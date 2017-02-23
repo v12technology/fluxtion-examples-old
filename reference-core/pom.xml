@@ -12,8 +12,30 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 	<fluxtion.plugin.ver>0.1.20-SNAPSHOT</fluxtion.plugin.ver>
-        <fluxtion.exe.path>C:\Users\gregp\development\tools\fluxtion\fluxtionTrial\fluxtion.exe</fluxtion.exe.path>
+        <!--
+        either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
+        hardcode a path for fluxtion.exe here
+        -->
+        <fluxtion.exe.path>${fluxtion.trial}</fluxtion.exe.path>
+        <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
+    
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>GNU General Public License, version 3</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Greg Higgins</name>
+            <email>greg.higgins@v12technology.com</email>
+            <organization>V12 Technology Limited</organization>
+        </developer>
+    </developers>
+    
     
     <profiles>
         <profile>
@@ -31,31 +53,16 @@
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
                                     <configClass>com.fluxtion.learning.example27.Builder</configClass>
                                     <packageName>com.fluxtion.learning.example27.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <assignNonPublicMembers>true</assignNonPublicMembers>
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
-<!--                            <execution>
-                                <id>example20</id>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <configuration>
-                                    <configClass>com.fluxtion.learning.example20.CharacterClassifierFactory</configClass>
-                                    <yamlFactoryConfig>${basedir}/src/main/resources/config/example20/fluxtion.yml</yamlFactoryConfig>
-                                    <packageName>com.fluxtion.learning.example20.generated</packageName>
-                                    <className>ScreenProcessor</className>
-                                    <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                                    <generateDebugPrep>true</generateDebugPrep>
-                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
-                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                                </configuration>
-                            </execution>-->
                         </executions>
                     </plugin>
                 </plugins>
@@ -65,7 +72,7 @@
         <profile>
             <id>build-all-examples</id>
             <activation>
-                <!--<activeByDefault>true</activeByDefault>-->
+                <activeByDefault>false</activeByDefault>
             </activation>
             <build>
                 <plugins>
@@ -461,72 +468,5 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>
-            <groupId>com.fluxtion</groupId>
-            <artifactId>ext.visualiser.gui-swing</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>-->
-        <dependency>
-            <groupId>com.esotericsoftware</groupId>
-            <artifactId>kryo</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-    </dependencies>
-
-<!--	
-    <dependencies>
-        <dependency>
-            <groupId>com.fluxtion</groupId>
-            <artifactId>extension.functional.standardfunctions</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion</groupId>
-            <artifactId>runtime</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion</groupId>
-            <artifactId>generator.api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.esotericsoftware</groupId>
-            <artifactId>kryo</artifactId>
-            <version>4.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hamcrest</groupId>
-            <artifactId>hamcrest-core</artifactId>
-            <version>1.3</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion</groupId>
-            <artifactId>ext.visualiser.gui-swing</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-    
-
-        <dependencyManagement>
-            <dependencies>
-                <dependency>
-                    <groupId>com.fluxtion</groupId>
-                    <artifactId>fluxtion-bom</artifactId>
-                    <version>0.1.0-SNAPSHOT</version>
-                    <type>pom</type>
-                    <scope>import</scope>
-                </dependency>
-            </dependencies>
-        </dependencyManagement>
-    -->    
-
-        
+    </dependencies>        
 </project>
