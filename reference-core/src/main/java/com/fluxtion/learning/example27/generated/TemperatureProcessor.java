@@ -14,15 +14,21 @@ import com.fluxtion.learning.TemperatureEvent;
 public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final HighTemperatureTest highTemperatureTest_1 = new HighTemperatureTest(35);
-  public final TemperatureAlertLogger alertLogger = new TemperatureAlertLogger(highTemperatureTest_1);
+  final net.vidageek.mirror.dsl.Mirror constructor = new net.vidageek.mirror.dsl.Mirror();
+  private final HighTemperatureTest highTemperatureTest_2 =
+      constructor.on(HighTemperatureTest.class).invoke().constructor().bypasser();
+  public final TemperatureAlertLogger alertLogger =
+      constructor.on(TemperatureAlertLogger.class).invoke().constructor().bypasser();
   //Dirty flags
-  private boolean isDirty_highTemperatureTest_1 = false;
+  private boolean isDirty_highTemperatureTest_2 = false;
   //Filter constants
 
   public TemperatureProcessor() {
-    //highTemperatureTest_1
+    final net.vidageek.mirror.dsl.Mirror assigner = new net.vidageek.mirror.dsl.Mirror();
+    //highTemperatureTest_2
+    assigner.on(highTemperatureTest_2).set().field("highLimit").withValue((int) 35);
     //alertLogger
+    assigner.on(alertLogger).set().field("tempTest").withValue(highTemperatureTest_2);
   }
 
   @Override
@@ -39,8 +45,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
 
   public void handleEvent(TemperatureEvent typedEvent) {
     //Default, no filter methods
-    isDirty_highTemperatureTest_1 = highTemperatureTest_1.processTemp(typedEvent);
-    if (isDirty_highTemperatureTest_1) {
+    isDirty_highTemperatureTest_2 = highTemperatureTest_2.processTemp(typedEvent);
+    if (isDirty_highTemperatureTest_2) {
       alertLogger.tempAlert();
     }
     //event stack unwind callbacks
@@ -50,7 +56,7 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   @Override
   public void afterEvent() {
 
-    isDirty_highTemperatureTest_1 = false;
+    isDirty_highTemperatureTest_2 = false;
   }
 
   @Override
