@@ -27,7 +27,7 @@
 			</properties>
 		</profile>
 ```
-
+*
 	* If preferred the path can be hardcoded in the pom.xml for the plugin
 
 * Dependencies - none
