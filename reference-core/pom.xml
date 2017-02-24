@@ -35,10 +35,27 @@
             <organization>V12 Technology Limited</organization>
         </developer>
     </developers>
+
+    <repositories>   
+        <repository>
+            <id>fluxtion.repo</id>
+            <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
+        </repository>
+    </repositories>    
     
+    <pluginRepositories>
+        <pluginRepository>
+            <id>fluxtion.plugin.repo</id>
+            <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
+        </pluginRepository>
+    </pluginRepositories>  
+                
     <profiles>
         <profile>
             <id>build-one-example</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>                
