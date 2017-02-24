@@ -16,8 +16,7 @@
     * set the path to fluxtion executable in the maven pom.xml of a module, the poms are set up to use a property substitution from ~/.m2/settings.xml 
  
 
-```
-#!xml
+```xml
 
     <profile>
     	<id>fluxtion-exe-config</id>
@@ -39,8 +38,7 @@
 * Dependencies - none
 * Database configuration - none
 * How to run tests - 
-```
-#!bash
+```bash
 
 mvn clean install 
 
