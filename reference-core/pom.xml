@@ -11,7 +11,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-	<fluxtion.plugin.ver>0.1.20-SNAPSHOT</fluxtion.plugin.ver>
+        <fluxtion.plugin.ver>1.0.1</fluxtion.plugin.ver>
+        <fluxtion.ver>0.1.20-SNAPSHOT</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -374,7 +375,7 @@
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                 </configuration>
                             </execution> 
-                             <execution>
+                            <execution>
                                 <id>example23</id>
                                 <goals>
                                     <goal>generate</goal>
@@ -455,7 +456,7 @@
             <dependency>
                 <groupId>com.fluxtion</groupId>
                 <artifactId>fluxtion-bom</artifactId>
-                <version>0.1.20-SNAPSHOT</version>
+                <version>${fluxtion.ver}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -484,5 +485,5 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>        
+    </dependencies>           
 </project>
