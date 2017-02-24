@@ -14,21 +14,21 @@
 * Maven Integration:
     * To help use Fluxtion within the normal development-build process, a custom fluxtion plugin is provided.
     * set the path to fluxtion executable in the maven pom.xml of a module, the poms are set up to use a property substitution from ~/.m2/settings.xml 
-```
-		<profile>
-			<id>fluxtion-exe-config</id>
-			<activation>
-				<property>
-					<name>!overrideFluxtionConfig</name>
-				</property>
-			</activation>
-			<properties>
-				<fluxtion.trial>c:\fluxtion.exe</fluxtion.trial>
-			</properties>
-		</profile>
-```
-*
-	* If preferred the path can be hardcoded in the pom.xml for the plugin
+
+ ```
+    <profile>
+    	<id>fluxtion-exe-config</id>
+    	<activation>
+    		<property>
+    			<name>!overrideFluxtionConfig</name>
+    		</property>
+    	</activation>
+    	<properties>
+    		<fluxtion.trial>c:\fluxtion.exe</fluxtion.trial>
+    	</properties>
+    </profile>
+    ```
+  * If preferred the path can be hardcoded in the pom.xml for the plugin
 
 * Dependencies - none
 * Database configuration - none
@@ -39,4 +39,5 @@
 
 * For any questions please send mails to info@v12technology.com
 * A google group is available at: 
+
 
