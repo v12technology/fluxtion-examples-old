@@ -16,7 +16,7 @@ public class MsgBuilder1 extends MsgBuilder{
     public boolean buildMessage() {
         if(!isGoodToLog())
             return false;
-        msgSink.append("received temp:");
+        msgSink.append("-> received temp: ");
         msgSink.append(((com.fluxtion.learning.functional.TemperatureEvent)source_TemperatureEventHandler_0.event()).getTemperature());
         msgSink.append("degC");
         msgSink.append('\n');

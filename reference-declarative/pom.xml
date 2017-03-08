@@ -76,7 +76,7 @@
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                                    <logDebug>true</logDebug>
+                                    <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
                         </executions>

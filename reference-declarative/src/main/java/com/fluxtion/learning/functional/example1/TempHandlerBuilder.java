@@ -6,7 +6,7 @@
 package com.fluxtion.learning.functional.example1;
 
 import com.fluxtion.api.node.SEPConfig;
-import static com.fluxtion.extension.functional.log.LogBuilder.Log;
+import static com.fluxtion.extension.declarative.builder.log.LogBuilder.Log;
 import com.fluxtion.learning.functional.TemperatureEvent;
 
 /**
@@ -21,5 +21,5 @@ import com.fluxtion.learning.functional.TemperatureEvent;
  * @author greg
  */
 public class TempHandlerBuilder extends SEPConfig {{
-        Log("received temp:{}degC", TemperatureEvent.class, TemperatureEvent::getTemperature);
+        Log("-> received temp: {}degC", TemperatureEvent.class, TemperatureEvent::getTemperature);
 }}
