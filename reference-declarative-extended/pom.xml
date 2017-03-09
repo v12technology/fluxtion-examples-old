@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.fluxtion.example</groupId>
+    <artifactId>learning-declarative-extended</artifactId>
+    <version>1.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>fluxtion.example :: ref.declarative.extended</name>
+	
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <fluxtion.plugin.ver>1.0.3-SNAPSHOT</fluxtion.plugin.ver>
+        <fluxtion.ver>0.1.20</fluxtion.ver>
+        <!--
+        either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
+        hardcode a path for fluxtion.exe here
+        -->
+        <fluxtion.exe.path>${fluxtion.declarative.ext.trial}</fluxtion.exe.path>
+        <netbeans.hint.license>gpl30</netbeans.hint.license>
+    </properties>
+    
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>GNU General Public License, version 3</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Greg Higgins</name>
+            <email>greg.higgins@v12technology.com</email>
+            <organization>V12 Technology Limited</organization>
+        </developer>
+    </developers>
+
+    <repositories>   
+        <repository>
+            <id>fluxtion.repo</id>
+            <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
+        </repository>
+    </repositories>  
+	
+    <pluginRepositories>
+        <pluginRepository>
+            <id>fluxtion.plugin.repo</id>
+            <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
+        </pluginRepository>
+    </pluginRepositories>  
+    
+    <profiles>     
+        <profile>
+            <id>build-all-examples</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>example1</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.declarative.ext.example1.FxMonitorBuilder</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.example1.generated</packageName>
+                                    <className>FxTradeMonitor</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.fluxtion.extension</groupId>
+            <artifactId>fluxtion-declarative-api</artifactId>
+            <version>0.1.20</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion.extension</groupId>
+            <artifactId>fluxtion-declarative-ext-api</artifactId>
+            <version>0.1.21-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion.extension</groupId>
+            <artifactId>fluxtion-declarative-builder</artifactId>
+            <version>0.1.21-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion.extension</groupId>
+            <artifactId>fluxtion-declarative-ext-builder</artifactId>
+            <version>0.1.21-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion</groupId>
+            <artifactId>fluxtion-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion</groupId>
+            <artifactId>fluxtion-builder</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fluxtion</groupId>
+                <artifactId>fluxtion-bom</artifactId>
+                <version>${fluxtion.ver}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+
+        
+</project>
