@@ -1,13 +1,18 @@
 /* 
- *  Copyright (C) 2016-2017 V12 Technology Limited
- *  
- *  This software is subject to the terms and conditions of its EULA, defined in the
- *  file "LICENCE.txt" and distributed with this software. All information contained
- *  herein is, and remains the property of V12 Technology Limited and its licensors, 
- *  if any. This source code may be protected by patents and patents pending and is 
- *  also protected by trade secret and copyright law. Dissemination or reproduction 
- *  of this material is strictly forbidden unless prior written permission is 
- *  obtained from V12 Technology Limited.  
+ * Copyright (C) 2017 V12 Technology Limited
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.fluxtion.learning.declarative.ext.helpers;
 
