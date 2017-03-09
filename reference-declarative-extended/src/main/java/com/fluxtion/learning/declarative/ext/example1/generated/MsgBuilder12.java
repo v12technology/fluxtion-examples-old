@@ -15,9 +15,9 @@ public class MsgBuilder12 extends MsgBuilder{
     @NoEventReference
     public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_1 source_CumSumInvoker_1_10;
     @NoEventReference
-    public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_3 source_CumSumInvoker_3_11;
-    @NoEventReference
     public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_9;
+    @NoEventReference
+    public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_3 source_CumSumInvoker_3_11;
     public Object logNotifier;
     private boolean notificationToLog;
     
@@ -29,13 +29,13 @@ public class MsgBuilder12 extends MsgBuilder{
     @OnEvent
     public boolean buildMessage() {
         if(notificationToLog & isGoodToLog()){
-            msgSink.append("<- Position update: EUR net:");
+            msgSink.append("<- Position update: EUR net:'");
             msgSink.append(source_SubtractInvoker_6_9.intValue());
-            msgSink.append(" dealt:");
+            msgSink.append("' dealt:'");
             msgSink.append(source_CumSumInvoker_1_10.intValue());
-            msgSink.append(" contra:");
+            msgSink.append("' contra:'");
             msgSink.append(source_CumSumInvoker_3_11.intValue());
-            msgSink.append("");
+            msgSink.append("'");
             msgSink.append('\n');
             notificationToLog = false;
             return true;

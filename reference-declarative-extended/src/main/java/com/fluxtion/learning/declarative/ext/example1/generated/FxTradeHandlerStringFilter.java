@@ -3,38 +3,38 @@ package com.fluxtion.learning.declarative.ext.example1.generated;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.FilterId;
 import com.fluxtion.extension.declarative.api.EventWrapper;
-import com.fluxtion.learning.DataEvent;
+import com.fluxtion.learning.declarative.ext.helpers.FxTrade;
 
 /**
- * Generated EventHandler for DataEvent
+ * Generated EventHandler for FxTrade
  * @author Greg Higgins
  */
-public class DataEventHandlerStringFilter implements EventWrapper<DataEvent>{
+public class FxTradeHandlerStringFilter implements EventWrapper<FxTrade>{
 
-    private DataEvent event;
+    private FxTrade event;
 
     @FilterId
     public String filter;
 
     @EventHandler
-    public boolean handleDataEvent(DataEvent event){
+    public boolean handleFxTrade(FxTrade event){
         this.event = event;
         return true;
     }
 
 //    @EventHandler
-//    public void handleDataEvent(DataEvent event){
+//    public void handleFxTrade(FxTrade event){
 //        this.event = event;
 //    }
 //    
     @Override
-    public DataEvent event() {
+    public FxTrade event() {
         return event;
     }
 
     @Override
-    public Class<DataEvent> eventClass() {
-        return DataEvent.class;
+    public Class<FxTrade> eventClass() {
+        return FxTrade.class;
     }
 
 }

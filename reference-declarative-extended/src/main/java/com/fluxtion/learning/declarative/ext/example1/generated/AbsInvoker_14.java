@@ -6,83 +6,83 @@ import com.fluxtion.api.annotations.OnEventComplete;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.numeric.NumericValuePush;
 import com.fluxtion.extension.declarative.api.numeric.NumericValue;
-import com.fluxtion.learning.declarative.ext.example1.generated.FxTradeHandlerStringFilter;
-import com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.CumSum;
 
 /**
  * generated NumericFunction wrapper.
  * Wraps a numeric function for invocation.
- * target class  : CumSum
- * target method : incSum
+ * target class  : com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Abs
+ * target method : abs
  * 
  * @author Greg Higgins
  */
-public class CumSumInvoker_1 implements NumericValue{
+public class AbsInvoker_14 extends Number implements NumericValue{
 
     //source operand inputs
-    public FxTradeHandlerStringFilter[] sourceUpdated_FxTradeHandlerStringFilter_0 = new FxTradeHandlerStringFilter[4];
-    private final CumSum f = new CumSum();
+    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_13;
+    private com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Abs f = new  com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Abs();
     private double result;
-    private double newValue;
     private boolean updated;
 
-    @OnParentUpdate("sourceUpdated_FxTradeHandlerStringFilter_0")
-    public void sourceUpdated_FxTradeHandlerStringFilter_0(FxTradeHandlerStringFilter updated){
-        newValue = updated.event().dealt();
+
+
+    @OnParentUpdate("source_SubtractInvoker_6_13")
+    public void sourceChange_source_SubtractInvoker_6_13(com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 updated){
         calculate();
     }
 
     public void calculate(){
         double oldValue = result;
-        result = f.incSum(result, newValue);
+        result = f.abs(source_SubtractInvoker_6_13.doubleValue());
         updated = oldValue != result;
     }
-    
+
     @OnEvent
     public boolean onEvent(){
         return updated;
     }
 
-     @OnEventComplete
+    @OnEventComplete
     public void afterCalculate(){
         updated = false;
     }
 
+    
+
+
     @Initialise
     public void init(){
-        f.reset();
         updated = false;
         result = 0;
     }
 
     @Override
     public short shortValue() {
-        return (short)result;
+        return (short) result;
     }
 
     @Override
     public byte byteValue() {
-        return (byte)result;
+        return (byte) result;
     }
 
     @Override
     public float floatValue() {
-        return (float)result;
+        return (float) result;
     }
 
     @Override
     public int intValue() {
-        return (int)result;
+        return (int) result;
     }
 
     @Override
     public long longValue() {
-        return (long)result;
+        return (long) result;
     }
 
     @Override
     public double doubleValue() {
-        return (double)result;
+        return (double) result;
     }
     
 }

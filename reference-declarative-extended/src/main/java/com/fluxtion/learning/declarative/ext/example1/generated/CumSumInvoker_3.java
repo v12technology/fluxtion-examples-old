@@ -6,7 +6,7 @@ import com.fluxtion.api.annotations.OnEventComplete;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.numeric.NumericValuePush;
 import com.fluxtion.extension.declarative.api.numeric.NumericValue;
-import com.fluxtion.learning.declarative.ext.example1.generated.DataEventHandlerStringFilter;
+import com.fluxtion.learning.declarative.ext.example1.generated.FxTradeHandlerStringFilter;
 import com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.CumSum;
 
 /**
@@ -20,15 +20,15 @@ import com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.CumSum
 public class CumSumInvoker_3 implements NumericValue{
 
     //source operand inputs
-    public DataEventHandlerStringFilter[] sourceUpdated_DataEventHandlerStringFilter_2 = new DataEventHandlerStringFilter[4];
+    public FxTradeHandlerStringFilter[] sourceUpdated_FxTradeHandlerStringFilter_2 = new FxTradeHandlerStringFilter[4];
     private final CumSum f = new CumSum();
     private double result;
     private double newValue;
     private boolean updated;
 
-    @OnParentUpdate("sourceUpdated_DataEventHandlerStringFilter_2")
-    public void sourceUpdated_DataEventHandlerStringFilter_2(DataEventHandlerStringFilter updated){
-        newValue = updated.event().getValue();
+    @OnParentUpdate("sourceUpdated_FxTradeHandlerStringFilter_2")
+    public void sourceUpdated_FxTradeHandlerStringFilter_2(FxTradeHandlerStringFilter updated){
+        newValue = updated.event().contra();
         calculate();
     }
 

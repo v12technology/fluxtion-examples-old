@@ -9,11 +9,11 @@ import com.fluxtion.api.annotations.OnParentUpdate;
  *
  * @author Greg Higgins
  */
-public class MsgBuilder28 extends MsgBuilder{
+public class MsgBuilder26 extends MsgBuilder{
 
     //source operand inputs
     @NoEventReference
-    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_27;
+    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_25;
     public Object logNotifier;
     private boolean notificationToLog;
     
@@ -25,9 +25,9 @@ public class MsgBuilder28 extends MsgBuilder{
     @OnEvent
     public boolean buildMessage() {
         if(notificationToLog & isGoodToLog()){
-            msgSink.append("NEW 4 <- ** POS CRITICAL ** delete: X  EUR position:'");
-            msgSink.append(source_SubtractInvoker_6_27.intValue());
-            msgSink.append("' dropped below critical limit of 1000");
+            msgSink.append("<- ** NEW POS CRITICAL    ** : EUR position:'");
+            msgSink.append(source_SubtractInvoker_6_25.intValue());
+            msgSink.append("' breached critical limit of 250M");
             msgSink.append('\n');
             notificationToLog = false;
             return true;

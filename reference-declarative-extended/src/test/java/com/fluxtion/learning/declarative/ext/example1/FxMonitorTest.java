@@ -16,10 +16,9 @@
  */
 package com.fluxtion.learning.declarative.ext.example1;
 
-import com.fluxtion.learning.DataEvent;
+import com.fluxtion.learning.declarative.ext.helpers.FxTrade;
 import com.fluxtion.learning.declarative.ext.example1.generated.FxTradeMonitor;
-import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.Lifecycle;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 /**
@@ -31,32 +30,48 @@ public class FxMonitorTest {
     @Test
     public void simpleFilterHelperTest() throws Exception {
 
-        EventHandler sep = new FxTradeMonitor();
-        ((Lifecycle) sep).init();
+        FxTradeMonitor sep = new FxTradeMonitor();
+        sep.init();
+        Number eurNetPos = sep.eurNetPos;
         //fire some events for FX - ignored any non-Euro trades 
-        DataEvent de1 = new DataEvent();
-        de1.setFilterString("EU");
-        de1.value = 2;
-        sep.onEvent(de1);
-        de1.setFilterString("EC");
-        sep.onEvent(de1);
-        de1.setFilterString("UE");
-        sep.onEvent(de1);
-        de1.value = 600;
-        sep.onEvent(de1);
-        de1.setFilterString("EY");
-        sep.onEvent(de1);
-        de1.setFilterString("CE");
-        sep.onEvent(de1);
-        de1.value = -1000;
-        sep.onEvent(de1);
-        sep.onEvent(de1);
-        de1.value = 500;
-        sep.onEvent(de1);
-        sep.onEvent(de1);
-        sep.onEvent(de1);
-        sep.onEvent(de1);
-        de1.value = -1500;
-        sep.onEvent(de1);
+        FxTrade trade = new FxTrade();
+        sep.onEvent(trade.buy("EU", 4e6, 4.32e6));
+        sep.onEvent(trade.sell("EU", 2e6, 2.17e6));
+        assertEquals(2e6, eurNetPos.intValue(), DELTA);
+        
+        //ignore - pos unchanged
+        sep.onEvent(trade.sell("UY", 2e6, 234.45e6));
+        assertEquals(2e6, eurNetPos.intValue(), DELTA);
+        
+        sep.onEvent(trade.buy("UE", 3e6, 2.79e6));
+        //log warning
+        sep.onEvent(trade.buy("UE", 30e6, 27.9e6));
+        sep.onEvent(trade.sell("UE", 3e6, 2.79e6));
+        assertEquals(-25.9e6, eurNetPos.doubleValue(), DELTA);
+        
+        sep.onEvent(trade.sell("EY", 100e6, 132.34e8));
+        assertEquals(-125.9e6, eurNetPos.doubleValue(), DELTA);
+        //log critical
+        sep.onEvent(trade.sell("EY", 200e6, 264.76e8));
+        assertEquals(-325.9e6, eurNetPos.doubleValue(), DELTA);
+        
+        //remove critical
+        sep.onEvent(trade.buy("EC", 200e6, 232.18e6));
+        //remove warning
+        sep.onEvent(trade.buy("EC", 130.9e6, 152.36e6));
+        assertEquals(5e6, eurNetPos.doubleValue(), DELTA);
+        
+        sep.onEvent(trade.buy("EU", 4e6, 4.36e6));
+        //log warning
+        sep.onEvent(trade.buy("EU", 4e6, 4.36e6));
+        assertEquals(13e6, eurNetPos.doubleValue(), DELTA);
+        //remove warning
+        sep.onEvent(trade.sell("EU", 4e6, 4.36e6));
+        
+        
+        //log critical + warning
+        sep.onEvent(trade.buy("EC", 245e6, 297.46e6));
+        assertEquals(254e6, eurNetPos.doubleValue(), DELTA);
     }
+    private static final double DELTA = 0.0001;
 }

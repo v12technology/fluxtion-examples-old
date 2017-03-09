@@ -9,11 +9,11 @@ import com.fluxtion.api.annotations.OnParentUpdate;
  *
  * @author Greg Higgins
  */
-public class MsgBuilder20 extends MsgBuilder{
+public class MsgBuilder22 extends MsgBuilder{
 
     //source operand inputs
     @NoEventReference
-    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_19;
+    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_21;
     public Object logNotifier;
     private boolean notificationToLog;
     
@@ -25,9 +25,9 @@ public class MsgBuilder20 extends MsgBuilder{
     @OnEvent
     public boolean buildMessage() {
         if(notificationToLog & isGoodToLog()){
-            msgSink.append("NEW 2 <- *  POS WARNING  * delete : X  EUR position:'");
-            msgSink.append(source_SubtractInvoker_6_19.intValue());
-            msgSink.append("' dropped below warn limit of 10");
+            msgSink.append("<- *  REMOVE POS WARNING   * : EUR position:'");
+            msgSink.append(source_SubtractInvoker_6_21.intValue());
+            msgSink.append("' dropped below warn limit of 10M");
             msgSink.append('\n');
             notificationToLog = false;
             return true;

@@ -9,41 +9,45 @@
  *  of this material is strictly forbidden unless prior written permission is 
  *  obtained from V12 Technology Limited.  
  */
-package com.fluxtion.learning;
+package com.fluxtion.learning.declarative.ext.helpers;
 
 import com.fluxtion.runtime.event.Event;
 
 /**
- *
+ * A simplified definition of an FX trade.
+ * 
  * @author Greg Higgins
  */
-public class DataEvent extends Event{
+public class FxTrade extends Event{
 
     public static final int ID = 1;
+    private double contra;
+    private double dealt;
     
-    public DataEvent() {
+    public FxTrade() {
         super(ID);
     }
     
-    public int value;
-
-    public int getValue() {
-        return value;
+    public FxTrade buy(String ccyPair, double dealt, double contra){
+        this.filterString = ccyPair;
+        this.dealt = dealt;
+        this.contra = contra;
+        return this;
     }
-
-    public void setFilterString(String key){
-        this.filterString = key;
-        this.filterId = Integer.MAX_VALUE;
-    }    
     
-    public void setFilterInt(int id){
-        this.filterString = "";
-        this.filterId = id;
-        
+    public FxTrade sell(String ccyPair, double dealt, double contra){
+        return buy(ccyPair, -dealt, -contra);
+    }
+    
+    public double dealt() {
+        return dealt;
     }
 
-    public String getStringValue() {
+    public double contra() {
+        return contra;
+    }
+    
+    public String ccyPair() {
         return filterString;
     }
-    
 }
