@@ -1,3 +1,19 @@
+/* 
+ * Copyright (C) 2017 V12 Technology Limited
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.fluxtion.learning.functional.example1.generated;
 
 import java.util.HashMap;
@@ -17,24 +33,24 @@ import com.fluxtion.learning.functional.TemperatureEvent;
 public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final AsciiConsoleLogger asciiConsoleLogger_5 = new AsciiConsoleLogger();
-  private final MsgBuilder1 msgBuilder1_3 = new MsgBuilder1();
-  private final TemperatureEventHandler temperatureEventHandler_1 = new TemperatureEventHandler();
+  private final AsciiConsoleLogger asciiConsoleLogger_8 = new AsciiConsoleLogger();
+  private final MsgBuilder1 msgBuilder1_5 = new MsgBuilder1();
+  private final TemperatureEventHandler temperatureEventHandler_2 = new TemperatureEventHandler();
   //Dirty flags
-  private boolean isDirty_msgBuilder1_3 = false;
-  private boolean isDirty_temperatureEventHandler_1 = false;
+  private boolean isDirty_msgBuilder1_5 = false;
+  private boolean isDirty_temperatureEventHandler_2 = false;
   //Filter constants
 
   public TemperatureProcessor() {
-    //asciiConsoleLogger_5
-    asciiConsoleLogger_5.initCapacity = (int) 512;
-    asciiConsoleLogger_5.msgBuilders = new MsgBuilder[1];
-    asciiConsoleLogger_5.msgBuilders[0] = msgBuilder1_3;
-    //msgBuilder1_3
-    msgBuilder1_3.source_TemperatureEventHandler_0 = temperatureEventHandler_1;
-    msgBuilder1_3.logLevel = (int) 3;
-    msgBuilder1_3.initCapacity = (int) 256;
-    //temperatureEventHandler_1
+    //asciiConsoleLogger_8
+    asciiConsoleLogger_8.initCapacity = (int) 512;
+    asciiConsoleLogger_8.msgBuilders = new MsgBuilder[1];
+    asciiConsoleLogger_8.msgBuilders[0] = msgBuilder1_5;
+    //msgBuilder1_5
+    msgBuilder1_5.source_TemperatureEventHandler_0 = temperatureEventHandler_2;
+    msgBuilder1_5.logLevel = (int) 3;
+    msgBuilder1_5.initCapacity = (int) 256;
+    //temperatureEventHandler_2
   }
 
   @Override
@@ -58,29 +74,29 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   public void handleEvent(LogControlEvent typedEvent) {
     switch (typedEvent.filterString()) {
       case ("CHANGE FILTER"):
-        isDirty_msgBuilder1_3 = msgBuilder1_3.controlLogIdFilter(typedEvent);
-        if (isDirty_msgBuilder1_3) {
-          asciiConsoleLogger_5.publishMessage(msgBuilder1_3);
+        isDirty_msgBuilder1_5 = msgBuilder1_5.controlLogIdFilter(typedEvent);
+        if (isDirty_msgBuilder1_5) {
+          asciiConsoleLogger_8.publishMessage(msgBuilder1_5);
         }
         afterEvent();
         return;
       case ("CHANGE LEVEL"):
-        isDirty_msgBuilder1_3 = msgBuilder1_3.controlLogLevelFilter(typedEvent);
-        if (isDirty_msgBuilder1_3) {
-          asciiConsoleLogger_5.publishMessage(msgBuilder1_3);
+        isDirty_msgBuilder1_5 = msgBuilder1_5.controlLogLevelFilter(typedEvent);
+        if (isDirty_msgBuilder1_5) {
+          asciiConsoleLogger_8.publishMessage(msgBuilder1_5);
         }
         afterEvent();
         return;
       case ("RECORD LEVEL"):
-        asciiConsoleLogger_5.controlLevelLogging(typedEvent);
+        asciiConsoleLogger_8.controlLevelLogging(typedEvent);
         afterEvent();
         return;
       case ("RECORD NAME"):
-        asciiConsoleLogger_5.controlIdLogging(typedEvent);
+        asciiConsoleLogger_8.controlIdLogging(typedEvent);
         afterEvent();
         return;
       case ("RECORD TIME"):
-        asciiConsoleLogger_5.controlTimeLogging(typedEvent);
+        asciiConsoleLogger_8.controlTimeLogging(typedEvent);
         afterEvent();
         return;
     }
@@ -89,12 +105,12 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
 
   public void handleEvent(TemperatureEvent typedEvent) {
     //Default, no filter methods
-    isDirty_temperatureEventHandler_1 =
-        temperatureEventHandler_1.handleTemperatureEvent(typedEvent);
-    if (isDirty_temperatureEventHandler_1) {
-      isDirty_msgBuilder1_3 = msgBuilder1_3.buildMessage();
-      if (isDirty_msgBuilder1_3) {
-        asciiConsoleLogger_5.publishMessage(msgBuilder1_3);
+    isDirty_temperatureEventHandler_2 =
+        temperatureEventHandler_2.handleTemperatureEvent(typedEvent);
+    if (isDirty_temperatureEventHandler_2) {
+      isDirty_msgBuilder1_5 = msgBuilder1_5.buildMessage();
+      if (isDirty_msgBuilder1_5) {
+        asciiConsoleLogger_8.publishMessage(msgBuilder1_5);
       }
     }
     //event stack unwind callbacks
@@ -103,15 +119,15 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
 
   @Override
   public void afterEvent() {
-    msgBuilder1_3.afterEvent();
-    isDirty_msgBuilder1_3 = false;
-    isDirty_temperatureEventHandler_1 = false;
+    msgBuilder1_5.afterEvent();
+    isDirty_msgBuilder1_5 = false;
+    isDirty_temperatureEventHandler_2 = false;
   }
 
   @Override
   public void init() {
-    msgBuilder1_3.init();
-    asciiConsoleLogger_5.init();
+    msgBuilder1_5.init();
+    asciiConsoleLogger_8.init();
   }
 
   @Override
