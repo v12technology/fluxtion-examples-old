@@ -1,19 +1,3 @@
-/* 
- * Copyright (C) 2017 V12 Technology Limited
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package com.fluxtion.learning.declarative.ext.example1.generated;
 
 import java.util.HashMap;
@@ -80,29 +64,29 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
   private final MsgBuilder30 msgBuilder30_47 = new MsgBuilder30();
   public final SubtractInvoker_6 eurNetPos = new SubtractInvoker_6();
   //Dirty flags
-  private boolean isDirty_fxTradeHandler_1 = false;
-  private boolean isDirty_absInvoker_14_31 = false;
-  private boolean isDirty_eurNetPos = false;
-  private boolean isDirty_cumSumInvoker_3_21 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_3 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_7 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_13 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_17 = false;
-  private boolean isDirty_lessThanDecorator_20_37 = false;
-  private boolean isDirty_lessThanDecorator_28_45 = false;
-  private boolean isDirty_msgBuilder22_39 = false;
-  private boolean isDirty_msgBuilder30_47 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_19 = false;
   private boolean isDirty_cumSumInvoker_1_11 = false;
   private boolean isDirty_fxTradeHandlerStringFilter_5 = false;
   private boolean isDirty_fxTradeHandlerStringFilter_9 = false;
   private boolean isDirty_fxTradeHandlerStringFilter_15 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_19 = false;
   private boolean isDirty_greaterThanDecorator_16_33 = false;
-  private boolean isDirty_greaterThanDecorator_24_41 = false;
   private boolean isDirty_msgBuilder18_35 = false;
   private boolean isDirty_msgBuilder26_43 = false;
+  private boolean isDirty_greaterThanDecorator_24_41 = false;
   private boolean isDirty_msgBuilder8_25 = false;
   private boolean isDirty_msgBuilder12_29 = false;
+  private boolean isDirty_fxTradeHandler_1 = false;
+  private boolean isDirty_cumSumInvoker_3_21 = false;
+  private boolean isDirty_absInvoker_14_31 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_3 = false;
+  private boolean isDirty_msgBuilder30_47 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_7 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_13 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_17 = false;
+  private boolean isDirty_eurNetPos = false;
+  private boolean isDirty_lessThanDecorator_20_37 = false;
+  private boolean isDirty_lessThanDecorator_28_45 = false;
+  private boolean isDirty_msgBuilder22_39 = false;
   //Filter constants
 
   public FxTradeMonitor() {
@@ -165,9 +149,9 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder8_25.logLevel = (int) 3;
     msgBuilder8_25.initCapacity = (int) 256;
     //msgBuilder12_29
-    msgBuilder12_29.source_CumSumInvoker_3_11 = cumSumInvoker_3_21;
     msgBuilder12_29.source_CumSumInvoker_1_10 = cumSumInvoker_1_11;
     msgBuilder12_29.source_SubtractInvoker_6_9 = eurNetPos;
+    msgBuilder12_29.source_CumSumInvoker_3_11 = cumSumInvoker_3_21;
     msgBuilder12_29.logNotifier = fxTradeHandler_1;
     msgBuilder12_29.logLevel = (int) 3;
     msgBuilder12_29.initCapacity = (int) 256;
@@ -192,8 +176,8 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder30_47.logLevel = (int) 1;
     msgBuilder30_47.initCapacity = (int) 256;
     //eurNetPos
-    eurNetPos.source_CumSumInvoker_3_5 = cumSumInvoker_3_21;
     eurNetPos.source_CumSumInvoker_1_4 = cumSumInvoker_1_11;
+    eurNetPos.source_CumSumInvoker_3_5 = cumSumInvoker_3_21;
   }
 
   @Override
@@ -1179,29 +1163,29 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder18_35.afterEvent();
     msgBuilder12_29.afterEvent();
     msgBuilder8_25.afterEvent();
-    isDirty_fxTradeHandler_1 = false;
-    isDirty_absInvoker_14_31 = false;
-    isDirty_eurNetPos = false;
-    isDirty_cumSumInvoker_3_21 = false;
-    isDirty_fxTradeHandlerStringFilter_3 = false;
-    isDirty_fxTradeHandlerStringFilter_7 = false;
-    isDirty_fxTradeHandlerStringFilter_13 = false;
-    isDirty_fxTradeHandlerStringFilter_17 = false;
-    isDirty_lessThanDecorator_20_37 = false;
-    isDirty_lessThanDecorator_28_45 = false;
-    isDirty_msgBuilder22_39 = false;
-    isDirty_msgBuilder30_47 = false;
-    isDirty_fxTradeHandlerStringFilter_19 = false;
     isDirty_cumSumInvoker_1_11 = false;
     isDirty_fxTradeHandlerStringFilter_5 = false;
     isDirty_fxTradeHandlerStringFilter_9 = false;
     isDirty_fxTradeHandlerStringFilter_15 = false;
+    isDirty_fxTradeHandlerStringFilter_19 = false;
     isDirty_greaterThanDecorator_16_33 = false;
-    isDirty_greaterThanDecorator_24_41 = false;
     isDirty_msgBuilder18_35 = false;
     isDirty_msgBuilder26_43 = false;
+    isDirty_greaterThanDecorator_24_41 = false;
     isDirty_msgBuilder8_25 = false;
     isDirty_msgBuilder12_29 = false;
+    isDirty_fxTradeHandler_1 = false;
+    isDirty_cumSumInvoker_3_21 = false;
+    isDirty_absInvoker_14_31 = false;
+    isDirty_fxTradeHandlerStringFilter_3 = false;
+    isDirty_msgBuilder30_47 = false;
+    isDirty_fxTradeHandlerStringFilter_7 = false;
+    isDirty_fxTradeHandlerStringFilter_13 = false;
+    isDirty_fxTradeHandlerStringFilter_17 = false;
+    isDirty_eurNetPos = false;
+    isDirty_lessThanDecorator_20_37 = false;
+    isDirty_lessThanDecorator_28_45 = false;
+    isDirty_msgBuilder22_39 = false;
   }
 
   @Override
