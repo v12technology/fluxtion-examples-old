@@ -38,6 +38,7 @@ obtained from V12 Technology Limited.
                 <version>1.0-m5.1</version>
                 <configuration>
                     <noDeploy>true</noDeploy>
+                    <noReleaseBuild>true</noReleaseBuild>
                     <username>${fluxtion.github.user}</username>
                     <password>${fluxtion.github.password}</password>
                     <!--<noTag>true</noTag>-->
