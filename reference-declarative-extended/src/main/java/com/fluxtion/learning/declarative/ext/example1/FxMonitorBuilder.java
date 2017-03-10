@@ -42,16 +42,17 @@ import com.fluxtion.learning.declarative.ext.helpers.FxTrade;
  * </pre>
  *
  * <ul>
- * Warning notifications
+ * <li>Warning notifications
  * <ul>
  * <li>log "ADD WARN" message whenever abs(EUR pos) breaches 10M
- * <li>No repeated warning log for subsequent trades while abs(EUR pos) > 10M.
+ * <li>No repeated warning log for subsequent trades while abs(EUR pos) $gt;
+ * 10M.
  * <li>log "REMOVE WARN" when absolute(EUR pos) drops below 10M.
  * </ul>
- * Critical notifications
+ * <li>Critical notifications
  * <ul>
  * <li>log "ADD CRITICAL" message when abs(EUR pos) breaches 250M
- * <li>No repeated error log for subsequent trades while abs(EUR pos) > 250M.
+ * <li>No repeated error log for subsequent trades while abs(EUR pos) $gt; 250M.
  * <li>log "REMOVE CRITICAL" when abs(EUR pos) drops below 250M.
  * </ul>
  * </ul>
