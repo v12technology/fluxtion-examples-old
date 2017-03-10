@@ -73,9 +73,9 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_assetHandlerCommodities) {
           notifier.assetBreached(assetHandlerCommodities);
         }
-        if (isDirty_assetHandlerFX
-            || isDirty_assetHandlerCommodities
-            || isDirty_assetHandlerEquities) {
+        if (isDirty_assetHandlerEquities
+            || isDirty_assetHandlerFX
+            || isDirty_assetHandlerCommodities) {
           notifier.onEvent();
         }
         afterEvent();
@@ -85,9 +85,9 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_assetHandlerEquities) {
           notifier.assetBreached(assetHandlerEquities);
         }
-        if (isDirty_assetHandlerFX
-            || isDirty_assetHandlerCommodities
-            || isDirty_assetHandlerEquities) {
+        if (isDirty_assetHandlerEquities
+            || isDirty_assetHandlerFX
+            || isDirty_assetHandlerCommodities) {
           notifier.onEvent();
         }
         afterEvent();
@@ -97,9 +97,9 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_assetHandlerFX) {
           notifier.assetBreached(assetHandlerFX);
         }
-        if (isDirty_assetHandlerFX
-            || isDirty_assetHandlerCommodities
-            || isDirty_assetHandlerEquities) {
+        if (isDirty_assetHandlerEquities
+            || isDirty_assetHandlerFX
+            || isDirty_assetHandlerCommodities) {
           notifier.onEvent();
         }
         afterEvent();

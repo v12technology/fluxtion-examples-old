@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.fluxtion.learning.functional.example1.generated;
+package com.fluxtion.learning.declarative.ext.example1.generated;
 
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.extension.declarative.api.log.MsgBuilder;
@@ -23,18 +23,22 @@ import com.fluxtion.extension.declarative.api.log.MsgBuilder;
  *
  * @author Greg Higgins
  */
-public class MsgBuilder1 extends MsgBuilder{
+public class MsgBuilder8 extends MsgBuilder{
 
     //source operand inputs
-    public com.fluxtion.learning.functional.example1.generated.TemperatureEventHandler source_TemperatureEventHandler_0;
+    public com.fluxtion.learning.declarative.ext.example1.generated.FxTradeHandler source_FxTradeHandler_7;
 
     @OnEvent
     public boolean buildMessage() {
         if(!isGoodToLog())
             return false;
-        msgSink.append("-> received temp: ");
-        msgSink.append(((com.fluxtion.learning.functional.TemperatureEvent)source_TemperatureEventHandler_0.event()).getTemperature());
-        msgSink.append("degC");
+        msgSink.append("-> Trade recived:'");
+        msgSink.append(((com.fluxtion.learning.declarative.ext.helpers.FxTrade)source_FxTradeHandler_7.event()).ccyPair());
+        msgSink.append("'@dealt:'");
+        msgSink.append(((com.fluxtion.learning.declarative.ext.helpers.FxTrade)source_FxTradeHandler_7.event()).dealt());
+        msgSink.append("' contra:'");
+        msgSink.append(((com.fluxtion.learning.declarative.ext.helpers.FxTrade)source_FxTradeHandler_7.event()).contra());
+        msgSink.append("'");
         msgSink.append('\n');
         return true;
     }

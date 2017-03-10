@@ -14,39 +14,43 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.fluxtion.learning.functional.example1.generated;
+package com.fluxtion.learning.declarative.ext.example1.generated;
 
 import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.api.annotations.FilterId;
 import com.fluxtion.extension.declarative.api.EventWrapper;
-import com.fluxtion.learning.functional.TemperatureEvent;
+import com.fluxtion.learning.declarative.ext.helpers.FxTrade;
 
 /**
- * Generated EventHandler for TemperatureEvent
+ * Generated EventHandler for FxTrade
  * @author Greg Higgins
  */
-public class TemperatureEventHandler implements EventWrapper<TemperatureEvent>{
+public class FxTradeHandlerStringFilter implements EventWrapper<FxTrade>{
 
-    private TemperatureEvent event;
+    private FxTrade event;
+
+    @FilterId
+    public String filter;
 
     @EventHandler
-    public boolean handleTemperatureEvent(TemperatureEvent event){
+    public boolean handleFxTrade(FxTrade event){
         this.event = event;
         return true;
     }
 
 //    @EventHandler
-//    public void handleTemperatureEvent(TemperatureEvent event){
+//    public void handleFxTrade(FxTrade event){
 //        this.event = event;
 //    }
 //    
     @Override
-    public TemperatureEvent event() {
+    public FxTrade event() {
         return event;
     }
 
     @Override
-    public Class<TemperatureEvent> eventClass() {
-        return TemperatureEvent.class;
+    public Class<FxTrade> eventClass() {
+        return FxTrade.class;
     }
 
 }
