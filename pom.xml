@@ -16,7 +16,7 @@ obtained from V12 Technology Limited.
     <artifactId>fluxtion-examples</artifactId>
     <version>1.0.1</version>
     <packaging>pom</packaging>
-    <name>fluxtion.examples</name>
+    <name>fluxtion.example</name>
     
     <modules>
         <module>reference-declarative</module>
