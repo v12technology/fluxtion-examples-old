@@ -27,8 +27,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.plugin.ver>1.0.3-SNAPSHOT</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.20</fluxtion.ver>
+        <fluxtion.plugin.ver>1.0.3</fluxtion.plugin.ver>
+        <fluxtion.ver>0.1.21-SNAPSHOT</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -105,34 +105,11 @@
     <dependencies>
         <dependency>
             <groupId>com.fluxtion.extension</groupId>
-            <artifactId>fluxtion-declarative-api</artifactId>
-            <version>0.1.20</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion.extension</groupId>
             <artifactId>fluxtion-declarative-ext-api</artifactId>
-            <version>0.1.21-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion.extension</groupId>
-            <artifactId>fluxtion-declarative-builder</artifactId>
-            <version>0.1.21-SNAPSHOT</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.fluxtion.extension</groupId>
             <artifactId>fluxtion-declarative-ext-builder</artifactId>
-            <version>0.1.21-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion</groupId>
-            <artifactId>fluxtion-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion</groupId>
-            <artifactId>fluxtion-builder</artifactId>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -147,7 +124,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    
 
     <dependencyManagement>
         <dependencies>
@@ -160,7 +136,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
-
         
 </project>
