@@ -16,7 +16,7 @@ obtained from V12 Technology Limited.
     <artifactId>fluxtion-examples</artifactId>
     <version>1.0.1</version>
     <packaging>pom</packaging>
-    <name>fluxtion.examples</name>
+    <name>fluxtion.example</name>
     
     <modules>
         <module>reference-declarative</module>
@@ -37,9 +37,10 @@ obtained from V12 Technology Limited.
                 <artifactId>jgitflow-maven-plugin</artifactId>
                 <version>1.0-m5.1</version>
                 <configuration>
-                    <!--<noDeploy>true</noDeploy>-->
-                    <username>${fluxtion.git.user}</username>
-                    <password>${fluxtion.git.password}</password>
+                    <noDeploy>true</noDeploy>
+                    <noReleaseBuild>true</noReleaseBuild>
+                    <username>${fluxtion.github.user}</username>
+                    <password>${fluxtion.github.password}</password>
                     <!--<noTag>true</noTag>-->
                     <!--<autoVersionSubmodules>true</autoVersionSubmodules>-->
                     <!--<allowSnapshots>true</allowSnapshots>-->
