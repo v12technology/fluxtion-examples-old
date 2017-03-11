@@ -90,7 +90,7 @@
                                     <className>ElevatorStateMachine</className>
                                     <packageName>com.fluxtion.learning.statemachine.example1.generated</packageName>
                                     <statePackage>com.fluxtion.learning.statemachine.example1</statePackage>
-                                    <!--<logDebug>true</logDebug>-->
+                                    <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
                         </executions>
