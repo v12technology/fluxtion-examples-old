@@ -1,19 +1,3 @@
-/* 
- * Copyright (C) 2017 V12 Technology Limited
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
 package com.fluxtion.learning.declarative.ext.example1.generated;
 
 import java.util.HashMap;
@@ -47,153 +31,155 @@ import com.fluxtion.learning.declarative.ext.helpers.FxTrade;
 public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final AsciiConsoleLogger asciiConsoleLogger_27 = new AsciiConsoleLogger();
-  private final AbsInvoker_14 absInvoker_14_31 = new AbsInvoker_14();
-  private final CumSumInvoker_1 cumSumInvoker_1_11 = new CumSumInvoker_1();
-  private final CumSumInvoker_3 cumSumInvoker_3_21 = new CumSumInvoker_3();
-  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_3 =
-      new FxTradeHandlerStringFilter();
+  private final AsciiConsoleLogger asciiConsoleLogger_41 = new AsciiConsoleLogger();
+  private final AbsInvoker_14 absInvoker_14_47 = new AbsInvoker_14();
+  private final CumSumInvoker_1 cumSumInvoker_1_17 = new CumSumInvoker_1();
+  private final CumSumInvoker_3 cumSumInvoker_3_32 = new CumSumInvoker_3();
   private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_5 =
       new FxTradeHandlerStringFilter();
-  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_7 =
+  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_8 =
       new FxTradeHandlerStringFilter();
-  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_9 =
+  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_11 =
       new FxTradeHandlerStringFilter();
-  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_13 =
+  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_14 =
       new FxTradeHandlerStringFilter();
-  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_15 =
+  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_20 =
       new FxTradeHandlerStringFilter();
-  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_17 =
+  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_23 =
       new FxTradeHandlerStringFilter();
-  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_19 =
+  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_26 =
       new FxTradeHandlerStringFilter();
-  private final FxTradeHandler fxTradeHandler_1 = new FxTradeHandler();
-  private final GreaterThanDecorator_16 greaterThanDecorator_16_33 = new GreaterThanDecorator_16();
-  private final GreaterThanDecorator_24 greaterThanDecorator_24_41 = new GreaterThanDecorator_24();
-  private final LessThanDecorator_20 lessThanDecorator_20_37 = new LessThanDecorator_20();
-  private final LessThanDecorator_28 lessThanDecorator_28_45 = new LessThanDecorator_28();
-  private final MsgBuilder8 msgBuilder8_25 = new MsgBuilder8();
-  private final MsgBuilder12 msgBuilder12_29 = new MsgBuilder12();
-  private final MsgBuilder18 msgBuilder18_35 = new MsgBuilder18();
-  private final MsgBuilder22 msgBuilder22_39 = new MsgBuilder22();
-  private final MsgBuilder26 msgBuilder26_43 = new MsgBuilder26();
-  private final MsgBuilder30 msgBuilder30_47 = new MsgBuilder30();
+  private final FxTradeHandlerStringFilter fxTradeHandlerStringFilter_29 =
+      new FxTradeHandlerStringFilter();
+  private final FxTradeHandler fxTradeHandler_2 = new FxTradeHandler();
+  private final GreaterThanDecorator_16 greaterThanDecorator_16_50 = new GreaterThanDecorator_16();
+  private final GreaterThanDecorator_24 greaterThanDecorator_24_62 = new GreaterThanDecorator_24();
+  private final LessThanDecorator_20 lessThanDecorator_20_56 = new LessThanDecorator_20();
+  private final LessThanDecorator_28 lessThanDecorator_28_68 = new LessThanDecorator_28();
+  private final MsgBuilder8 msgBuilder8_38 = new MsgBuilder8();
+  private final MsgBuilder12 msgBuilder12_44 = new MsgBuilder12();
+  private final MsgBuilder18 msgBuilder18_53 = new MsgBuilder18();
+  private final MsgBuilder22 msgBuilder22_59 = new MsgBuilder22();
+  private final MsgBuilder26 msgBuilder26_65 = new MsgBuilder26();
+  private final MsgBuilder30 msgBuilder30_71 = new MsgBuilder30();
   public final SubtractInvoker_6 eurNetPos = new SubtractInvoker_6();
   //Dirty flags
-  private boolean isDirty_lessThanDecorator_20_37 = false;
-  private boolean isDirty_absInvoker_14_31 = false;
-  private boolean isDirty_cumSumInvoker_3_21 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_3 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_7 = false;
-  private boolean isDirty_msgBuilder22_39 = false;
-  private boolean isDirty_msgBuilder30_47 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_13 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_17 = false;
-  private boolean isDirty_fxTradeHandler_1 = false;
-  private boolean isDirty_lessThanDecorator_28_45 = false;
-  private boolean isDirty_eurNetPos = false;
-  private boolean isDirty_msgBuilder18_35 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_9 = false;
-  private boolean isDirty_cumSumInvoker_1_11 = false;
   private boolean isDirty_fxTradeHandlerStringFilter_5 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_15 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_19 = false;
-  private boolean isDirty_greaterThanDecorator_16_33 = false;
-  private boolean isDirty_greaterThanDecorator_24_41 = false;
-  private boolean isDirty_msgBuilder26_43 = false;
-  private boolean isDirty_msgBuilder8_25 = false;
-  private boolean isDirty_msgBuilder12_29 = false;
+  private boolean isDirty_absInvoker_14_47 = false;
+  private boolean isDirty_eurNetPos = false;
+  private boolean isDirty_cumSumInvoker_3_32 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_11 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_20 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_26 = false;
+  private boolean isDirty_fxTradeHandler_2 = false;
+  private boolean isDirty_lessThanDecorator_20_56 = false;
+  private boolean isDirty_lessThanDecorator_28_68 = false;
+  private boolean isDirty_msgBuilder22_59 = false;
+  private boolean isDirty_msgBuilder30_71 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_14 = false;
+  private boolean isDirty_cumSumInvoker_1_17 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_8 = false;
+  private boolean isDirty_msgBuilder18_53 = false;
+  private boolean isDirty_msgBuilder26_65 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_23 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_29 = false;
+  private boolean isDirty_greaterThanDecorator_16_50 = false;
+  private boolean isDirty_greaterThanDecorator_24_62 = false;
+  private boolean isDirty_msgBuilder8_38 = false;
+  private boolean isDirty_msgBuilder12_44 = false;
   //Filter constants
 
   public FxTradeMonitor() {
-    //asciiConsoleLogger_27
-    asciiConsoleLogger_27.initCapacity = (int) 512;
-    asciiConsoleLogger_27.msgBuilders = new MsgBuilder[6];
-    asciiConsoleLogger_27.msgBuilders[0] = msgBuilder8_25;
-    asciiConsoleLogger_27.msgBuilders[1] = msgBuilder12_29;
-    asciiConsoleLogger_27.msgBuilders[2] = msgBuilder18_35;
-    asciiConsoleLogger_27.msgBuilders[3] = msgBuilder22_39;
-    asciiConsoleLogger_27.msgBuilders[4] = msgBuilder26_43;
-    asciiConsoleLogger_27.msgBuilders[5] = msgBuilder30_47;
-    //absInvoker_14_31
-    absInvoker_14_31.source_SubtractInvoker_6_13 = eurNetPos;
-    //cumSumInvoker_1_11
-    cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0 =
+    //asciiConsoleLogger_41
+    asciiConsoleLogger_41.initCapacity = (int) 512;
+    asciiConsoleLogger_41.msgBuilders = new MsgBuilder[6];
+    asciiConsoleLogger_41.msgBuilders[0] = msgBuilder8_38;
+    asciiConsoleLogger_41.msgBuilders[1] = msgBuilder12_44;
+    asciiConsoleLogger_41.msgBuilders[2] = msgBuilder18_53;
+    asciiConsoleLogger_41.msgBuilders[3] = msgBuilder22_59;
+    asciiConsoleLogger_41.msgBuilders[4] = msgBuilder26_65;
+    asciiConsoleLogger_41.msgBuilders[5] = msgBuilder30_71;
+    //absInvoker_14_47
+    absInvoker_14_47.source_SubtractInvoker_6_13 = eurNetPos;
+    //cumSumInvoker_1_17
+    cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0 =
         new FxTradeHandlerStringFilter[4];
-    cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0[0] = fxTradeHandlerStringFilter_3;
-    cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0[1] = fxTradeHandlerStringFilter_5;
-    cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0[2] = fxTradeHandlerStringFilter_7;
-    cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0[3] = fxTradeHandlerStringFilter_9;
-    //cumSumInvoker_3_21
-    cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2 =
+    cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0[0] = fxTradeHandlerStringFilter_5;
+    cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0[1] = fxTradeHandlerStringFilter_8;
+    cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0[2] =
+        fxTradeHandlerStringFilter_11;
+    cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0[3] =
+        fxTradeHandlerStringFilter_14;
+    //cumSumInvoker_3_32
+    cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2 =
         new FxTradeHandlerStringFilter[4];
-    cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2[0] =
-        fxTradeHandlerStringFilter_13;
-    cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2[1] =
-        fxTradeHandlerStringFilter_15;
-    cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2[2] =
-        fxTradeHandlerStringFilter_17;
-    cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2[3] =
-        fxTradeHandlerStringFilter_19;
-    //fxTradeHandlerStringFilter_3
-    fxTradeHandlerStringFilter_3.filter = "EU";
+    cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2[0] =
+        fxTradeHandlerStringFilter_20;
+    cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2[1] =
+        fxTradeHandlerStringFilter_23;
+    cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2[2] =
+        fxTradeHandlerStringFilter_26;
+    cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2[3] =
+        fxTradeHandlerStringFilter_29;
     //fxTradeHandlerStringFilter_5
-    fxTradeHandlerStringFilter_5.filter = "EC";
-    //fxTradeHandlerStringFilter_7
-    fxTradeHandlerStringFilter_7.filter = "EG";
-    //fxTradeHandlerStringFilter_9
-    fxTradeHandlerStringFilter_9.filter = "EY";
-    //fxTradeHandlerStringFilter_13
-    fxTradeHandlerStringFilter_13.filter = "UE";
-    //fxTradeHandlerStringFilter_15
-    fxTradeHandlerStringFilter_15.filter = "CE";
-    //fxTradeHandlerStringFilter_17
-    fxTradeHandlerStringFilter_17.filter = "GE";
-    //fxTradeHandlerStringFilter_19
-    fxTradeHandlerStringFilter_19.filter = "YE";
-    //fxTradeHandler_1
-    //greaterThanDecorator_16_33
-    greaterThanDecorator_16_33.source_AbsInvoker_14_15 = absInvoker_14_31;
-    //greaterThanDecorator_24_41
-    greaterThanDecorator_24_41.source_AbsInvoker_14_23 = absInvoker_14_31;
-    //lessThanDecorator_20_37
-    lessThanDecorator_20_37.source_AbsInvoker_14_19 = absInvoker_14_31;
-    //lessThanDecorator_28_45
-    lessThanDecorator_28_45.source_AbsInvoker_14_27 = absInvoker_14_31;
-    //msgBuilder8_25
-    msgBuilder8_25.source_FxTradeHandler_7 = fxTradeHandler_1;
-    msgBuilder8_25.logLevel = (int) 3;
-    msgBuilder8_25.initCapacity = (int) 256;
-    //msgBuilder12_29
-    msgBuilder12_29.source_CumSumInvoker_3_11 = cumSumInvoker_3_21;
-    msgBuilder12_29.source_CumSumInvoker_1_10 = cumSumInvoker_1_11;
-    msgBuilder12_29.source_SubtractInvoker_6_9 = eurNetPos;
-    msgBuilder12_29.logNotifier = fxTradeHandler_1;
-    msgBuilder12_29.logLevel = (int) 3;
-    msgBuilder12_29.initCapacity = (int) 256;
-    //msgBuilder18_35
-    msgBuilder18_35.source_SubtractInvoker_6_17 = eurNetPos;
-    msgBuilder18_35.logNotifier = greaterThanDecorator_16_33;
-    msgBuilder18_35.logLevel = (int) 2;
-    msgBuilder18_35.initCapacity = (int) 256;
-    //msgBuilder22_39
-    msgBuilder22_39.source_SubtractInvoker_6_21 = eurNetPos;
-    msgBuilder22_39.logNotifier = lessThanDecorator_20_37;
-    msgBuilder22_39.logLevel = (int) 2;
-    msgBuilder22_39.initCapacity = (int) 256;
-    //msgBuilder26_43
-    msgBuilder26_43.source_SubtractInvoker_6_25 = eurNetPos;
-    msgBuilder26_43.logNotifier = greaterThanDecorator_24_41;
-    msgBuilder26_43.logLevel = (int) 1;
-    msgBuilder26_43.initCapacity = (int) 256;
-    //msgBuilder30_47
-    msgBuilder30_47.source_SubtractInvoker_6_29 = eurNetPos;
-    msgBuilder30_47.logNotifier = lessThanDecorator_28_45;
-    msgBuilder30_47.logLevel = (int) 1;
-    msgBuilder30_47.initCapacity = (int) 256;
+    fxTradeHandlerStringFilter_5.filter = "EU";
+    //fxTradeHandlerStringFilter_8
+    fxTradeHandlerStringFilter_8.filter = "EC";
+    //fxTradeHandlerStringFilter_11
+    fxTradeHandlerStringFilter_11.filter = "EG";
+    //fxTradeHandlerStringFilter_14
+    fxTradeHandlerStringFilter_14.filter = "EY";
+    //fxTradeHandlerStringFilter_20
+    fxTradeHandlerStringFilter_20.filter = "UE";
+    //fxTradeHandlerStringFilter_23
+    fxTradeHandlerStringFilter_23.filter = "CE";
+    //fxTradeHandlerStringFilter_26
+    fxTradeHandlerStringFilter_26.filter = "GE";
+    //fxTradeHandlerStringFilter_29
+    fxTradeHandlerStringFilter_29.filter = "YE";
+    //fxTradeHandler_2
+    //greaterThanDecorator_16_50
+    greaterThanDecorator_16_50.source_AbsInvoker_14_15 = absInvoker_14_47;
+    //greaterThanDecorator_24_62
+    greaterThanDecorator_24_62.source_AbsInvoker_14_23 = absInvoker_14_47;
+    //lessThanDecorator_20_56
+    lessThanDecorator_20_56.source_AbsInvoker_14_19 = absInvoker_14_47;
+    //lessThanDecorator_28_68
+    lessThanDecorator_28_68.source_AbsInvoker_14_27 = absInvoker_14_47;
+    //msgBuilder8_38
+    msgBuilder8_38.source_FxTradeHandler_7 = fxTradeHandler_2;
+    msgBuilder8_38.logLevel = (int) 3;
+    msgBuilder8_38.initCapacity = (int) 256;
+    //msgBuilder12_44
+    msgBuilder12_44.source_SubtractInvoker_6_9 = eurNetPos;
+    msgBuilder12_44.source_CumSumInvoker_1_10 = cumSumInvoker_1_17;
+    msgBuilder12_44.source_CumSumInvoker_3_11 = cumSumInvoker_3_32;
+    msgBuilder12_44.logNotifier = fxTradeHandler_2;
+    msgBuilder12_44.logLevel = (int) 3;
+    msgBuilder12_44.initCapacity = (int) 256;
+    //msgBuilder18_53
+    msgBuilder18_53.source_SubtractInvoker_6_17 = eurNetPos;
+    msgBuilder18_53.logNotifier = greaterThanDecorator_16_50;
+    msgBuilder18_53.logLevel = (int) 2;
+    msgBuilder18_53.initCapacity = (int) 256;
+    //msgBuilder22_59
+    msgBuilder22_59.source_SubtractInvoker_6_21 = eurNetPos;
+    msgBuilder22_59.logNotifier = lessThanDecorator_20_56;
+    msgBuilder22_59.logLevel = (int) 2;
+    msgBuilder22_59.initCapacity = (int) 256;
+    //msgBuilder26_65
+    msgBuilder26_65.source_SubtractInvoker_6_25 = eurNetPos;
+    msgBuilder26_65.logNotifier = greaterThanDecorator_24_62;
+    msgBuilder26_65.logLevel = (int) 1;
+    msgBuilder26_65.initCapacity = (int) 256;
+    //msgBuilder30_71
+    msgBuilder30_71.source_SubtractInvoker_6_29 = eurNetPos;
+    msgBuilder30_71.logNotifier = lessThanDecorator_28_68;
+    msgBuilder30_71.logLevel = (int) 1;
+    msgBuilder30_71.initCapacity = (int) 256;
     //eurNetPos
-    eurNetPos.source_CumSumInvoker_3_5 = cumSumInvoker_3_21;
-    eurNetPos.source_CumSumInvoker_1_4 = cumSumInvoker_1_11;
+    eurNetPos.source_CumSumInvoker_1_4 = cumSumInvoker_1_17;
+    eurNetPos.source_CumSumInvoker_3_5 = cumSumInvoker_3_32;
   }
 
   @Override
@@ -219,69 +205,69 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
   public void handleEvent(LogControlEvent typedEvent) {
     switch (typedEvent.filterString()) {
       case ("CHANGE FILTER"):
-        isDirty_msgBuilder8_25 = msgBuilder8_25.controlLogIdFilter(typedEvent);
-        if (isDirty_msgBuilder8_25) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        isDirty_msgBuilder8_38 = msgBuilder8_38.controlLogIdFilter(typedEvent);
+        if (isDirty_msgBuilder8_38) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
         }
-        isDirty_msgBuilder12_29 = msgBuilder12_29.controlLogIdFilter(typedEvent);
-        if (isDirty_msgBuilder12_29) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+        isDirty_msgBuilder12_44 = msgBuilder12_44.controlLogIdFilter(typedEvent);
+        if (isDirty_msgBuilder12_44) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
         }
-        isDirty_msgBuilder18_35 = msgBuilder18_35.controlLogIdFilter(typedEvent);
-        if (isDirty_msgBuilder18_35) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        isDirty_msgBuilder18_53 = msgBuilder18_53.controlLogIdFilter(typedEvent);
+        if (isDirty_msgBuilder18_53) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
         }
-        isDirty_msgBuilder22_39 = msgBuilder22_39.controlLogIdFilter(typedEvent);
-        if (isDirty_msgBuilder22_39) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        isDirty_msgBuilder22_59 = msgBuilder22_59.controlLogIdFilter(typedEvent);
+        if (isDirty_msgBuilder22_59) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
         }
-        isDirty_msgBuilder26_43 = msgBuilder26_43.controlLogIdFilter(typedEvent);
-        if (isDirty_msgBuilder26_43) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        isDirty_msgBuilder26_65 = msgBuilder26_65.controlLogIdFilter(typedEvent);
+        if (isDirty_msgBuilder26_65) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
         }
-        isDirty_msgBuilder30_47 = msgBuilder30_47.controlLogIdFilter(typedEvent);
-        if (isDirty_msgBuilder30_47) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        isDirty_msgBuilder30_71 = msgBuilder30_71.controlLogIdFilter(typedEvent);
+        if (isDirty_msgBuilder30_71) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
         }
         afterEvent();
         return;
       case ("CHANGE LEVEL"):
-        isDirty_msgBuilder8_25 = msgBuilder8_25.controlLogLevelFilter(typedEvent);
-        if (isDirty_msgBuilder8_25) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        isDirty_msgBuilder8_38 = msgBuilder8_38.controlLogLevelFilter(typedEvent);
+        if (isDirty_msgBuilder8_38) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
         }
-        isDirty_msgBuilder12_29 = msgBuilder12_29.controlLogLevelFilter(typedEvent);
-        if (isDirty_msgBuilder12_29) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+        isDirty_msgBuilder12_44 = msgBuilder12_44.controlLogLevelFilter(typedEvent);
+        if (isDirty_msgBuilder12_44) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
         }
-        isDirty_msgBuilder18_35 = msgBuilder18_35.controlLogLevelFilter(typedEvent);
-        if (isDirty_msgBuilder18_35) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        isDirty_msgBuilder18_53 = msgBuilder18_53.controlLogLevelFilter(typedEvent);
+        if (isDirty_msgBuilder18_53) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
         }
-        isDirty_msgBuilder22_39 = msgBuilder22_39.controlLogLevelFilter(typedEvent);
-        if (isDirty_msgBuilder22_39) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        isDirty_msgBuilder22_59 = msgBuilder22_59.controlLogLevelFilter(typedEvent);
+        if (isDirty_msgBuilder22_59) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
         }
-        isDirty_msgBuilder26_43 = msgBuilder26_43.controlLogLevelFilter(typedEvent);
-        if (isDirty_msgBuilder26_43) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        isDirty_msgBuilder26_65 = msgBuilder26_65.controlLogLevelFilter(typedEvent);
+        if (isDirty_msgBuilder26_65) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
         }
-        isDirty_msgBuilder30_47 = msgBuilder30_47.controlLogLevelFilter(typedEvent);
-        if (isDirty_msgBuilder30_47) {
-          asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        isDirty_msgBuilder30_71 = msgBuilder30_71.controlLogLevelFilter(typedEvent);
+        if (isDirty_msgBuilder30_71) {
+          asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
         }
         afterEvent();
         return;
       case ("RECORD LEVEL"):
-        asciiConsoleLogger_27.controlLevelLogging(typedEvent);
+        asciiConsoleLogger_41.controlLevelLogging(typedEvent);
         afterEvent();
         return;
       case ("RECORD NAME"):
-        asciiConsoleLogger_27.controlIdLogging(typedEvent);
+        asciiConsoleLogger_41.controlIdLogging(typedEvent);
         afterEvent();
         return;
       case ("RECORD TIME"):
-        asciiConsoleLogger_27.controlTimeLogging(typedEvent);
+        asciiConsoleLogger_41.controlTimeLogging(typedEvent);
         afterEvent();
         return;
     }
@@ -291,880 +277,880 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
   public void handleEvent(FxTrade typedEvent) {
     switch (typedEvent.filterString()) {
       case ("CE"):
-        isDirty_fxTradeHandlerStringFilter_15 =
-            fxTradeHandlerStringFilter_15.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_15) {
-          cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2(
-              fxTradeHandlerStringFilter_15);
+        isDirty_fxTradeHandlerStringFilter_23 =
+            fxTradeHandlerStringFilter_23.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_23) {
+          cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2(
+              fxTradeHandlerStringFilter_23);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          isDirty_cumSumInvoker_3_21 = cumSumInvoker_3_21.onEvent();
-          if (isDirty_cumSumInvoker_3_21) {
-            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_21);
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
+          if (isDirty_cumSumInvoker_3_32) {
+            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          cumSumInvoker_3_21.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
         return;
       case ("EC"):
-        isDirty_fxTradeHandlerStringFilter_5 =
-            fxTradeHandlerStringFilter_5.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_5) {
-          cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0(
-              fxTradeHandlerStringFilter_5);
+        isDirty_fxTradeHandlerStringFilter_8 =
+            fxTradeHandlerStringFilter_8.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_8) {
+          cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0(
+              fxTradeHandlerStringFilter_8);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          isDirty_cumSumInvoker_1_11 = cumSumInvoker_1_11.onEvent();
-          if (isDirty_cumSumInvoker_1_11) {
-            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_11);
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
+          if (isDirty_cumSumInvoker_1_17) {
+            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          cumSumInvoker_1_11.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
         return;
       case ("EG"):
-        isDirty_fxTradeHandlerStringFilter_7 =
-            fxTradeHandlerStringFilter_7.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_7) {
-          cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0(
-              fxTradeHandlerStringFilter_7);
+        isDirty_fxTradeHandlerStringFilter_11 =
+            fxTradeHandlerStringFilter_11.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_11) {
+          cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0(
+              fxTradeHandlerStringFilter_11);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          isDirty_cumSumInvoker_1_11 = cumSumInvoker_1_11.onEvent();
-          if (isDirty_cumSumInvoker_1_11) {
-            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_11);
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
+          if (isDirty_cumSumInvoker_1_17) {
+            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          cumSumInvoker_1_11.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
         return;
       case ("EU"):
-        isDirty_fxTradeHandlerStringFilter_3 =
-            fxTradeHandlerStringFilter_3.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_3) {
-          cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0(
-              fxTradeHandlerStringFilter_3);
+        isDirty_fxTradeHandlerStringFilter_5 =
+            fxTradeHandlerStringFilter_5.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_5) {
+          cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0(
+              fxTradeHandlerStringFilter_5);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          isDirty_cumSumInvoker_1_11 = cumSumInvoker_1_11.onEvent();
-          if (isDirty_cumSumInvoker_1_11) {
-            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_11);
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
+          if (isDirty_cumSumInvoker_1_17) {
+            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          cumSumInvoker_1_11.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
         return;
       case ("EY"):
-        isDirty_fxTradeHandlerStringFilter_9 =
-            fxTradeHandlerStringFilter_9.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_9) {
-          cumSumInvoker_1_11.sourceUpdated_FxTradeHandlerStringFilter_0(
-              fxTradeHandlerStringFilter_9);
+        isDirty_fxTradeHandlerStringFilter_14 =
+            fxTradeHandlerStringFilter_14.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_14) {
+          cumSumInvoker_1_17.sourceUpdated_FxTradeHandlerStringFilter_0(
+              fxTradeHandlerStringFilter_14);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          isDirty_cumSumInvoker_1_11 = cumSumInvoker_1_11.onEvent();
-          if (isDirty_cumSumInvoker_1_11) {
-            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_11);
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
+          if (isDirty_cumSumInvoker_1_17) {
+            eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_3
-            || isDirty_fxTradeHandlerStringFilter_7
-            || isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_9) {
-          cumSumInvoker_1_11.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11
+            || isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14) {
+          cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
         return;
       case ("GE"):
-        isDirty_fxTradeHandlerStringFilter_17 =
-            fxTradeHandlerStringFilter_17.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_17) {
-          cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2(
-              fxTradeHandlerStringFilter_17);
+        isDirty_fxTradeHandlerStringFilter_26 =
+            fxTradeHandlerStringFilter_26.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_26) {
+          cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2(
+              fxTradeHandlerStringFilter_26);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          isDirty_cumSumInvoker_3_21 = cumSumInvoker_3_21.onEvent();
-          if (isDirty_cumSumInvoker_3_21) {
-            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_21);
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
+          if (isDirty_cumSumInvoker_3_32) {
+            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          cumSumInvoker_3_21.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
         return;
       case ("UE"):
-        isDirty_fxTradeHandlerStringFilter_13 =
-            fxTradeHandlerStringFilter_13.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_13) {
-          cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2(
-              fxTradeHandlerStringFilter_13);
+        isDirty_fxTradeHandlerStringFilter_20 =
+            fxTradeHandlerStringFilter_20.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_20) {
+          cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2(
+              fxTradeHandlerStringFilter_20);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          isDirty_cumSumInvoker_3_21 = cumSumInvoker_3_21.onEvent();
-          if (isDirty_cumSumInvoker_3_21) {
-            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_21);
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
+          if (isDirty_cumSumInvoker_3_32) {
+            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          cumSumInvoker_3_21.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
         return;
       case ("YE"):
-        isDirty_fxTradeHandlerStringFilter_19 =
-            fxTradeHandlerStringFilter_19.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandlerStringFilter_19) {
-          cumSumInvoker_3_21.sourceUpdated_FxTradeHandlerStringFilter_2(
-              fxTradeHandlerStringFilter_19);
+        isDirty_fxTradeHandlerStringFilter_29 =
+            fxTradeHandlerStringFilter_29.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandlerStringFilter_29) {
+          cumSumInvoker_3_32.sourceUpdated_FxTradeHandlerStringFilter_2(
+              fxTradeHandlerStringFilter_29);
         }
-        isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-        if (isDirty_fxTradeHandler_1) {
-          msgBuilder12_29.postLog(fxTradeHandler_1);
+        isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+        if (isDirty_fxTradeHandler_2) {
+          msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          isDirty_cumSumInvoker_3_21 = cumSumInvoker_3_21.onEvent();
-          if (isDirty_cumSumInvoker_3_21) {
-            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_21);
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
+          if (isDirty_cumSumInvoker_3_32) {
+            eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
           }
         }
-        if (isDirty_fxTradeHandler_1) {
-          isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-          if (isDirty_msgBuilder8_25) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+        if (isDirty_fxTradeHandler_2) {
+          isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+          if (isDirty_msgBuilder8_38) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
-            absInvoker_14_31.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
+            absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_1
-            || isDirty_cumSumInvoker_1_11
-            || isDirty_cumSumInvoker_3_21
+        if (isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17
+            || isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos) {
-          isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-          if (isDirty_msgBuilder12_29) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+          isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+          if (isDirty_msgBuilder12_44) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
           }
         }
         if (isDirty_eurNetPos) {
-          isDirty_absInvoker_14_31 = absInvoker_14_31.onEvent();
+          isDirty_absInvoker_14_47 = absInvoker_14_47.onEvent();
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_16_33 = greaterThanDecorator_16_33.onEvent();
-          if (isDirty_greaterThanDecorator_16_33) {
-            msgBuilder18_35.postLog(greaterThanDecorator_16_33);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_16_50 = greaterThanDecorator_16_50.onEvent();
+          if (isDirty_greaterThanDecorator_16_50) {
+            msgBuilder18_53.postLog(greaterThanDecorator_16_50);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_20_37 = lessThanDecorator_20_37.onEvent();
-          if (isDirty_lessThanDecorator_20_37) {
-            msgBuilder22_39.postLog(lessThanDecorator_20_37);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_20_56 = lessThanDecorator_20_56.onEvent();
+          if (isDirty_lessThanDecorator_20_56) {
+            msgBuilder22_59.postLog(lessThanDecorator_20_56);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_greaterThanDecorator_24_41 = greaterThanDecorator_24_41.onEvent();
-          if (isDirty_greaterThanDecorator_24_41) {
-            msgBuilder26_43.postLog(greaterThanDecorator_24_41);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_greaterThanDecorator_24_62 = greaterThanDecorator_24_62.onEvent();
+          if (isDirty_greaterThanDecorator_24_62) {
+            msgBuilder26_65.postLog(greaterThanDecorator_24_62);
           }
         }
-        if (isDirty_absInvoker_14_31) {
-          isDirty_lessThanDecorator_28_45 = lessThanDecorator_28_45.onEvent();
-          if (isDirty_lessThanDecorator_28_45) {
-            msgBuilder30_47.postLog(lessThanDecorator_28_45);
+        if (isDirty_absInvoker_14_47) {
+          isDirty_lessThanDecorator_28_68 = lessThanDecorator_28_68.onEvent();
+          if (isDirty_lessThanDecorator_28_68) {
+            msgBuilder30_71.postLog(lessThanDecorator_28_68);
           }
         }
-        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_33) {
-          isDirty_msgBuilder18_35 = msgBuilder18_35.buildMessage();
-          if (isDirty_msgBuilder18_35) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder18_35);
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_16_50) {
+          isDirty_msgBuilder18_53 = msgBuilder18_53.buildMessage();
+          if (isDirty_msgBuilder18_53) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder18_53);
           }
         }
-        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_37) {
-          isDirty_msgBuilder22_39 = msgBuilder22_39.buildMessage();
-          if (isDirty_msgBuilder22_39) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder22_39);
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_20_56) {
+          isDirty_msgBuilder22_59 = msgBuilder22_59.buildMessage();
+          if (isDirty_msgBuilder22_59) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_41 || isDirty_eurNetPos) {
-          isDirty_msgBuilder26_43 = msgBuilder26_43.buildMessage();
-          if (isDirty_msgBuilder26_43) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder26_43);
+        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+          isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
+          if (isDirty_msgBuilder26_65) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_45 || isDirty_eurNetPos) {
-          isDirty_msgBuilder30_47 = msgBuilder30_47.buildMessage();
-          if (isDirty_msgBuilder30_47) {
-            asciiConsoleLogger_27.publishMessage(msgBuilder30_47);
+        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+          isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
+          if (isDirty_msgBuilder30_71) {
+            asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
           }
         }
         //event stack unwind callbacks
         if (isDirty_eurNetPos) {
-          absInvoker_14_31.afterCalculate();
+          absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_11 || isDirty_cumSumInvoker_3_21) {
+        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_13
-            || isDirty_fxTradeHandlerStringFilter_17
-            || isDirty_fxTradeHandlerStringFilter_15
-            || isDirty_fxTradeHandlerStringFilter_19) {
-          cumSumInvoker_3_21.afterCalculate();
+        if (isDirty_fxTradeHandlerStringFilter_20
+            || isDirty_fxTradeHandlerStringFilter_26
+            || isDirty_fxTradeHandlerStringFilter_23
+            || isDirty_fxTradeHandlerStringFilter_29) {
+          cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
         return;
     }
     //Default, no filter methods
-    isDirty_fxTradeHandler_1 = fxTradeHandler_1.handleFxTrade(typedEvent);
-    if (isDirty_fxTradeHandler_1) {
-      msgBuilder12_29.postLog(fxTradeHandler_1);
+    isDirty_fxTradeHandler_2 = fxTradeHandler_2.handleFxTrade(typedEvent);
+    if (isDirty_fxTradeHandler_2) {
+      msgBuilder12_44.postLog(fxTradeHandler_2);
     }
-    if (isDirty_fxTradeHandler_1) {
-      isDirty_msgBuilder8_25 = msgBuilder8_25.buildMessage();
-      if (isDirty_msgBuilder8_25) {
-        asciiConsoleLogger_27.publishMessage(msgBuilder8_25);
+    if (isDirty_fxTradeHandler_2) {
+      isDirty_msgBuilder8_38 = msgBuilder8_38.buildMessage();
+      if (isDirty_msgBuilder8_38) {
+        asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
       }
     }
-    if (isDirty_fxTradeHandler_1
-        || isDirty_cumSumInvoker_1_11
-        || isDirty_cumSumInvoker_3_21
+    if (isDirty_fxTradeHandler_2
+        || isDirty_cumSumInvoker_1_17
+        || isDirty_cumSumInvoker_3_32
         || isDirty_eurNetPos) {
-      isDirty_msgBuilder12_29 = msgBuilder12_29.buildMessage();
-      if (isDirty_msgBuilder12_29) {
-        asciiConsoleLogger_27.publishMessage(msgBuilder12_29);
+      isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
+      if (isDirty_msgBuilder12_44) {
+        asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
       }
     }
     //event stack unwind callbacks
@@ -1173,54 +1159,54 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
 
   @Override
   public void afterEvent() {
-    msgBuilder30_47.afterEvent();
-    msgBuilder26_43.afterEvent();
-    msgBuilder22_39.afterEvent();
-    msgBuilder18_35.afterEvent();
-    msgBuilder12_29.afterEvent();
-    msgBuilder8_25.afterEvent();
-    isDirty_lessThanDecorator_20_37 = false;
-    isDirty_absInvoker_14_31 = false;
-    isDirty_cumSumInvoker_3_21 = false;
-    isDirty_fxTradeHandlerStringFilter_3 = false;
-    isDirty_fxTradeHandlerStringFilter_7 = false;
-    isDirty_msgBuilder22_39 = false;
-    isDirty_msgBuilder30_47 = false;
-    isDirty_fxTradeHandlerStringFilter_13 = false;
-    isDirty_fxTradeHandlerStringFilter_17 = false;
-    isDirty_fxTradeHandler_1 = false;
-    isDirty_lessThanDecorator_28_45 = false;
-    isDirty_eurNetPos = false;
-    isDirty_msgBuilder18_35 = false;
-    isDirty_fxTradeHandlerStringFilter_9 = false;
-    isDirty_cumSumInvoker_1_11 = false;
+    msgBuilder30_71.afterEvent();
+    msgBuilder26_65.afterEvent();
+    msgBuilder22_59.afterEvent();
+    msgBuilder18_53.afterEvent();
+    msgBuilder12_44.afterEvent();
+    msgBuilder8_38.afterEvent();
     isDirty_fxTradeHandlerStringFilter_5 = false;
-    isDirty_fxTradeHandlerStringFilter_15 = false;
-    isDirty_fxTradeHandlerStringFilter_19 = false;
-    isDirty_greaterThanDecorator_16_33 = false;
-    isDirty_greaterThanDecorator_24_41 = false;
-    isDirty_msgBuilder26_43 = false;
-    isDirty_msgBuilder8_25 = false;
-    isDirty_msgBuilder12_29 = false;
+    isDirty_absInvoker_14_47 = false;
+    isDirty_eurNetPos = false;
+    isDirty_cumSumInvoker_3_32 = false;
+    isDirty_fxTradeHandlerStringFilter_11 = false;
+    isDirty_fxTradeHandlerStringFilter_20 = false;
+    isDirty_fxTradeHandlerStringFilter_26 = false;
+    isDirty_fxTradeHandler_2 = false;
+    isDirty_lessThanDecorator_20_56 = false;
+    isDirty_lessThanDecorator_28_68 = false;
+    isDirty_msgBuilder22_59 = false;
+    isDirty_msgBuilder30_71 = false;
+    isDirty_fxTradeHandlerStringFilter_14 = false;
+    isDirty_cumSumInvoker_1_17 = false;
+    isDirty_fxTradeHandlerStringFilter_8 = false;
+    isDirty_msgBuilder18_53 = false;
+    isDirty_msgBuilder26_65 = false;
+    isDirty_fxTradeHandlerStringFilter_23 = false;
+    isDirty_fxTradeHandlerStringFilter_29 = false;
+    isDirty_greaterThanDecorator_16_50 = false;
+    isDirty_greaterThanDecorator_24_62 = false;
+    isDirty_msgBuilder8_38 = false;
+    isDirty_msgBuilder12_44 = false;
   }
 
   @Override
   public void init() {
-    cumSumInvoker_1_11.init();
-    cumSumInvoker_3_21.init();
-    msgBuilder8_25.init();
+    cumSumInvoker_1_17.init();
+    cumSumInvoker_3_32.init();
+    msgBuilder8_38.init();
     eurNetPos.init();
-    msgBuilder12_29.init();
-    absInvoker_14_31.init();
-    greaterThanDecorator_16_33.init();
-    lessThanDecorator_20_37.init();
-    greaterThanDecorator_24_41.init();
-    lessThanDecorator_28_45.init();
-    msgBuilder18_35.init();
-    msgBuilder22_39.init();
-    msgBuilder26_43.init();
-    msgBuilder30_47.init();
-    asciiConsoleLogger_27.init();
+    msgBuilder12_44.init();
+    absInvoker_14_47.init();
+    greaterThanDecorator_16_50.init();
+    lessThanDecorator_20_56.init();
+    greaterThanDecorator_24_62.init();
+    lessThanDecorator_28_68.init();
+    msgBuilder18_53.init();
+    msgBuilder22_59.init();
+    msgBuilder26_65.init();
+    msgBuilder30_71.init();
+    asciiConsoleLogger_41.init();
   }
 
   @Override
