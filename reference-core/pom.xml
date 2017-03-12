@@ -19,7 +19,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fluxtion.example</groupId>
     <artifactId>learning</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <name>fluxtion.example :: ref.core</name>
     
@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.plugin.ver>1.0.3</fluxtion.plugin.ver>
+        <fluxtion.plugin.ver>1.0.4</fluxtion.plugin.ver>
         <fluxtion.ver>0.1.22</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
@@ -79,23 +79,23 @@
                         <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
                         <version>${fluxtion.plugin.ver}</version>
+                        <configuration>
+                            <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                        </configuration>
                         <executions>
                             <execution>
-                                <id>example27</id>
+                                <id>example20</id>
                                 <goals>
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                                    <configClass>com.fluxtion.learning.example27.Builder</configClass>
-                                    <packageName>com.fluxtion.learning.example27.generated</packageName>
-                                    <className>TemperatureProcessor</className>
+                                    <configClass>com.fluxtion.learning.example20.CharacterClassifierFactory</configClass>
+                                    <yamlFactoryConfig>${basedir}/src/main/resources/config/example20/fluxtion.yml</yamlFactoryConfig>
+                                    <packageName>com.fluxtion.learning.example20.generated</packageName>
+                                    <className>ScreenProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <assignNonPublicMembers>true</assignNonPublicMembers>
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                     <logDebug>true</logDebug>
-                                    <templateSep>template/base/javaTemplate.vsl</templateSep>
-                                    <templateDebugSep>template/base/javaTemplateDebug.vsl</templateDebugSep>
                                 </configuration>
                             </execution>
                         </executions>
