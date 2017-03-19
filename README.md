@@ -2,13 +2,13 @@
 
 ### This repository holds code examples for use with the Fluxtion framework ###
 
-* Building and running the projects in this repository will teach a developer how to understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the reference and tutorial documentation on the Fluxtion website. 
+* Building and running the projects in this repository will teach a developer how to understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the Fluxtion website. 
 * Version 1.0.2
-* Fluxtion has several version the examples demonstrate capabilities and functionality for each version, brief description of each version:
+* Fluxtion has several versions the examples demonstrate capabilities and functionality for each version:
     * fluxtion - The core fluxtion tool that generates static event procssors(SEP).
     * fluxtion-declarative - Adds declarative functionality for constructing SEP's, supports aggregation, functional idioms, windowing, logging, filtering
     * fluxtion-decalrative-extended - Adds bespoke text processing, math functions, logical operators
-    * fluxtion-statemachine - a statemachine generator powered by fluxtion core, leveraging it's annotations.
+    * fluxtion-statemachine - a statemachine generator powered by fluxtion core, leveraging Fluxtions's annotations.
 
 ### How do I get set up? ###
 
