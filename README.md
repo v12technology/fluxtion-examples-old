@@ -144,7 +144,7 @@ Final Memory: 11M/276M
 
 ```
 
-(###Configuartion-for-all-examples###)
+### Configuartion for all examples ###
 
 Running the other examples for different versions of fluxtions follows the same process, download the installer, activate license, run mvn install. The table below sets out the bindings between trial keys and executables:
 
