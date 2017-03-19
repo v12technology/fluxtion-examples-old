@@ -11,16 +11,16 @@
     * fluxtion-statemachine - a statemachine generator powered by fluxtion core, leveraging Fluxtions's annotations.
 
 ### How do I get set up? ###
-This guide will sep you thorugh the process of running the reference-core exmaple project. at the [end of the guide](#configuartion-for-all-examples) is configuration information to run all the examples in this project.
+This guide will step you through the process of running the reference-core example project. At the [end of the guide](#configuartion-for-all-examples) is configuration information to run all the examples in this project.
 
 * Install Fluxtion Core Trial:
-    * Download the latest trial version version for you platform from [dropbox](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAA01xw4EDZcYW0elHxkKoM1a?dl=0), the follwoing versions are available: 
+    * Download the latest trial version for you platform from [dropbox](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAA01xw4EDZcYW0elHxkKoM1a?dl=0), the following versions are available: 
         * [Windows installer](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAD6vSalNq4j2D6JGKeHBfIVa/fluxtion-core-trial.exe?dl=0)
         * [windows zip file](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAD_i_lBRksoynyG67DYRL6Sa/fluxtion-core-trial.zip?dl=0) 
         * [linux self extracting archive](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AACdzgBWQ3aclYbr6maileY5a/fluxtion-core-trial-0.1.5.sh?dl=0).
     * The download will be either an installation package or an archive, unpack/install as ncessary on the local machine.
 * Activating License
-    * Fluxtion is a license based product before running any examples the **Fluxtion license must be activated**.
+    * Fluxtion is a license based product so before running any examples the **Fluxtion license must be activated**.
     * Locate the install directory and run **fluxtion.exe activate Q3WWS-QBQAY-75JEY-GG7UK-FPKI**, e.g. for windows:
     
 ```bash
@@ -41,7 +41,7 @@ License:C:\Users\myuser_name\.v12-fluxtion\trial-fluxtion-core.lic
 
 * Maven Integration:
     * To help use Fluxtion within the normal development-build process, a custom fluxtion plugin is provided.
-    * set the path to fluxtion executable in the maven pom.xml of a module, the poms are set up to use a property substitution from ~/.m2/settings.xml, an example settings.xml: 
+    * Set the path to fluxtion executable in the maven pom.xml of a module, the poms are set up to use a property substitution from ~/.m2/settings.xml, an example settings.xml: 
  
 
 ```xml
@@ -77,7 +77,7 @@ License:C:\Users\myuser_name\.v12-fluxtion\trial-fluxtion-core.lic
 * Database configuration - none
 * Clone the [examples](https://github.com/v12technology/fluxtion-examples.git) and cd into the reference-core directory
 * To run tests execute  **mvn install**, by default only one example generates, to generate all examples use mvn -Pbuild-all-examples
-* the deault build generates debug output, set **&lt;logDebug&gt;true&lt;/logDebug&gt;** to false to reduce logging noise:
+* The default build generates debug output, set **&lt;logDebug&gt;true&lt;/logDebug&gt;** to false to reduce logging noise:
 
 ```bash
 
@@ -146,7 +146,7 @@ Final Memory: 11M/276M
 
 ### Configuartion for all examples ###
 
-Running the other examples for different versions of fluxtions follows the same process, download the installer, activate license, run mvn install. The table below sets out the bindings between trial keys and executables:
+Running the other examples for different versions of fluxtion follows the same process: download the installer, activate license, run mvn install. The table below sets out the bindings between trial keys and executables:
 
 example|windows executable|key
 -------|----------|---
