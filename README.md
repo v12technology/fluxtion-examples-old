@@ -18,7 +18,16 @@
         * [windows zip file](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAD_i_lBRksoynyG67DYRL6Sa/fluxtion-core-trial.zip?dl=0) 
         * [linux self extracting archive](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AACdzgBWQ3aclYbr6maileY5a/fluxtion-core-trial-0.1.5.sh?dl=0).
     * The download will be either an installation package or an archive unpack/install on the local machine.
-    * Before running any examples the **Fluxtion license must be activated** with the installed executable, locate the install directory and run fluxtion.exe activate (LICENSE KEY) 
+* Activating LIcense
+    * Fluxtion is a license based product Before running any examples the **Fluxtion license must be activated**.
+    * Locate the install directory and run **fluxtion.exe activate Q3WWS-QBQAY-75JEY-GG7UK-FPKI** :
+    
+```bash
+
+mvn clean install 
+
+```
+
 * Maven Integration:
     * To help use Fluxtion within the normal development-build process, a custom fluxtion plugin is provided.
     * set the path to fluxtion executable in the maven pom.xml of a module, the poms are set up to use a property substitution from ~/.m2/settings.xml 
