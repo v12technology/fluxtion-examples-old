@@ -7,7 +7,7 @@
 * Fluxtion has several applications: the examples demonstrate capabilities and functionality of each one:
     * fluxtion - The core fluxtion tool that generates a static event procssor(SEP).
     * fluxtion-declarative - Adds declarative functionality for constructing SEP's, supports aggregation, functional idioms, windowing, logging and filtering.
-    * fluxtion-decalrative-extended - Adds bespoke text processing, math functions, logical operators and utilities.
+    * fluxtion-declarative-extended - Adds bespoke text processing, math functions, logical operators and utilities.
     * fluxtion-statemachine - a statemachine generator powered by fluxtion core, leveraging Fluxtions's annotations.
 
 ### How do I get set up? ###
