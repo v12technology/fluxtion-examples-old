@@ -2,8 +2,8 @@
 
 ### This repository holds code examples for use with the Fluxtion framework ###
 
-* Building and running the projects in this repository will help a developer understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the Fluxtion website. 
-* Version 1.0.2
+* Building and running the projects in this repository will help a developer understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the [Fluxtion website](http://fluxtion.wpengine.com/). 
+* Current example release version 1.0.2
 * Fluxtion has several applications the examples demonstrate capabilities and functionality of each one:
     * fluxtion - The core fluxtion tool that generates a static event procssor(SEP).
     * fluxtion-declarative - Adds declarative functionality for constructing SEP's, supports aggregation, functional idioms, windowing, logging and filtering.
@@ -75,7 +75,7 @@ License:C:\Users\myuser_name\.v12-fluxtion\trial-fluxtion-core.lic
 * Dependencies - none
 * Database configuration - none
 * Clone the [examples](https://github.com/v12technology/fluxtion-examples.git) and cd into the reference-core directory
-* To run teste execute  **mvn install**, by default only one example generates, to generate all examples use mvn -Pbuild-all-examples
+* To run tests execute  **mvn install**, by default only one example generates, to generate all examples use mvn -Pbuild-all-examples
 * the deault build generates debug output, set **&lt;logDebug&gt;true&lt;/logDebug&gt;** to false to reduce logging noise:
 
 ```bash
