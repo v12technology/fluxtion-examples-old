@@ -74,7 +74,10 @@ License:C:\Users\myuser_name\.v12-fluxtion\trial-fluxtion-core.lic
 
 * Dependencies - none
 * Database configuration - none
-* How to run tests - 
+* Clone the [examples](https://github.com/v12technology/fluxtion-examples.git) and cd into the reference-core directory
+* To run teste execute  **mvn install**, by default only one example generates, to generate all examples use mvn -Pbuild-all-examples
+* the deault build generates debug output, set **&lt;logDebug&gt;true&lt;/logDebug&gt;** to false to reduce logging noise:
+
 ```bash
 
 mvn clean install 
@@ -140,6 +143,9 @@ Final Memory: 11M/276M
 
 ```
 
+### Running the core examples ###
+
+Running the other examples for different versions of fluxtions follows the same process, download the installer, activate license
 
 ### Who do I talk to? ###
 
