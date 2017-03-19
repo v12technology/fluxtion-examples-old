@@ -5,7 +5,7 @@
 * Building and running the projects in this repository will teach a developer how to understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the Fluxtion website. 
 * Version 1.0.2
 * Fluxtion has several applications the examples demonstrate capabilities and functionality of each one:
-    * fluxtion - The core fluxtion tool that generates static event procssors(SEP).
+    * fluxtion - The core fluxtion tool that generates a static event procssor(SEP).
     * fluxtion-declarative - Adds declarative functionality for constructing SEP's, supports aggregation, functional idioms, windowing, logging and filtering.
     * fluxtion-decalrative-extended - Adds bespoke text processing, math functions, logical operators and utilities.
     * fluxtion-statemachine - a statemachine generator powered by fluxtion core, leveraging Fluxtions's annotations.
@@ -17,10 +17,10 @@
         * [Windows installer](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAD6vSalNq4j2D6JGKeHBfIVa/fluxtion-core-trial.exe?dl=0)
         * [windows zip file](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAD_i_lBRksoynyG67DYRL6Sa/fluxtion-core-trial.zip?dl=0) 
         * [linux self extracting archive](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AACdzgBWQ3aclYbr6maileY5a/fluxtion-core-trial-0.1.5.sh?dl=0).
-    * The download will be either an installation package or an archive unpack/install on the local machine.
-* Activating LIcense
-    * Fluxtion is a license based product Before running any examples the **Fluxtion license must be activated**.
-    * Locate the install directory and run **fluxtion.exe activate Q3WWS-QBQAY-75JEY-GG7UK-FPKI** for windows:
+    * The download will be either an installation package or an archive, unpack/install as ncessary on the local machine.
+* Activating License
+    * Fluxtion is a license based product before running any examples the **Fluxtion license must be activated**.
+    * Locate the install directory and run **fluxtion.exe activate Q3WWS-QBQAY-75JEY-GG7UK-FPKI**, e.g. for windows:
     
 ```bash
 
@@ -40,7 +40,7 @@ License:C:\Users\myuser_name\.v12-fluxtion\trial-fluxtion-core.lic
 
 * Maven Integration:
     * To help use Fluxtion within the normal development-build process, a custom fluxtion plugin is provided.
-    * set the path to fluxtion executable in the maven pom.xml of a module, the poms are set up to use a property substitution from ~/.m2/settings.xml 
+    * set the path to fluxtion executable in the maven pom.xml of a module, the poms are set up to use a property substitution from ~/.m2/settings.xml, an example settings.xml: 
  
 
 ```xml
@@ -68,7 +68,7 @@ License:C:\Users\myuser_name\.v12-fluxtion\trial-fluxtion-core.lic
 </settings>
 ```
 - 
-    * If preferred the path can be hardcoded in the pom.xml for the plugin
+    * If preferred the path to fluxtion executable can be hardcoded in the pom.xml for the example.
 
 ### Running the core examples ###
 
@@ -130,7 +130,7 @@ running trial version of fluxtion
 09:03:37.022 Reflections took 1800 ms to scan 5 urls, producing 318 keys and 1582 values 
 09:03:39.696 Updated com.fluxtion.learning.example1.generated.TemperatureProcessor in G:\my_projects\fluxtion-master\fluxtion-opensource\examples\reference-core\target\classes
 ...
-...
+... **DEBUG OUTPUT REMOVED**
 ...
 ------------------------------------------------------------------------
 BUILD SUCCESS
