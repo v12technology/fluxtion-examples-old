@@ -4,7 +4,7 @@
 
 * Building and running the projects in this repository will help a developer understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the [Fluxtion website](http://fluxtion.wpengine.com/). 
 * Current example release version 1.0.2
-* Fluxtion has several applications the examples demonstrate capabilities and functionality of each one:
+* Fluxtion has several applications: the examples demonstrate capabilities and functionality of each one:
     * fluxtion - The core fluxtion tool that generates a static event procssor(SEP).
     * fluxtion-declarative - Adds declarative functionality for constructing SEP's, supports aggregation, functional idioms, windowing, logging and filtering.
     * fluxtion-decalrative-extended - Adds bespoke text processing, math functions, logical operators and utilities.
