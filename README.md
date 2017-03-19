@@ -11,7 +11,7 @@
     * fluxtion-statemachine - a statemachine generator powered by fluxtion core, leveraging Fluxtions's annotations.
 
 ### How do I get set up? ###
-This guide will sep you thorugh the process of running the reference-core exmaple project. at the [end of the guide](#Configuartion-for-all-examples) is configuration information to run all the examples in this project.
+This guide will sep you thorugh the process of running the reference-core exmaple project. at the [end of the guide](#configuartion-for-all-examples) is configuration information to run all the examples in this project.
 
 * Install Fluxtion Core Trial:
     * Download the latest trial version version for you platform from [dropbox](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAA01xw4EDZcYW0elHxkKoM1a?dl=0), the follwoing versions are available: 
