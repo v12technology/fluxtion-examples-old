@@ -2,7 +2,7 @@
 
 ### This repository holds code examples for use with the Fluxtion framework ###
 
-* Building and running the projects in this repository will teach a developer how to understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the Fluxtion website. 
+* Building and running the projects in this repository will help a developer understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the Fluxtion website. 
 * Version 1.0.2
 * Fluxtion has several applications the examples demonstrate capabilities and functionality of each one:
     * fluxtion - The core fluxtion tool that generates a static event procssor(SEP).
