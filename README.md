@@ -107,7 +107,7 @@ Downloaded: https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/com/fluxtion/core-
 Downloading: https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/com/fluxtion/build-parent-root/0.1.22/build-parent-root-0.1.22.pom
          
 Downloaded: https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/com/fluxtion/build-parent-root/0.1.22/build-parent-root-0.1.22.pom (6 KB at 5.5 KB/sec)
-Downloading: https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/com/fluxtion/fluxtion-builder/0.1.22/fluxtion-builder-0.1.22.pom
+ Downloading: https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/com/fluxtion/fluxtion-builder/0.1.22/fluxtion-builder-0.1.22.pom
          
 Downloaded: https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/com/fluxtion/fluxtion-builder/0.1.22/fluxtion-builder-0.1.22.pom (2 KB at 0.8 KB/sec)
 Downloading: https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/com/fluxtion/fluxtion-api/0.1.22/fluxtion-api-0.1.22.jar
@@ -170,4 +170,4 @@ reference-statemachine| fluxtion-statemachine-trial-0.1.5.sh | 93DS4-4XNKB-YY7SM
 ### Who do I talk to? ###
 
 * For any questions please send mails to info@v12technology.com
-* A google group is available at:
+* Ask questions on our [forum](https://groups.google.com/a/v12technology.com/forum/#!forum/fluxtion).
