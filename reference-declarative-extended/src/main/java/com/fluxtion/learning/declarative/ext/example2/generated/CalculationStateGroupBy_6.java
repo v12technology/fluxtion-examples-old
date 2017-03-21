@@ -7,11 +7,11 @@ import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
 import com.fluxtion.learning.declarative.ext.example2.generated.GreaterThanDecorator_1;
+import com.fluxtion.learning.declarative.ext.example2.FlightDelayProcessor.FlightDetails;
 import com.fluxtion.learning.declarative.ext.example2.FlightDelayProcessor.CarrierDelay;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.learning.declarative.ext.example2.FlightDelayProcessor.FlightDetails;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 
 /**
  * generated group by calculation state holder. This class holds thr
