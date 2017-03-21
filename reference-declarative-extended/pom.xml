@@ -73,7 +73,7 @@
                         <artifactId>fluxtion-maven-plugin</artifactId>
                         <version>${fluxtion.plugin.ver}</version>
                         <executions>
-                                                    
+<!--                                                    
                             <execution>
                                 <id>example1</id>
                                 <goals>
@@ -105,8 +105,8 @@
                                     <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
-                            
-<!--                            <execution>
+                            -->
+                            <execution>
                                 <id>example3</id>
                                 <goals>
                                     <goal>generate</goal>
@@ -120,7 +120,7 @@
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                     <logDebug>true</logDebug>
                                 </configuration>
-                            </execution>-->
+                            </execution>
                         </executions>
                     </plugin>
                 </plugins>
