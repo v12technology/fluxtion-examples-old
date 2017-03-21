@@ -39,12 +39,17 @@ import com.fluxtion.runtime.event.Event;
 public class FlightDelayProcessor extends SEPConfig {
 
         {
+            //filter for positive delays
             Wrapper<FlightDetails> delayedFlight = greaterThanFilter(FlightDetails.class, FlightDetails::getDelay, 0);
+            //group by carrier name
             GroupByBuilder<FlightDetails, CarrierDelay> carrierDelay = groupBy(delayedFlight, FlightDetails::getCarrier, CarrierDelay.class);
+            //init each group record with human readable name
             carrierDelay.init(FlightDetails::getCarrier, CarrierDelay::setCarrierId);
+            //aggregate calculations
             carrierDelay.avg(FlightDetails::getDelay, CarrierDelay::setAvgDelay);
             carrierDelay.count(FlightDetails::getDelay, CarrierDelay::setTotalFlights);
             carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
+            //add public node for debug
             addPublicNode(carrierDelay.build(), "carrierDelayMap");
         }
         
