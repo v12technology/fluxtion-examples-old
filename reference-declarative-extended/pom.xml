@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.plugin.ver>1.0.4</fluxtion.plugin.ver>
+        <fluxtion.plugin.ver>1.0.5</fluxtion.plugin.ver>
         <fluxtion.ver>0.1.22</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
@@ -59,14 +59,7 @@
             <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
         </repository>
     </repositories>  
-	
-    <pluginRepositories>
-        <pluginRepository>
-            <id>fluxtion.plugin.repo</id>
-            <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
-        </pluginRepository>
-    </pluginRepositories>  
-    
+
     <profiles>     
         <profile>
             <id>build-all-examples</id>
@@ -80,6 +73,7 @@
                         <artifactId>fluxtion-maven-plugin</artifactId>
                         <version>${fluxtion.plugin.ver}</version>
                         <executions>
+                                                    
                             <execution>
                                 <id>example1</id>
                                 <goals>
@@ -95,6 +89,38 @@
                                     <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
+                            
+                            <execution>
+                                <id>example2</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.declarative.ext.example2.FlightDelayProcessor</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.example2.generated</packageName>
+                                    <className>FlightDelayMonitor</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>
+                            
+<!--                            <execution>
+                                <id>example3</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.declarative.ext.example3.FlightDelayProcessor</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.example3.generated</packageName>
+                                    <className>FlightDelayMonitor</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>-->
                         </executions>
                     </plugin>
                 </plugins>
