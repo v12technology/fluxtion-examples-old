@@ -6,8 +6,8 @@ import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.learning.declarative.ext.example3.FlightDelayProcessor.FlightDetails;
-import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2Double;
 import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2ByteBuffer;
+import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2Double;
 
 /**
  * generated Test wrapper.

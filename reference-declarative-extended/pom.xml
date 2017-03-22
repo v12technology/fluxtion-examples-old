@@ -102,7 +102,7 @@
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                     <logDebug>true</logDebug>
                                 </configuration>
-                            </execution>
+                            </execution>                            
                             <execution>
                                 <id>example3</id>
                                 <goals>
@@ -113,6 +113,21 @@
                                     <configClass>com.fluxtion.learning.declarative.ext.example3.FlightDelayProcessor</configClass>
                                     <packageName>com.fluxtion.learning.declarative.ext.example3.generated</packageName>
                                     <className>FlightDelayMonitor</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>example4</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.declarative.ext.example4.Builder</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.example4.generated</packageName>
+                                    <className>MatchResulProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                     <logDebug>true</logDebug>
