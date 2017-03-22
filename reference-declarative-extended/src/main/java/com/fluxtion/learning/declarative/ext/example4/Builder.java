@@ -24,7 +24,28 @@ import com.fluxtion.extension.declarative.builder.group.GroupByBuilder;
 import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
 
 /**
+ * Calculate the league statistics for a set of teams, including:
+ * <ul>
+ * <li>eamName;
+ * <li>homeGamesPlayed;
+ * <li>homeWins;
+ * <li>homeLosses;
+ * <li>homeDraws;
+ * <li>homeGoalsFor;
+ * <li>homeGoalsAgainst;
+ * <li>awayGamesPlayed;
+ * <li>awayWins;
+ * <li>awayLosses;
+ * <li>awayDraws;
+ * <li>awayGoalsFor;
+ * <li>awayGoalsAgainst;
+ * </ul>
  *
+ *  The league is maintained by a matchday processor procesing a result presented as a CSV record.
+ * 
+ * The example demonstrates the use of joins, csv parsing, aggregate functions, initialising a group record and
+ * public nodes.
+ * 
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
 public class Builder extends SEPConfig {
@@ -34,7 +55,7 @@ public class Builder extends SEPConfig {
         //add csv parser
         Wrapper<MatchResult> matchResult = csvMarshaller(MatchResult.class, 1)
                 .mapString(0, MatchResult::setHomeTeam).map(1, MatchResult::setHomeGoals)
-                .mapString(2, MatchResult::setAwayTeam).map(3, MatchResult::setAwayGoals)
+                .mapString(3, MatchResult::setAwayTeam).map(2, MatchResult::setAwayGoals)
                 .build();
         //groupby team name, self-referntial join on team name, for hone and away team
         GroupByBuilder<MatchResult, LeaguePosition> home = groupBy(matchResult, MatchResult::getHomeTeam, LeaguePosition.class);
