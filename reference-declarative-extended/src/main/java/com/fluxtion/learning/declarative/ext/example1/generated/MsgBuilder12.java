@@ -13,11 +13,11 @@ public class MsgBuilder12 extends MsgBuilder{
 
     //source operand inputs
     @NoEventReference
+    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_9;
+    @NoEventReference
     public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_3 source_CumSumInvoker_3_11;
     @NoEventReference
     public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_1 source_CumSumInvoker_1_10;
-    @NoEventReference
-    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_9;
     public Object logNotifier;
     private boolean notificationToLog;
     
