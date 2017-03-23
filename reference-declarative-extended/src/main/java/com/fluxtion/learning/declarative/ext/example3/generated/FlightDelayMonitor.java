@@ -104,8 +104,8 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (44):
         isDirty_asciiAnyCharMatcher_0_15 = asciiAnyCharMatcher_0_15.onChar_44(typedEvent);
         if (isDirty_asciiAnyCharMatcher_0_15) {
-          csv2Double_2.onDelimiter(asciiAnyCharMatcher_0_15);
           csv2ByteBuffer_5.onDelimiter(asciiAnyCharMatcher_0_15);
+          csv2Double_2.onDelimiter(asciiAnyCharMatcher_0_15);
         }
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
         if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {

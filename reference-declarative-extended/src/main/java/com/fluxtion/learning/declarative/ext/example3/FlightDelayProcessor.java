@@ -25,28 +25,49 @@ import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterTha
 import com.fluxtion.runtime.event.Event;
 
 /**
+ * Inspired by
+ * https://blog.redelastic.com/diving-into-akka-streams-2770b3aeabb0#.lt2w5bntb
+ *
+ * Process CSV flight data from the
+ * http://stat-computing.org/dataexpo/2009/the-data.html
+ *
+ * Calculate summary delay statistics for each carrier that has a fightdetails
+ * record in the CVS source., the summary should:
+ *
+ * <ul>
+ * <li>Group the carriers by name, column 8
+ * <li>Delay is column 14
+ * <li>Cumulative sum of total delay
+ * <li>Total number of delayed flights
+ * <li>Average delay for a flight if it is late
+ * </li>
+ *
+ * FlightDetails contains the carrier name and the delay if any on arrival. A
+ * negative delay is an early arrival and a positive value is the number of
+ * minutes late the plane landed. The solution demonstrates the use of GroupBy
+ * with aggregate functions to calculate, averages, counts and sums, fed by CSV data.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
 public class FlightDelayProcessor extends SEPConfig {
 
-        {
-            //add csv parser
-            Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1).map(14, FlightDetails::setDelay).mapString(8, FlightDetails::setCarrier).build();
-            //filter for positive delays
-            Wrapper<FlightDetails> delayedFlight = greaterThanFilter(flightDetails, FlightDetails::getDelay, 0);
-            //group by carrier name
-            GroupByBuilder<FlightDetails, CarrierDelay> carrierDelay = groupBy(delayedFlight, FlightDetails::getCarrier, CarrierDelay.class);
-            //init each group record with human readable name
-            carrierDelay.init(FlightDetails::getCarrier, CarrierDelay::setCarrierId);
-            //aggregate calculations
-            carrierDelay.avg(FlightDetails::getDelay, CarrierDelay::setAvgDelay);
-            carrierDelay.count(FlightDetails::getDelay, CarrierDelay::setTotalFlights);
-            carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
-            //add public node for debug
-            addPublicNode(carrierDelay.build(), "carrierDelayMap");
-        }
-        
+    {
+        //add csv parser
+        Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1).map(14, FlightDetails::setDelay).mapString(8, FlightDetails::setCarrier).build();
+        //filter for positive delays
+        Wrapper<FlightDetails> delayedFlight = greaterThanFilter(flightDetails, FlightDetails::getDelay, 0);
+        //group by carrier name
+        GroupByBuilder<FlightDetails, CarrierDelay> carrierDelay = groupBy(delayedFlight, FlightDetails::getCarrier, CarrierDelay.class);
+        //init each group record with human readable name
+        carrierDelay.init(FlightDetails::getCarrier, CarrierDelay::setCarrierId);
+        //aggregate calculations
+        carrierDelay.avg(FlightDetails::getDelay, CarrierDelay::setAvgDelay);
+        carrierDelay.count(FlightDetails::getDelay, CarrierDelay::setTotalFlights);
+        carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
+        //add public node for debug
+        addPublicNode(carrierDelay.build(), "carrierDelayMap");
+    }
+
     public static class FlightDetails extends Event {
 
         public int delay;
@@ -68,8 +89,8 @@ public class FlightDelayProcessor extends SEPConfig {
         }
 
     }
-    
-    public static class CarrierDelay{
+
+    public static class CarrierDelay {
 
         private String carrierId;
         private int avgDelay;
@@ -112,7 +133,7 @@ public class FlightDelayProcessor extends SEPConfig {
         public String toString() {
             return "CarrierDelay{" + "carrierId=" + carrierId + ", avgDelay=" + avgDelay + ", totalFlights=" + totalFlights + ", totalDelayMins=" + totalDelayMins + '}';
         }
-        
+
     }
 
 }

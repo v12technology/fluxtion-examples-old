@@ -24,6 +24,8 @@ import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterTha
 import com.fluxtion.runtime.event.Event;
 
 /**
+ * Inspired by https://blog.redelastic.com/diving-into-akka-streams-2770b3aeabb0#.lt2w5bntb
+ *
  * Process a FlightDetails event, broadcast when a plane lands to calculate for each carrier:
  * <ul>
  * <li>a cumulative sum of minutes delayed. 

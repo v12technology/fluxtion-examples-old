@@ -64,28 +64,28 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
   private final MsgBuilder30 msgBuilder30_71 = new MsgBuilder30();
   public final SubtractInvoker_6 eurNetPos = new SubtractInvoker_6();
   //Dirty flags
+  private boolean isDirty_fxTradeHandlerStringFilter_26 = false;
   private boolean isDirty_cumSumInvoker_3_32 = false;
   private boolean isDirty_absInvoker_14_47 = false;
+  private boolean isDirty_msgBuilder30_71 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_5 = false;
   private boolean isDirty_eurNetPos = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_11 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_20 = false;
+  private boolean isDirty_fxTradeHandler_2 = false;
+  private boolean isDirty_lessThanDecorator_20_56 = false;
+  private boolean isDirty_lessThanDecorator_28_68 = false;
+  private boolean isDirty_msgBuilder22_59 = false;
+  private boolean isDirty_fxTradeHandlerStringFilter_29 = false;
+  private boolean isDirty_cumSumInvoker_1_17 = false;
   private boolean isDirty_fxTradeHandlerStringFilter_8 = false;
   private boolean isDirty_fxTradeHandlerStringFilter_14 = false;
   private boolean isDirty_fxTradeHandlerStringFilter_23 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_29 = false;
-  private boolean isDirty_fxTradeHandler_2 = false;
-  private boolean isDirty_greaterThanDecorator_24_62 = false;
-  private boolean isDirty_lessThanDecorator_28_68 = false;
-  private boolean isDirty_msgBuilder22_59 = false;
-  private boolean isDirty_msgBuilder30_71 = false;
-  private boolean isDirty_lessThanDecorator_20_56 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_26 = false;
-  private boolean isDirty_cumSumInvoker_1_17 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_5 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_11 = false;
-  private boolean isDirty_fxTradeHandlerStringFilter_20 = false;
+  private boolean isDirty_msgBuilder18_53 = false;
   private boolean isDirty_greaterThanDecorator_16_50 = false;
+  private boolean isDirty_greaterThanDecorator_24_62 = false;
   private boolean isDirty_msgBuilder8_38 = false;
   private boolean isDirty_msgBuilder12_44 = false;
-  private boolean isDirty_msgBuilder18_53 = false;
   private boolean isDirty_msgBuilder26_65 = false;
   //Filter constants
 
@@ -287,10 +287,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
           if (isDirty_cumSumInvoker_3_32) {
             eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
@@ -302,16 +302,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -356,13 +356,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -372,13 +372,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
@@ -394,10 +394,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
           if (isDirty_cumSumInvoker_1_17) {
             eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
@@ -409,16 +409,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -463,13 +463,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -479,13 +479,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
@@ -501,10 +501,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
           if (isDirty_cumSumInvoker_1_17) {
             eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
@@ -516,16 +516,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -570,13 +570,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -586,13 +586,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
@@ -608,10 +608,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
           if (isDirty_cumSumInvoker_1_17) {
             eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
@@ -623,16 +623,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -677,13 +677,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -693,13 +693,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
@@ -715,10 +715,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           isDirty_cumSumInvoker_1_17 = cumSumInvoker_1_17.onEvent();
           if (isDirty_cumSumInvoker_1_17) {
             eurNetPos.sourceChange_source_CumSumInvoker_1_4(cumSumInvoker_1_17);
@@ -730,16 +730,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -784,13 +784,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -800,13 +800,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_5
-            || isDirty_fxTradeHandlerStringFilter_11
-            || isDirty_fxTradeHandlerStringFilter_8
-            || isDirty_fxTradeHandlerStringFilter_14) {
+        if (isDirty_fxTradeHandlerStringFilter_8
+            || isDirty_fxTradeHandlerStringFilter_14
+            || isDirty_fxTradeHandlerStringFilter_5
+            || isDirty_fxTradeHandlerStringFilter_11) {
           cumSumInvoker_1_17.afterCalculate();
         }
         afterEvent();
@@ -822,10 +822,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
           if (isDirty_cumSumInvoker_3_32) {
             eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
@@ -837,16 +837,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -891,13 +891,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -907,13 +907,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
@@ -929,10 +929,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
           if (isDirty_cumSumInvoker_3_32) {
             eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
@@ -944,16 +944,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -998,13 +998,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -1014,13 +1014,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
@@ -1036,10 +1036,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_fxTradeHandler_2) {
           msgBuilder12_44.postLog(fxTradeHandler_2);
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           isDirty_cumSumInvoker_3_32 = cumSumInvoker_3_32.onEvent();
           if (isDirty_cumSumInvoker_3_32) {
             eurNetPos.sourceChange_source_CumSumInvoker_3_5(cumSumInvoker_3_32);
@@ -1051,16 +1051,16 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
           }
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           isDirty_eurNetPos = eurNetPos.onEvent();
           if (isDirty_eurNetPos) {
             absInvoker_14_47.sourceChange_source_SubtractInvoker_6_13(eurNetPos);
           }
         }
-        if (isDirty_fxTradeHandler_2
+        if (isDirty_cumSumInvoker_3_32
             || isDirty_eurNetPos
-            || isDirty_cumSumInvoker_1_17
-            || isDirty_cumSumInvoker_3_32) {
+            || isDirty_fxTradeHandler_2
+            || isDirty_cumSumInvoker_1_17) {
           isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
           if (isDirty_msgBuilder12_44) {
             asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -1105,13 +1105,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
             asciiConsoleLogger_41.publishMessage(msgBuilder22_59);
           }
         }
-        if (isDirty_greaterThanDecorator_24_62 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_greaterThanDecorator_24_62) {
           isDirty_msgBuilder26_65 = msgBuilder26_65.buildMessage();
           if (isDirty_msgBuilder26_65) {
             asciiConsoleLogger_41.publishMessage(msgBuilder26_65);
           }
         }
-        if (isDirty_lessThanDecorator_28_68 || isDirty_eurNetPos) {
+        if (isDirty_eurNetPos || isDirty_lessThanDecorator_28_68) {
           isDirty_msgBuilder30_71 = msgBuilder30_71.buildMessage();
           if (isDirty_msgBuilder30_71) {
             asciiConsoleLogger_41.publishMessage(msgBuilder30_71);
@@ -1121,13 +1121,13 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         if (isDirty_eurNetPos) {
           absInvoker_14_47.afterCalculate();
         }
-        if (isDirty_cumSumInvoker_1_17 || isDirty_cumSumInvoker_3_32) {
+        if (isDirty_cumSumInvoker_3_32 || isDirty_cumSumInvoker_1_17) {
           eurNetPos.afterCalculate();
         }
-        if (isDirty_fxTradeHandlerStringFilter_26
+        if (isDirty_fxTradeHandlerStringFilter_23
             || isDirty_fxTradeHandlerStringFilter_29
             || isDirty_fxTradeHandlerStringFilter_20
-            || isDirty_fxTradeHandlerStringFilter_23) {
+            || isDirty_fxTradeHandlerStringFilter_26) {
           cumSumInvoker_3_32.afterCalculate();
         }
         afterEvent();
@@ -1144,10 +1144,10 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
         asciiConsoleLogger_41.publishMessage(msgBuilder8_38);
       }
     }
-    if (isDirty_fxTradeHandler_2
+    if (isDirty_cumSumInvoker_3_32
         || isDirty_eurNetPos
-        || isDirty_cumSumInvoker_1_17
-        || isDirty_cumSumInvoker_3_32) {
+        || isDirty_fxTradeHandler_2
+        || isDirty_cumSumInvoker_1_17) {
       isDirty_msgBuilder12_44 = msgBuilder12_44.buildMessage();
       if (isDirty_msgBuilder12_44) {
         asciiConsoleLogger_41.publishMessage(msgBuilder12_44);
@@ -1165,28 +1165,28 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder18_53.afterEvent();
     msgBuilder12_44.afterEvent();
     msgBuilder8_38.afterEvent();
+    isDirty_fxTradeHandlerStringFilter_26 = false;
     isDirty_cumSumInvoker_3_32 = false;
     isDirty_absInvoker_14_47 = false;
+    isDirty_msgBuilder30_71 = false;
+    isDirty_fxTradeHandlerStringFilter_5 = false;
     isDirty_eurNetPos = false;
+    isDirty_fxTradeHandlerStringFilter_11 = false;
+    isDirty_fxTradeHandlerStringFilter_20 = false;
+    isDirty_fxTradeHandler_2 = false;
+    isDirty_lessThanDecorator_20_56 = false;
+    isDirty_lessThanDecorator_28_68 = false;
+    isDirty_msgBuilder22_59 = false;
+    isDirty_fxTradeHandlerStringFilter_29 = false;
+    isDirty_cumSumInvoker_1_17 = false;
     isDirty_fxTradeHandlerStringFilter_8 = false;
     isDirty_fxTradeHandlerStringFilter_14 = false;
     isDirty_fxTradeHandlerStringFilter_23 = false;
-    isDirty_fxTradeHandlerStringFilter_29 = false;
-    isDirty_fxTradeHandler_2 = false;
-    isDirty_greaterThanDecorator_24_62 = false;
-    isDirty_lessThanDecorator_28_68 = false;
-    isDirty_msgBuilder22_59 = false;
-    isDirty_msgBuilder30_71 = false;
-    isDirty_lessThanDecorator_20_56 = false;
-    isDirty_fxTradeHandlerStringFilter_26 = false;
-    isDirty_cumSumInvoker_1_17 = false;
-    isDirty_fxTradeHandlerStringFilter_5 = false;
-    isDirty_fxTradeHandlerStringFilter_11 = false;
-    isDirty_fxTradeHandlerStringFilter_20 = false;
+    isDirty_msgBuilder18_53 = false;
     isDirty_greaterThanDecorator_16_50 = false;
+    isDirty_greaterThanDecorator_24_62 = false;
     isDirty_msgBuilder8_38 = false;
     isDirty_msgBuilder12_44 = false;
-    isDirty_msgBuilder18_53 = false;
     isDirty_msgBuilder26_65 = false;
   }
 
