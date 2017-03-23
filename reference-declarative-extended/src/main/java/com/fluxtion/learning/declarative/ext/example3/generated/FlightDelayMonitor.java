@@ -81,7 +81,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
         }
         isDirty_csv2Double_2 = csv2Double_2.onEol(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         isDirty_flightDetailsCsvMarshaller2_8 = flightDetailsCsvMarshaller2_8.onEol(typedEvent);
@@ -95,7 +95,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -108,7 +108,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           csv2Double_2.onDelimiter(asciiAnyCharMatcher_0_15);
         }
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -121,7 +121,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -130,7 +130,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (45):
         isDirty_csv2Double_2 = csv2Double_2.onSign(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -143,7 +143,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -152,7 +152,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (46):
         isDirty_csv2Double_2 = csv2Double_2.onDecimalPoint(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -165,7 +165,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -174,7 +174,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (48):
         isDirty_csv2Double_2 = csv2Double_2.on_0(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -187,7 +187,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -196,7 +196,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (49):
         isDirty_csv2Double_2 = csv2Double_2.on_1(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -209,7 +209,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -218,7 +218,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (50):
         isDirty_csv2Double_2 = csv2Double_2.on_2(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -231,7 +231,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -240,7 +240,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (51):
         isDirty_csv2Double_2 = csv2Double_2.on_3(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -253,7 +253,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -262,7 +262,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (52):
         isDirty_csv2Double_2 = csv2Double_2.on_4(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -275,7 +275,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -284,7 +284,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (53):
         isDirty_csv2Double_2 = csv2Double_2.on_5(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -297,7 +297,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -306,7 +306,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (54):
         isDirty_csv2Double_2 = csv2Double_2.on_6(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -319,7 +319,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -328,7 +328,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (55):
         isDirty_csv2Double_2 = csv2Double_2.on_7(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -341,7 +341,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -350,7 +350,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (56):
         isDirty_csv2Double_2 = csv2Double_2.on_8(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -363,7 +363,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -372,7 +372,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       case (57):
         isDirty_csv2Double_2 = csv2Double_2.on_9(typedEvent);
         isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
         }
         if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -385,7 +385,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
           isDirty_carrierDelayMap = carrierDelayMap.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+        if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
           csv2ByteBuffer_5.onEventComplete();
         }
         afterEvent();
@@ -393,7 +393,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
     }
     //Default, no filter methods
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+    if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
     if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -406,7 +406,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_15 || isDirty_asciiAnyCharMatcher_1_16) {
+    if (isDirty_asciiAnyCharMatcher_1_16 || isDirty_asciiAnyCharMatcher_0_15) {
       csv2ByteBuffer_5.onEventComplete();
     }
     afterEvent();
