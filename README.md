@@ -154,6 +154,7 @@ reference-core| fluxtion-core-trial.exe | Q3WWS-QBQAY-75JEY-GG7UK-FPKIH
 reference-declarative| fluxtion-declarative-trial.exe | XELFA-4HGBI-GMDXZ-3SFIG-XV63C
 reference-declarative-extended| fluxtion-declarative-extended-trial.exe | T5YQN-GHSH4-P5BG9-RZLR9-QSFKX
 reference-statemachine| fluxtion-statemachine-trial.exe | 93DS4-4XNKB-YY7SM-7V2P9-BGVQR
+reference-fx| fluxtion-fx-trial-0.1.8.exe | 7DSBB-PBQFW-II7YM-R54YP-9IIBW
 
 example|64 bit Linux installer|key
 -------|----------|---

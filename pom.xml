@@ -14,7 +14,7 @@ obtained from V12 Technology Limited.
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fluxtion</groupId>
     <artifactId>fluxtion-examples</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6</version>
     <packaging>pom</packaging>
     <name>fluxtion.example</name>
     
@@ -23,6 +23,7 @@ obtained from V12 Technology Limited.
         <module>reference-core</module>
         <module>reference-declarative-extended</module>
         <module>reference-statemachine</module>
+        <module>reference-fx</module>
     </modules>
     
     <properties>
