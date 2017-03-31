@@ -16,11 +16,15 @@
  */
 package com.fluxtion.learning.fx.example1;
 
+import com.fluxtion.fx.EventAuditor;
+import com.fluxtion.fx.node.biascheck.EventAuditDelegator;
 import com.fluxtion.fx.node.biascheck.OrderBiasResult;
-import com.fluxtion.fx.node.biascheck.OrderBiasResultHandler;
 import static com.fluxtion.fx.util.CcyPair.*;
 import com.fluxtion.learning.fx.utils.ConsoleAuditor;
+import com.fluxtion.learning.fx.utils.Log4jAuditor;
 import com.fluxtion.learning.fx.utils.PriceOrderGenerator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -31,7 +35,8 @@ public class RunSampleMarket {
     private final boolean printAuditToConsole = false;
 
     public static void main(String[] args) throws InterruptedException {
-        new RunSampleMarket().runMarket_1();
+//        new RunSampleMarket().runMarket_1();
+        new RunSampleMarket().runMarket_log4j(5 * 60);
     }
 
     private void runMarket_1() throws InterruptedException {
@@ -45,9 +50,9 @@ public class RunSampleMarket {
             System.out.println("breach notification:" + breachNotification.toString());
         });
         monitor.registerResultsReceiver((long seconds, OrderBiasResult[] results) -> {
-//            System.out.println("Current bias at:" + seconds + " seconds");
+//            LOGGER.info("Current bias at:" + seconds + " seconds");
 //            for (int i = 0; i < results.length; i++) {
-//                System.out.println("\t" + results[i]);
+//                LOGGER.info("\t" + results[i]);
 //            }
         });
         PriceOrderGenerator orderGenerator = new PriceOrderGenerator(monitor);
@@ -59,10 +64,41 @@ public class RunSampleMarket {
         //
         System.out.println("starting order geenerator");
         orderGenerator.startMarket(1);
-        Thread.sleep(5 * 60 * 1000);
+        Thread.sleep(5 * 1 * 1000);
         System.out.println("stopping order geenerator");
         orderGenerator.stopMarket();
         System.out.println("message stats:" + auditor.toString());
 
+    }
+
+    private void runMarket_log4j(int lengthOfRun) throws InterruptedException {
+        final Log4jAuditor log4jAuditor = new Log4jAuditor();
+        PriceOrderGenerator orderGenerator = builOrderGenerator(log4jAuditor);
+        runMarketForSetPeriod(orderGenerator, lengthOfRun);
+        System.out.println(log4jAuditor.toString());
+    }
+
+    private void runMarketForSetPeriod(PriceOrderGenerator orderGenerator, int seconds) throws InterruptedException {
+        //
+        System.out.println("starting order geenerator");
+        orderGenerator.startMarket(1);
+        Thread.sleep(seconds * 1000);
+        System.out.println("stopping order geenerator");
+        orderGenerator.stopMarket();
+    }
+
+    private PriceOrderGenerator builOrderGenerator(EventAuditor auditor) {
+        G10Monitor monitor = new G10Monitor();
+        //register listeners
+        if (auditor != null) {
+            monitor.registerEventAuditor(auditor);
+        }
+        PriceOrderGenerator orderGenerator = new PriceOrderGenerator(monitor);
+        orderGenerator.init();
+        orderGenerator.addCcy(EURUSD);
+        orderGenerator.addCcy(GBPUSD);
+        orderGenerator.addCcy(EURCHF);
+        orderGenerator.addCcy(USDCHF);
+        return orderGenerator;
     }
 }

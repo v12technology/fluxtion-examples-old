@@ -55,8 +55,8 @@ public class PriceOrderGenerator {
         //timing pulse
         timingPulse = new TimingPulseEvent(1);
         run.set(true);
+        timingPulseExecutor = scheduledExecutor.scheduleAtFixedRate(() -> pushTImingPulse(), 0, 500, TimeUnit.MILLISECONDS);
         marketExecutor = scheduledExecutor.scheduleAtFixedRate(() -> generate(), 100, sleepPeriod, TimeUnit.MILLISECONDS);
-        timingPulseExecutor = scheduledExecutor.scheduleAtFixedRate(() -> pushTImingPulse(), 100, 500, TimeUnit.MILLISECONDS);
     }
 
     public void stopMarket() throws InterruptedException {
