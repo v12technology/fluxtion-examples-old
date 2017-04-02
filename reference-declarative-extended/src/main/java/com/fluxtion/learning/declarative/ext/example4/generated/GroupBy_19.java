@@ -9,11 +9,11 @@ import com.fluxtion.extension.declarative.api.group.GroupBy;
 import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.learning.declarative.ext.example4.generated.MatchResultCsvMarshaller4;
 import com.fluxtion.learning.declarative.ext.example4.LeaguePosition;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.learning.declarative.ext.example4.MatchResult;
+import com.fluxtion.learning.declarative.ext.example4.generated.MatchResultCsvMarshaller4;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 
 /**
  * generated group by holder.
@@ -36,6 +36,18 @@ public final class GroupBy_19 implements GroupBy<LeaguePosition>{
         MatchResult event = eventWrapped.event();
         CalculationStateGroupBy_19 instance = calcState.getOrCreateInstance(event.getHomeTeam(), initialisermatchResultCsvMarshaller40, event);
         target = instance.target;
+        {
+			double value = instance.aggregateSum17;
+			value = AggregateSum.calcSum((double)event.getDraw(), (double)value);
+			target.setHomeDraws((int)value);
+			instance.aggregateSum17 = value;
+         }
+        {
+			double value = instance.aggregateSum18;
+			value = AggregateSum.calcSum((double)event.getAwayGoals(), (double)value);
+			target.setHomeGoalsAgainst((int)value);
+			instance.aggregateSum18 = value;
+         }
         {
 			int value = instance.aggregateCount13;
 			value = AggregateCount.increment((int)event.getHomeGoals(), (int)value);
@@ -60,18 +72,6 @@ public final class GroupBy_19 implements GroupBy<LeaguePosition>{
 			target.setHomeLosses((int)value);
 			instance.aggregateSum16 = value;
          }
-        {
-			double value = instance.aggregateSum17;
-			value = AggregateSum.calcSum((double)event.getDraw(), (double)value);
-			target.setHomeDraws((int)value);
-			instance.aggregateSum17 = value;
-         }
-        {
-			double value = instance.aggregateSum18;
-			value = AggregateSum.calcSum((double)event.getAwayGoals(), (double)value);
-			target.setHomeGoalsAgainst((int)value);
-			instance.aggregateSum18 = value;
-         }
         return true;
     }
 
@@ -80,24 +80,6 @@ public final class GroupBy_19 implements GroupBy<LeaguePosition>{
         MatchResult event = eventWrapped.event();
         CalculationStateGroupBy_19 instance = calcState.getOrCreateInstance(event.getAwayTeam(), initialisermatchResultCsvMarshaller41, event);
         target = instance.target;
-        {
-			double value = instance.aggregateSum8;
-			value = AggregateSum.calcSum((double)event.getAwayGoals(), (double)value);
-			target.setAwayGoalsFor((int)value);
-			instance.aggregateSum8 = value;
-         }
-        {
-			double value = instance.aggregateSum9;
-			value = AggregateSum.calcSum((double)event.getHomeGoals(), (double)value);
-			target.setAwayGoalsAgainst((int)value);
-			instance.aggregateSum9 = value;
-         }
-        {
-			double value = instance.aggregateSum10;
-			value = AggregateSum.calcSum((double)event.getAwayWin(), (double)value);
-			target.setAwayWins((int)value);
-			instance.aggregateSum10 = value;
-         }
         {
 			double value = instance.aggregateSum11;
 			value = AggregateSum.calcSum((double)event.getAwayLoss(), (double)value);
@@ -115,6 +97,24 @@ public final class GroupBy_19 implements GroupBy<LeaguePosition>{
 			value = AggregateCount.increment((int)event.getHomeGoals(), (int)value);
 			target.setAwayGamesPlayed((int)value);
 			instance.aggregateCount7 = value;
+         }
+        {
+			double value = instance.aggregateSum8;
+			value = AggregateSum.calcSum((double)event.getAwayGoals(), (double)value);
+			target.setAwayGoalsFor((int)value);
+			instance.aggregateSum8 = value;
+         }
+        {
+			double value = instance.aggregateSum9;
+			value = AggregateSum.calcSum((double)event.getHomeGoals(), (double)value);
+			target.setAwayGoalsAgainst((int)value);
+			instance.aggregateSum9 = value;
+         }
+        {
+			double value = instance.aggregateSum10;
+			value = AggregateSum.calcSum((double)event.getAwayWin(), (double)value);
+			target.setAwayWins((int)value);
+			instance.aggregateSum10 = value;
          }
         return true;
     }
