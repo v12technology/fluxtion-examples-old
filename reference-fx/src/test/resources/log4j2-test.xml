@@ -5,11 +5,14 @@
     </Properties>
  
     <Appenders>
-        <RandomAccessFile  name="fileLogger" fileName="${basePath}/fluxtionfx-audit.log" append="false" immediateFlush="false">
+        <RollingFile name="fileLogger" fileName="${basePath}/fluxtionfx-audit.log" filePattern="${basePath}/fluxtionfx-audit-%d{yyyy-MM-dd}.log">
             <PatternLayout>
                 <pattern>%msg%n</pattern>
             </PatternLayout>
-        </RandomAccessFile >
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
  
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />

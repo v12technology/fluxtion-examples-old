@@ -64,7 +64,7 @@
     
     <profiles>     
         <profile>
-            <id>build-all-examples</id>
+            <id>build-example1-BiasMonitor</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -82,10 +82,10 @@
                                 </goals>
                                 <configuration>
                                     <fluxtionExePath>${fluxtionFx.exe.path}</fluxtionExePath>
-                                    <className>G10Monitor</className>
+                                    <className>G10oMonitor</className>
                                     <packageName>com.fluxtion.learning.fx.example1.generated</packageName>
                                     <biasConfig>com.fluxtion.learning.fx.example1.G10MonitorBiasConfig</biasConfig>
-                                    <logDebug>true</logDebug>
+                                    <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
                         </executions>
@@ -94,7 +94,7 @@
             </build>
         </profile>
         <profile>
-            <id>build-marshallers</id>
+            <id>build-example2-BiasMonitor</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -102,22 +102,20 @@
                 <plugins>
                     <plugin>
                         <groupId>com.fluxtion</groupId>
-                        <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>${fluxtion.plugin.ver}</version>
+                        <artifactId>fluxtionfx-maven-plugin</artifactId>
+                        <version>${fluxtionfx.plugin.ver}</version>
                         <executions>
                             <execution>
-                                <id>example1-marshaller</id>
+                                <id>example2</id>
                                 <goals>
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                                    <configClass>com.fluxtion.learning.fx.example1.MarshallerConfig$FxPriceMarshaller</configClass>
-                                    <className>FxPriceCsvMarshaller</className>
-                                    <packageName>com.fluxtion.learning.fx.example1.generated.marshaller.fxprice</packageName>
-                                    <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <!--<biasConfig>com.fluxtion.learning.fx.example1.G10MonitorBiasConfig</biasConfig>-->
-                                    <logDebug>true</logDebug>
+                                    <fluxtionExePath>${fluxtionFx.exe.path}</fluxtionExePath>
+                                    <className>PorfolioMonitor</className>
+                                    <packageName>com.fluxtion.learning.fx.example2.generated</packageName>
+                                    <biasConfig>com.fluxtion.learning.fx.example2.PortfolioMonitorBiasConfig</biasConfig>
+                                    <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
                         </executions>
@@ -156,29 +154,20 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>1.2.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.4</version>
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.7</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion.extension</groupId>
-            <artifactId>fluxtion-declarative-ext-api</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.fluxtion.extension</groupId>
             <artifactId>fluxtion-declarative-ext-builder</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.3.6</version>
         </dependency>
     </dependencies>
 

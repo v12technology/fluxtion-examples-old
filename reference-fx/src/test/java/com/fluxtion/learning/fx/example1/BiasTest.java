@@ -20,7 +20,7 @@ import com.fluxtion.fx.event.FxOrder;
 import com.fluxtion.fx.event.FxPrice;
 import com.fluxtion.fx.node.biascheck.OrderBiasResult;
 import com.fluxtion.fx.util.CcyPair;
-import com.fluxtion.learning.fx.utils.ConsoleAuditor;
+import com.fluxtion.fx.util.ConsoleAuditor;
 import com.fluxtion.learning.fx.utils.PriceOrderHelper;
 import java.util.concurrent.atomic.LongAdder;
 import org.junit.Assert;

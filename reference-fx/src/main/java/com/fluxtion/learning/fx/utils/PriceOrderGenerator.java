@@ -19,14 +19,25 @@ package com.fluxtion.learning.fx.utils;
 import com.fluxtion.fx.BiasProcessor;
 import com.fluxtion.fx.event.FxOrder;
 import com.fluxtion.fx.event.FxPrice;
-import com.fluxtion.fx.event.TimingPulseEvent;
 import com.fluxtion.fx.util.CcyPair;
+import static com.fluxtion.fx.util.CcyPair.AUDUSD;
+import static com.fluxtion.fx.util.CcyPair.EURCHF;
+import static com.fluxtion.fx.util.CcyPair.EURDKK;
+import static com.fluxtion.fx.util.CcyPair.EURHUF;
+import static com.fluxtion.fx.util.CcyPair.EURJPY;
+import static com.fluxtion.fx.util.CcyPair.EURNOK;
+import static com.fluxtion.fx.util.CcyPair.EURUSD;
+import static com.fluxtion.fx.util.CcyPair.GBPUSD;
+import static com.fluxtion.fx.util.CcyPair.USDCHF;
+import static com.fluxtion.fx.util.CcyPair.USDJPY;
 import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -44,23 +55,58 @@ public class PriceOrderGenerator {
     private final ScheduledExecutorService scheduledExecutor;
     private ScheduledFuture<?> marketExecutor;
     private ScheduledFuture<?> timingPulseExecutor;
-    private TimingPulseEvent timingPulse;
 
     public PriceOrderGenerator(BiasProcessor biasCheck) {
         this.biasCheck = biasCheck;
         scheduledExecutor = Executors.newSingleThreadScheduledExecutor();
     }
 
+    public void runMarketForPeriod(int secondsRunning, int millisSleepBetweenTicks) {
+        if (millisSleepBetweenTicks < 1) {
+            runWithoutPause(secondsRunning);
+        } else {
+            try {
+                System.out.println("starting order generator run for:" + secondsRunning + " seconds");
+                startMarket(millisSleepBetweenTicks);
+                Thread.sleep(secondsRunning * 1000);
+                System.out.println("stopping order generator");
+                stopMarket();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PriceOrderGenerator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void runWithoutPause(int secondsRunning) {
+        init();
+        System.out.println("starting order generator run for:" + secondsRunning + " seconds");
+        long now = System.currentTimeMillis();
+        long finish = now + secondsRunning * 1000;
+        long next_pulse = now + 500;
+        pushTImingPulse();
+        do {
+            generate();
+            now = System.currentTimeMillis();
+            if (now > next_pulse) {
+                next_pulse = now + 500;
+                pushTImingPulse();
+            }
+
+        } while (now < finish);
+        System.out.println("stopping order generator");
+
+    }
+
     public void startMarket(int sleepPeriod) {
-        //timing pulse
-        timingPulse = new TimingPulseEvent(1);
+        init();
         run.set(true);
         timingPulseExecutor = scheduledExecutor.scheduleAtFixedRate(() -> pushTImingPulse(), 0, 500, TimeUnit.MILLISECONDS);
-        marketExecutor = scheduledExecutor.scheduleAtFixedRate(() -> generate(), 100, sleepPeriod, TimeUnit.MILLISECONDS);
+        marketExecutor = scheduledExecutor.scheduleAtFixedRate(() -> generate(), 20, sleepPeriod, TimeUnit.MILLISECONDS);
     }
 
     public void stopMarket() throws InterruptedException {
         marketExecutor.cancel(true);
+        timingPulseExecutor.cancel(true);
         scheduledExecutor.shutdownNow();
         scheduledExecutor.awaitTermination(2, TimeUnit.SECONDS);
     }
@@ -129,14 +175,26 @@ public class PriceOrderGenerator {
         configArray = new CcyConfig[0];
         _random = new Random(2000);
         orderHelper = new PriceOrderHelper(biasCheck);
+
+        addCcy(EURUSD);
+        addCcy(GBPUSD);
+        addCcy(EURCHF);
+        addCcy(USDCHF);
+        addCcy(EURJPY);
+        addCcy(USDJPY);
+        addCcy(EURHUF);
+        addCcy(EURDKK);
+        addCcy(EURNOK);
+        addCcy(AUDUSD);
+
     }
 
     private Random _random;
 
     private void getNextPrice(CcyConfig ccyConfig) {
-        float oldPrice = (float) ccyConfig.price.getBid();
-        float MIN_PRICE = (float) ccyConfig.minPrice;
-        float MAX_PRICE = (float) ccyConfig.maxPrice;
+        double oldPrice = ccyConfig.price.getBid();
+        double MIN_PRICE = ccyConfig.minPrice;
+        double MAX_PRICE = ccyConfig.maxPrice;
         // Instead of a fixed volatility, pick a random volatility
         // each time, between 2 and 10.
         float volatility = _random.nextFloat() * 10 + 2;
@@ -148,8 +206,8 @@ public class PriceOrderGenerator {
         if (changePercent > volatility) {
             changePercent -= (2 * volatility);
         }
-        float changeAmount = oldPrice * changePercent / 100;
-        float newPrice = oldPrice + changeAmount;
+        double changeAmount = oldPrice * changePercent / 100;
+        double newPrice = oldPrice + changeAmount;
 
         // Add a ceiling and floor.
         if (newPrice < MIN_PRICE) {
@@ -157,7 +215,9 @@ public class PriceOrderGenerator {
         } else if (newPrice > MAX_PRICE) {
             newPrice -= Math.abs(changeAmount) * 2;
         }
-        ccyConfig.price.setBidOffer(newPrice, newPrice + ccyConfig.spread);
+        newPrice = ((double) Math.round(newPrice * 10000)) / 10000.0;
+        double offerNew = ((double) Math.round((newPrice + ccyConfig.spread) * 10000)) / 10000.0;
+        ccyConfig.price.setBidOffer(newPrice, offerNew);
     }
 
     private static class CcyConfig {
@@ -167,36 +227,72 @@ public class PriceOrderGenerator {
             price = new FxPrice(pair);
             minPrice = 0.6;
             maxPrice = 1.4;
+            spread = 0.0002;
             switch (pair) {
                 case EURUSD:
                     price.setBidOffer(1.1025, 1.1027);
                     minPrice = 1.0934;
                     maxPrice = 1.2234;
+                    orderRate = 0.12;
                     break;
                 case EURCHF:
                     price.setBidOffer(1.0702, 1.0703);
                     minPrice = 1.0233;
                     maxPrice = 1.1134;
+                    orderRate = 0.02;
+                    break;
+                case AUDUSD:
+                    price.setBidOffer(0.702, 0.7022);
+                    minPrice = 0.68;
+                    maxPrice = 0.82;
+                    orderRate = 0.075;
                     break;
                 case EURJPY:
                     price.setBidOffer(120.25, 120.46);
                     minPrice = 118.25;
                     maxPrice = 132.56;
+                    spread = 0.02;
+                    break;
+                case USDJPY:
+                    price.setBidOffer(120.25, 120.46);
+                    minPrice = 106.08;
+                    maxPrice = 121.32;
+                    spread = 0.02;
+                    orderRate = 0.08;
                     break;
                 case GBPUSD:
                     price.setBidOffer(1.2500, 1.2501);
                     minPrice = 1.1867;
                     maxPrice = 1.5733;
+                    orderRate = 0.1;
+                    break;
+                case EURHUF:
+                    price.setBidOffer(305.25, 305.75);
+                    minPrice = 300;
+                    maxPrice = 325;
+                    orderRate = 0.01;
+                    break;
+                case EURDKK:
+                    price.setBidOffer(7.5, 5002);
+                    minPrice = 7.2545;
+                    maxPrice = 7.5987;
+                    orderRate = 0.025;
+                    break;
+                case EURNOK:
+                    price.setBidOffer(9.4, 9.45);
+                    minPrice = 9;
+                    maxPrice = 9.9;
+                    orderRate = 0.015;
                     break;
                 default:
                     price.setBidOffer(0.9999, 1.0001);
                     minPrice = 0.75;
                     maxPrice = 1.22;
             }
-            
+
         }
-        
-        private float spread = (float) 0.0002;
+
+        private double spread = 0.0002;
         CcyPair pair;
         int delayMircos = 1000;
         double bias = 0.0;
