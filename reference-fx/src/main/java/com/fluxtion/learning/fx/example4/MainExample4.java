@@ -48,11 +48,10 @@ import java.io.File;
  */
 public class MainExample4 {
 
-    private final boolean printAuditToConsole = false;
 
     public static void main(String[] args) throws InterruptedException {
-        auditRealtime();
         noAuditRealtime();
+        auditRealtime();
         replayAuditLog();
     }
 
@@ -64,13 +63,15 @@ public class MainExample4 {
         monitor.registerEventAuditor(log4jAuditor);
         //market
         PriceOrderGenerator market = new PriceOrderGenerator(monitor);
+        long now = System.nanoTime();
         market.runMarketForPeriod(5, -1);
+        now = (System.nanoTime() - now)/1_000_000;
         System.out.println(log4jAuditor.toString());
+        System.out.println("process time:" + now + " millis, event rate:" + (int)(log4jAuditor.totalEventCount()/(0.001 *now)) + " events per second");
         System.out.println("=================================================================================================\n\n\n");
     }
 
     private static void noAuditRealtime() {
-//        System.setProperty("Log4jContextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
         System.out.println("Demonstrate Bias processing in realtime with no auditing ");
         System.out.println("=================================================================================================");
         G10Monitor monitor = new G10Monitor();
@@ -79,8 +80,11 @@ public class MainExample4 {
         monitor.registerEventAuditor(consoleAuditor);
         //market
         PriceOrderGenerator market = new PriceOrderGenerator(monitor);
+        long now = System.nanoTime();
         market.runMarketForPeriod(5, -1);
+        now = (System.nanoTime() - now)/1_000_000;
         System.out.println(consoleAuditor.toString());
+        System.out.println("process time:" + now + " millis, event rate:" + (int)(consoleAuditor.totalEventCount()/(0.001 *now)) + " events per second");
         System.out.println("=================================================================================================\n\n\n");
     }
     
@@ -96,25 +100,9 @@ public class MainExample4 {
         replay.replay(monitor, new File("src\\test\\resources\\replay\\fluxtionfx-audit-large.log"));
         now = (System.nanoTime() - now)/1_000_000;
         System.out.println(consoleAuditor.toString());
-        System.out.println("process time:" + now + " millis, event rate:" + (int)(consoleAuditor.totalEventCount()/(0.0001 *now)) + " events per second");
+        System.out.println("process time:" + now + " millis, event rate:" + (int)(consoleAuditor.totalEventCount()/(0.001 *now)) + " events per second");
         System.out.println("=================================================================================================");
         
     }
-
-    private static class OrderBiasResultPrinter implements OrderBiasResultHandler {
-
-        public OrderBiasResultPrinter() {
-        }
-
-        @Override
-        public void handleEvent(long seconds, OrderBiasResult[] results) {
-            System.out.println("Bias summary at " + seconds + " seconds");
-            for (OrderBiasResult result : results) {
-                System.out.println("\t" + result.toString());
-            }
-        }
-    }
-
-    
 
 }
