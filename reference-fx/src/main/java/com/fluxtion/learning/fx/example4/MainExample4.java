@@ -89,7 +89,7 @@ public class MainExample4 {
     }
     
     private static void replayAuditLog(){
-        System.out.println("\n\nStarting replay with new instance of G10Monitor from src\\test\\resources\\replay\\fluxtionfx-audit-large.log");
+        System.out.println("\n\nStarting replay with new instance of G10Monitor from src\\test\\resources\\replay\\fluxtionfx-audit-large.audit");
         System.out.println("=================================================================================================");
         G10Monitor monitor = new G10Monitor();
         final ConsoleAuditor consoleAuditor = new ConsoleAuditor();
@@ -97,7 +97,7 @@ public class MainExample4 {
         monitor.registerEventAuditor(consoleAuditor);
         CsvAuditReplay replay = new CsvAuditReplay();
         long now = System.nanoTime();
-        replay.replay(monitor, new File("src\\test\\resources\\replay\\fluxtionfx-audit-large.log"));
+        replay.replay(monitor, new File("src\\test\\resources\\replay\\fluxtionfx-audit-large.audit"));
         now = (System.nanoTime() - now)/1_000_000;
         System.out.println(consoleAuditor.toString());
         System.out.printf("process time:%,d millis, event rate:%,d events per second\n", now, (int)(consoleAuditor.totalEventCount()/(0.001 *now)));
