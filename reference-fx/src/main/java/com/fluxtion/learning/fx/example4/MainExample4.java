@@ -51,8 +51,8 @@ public class MainExample4 {
     private final boolean printAuditToConsole = false;
 
     public static void main(String[] args) throws InterruptedException {
-//        auditRealtime();
-//        noAuditRealtime();
+        auditRealtime();
+        noAuditRealtime();
         replayAuditLog();
     }
 
