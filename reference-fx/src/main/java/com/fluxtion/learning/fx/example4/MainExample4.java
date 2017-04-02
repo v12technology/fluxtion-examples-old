@@ -50,12 +50,12 @@ public class MainExample4 {
 
 
     public static void main(String[] args) throws InterruptedException {
-        noAuditRealtime();
-        auditRealtime();
+        noAuditor();
+        log4jAuditor();
         replayAuditLog();
     }
 
-    private static void auditRealtime() {
+    private static void log4jAuditor() {
         System.out.println("Demonstrate Bias processing in realtime with auditing using log4j2");
         System.out.println("=================================================================================================");
         G10Monitor monitor = new G10Monitor();
@@ -67,11 +67,11 @@ public class MainExample4 {
         market.runMarketForPeriod(5, -1);
         now = (System.nanoTime() - now)/1_000_000;
         System.out.println(log4jAuditor.toString());
-        System.out.println("process time:" + now + " millis, event rate:" + (int)(log4jAuditor.totalEventCount()/(0.001 *now)) + " events per second");
+        System.out.printf("process time:%,d millis, event rate:%,d events per second\n", now, (int)(log4jAuditor.totalEventCount()/(0.001 *now)));
         System.out.println("=================================================================================================\n\n\n");
     }
 
-    private static void noAuditRealtime() {
+    private static void noAuditor() {
         System.out.println("Demonstrate Bias processing in realtime with no auditing ");
         System.out.println("=================================================================================================");
         G10Monitor monitor = new G10Monitor();
@@ -84,7 +84,7 @@ public class MainExample4 {
         market.runMarketForPeriod(5, -1);
         now = (System.nanoTime() - now)/1_000_000;
         System.out.println(consoleAuditor.toString());
-        System.out.println("process time:" + now + " millis, event rate:" + (int)(consoleAuditor.totalEventCount()/(0.001 *now)) + " events per second");
+        System.out.printf("process time:%,d millis, event rate:%,d events per second\n", now, (int)(consoleAuditor.totalEventCount()/(0.001 *now)));
         System.out.println("=================================================================================================\n\n\n");
     }
     
@@ -100,7 +100,7 @@ public class MainExample4 {
         replay.replay(monitor, new File("src\\test\\resources\\replay\\fluxtionfx-audit-large.log"));
         now = (System.nanoTime() - now)/1_000_000;
         System.out.println(consoleAuditor.toString());
-        System.out.println("process time:" + now + " millis, event rate:" + (int)(consoleAuditor.totalEventCount()/(0.001 *now)) + " events per second");
+        System.out.printf("process time:%,d millis, event rate:%,d events per second\n", now, (int)(consoleAuditor.totalEventCount()/(0.001 *now)));
         System.out.println("=================================================================================================");
         
     }
