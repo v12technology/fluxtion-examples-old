@@ -27,15 +27,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.plugin.ver>1.0.5</fluxtion.plugin.ver>
-        <fluxtionfx.plugin.ver>1.0.0</fluxtionfx.plugin.ver>
-        <fluxtion.ver>0.1.26</fluxtion.ver>
+        <fluxtion.plugin.ver>1.0.0</fluxtion.plugin.ver>
+        <fluxtion.ver>0.1.25</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
         -->
-        <fluxtion.exe.path>${fluxtion.declarative.ext.trial}</fluxtion.exe.path>
-        <fluxtionFx.exe.path>${fluxtionfx.trial}</fluxtionFx.exe.path>
+        <fluxtion.exe.path>${fluxtionfx.trial}</fluxtion.exe.path>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     
@@ -64,7 +62,7 @@
     
     <profiles>     
         <profile>
-            <id>build-example1-BiasMonitor</id>
+            <id>build-all-examples</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -73,7 +71,7 @@
                     <plugin>
                         <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtionfx-maven-plugin</artifactId>
-                        <version>${fluxtionfx.plugin.ver}</version>
+                        <version>${fluxtion.plugin.ver}</version>
                         <executions>
                             <execution>
                                 <id>example1</id>
@@ -81,41 +79,11 @@
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <fluxtionExePath>${fluxtionFx.exe.path}</fluxtionExePath>
-                                    <className>G10oMonitor</className>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <className>G10Monitor</className>
                                     <packageName>com.fluxtion.learning.fx.example1.generated</packageName>
                                     <biasConfig>com.fluxtion.learning.fx.example1.G10MonitorBiasConfig</biasConfig>
-                                    <!--<logDebug>true</logDebug>-->
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>build-example2-BiasMonitor</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.fluxtion</groupId>
-                        <artifactId>fluxtionfx-maven-plugin</artifactId>
-                        <version>${fluxtionfx.plugin.ver}</version>
-                        <executions>
-                            <execution>
-                                <id>example2</id>
-                                <goals>
-                                    <goal>generate</goal>
-                                </goals>
-                                <configuration>
-                                    <fluxtionExePath>${fluxtionFx.exe.path}</fluxtionExePath>
-                                    <className>PorfolioMonitor</className>
-                                    <packageName>com.fluxtion.learning.fx.example2.generated</packageName>
-                                    <biasConfig>com.fluxtion.learning.fx.example2.PortfolioMonitorBiasConfig</biasConfig>
-                                    <!--<logDebug>true</logDebug>-->
+                                    <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
                         </executions>
@@ -132,16 +100,6 @@
             <version>${fluxtion.ver}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.8.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.8.1</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
@@ -154,20 +112,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.4</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>com.fluxtion.extension</groupId>
-            <artifactId>fluxtion-declarative-ext-builder</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.1</version>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.lmax</groupId>
-            <artifactId>disruptor</artifactId>
-            <version>3.3.6</version>
         </dependency>
     </dependencies>
 
