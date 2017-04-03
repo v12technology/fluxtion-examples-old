@@ -29,11 +29,12 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.plugin.ver>1.0.0</fluxtion.plugin.ver>
         <fluxtion.ver>0.1.26</fluxtion.ver>
+        <fluxtionfx.plugin.ver>1.0.0</fluxtionfx.plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
         -->
-        <fluxtion.exe.path>${fluxtionfx.trial}</fluxtion.exe.path>
+        <fluxtionFx.exe.path>${fluxtionfx.trial}</fluxtionFx.exe.path>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     
@@ -60,9 +61,10 @@
         </repository>
     </repositories>  
     
+    
     <profiles>     
         <profile>
-            <id>build-all-examples</id>
+            <id>build-example1-BiasMonitor</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -71,7 +73,7 @@
                     <plugin>
                         <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtionfx-maven-plugin</artifactId>
-                        <version>${fluxtion.plugin.ver}</version>
+                        <version>${fluxtionfx.plugin.ver}</version>
                         <executions>
                             <execution>
                                 <id>example1</id>
@@ -79,11 +81,41 @@
                                     <goal>generate</goal>
                                 </goals>
                                 <configuration>
-                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                                    <className>G10Monitor</className>
+                                    <fluxtionExePath>${fluxtionFx.exe.path}</fluxtionExePath>
+                                    <className>G10oMonitor</className>
                                     <packageName>com.fluxtion.learning.fx.example1.generated</packageName>
                                     <biasConfig>com.fluxtion.learning.fx.example1.G10MonitorBiasConfig</biasConfig>
-                                    <logDebug>true</logDebug>
+                                    <!--<logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>build-example2-BiasMonitor</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtionfx-maven-plugin</artifactId>
+                        <version>${fluxtionfx.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>example2</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtionFx.exe.path}</fluxtionExePath>
+                                    <className>PorfolioMonitor</className>
+                                    <packageName>com.fluxtion.learning.fx.example2.generated</packageName>
+                                    <biasConfig>com.fluxtion.learning.fx.example2.PortfolioMonitorBiasConfig</biasConfig>
+                                    <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
                         </executions>
@@ -92,6 +124,7 @@
             </build>
         </profile>
     </profiles>
+    
     
     <dependencies>
         <dependency>
