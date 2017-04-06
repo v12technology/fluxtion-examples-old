@@ -38,9 +38,8 @@ import java.io.File;
  * <li>auditRealtime - simulates a sample market for 5 seconds, generates
  * prices, orders, accepts and rejects. The market ticks every 100 millis. All
  * input is logged to a Log4jAuditor that stores the events as CSV records</li>
- * <li>replayAuditLog - sends messages programmatically to the
- * BiasProcessor that will simulate a breach condition that will be logged to
- * console</li>
+ * <li>replayAuditLog - sends messages programmatically to the BiasProcessor
+ * that will simulate a breach condition that will be logged to console</li>
  * </ul>
  *
  * The configuration for generating the G10Monitor is in the source file
@@ -72,8 +71,8 @@ public class MainExample3 {
         market.runMarketForPeriod(5, 100);
         System.out.println("=================================================================================================");
     }
-    
-    private static void replayAuditLog(){
+
+    private static void replayAuditLog() {
         System.out.println("\n\nStarting replay with new instance of G10Monitor");
         System.out.println("=================================================================================================");
         G10Monitor monitor = new G10Monitor();
@@ -81,9 +80,15 @@ public class MainExample3 {
         monitor.registerResultsReceiver(new OrderBiasResultPrinter());
         monitor.registerEventAuditor(new ConsoleAuditor());
         CsvAuditReplay replay = new CsvAuditReplay();
+        /**
+         * Disable all audit and publishing with: 
+         * monitor.enableAudit(true);
+         * monitor.enableResultPublication(true);
+         * monitor.enableResultPublication(true);
+         */
         replay.replay(monitor, new File("target\\generated-sources\\testlog\\fluxtionfx-audit.log"));
         System.out.println("=================================================================================================");
-        
+
     }
 
     private static class OrderBiasResultPrinter implements OrderBiasResultHandler {
@@ -99,7 +104,5 @@ public class MainExample3 {
             }
         }
     }
-
-    
 
 }
