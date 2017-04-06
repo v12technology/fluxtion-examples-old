@@ -28,7 +28,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.plugin.ver>1.0.0</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.26</fluxtion.ver>
+        <fluxtion.ver>0.1.28</fluxtion.ver>
         <fluxtionfx.plugin.ver>1.0.0</fluxtionfx.plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
