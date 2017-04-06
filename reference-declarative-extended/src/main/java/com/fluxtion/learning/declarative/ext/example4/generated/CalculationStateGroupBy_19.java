@@ -6,10 +6,10 @@ import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
-import com.fluxtion.learning.declarative.ext.example4.LeaguePosition;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.learning.declarative.ext.example4.MatchResult;
 import com.fluxtion.learning.declarative.ext.example4.generated.MatchResultCsvMarshaller4;
+import com.fluxtion.learning.declarative.ext.example4.LeaguePosition;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 
 /**
@@ -21,18 +21,18 @@ import com.fluxtion.extension.declarative.api.group.AggregateFunctions.Aggregate
  */
 public final class CalculationStateGroupBy_19 implements Wrapper<LeaguePosition>{
     public LeaguePosition target;
-    public double aggregateSum17;
-    public double aggregateSum18;
     public int aggregateCount13;
     public double aggregateSum14;
-    public double aggregateSum15;
-    public double aggregateSum16;
     public double aggregateSum11;
     public double aggregateSum12;
     public int aggregateCount7;
     public double aggregateSum8;
     public double aggregateSum9;
     public double aggregateSum10;
+    public double aggregateSum15;
+    public double aggregateSum16;
+    public double aggregateSum17;
+    public double aggregateSum18;
 
     public CalculationStateGroupBy_19(){
          target = new LeaguePosition();
