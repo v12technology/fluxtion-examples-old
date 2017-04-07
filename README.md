@@ -3,7 +3,9 @@
 ### This repository holds code examples for use with the Fluxtion framework ###
 
 * Building and running the projects in this repository will help a developer understand and exploit the capabilities of the Fluxtion toolset. The examples should be read in conjunction with the [reference](http://fluxtion.wpengine.com/documents/reference/) and tutorial documentation on the [Fluxtion website](http://fluxtion.wpengine.com/). 
-* Current example release version 1.0.2
+* Current example release version 1.0.10
+* Current Fluxtion api release version 1.0.28
+* Current Fluxtion exectuable release version 1.0.19
 * Fluxtion has several applications: the examples demonstrate capabilities and functionality of each one:
     * fluxtion - The core fluxtion tool that generates a static event procssor(SEP).
     * fluxtion-declarative - Adds declarative functionality for constructing SEP's, supports aggregation, functional idioms, windowing, logging and filtering.
@@ -15,9 +17,9 @@ This guide will step you through the process of running the reference-core examp
 
 * Install Fluxtion Core Trial:
     * Download the latest trial version for you platform from [dropbox](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAA01xw4EDZcYW0elHxkKoM1a?dl=0), the following versions are available: 
-        * [Windows installer](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAD6vSalNq4j2D6JGKeHBfIVa/fluxtion-core-trial.exe?dl=0)
-        * [windows zip file](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AAD_i_lBRksoynyG67DYRL6Sa/fluxtion-core-trial.zip?dl=0) 
-        * [linux self extracting archive](https://www.dropbox.com/sh/p8g5iqxbedzgcur/AACdzgBWQ3aclYbr6maileY5a/fluxtion-core-trial-0.1.5.sh?dl=0).
+        * [Windows installer](https://www.dropbox.com/s/a2hl8n6h0sz6hhd/fluxtion-core-trial-0.1.9.exe?dl=0)
+        * windows zip file - TBD
+        * [linux self extracting archive](https://www.dropbox.com/s/luhdl6drkrehigo/fluxtion-core-trial-0.1.9.sh?dl=0).
     * The download will be either an installation package or an archive, unpack/install as ncessary on the local machine.
 * Activating License
     * Fluxtion is a license based product so before running any examples the **Fluxtion license must be activated**.
