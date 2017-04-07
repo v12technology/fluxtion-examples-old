@@ -82,7 +82,7 @@
                                 </goals>
                                 <configuration>
                                     <fluxtionExePath>${fluxtionFx.exe.path}</fluxtionExePath>
-                                    <className>G10oMonitor</className>
+                                    <className>G10Monitor</className>
                                     <packageName>com.fluxtion.learning.fx.example1.generated</packageName>
                                     <biasConfig>com.fluxtion.learning.fx.example1.G10MonitorBiasConfig</biasConfig>
                                     <!--<logDebug>true</logDebug>-->
