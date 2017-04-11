@@ -27,14 +27,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.plugin.ver>1.0.0</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.28</fluxtion.ver>
+        <fluxtion.plugin.ver>1.0.5</fluxtion.plugin.ver>
+        <fluxtion.ver>0.1.29-SNAPSHOT</fluxtion.ver>
         <fluxtionfx.plugin.ver>1.0.0</fluxtionfx.plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
         -->
         <fluxtionFx.exe.path>${fluxtionfx.trial}</fluxtionFx.exe.path>
+        <fluxtion.exe.path>${fluxtion.declarative.ext.trial}</fluxtion.exe.path>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     
@@ -115,6 +116,36 @@
                                     <className>PorfolioMonitor</className>
                                     <packageName>com.fluxtion.learning.fx.example2.generated</packageName>
                                     <biasConfig>com.fluxtion.learning.fx.example2.PortfolioMonitorBiasConfig</biasConfig>
+                                    <!--<logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>build-example6-reconciler</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>example6</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <className>ReconcilerTest</className>
+                                    <packageName>com.fluxtion.learning.fx.example3.generated</packageName>
+                                    <configClass>com.fluxtion.learning.fx.example6.ReconcilerSEP</configClass>
                                     <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
