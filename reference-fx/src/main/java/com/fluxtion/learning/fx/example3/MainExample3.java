@@ -1,5 +1,5 @@
-/*
- * Copyright (C) 2017 Greg Higgins (greg.higgins@V12technology.com)
+/* 
+ * Copyright (C) 2017 V12 Technology Limited
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
