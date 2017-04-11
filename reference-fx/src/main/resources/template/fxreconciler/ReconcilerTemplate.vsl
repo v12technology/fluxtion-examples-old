@@ -1,0 +1,109 @@
+## Velocity Template.
+/* 
+ * Copyright (C) 2017 V12 Technology Limited
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package ${functionPackage};
+
+#foreach( $import in $imports)
+import $import;
+#end
+/**
+ * Fluxtion generated TradeReconciler
+ *
+ * @author greg higgins (greg.higgins@v12technology.com)
+ */
+public class  ${functionClass} implements TradeReconciler{
+
+    private Int2ObjectOpenHashMap<ReconcileRecord> id2Reconcile;
+    private ArrayDeque<ReconcileRecord> freeList;
+    public TradeAcknowledgementAuditor tradeAcknowledgementCache;
+
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+    @EventHandler(filterString = "$source")
+    public void handleTradeSource_$source (TradeAcknowledgement acknowledgement){
+        ReconcileRecord record = getRecord(tradeAcknowledgementCache.acknowledgement);
+        record.received_$source = true;
+        if (record.matched()) {
+            matchedRecord(record);
+        }
+    }
+
+#end
+    private void matchedRecord(ReconcileRecord record) {
+        record.reset();
+        id2Reconcile.remove(record.tradeId);
+        freeList.addLast(record);
+        //TODO notify matched listener
+    }
+
+    private ReconcileRecord getRecord(TradeAcknowledgement acknowledgement) {
+        ReconcileRecord record = id2Reconcile.get(acknowledgement.tradeId);
+        if (record == null) {
+            record = freeList.pollLast();
+            if (record == null) {
+                record = new ReconcileRecord();
+            }
+            record.firstReceivedTime = acknowledgement.time;
+            id2Reconcile.put(acknowledgement.tradeId, record);
+        }
+        return record;
+    }
+
+    @Initialise
+    public void init(){
+        id2Reconcile = new Int2ObjectOpenHashMap<>();
+        freeList = new ArrayDeque<>();
+        for (int i = 0; i < 50; i++) {
+            freeList.add(new ReconcileRecord());
+        }
+    }
+
+    public static class ReconcileRecord implements ReconcileStatus<Integer>{
+
+        private static final String[] VENUES = new String[]{${venues}};
+        int tradeId;
+        long firstReceivedTime;
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+        boolean received_$source;
+#end
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+        long time_$source;
+#end
+
+        @Override
+        public boolean matched(){
+            return ${matching};
+        }
+
+        @Override
+        public Integer id() {
+            return tradeId;
+        }
+
+        public String[] venues(){
+            return VENUES;
+        }
+
+        void reset(){
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+            received_$source = false;
+#end
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+            time_$source = 0;
+#end
+        }
+    }
+}
