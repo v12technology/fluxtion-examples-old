@@ -20,13 +20,13 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.ResultsCache;
 
 
 /**
- *
+ * 
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public abstract class ReportPublisher {
+public interface ReportPublisher {
 
     public static final String RESULT_PUBLISHER = "com.fluxtion.fx.reconciler.extensions.ReportPublisher";
 
-    abstract public void publishReport(ResultsCache cache);
+    void publishReport( ResultsCache reconcileResultcCche);
     
 }
