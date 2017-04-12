@@ -1,5 +1,5 @@
-/* 
- * Copyright (C) 2017 V12 Technology Limited
+/*
+ * Copyright (C) 2017 Greg Higgins (greg.higgins@V12technology.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,17 +16,16 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.extensions;
 
-import com.fluxtion.learning.fx.example6.reconciler.nodes.ResultsCache;
-
-
 /**
- * 
+ * A ReconcileStatusCache will hold a set of ReconcileStatus records. The amount
+ * of records held by the ReconcileStatusCache will be dependent upon the
+ * implementation.
+ *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public interface ReportPublisher {
+public interface ReconcileStatusCache {
 
-    public static final String RESULT_PUBLISHER = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReportPublisher";
-
-    void publishReport( ResultsCache reconcileResultcCche);
+    public static final String RECONCILE_STATUS_CACHE = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache";
     
+    void reset();
 }

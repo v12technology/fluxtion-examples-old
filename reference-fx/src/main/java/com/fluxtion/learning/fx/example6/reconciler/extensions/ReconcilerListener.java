@@ -23,7 +23,7 @@ package com.fluxtion.learning.fx.example6.reconciler.extensions;
  */
 public interface ReconcilerListener {
     
-    public static final String RECONCILE_LISTENER = "com.fluxtion.fx.reconciler.extensions.ReconcilerListener";
+    public static final String RECONCILE_LISTENER = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener";
     
     public void reconcileSummary(int matchedTrades, int reconcilingTrades, int unMatchedTrades);   
     

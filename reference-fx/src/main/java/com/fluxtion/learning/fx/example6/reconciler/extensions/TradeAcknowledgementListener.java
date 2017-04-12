@@ -23,7 +23,7 @@ import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
 public interface TradeAcknowledgementListener {
-    public static final String TA_LISTENER = "com.fluxtion.fx.reconciler.extensions.TradeAcknowledgementListener";
+    public static final String TA_LISTENER = "com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAcknowledgementListener";
     
     void processAcknowledgemnt(TradeAcknowledgement tradeAcknowledgement);
 }
