@@ -21,8 +21,8 @@ import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
-import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatusCache;
-import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatusCache.RECONCILE_STATUS_CACHE;
+import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
+import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache.RECONCILE_STATUS_CACHE;
 
 /**
  * A ReconcileStatusCache holds a set of ReconcileStatus records ready for

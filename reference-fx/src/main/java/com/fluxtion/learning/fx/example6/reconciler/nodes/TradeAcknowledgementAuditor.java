@@ -38,7 +38,7 @@ public class TradeAcknowledgementAuditor {
     private TradeAcknowledgementListener auditor;
 
     @EventHandler(propogate = false)
-    public void cacheTradeAcknowledgemt(TradeAcknowledgement acknowledgement) {
+    public void auditAcknowledgemt(TradeAcknowledgement acknowledgement) {
         this.acknowledgement = acknowledgement;
         if (auditor != null) {
             auditor.processAcknowledgemnt(acknowledgement);
