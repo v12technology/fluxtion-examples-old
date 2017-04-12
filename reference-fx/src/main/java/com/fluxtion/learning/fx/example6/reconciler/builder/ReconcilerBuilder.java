@@ -26,8 +26,8 @@ import com.fluxtion.fx.eventhandler.TimeHandlerSeconds;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileReportPublisher;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileUpdatePublisher;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.ReportGenerator;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.SummaryPublisher;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ResultsCache;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
@@ -90,11 +90,11 @@ public class ReconcilerBuilder {
             ResultsCache cache = new ResultsCache();
             cache.reconciler = reconiler;
             //update publisher
-            ReconcileUpdatePublisher updatePublisher = new ReconcileUpdatePublisher();
+            SummaryPublisher updatePublisher = new SummaryPublisher();
             updatePublisher.reconiler = reconiler;
             updatePublisher.alarm = notifier;
             //report generator
-            ReconcileReportPublisher resultsPublisher = new ReconcileReportPublisher();
+            ReportGenerator resultsPublisher = new ReportGenerator();
             resultsPublisher.reconcileResultcCche = cache;
             resultsPublisher.alarm = notifier;
             //add items to the event graph in any order, Fluxtion will figure 

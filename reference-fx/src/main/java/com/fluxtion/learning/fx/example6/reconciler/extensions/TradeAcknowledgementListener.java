@@ -19,11 +19,16 @@ package com.fluxtion.learning.fx.example6.reconciler.extensions;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 
 /**
- *
+ * A listener interface notified upon receipt of a TradeAcknowledgement event.
+ * 
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
 public interface TradeAcknowledgementListener {
     public static final String TA_LISTENER = "com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAcknowledgementListener";
     
+    /**
+     * Notification of a new TradeAcknowledgementListener event
+     * @param tradeAcknowledgement the new acknowledgement
+     */
     void processAcknowledgemnt(TradeAcknowledgement tradeAcknowledgement);
 }

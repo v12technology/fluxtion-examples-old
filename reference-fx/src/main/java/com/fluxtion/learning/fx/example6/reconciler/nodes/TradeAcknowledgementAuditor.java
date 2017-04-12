@@ -23,8 +23,8 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAcknowledgem
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAcknowledgementListener.TA_LISTENER;
 
 /**
- * Receives a TradeAcknowledgement and delegates to the registered auditor to
- * persist all incoming trade messages.
+ * Listens to TradeAcknowledgement events and delegates processing to the
+ * registered auditor which persist all incoming trade messages.
  *
  * A TradeAcknowledgementListener registers with the TradeAcknowledgementAuditor
  * using a ListenerRegisration event and pushing the event to the generated SEP.

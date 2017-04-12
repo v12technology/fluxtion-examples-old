@@ -16,46 +16,45 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
-import com.fluxtion.learning.fx.example6.reconciler.extensions.ReportPublisher;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
-import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReportPublisher.RESULT_PUBLISHER;
+import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher.RESULT_PUBLISHER;
+import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher;
 
 /**
  * Publishes reports of the current reconcile status by delegating to a
- * registered ReportPublisher. Reports maybe in any format this dependent upon
- * the implementation of the registered ReportPublisher.
+ * registered ReconcileReportPublisher. Reports maybe in any format, dependent
+ * upon the implementation of the registered ReconcileReportPublisher.
  *
- * The registered ReportPublisher is invoked with an instance of ResultsCache,
- * which gives access to ReconcileStatus records, regardless of the reconcile
- * status of the record. The number of ReconcileStatus records in the cache is
- * dependent upon the cache implementation.
+ * The registered ReconcileReportPublisher is invoked with an instance of
+ * ResultsCache, which gives access to ReconcileStatus records, regardless of
+ * the reconcile status of the record. The number of ReconcileStatus records in
+ * the cache is dependent upon the cache implementation.
  *
- * Generating a report maybe a lengthy process and the ReportPublisher may carry
- * out its work asynchronously depending upon the implementation registered.
+ * Generating a report maybe a lengthy process and the ReconcileReportPublisher
+ * may carry out its work asynchronously depending upon the implementation
+ * registered.
  *
- * The ReconcileReportPublisher is triggered by either:
+ * The ReportGenerator is triggered by either:
  * <ul>
  * <li>A timed alarm signal</li>
  * <li>A control signal event</li>
  * </ul>
  *
- * The generation signals maybe ignored by the ReportPublisher, dependent upon
- * the current state of the system, for example the disk maybe full, or the.
  *
- * A ReportPublisher can be registered by creating a ListenerRegisration event
- * and pushing the event to the generated SEP.
+ * A ReconcileReportPublisher can be registered by creating a
+ * ListenerRegisration event and pushing the event to the generated SEP.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public class ReconcileReportPublisher {
+public class ReportGenerator {
 
     public ResultsCache reconcileResultcCche;
-    private ReportPublisher publisher;
+    private ReconcileReportPublisher publisher;
     public TimedNotifier alarm;
 
     private void publishReport() {
@@ -70,7 +69,7 @@ public class ReconcileReportPublisher {
     }
 
     @EventHandler(filterString = RESULT_PUBLISHER, propogate = false)
-    public void registerPublisher(ListenerRegisration<ReportPublisher> registration) {
+    public void registerPublisher(ListenerRegisration<ReconcileReportPublisher> registration) {
         this.publisher = registration.getListener();
     }
 

@@ -21,8 +21,7 @@ import com.fluxtion.runtime.event.Event;
 /**
  * ControlSignal is an event that provides a generic method for nodes to receive
  * control signals without having to define bespoke control events for each type
- * of signal. The ControlSiganl also provides an optional enable flag the
- * receiver can inspect.
+ * of signal.
  *
  * The ControlSignal has a filter string, which allows the receiver to filter
  * which ControlSignals it should be informed of. A node marks a method with a
@@ -35,9 +34,12 @@ import com.fluxtion.runtime.event.Event;
  *
  * }
  * </pre>
- *
+ * 
  * Using the propogate=false will prevent a control signal from starting an
  * event chain for any dependent nodes.
+ *
+ * The ControlSignal also provides an optional enable flag the
+ * receiver can inspect.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */

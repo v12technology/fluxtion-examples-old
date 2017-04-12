@@ -17,14 +17,20 @@
 package com.fluxtion.learning.fx.example6.reconciler.extensions;
 
 /**
- * receives summary of the current state of reconciliation.
+ * A listener that is notified of summary state of reconciliation.
  * 
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public interface ReconcilerListener {
+public interface ReconcileSummaryListener {
     
     public static final String RECONCILE_LISTENER = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener";
     
+    /**
+     * Summary update notification
+     * @param matchedTrades number of matched trades
+     * @param reconcilingTrades number of trades awaiting reconciliation and not timed out
+     * @param unMatchedTrades number of trades, un-reconciled within expiry time
+     */
     public void reconcileSummary(int matchedTrades, int reconcilingTrades, int unMatchedTrades);   
     
 }

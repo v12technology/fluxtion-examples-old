@@ -17,15 +17,18 @@
 package com.fluxtion.learning.fx.example6.reconciler.extensions;
 
 /**
- * A ReconcileStatusCache will hold a set of ReconcileStatus records. The amount
- * of records held by the ReconcileStatusCache will be dependent upon the
- * implementation.
+ * A ReconcileStatusCache holds a set of ReconcileStatus records, available for
+ * reading. The amount of records held by the ReconcileStatusCache is dependent
+ * upon the cache implementation.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
 public interface ReconcileStatusCache {
 
     public static final String RECONCILE_STATUS_CACHE = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache";
-    
+
+    /**
+     * reset cache to initial state
+     */
     void reset();
 }

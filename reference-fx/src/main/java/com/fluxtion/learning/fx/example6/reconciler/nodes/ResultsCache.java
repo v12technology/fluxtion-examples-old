@@ -21,22 +21,22 @@ import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
-import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache.RECONCILE_STATUS_CACHE;
+import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
 
 /**
  * A ReconcileStatusCache holds a set of ReconcileStatus records ready for
- * inspection. The amount of records held by the ReconcileStatusCache will be
- * dependent upon the implementation of the cache registered. The cache is
- * updated when TradeReconciler indicates a change in status to a
- * ReconcileStatus record.
- *
- * Child nodes can query this class to access the current status of the
- * ReconcileRecords.
- *
- * A ReconcileStatusCache registers with the ResultsCache using a
- * ListenerRegisration event and pushing the event to the generated SEP.
- * Currently only one registered ReconcileStatusCache is supported.
+ inspection. The amount of records held by the ReconcileStatusCache will be
+ dependent upon the implementation of the cache registered. The cache is
+ updated when TradeReconciler indicates a change in status to a
+ ReconcileStatus record.
+
+ Child nodes can query this class to access the current status of the
+ ReconcileRecords.
+
+ A ReconcileStatusCache registers with the ResultsCache using a
+ ListenerRegisration event and pushing the event to the generated SEP.
+ Currently only one registered ReconcileStatusCache is supported.
  *
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)

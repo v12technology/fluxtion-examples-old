@@ -21,32 +21,32 @@ import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
-import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener;
-import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener.RECONCILE_LISTENER;
+import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener.RECONCILE_LISTENER;
+import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener;
 
 /**
- * A ReconcileUpdatePublisher publishes the change in state of the current
- * reconcile status for a set of ReconcileStatus records in the TradeReconciler.
+ * A SummaryPublisher publishes the change in state of the current
+ reconcile status for a set of ReconcileStatus records in the TradeReconciler.
  * Only the changed ReconcileStatus records due to processing of new
- * TradeAcknowledgement events are published to the ReconcilerListener.
- *
- * A ReconcilerListener registers with the ReconcileUpdatePublisher using a
- * ListenerRegisration event and pushing the event to the generated SEP.
- * Currently only one registered ReconcilerListener is supported.
- *
- * The responsibility for reporting on the reconcile status of all
- * ReconcileStaus records lies with the ReconcileReportPublisher.
+ TradeAcknowledgement events are published to the ReconcileSummaryListener.
+
+ A ReconcileSummaryListener registers with the SummaryPublisher using a
+ ListenerRegisration event and pushing the event to the generated SEP.
+ Currently only one registered ReconcileSummaryListener is supported.
+
+ The responsibility for reporting on the reconcile status of all
+ ReconcileStaus records lies with the ReconcileReportPublisher.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public class ReconcileUpdatePublisher {
+public class SummaryPublisher {
 
     public TradeReconciler reconiler;
     public TimedNotifier alarm;
-    private ReconcilerListener reconcilerListener;
+    private ReconcileSummaryListener reconcilerListener;
 
     @EventHandler(filterString = RECONCILE_LISTENER, propogate = false)
-    public void registerReconcileListerner(ListenerRegisration<ReconcilerListener> registration) {
+    public void registerReconcileListerner(ListenerRegisration<ReconcileSummaryListener> registration) {
         reconcilerListener = registration.getListener();
     }
 

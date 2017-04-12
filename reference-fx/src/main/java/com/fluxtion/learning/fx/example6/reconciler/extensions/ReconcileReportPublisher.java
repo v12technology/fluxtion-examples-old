@@ -20,13 +20,28 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.ResultsCache;
 
 
 /**
+ * Provides reporting functionality of the current state of reconciliation. A
+ ReconcileReportPublisher is invoked with publishReport when a report is required to
+ be published. 
+ 
+ The implementation is free to choose:
+ <ul>
+ * <li>the format of the report</li>
+ * <li>whether to honour the request to publish a report</li>
+ * <li>synchronous or asynchronous generation</li>
+ * </ul>
  * 
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public interface ReportPublisher {
+public interface ReconcileReportPublisher {
 
     public static final String RESULT_PUBLISHER = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReportPublisher";
 
+    /**
+     * AQ request to publish a report
+     * 
+     * @param reconcileResultcCche access to the current ReconcileRecord set
+     */
     void publishReport( ResultsCache reconcileResultcCche);
     
 }
