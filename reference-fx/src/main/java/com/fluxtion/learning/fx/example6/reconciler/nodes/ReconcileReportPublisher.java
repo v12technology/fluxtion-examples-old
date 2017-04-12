@@ -26,16 +26,20 @@ import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReportPublisher.RESULT_PUBLISHER;
 
 /**
- * Publishes reports of the current state of the reconcile status by delegating
- * to a registered ReportPublisher. A ReportPublisher can be registered by
- * creating a ListenerRegisration event and pushing the event to the generated
- * SEP.
+ * Publishes reports of the current reconcile status by delegating to a
+ * registered ReportPublisher. A ReportPublisher can be registered by creating a
+ * ListenerRegisration event and pushing the event to the generated SEP.
+ *
+ * The registered ReportPublisher is invoked with an instance of ResultsCache,
+ * which gives access to all trades, whether they have been reconciled or not.
+ *
+ * Generating a report maybe a lengthy process and the ReportPublisher may carry
+ * out its work asynchronously depending upon the implementation registered.
  *
  * The ReconcileReportPublisher is triggered by either:
  * <ul>
  * <li>A timed alarm signal</li>
- * <li>A control signal event</li?
- * </ul>
+ * <li>A control signal event</li? </ul>
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
