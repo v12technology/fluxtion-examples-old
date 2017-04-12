@@ -79,13 +79,16 @@ public class ReconcilerBuilder {
 
     public TradeReconciler build() {
         try {
-            TradeReconciler result = generateTradeReconciler();
+            //auditor
+            TradeAcknowledgementAuditor auditor = new TradeAcknowledgementAuditor();
+            //reconciler
+            TradeReconciler reconiler = generateTradeReconciler(auditor);
             //update publisher
             ReconcileUpdatePublisher updatePublisher = new ReconcileUpdatePublisher();
-            updatePublisher.reconiler = result;
+            updatePublisher.reconiler = reconiler;
             //cache
             ResultsCache cache = new ResultsCache();
-            cache.reconciler = result;
+            cache.reconciler = reconiler;
             //alarm
             TimeHandlerSeconds timeHandler = new TimeHandlerSeconds();
             TimedNotifier notifier = new TimedNotifier(1, timeHandler);
@@ -93,21 +96,22 @@ public class ReconcilerBuilder {
             ReconcileReportPublisher resultsPublisher = new ReconcileReportPublisher();
             resultsPublisher.reconcileResultcCche = cache;
             resultsPublisher.alarm = notifier;
-            //add items to the 
-            GenerationContext.SINGLETON.getNodeList().add(result);
+            //add items to the event graph in any order, Fluxtion will figure 
+            //out all the optimal event delegation :)
+            GenerationContext.SINGLETON.getNodeList().add(auditor);
+            GenerationContext.SINGLETON.getNodeList().add(reconiler);
             GenerationContext.SINGLETON.getNodeList().add(timeHandler);
             GenerationContext.SINGLETON.getNodeList().add(notifier);
             GenerationContext.SINGLETON.getNodeList().add(updatePublisher);
             GenerationContext.SINGLETON.getNodeList().add(cache);
             GenerationContext.SINGLETON.getNodeList().add(resultsPublisher);
-            return result;
+            return reconiler;
         } catch (Exception e) {
             throw new RuntimeException("could not build TradeReconciler " + e.getMessage(), e);
         }
     }
 
-    private TradeReconciler generateTradeReconciler() throws IOException, MethodInvocationException, ParseErrorException, ResourceNotFoundException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchFieldException {
-        TradeAcknowledgementAuditor auditor = new TradeAcknowledgementAuditor();
+    private TradeReconciler generateTradeReconciler(TradeAcknowledgementAuditor auditor) throws IOException, MethodInvocationException, ParseErrorException, ResourceNotFoundException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchFieldException {
         importMap.addImport(TradeReconciler.class);
         importMap.addImport(EventHandler.class);
         importMap.addImport(TradeAcknowledgement.class);
@@ -128,7 +132,6 @@ public class ReconcilerBuilder {
         //reconciler - dynamically generated
         TradeReconciler result = aggClass.newInstance();
         aggClass.getField("tradeAcknowledgementCache").set(result, auditor);
-        GenerationContext.SINGLETON.getNodeList().add(auditor);
         return result;
     }
 }
