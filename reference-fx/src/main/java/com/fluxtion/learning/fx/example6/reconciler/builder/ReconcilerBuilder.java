@@ -79,19 +79,20 @@ public class ReconcilerBuilder {
 
     public TradeReconciler build() {
         try {
+            //alarm
+            TimeHandlerSeconds timeHandler = new TimeHandlerSeconds();
+            TimedNotifier notifier = new TimedNotifier(1, timeHandler);
             //auditor
             TradeAcknowledgementAuditor auditor = new TradeAcknowledgementAuditor();
             //reconciler
             TradeReconciler reconiler = generateTradeReconciler(auditor);
-            //update publisher
-            ReconcileUpdatePublisher updatePublisher = new ReconcileUpdatePublisher();
-            updatePublisher.reconiler = reconiler;
             //cache
             ResultsCache cache = new ResultsCache();
             cache.reconciler = reconiler;
-            //alarm
-            TimeHandlerSeconds timeHandler = new TimeHandlerSeconds();
-            TimedNotifier notifier = new TimedNotifier(1, timeHandler);
+            //update publisher
+            ReconcileUpdatePublisher updatePublisher = new ReconcileUpdatePublisher();
+            updatePublisher.reconiler = reconiler;
+            updatePublisher.alarm = notifier;
             //report generator
             ReconcileReportPublisher resultsPublisher = new ReconcileReportPublisher();
             resultsPublisher.reconcileResultcCche = cache;

@@ -18,7 +18,9 @@ package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.fx.event.ListenerRegisration;
+import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener;
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener.RECONCILE_LISTENER;
 
@@ -40,6 +42,7 @@ import static com.fluxtion.learning.fx.example6.reconciler.extensions.Reconciler
 public class ReconcileUpdatePublisher {
 
     public TradeReconciler reconiler;
+    public TimedNotifier alarm;
     private ReconcilerListener reconcilerListener;
 
     @EventHandler(filterString = RECONCILE_LISTENER, propogate = false)
@@ -47,10 +50,15 @@ public class ReconcileUpdatePublisher {
         reconcilerListener = registration.getListener();
     }
 
-    @OnEvent
-    public void publishReconcileUpdates() {
+    @OnParentUpdate
+    public void publishReconcileDelta(TimedNotifier TimedNotifier) {
         if (reconcilerListener != null) {
             //pushUpdates
         }
+    }
+
+    @OnParentUpdate
+    public void collectUpdates(TradeReconciler reconiler) {
+        //collect updates
     }
 }

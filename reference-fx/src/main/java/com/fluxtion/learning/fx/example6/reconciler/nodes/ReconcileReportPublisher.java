@@ -65,7 +65,7 @@ public class ReconcileReportPublisher {
     }
 
     @OnParentUpdate
-    public void publishAlarm(TimedNotifier TimedNotifier) {
+    public void publishReconcileReport(TimedNotifier TimedNotifier) {
         publishReport();
     }
 
