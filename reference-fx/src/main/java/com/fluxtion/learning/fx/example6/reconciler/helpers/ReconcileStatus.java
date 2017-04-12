@@ -17,12 +17,49 @@
 package com.fluxtion.learning.fx.example6.reconciler.helpers;
 
 /**
+ * An interface defining the current reconcile status for a Trade. A trade may
+ * require multiple venues to acknowledge it before the reconcile status is
+ * RECONCILED.
  *
+ * The states a ReconcileStatus can hold are defined in the enum,
+ * ReconcileStatus.Status:
+ *
+ * RECONCILIG, RECONCILED, EXPIRED_RECONCILE, RECONCILED_AFTER_EXPIRY;
+ *
+ * @param <T> The key type for the TradeAcknoweledgement
+ * 
  * @author Greg Higgins (greg.higgins@V12technology.com)
- * @param <T>
  */
 public interface ReconcileStatus<T> {
+
+    /**
+     * The venues that must acknowledge the trade for it to be RECONCILED
+     *
+     * @return reconciling venues
+     */
     String[] venues();
+
+    /**
+     * A boolean flag indicating whether all venues have acknowledged the trade.
+     * @return is reconciled
+     */
     boolean matched();
+
+    /**
+     * The id of trade acknowledgement.
+     * 
+     * @return id of trade acknowledgement
+     */
     T id();
+
+    /**
+     * current reconcile status as an enum.
+     * 
+     * @return reconcile status
+     */
+    Status status();
+
+    public enum Status {
+        RECONCILIG, RECONCILED, EXPIRED_RECONCILE, RECONCILED_AFTER_EXPIRY;
+    }
 }
