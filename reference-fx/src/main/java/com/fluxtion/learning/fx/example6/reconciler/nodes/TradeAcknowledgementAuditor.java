@@ -30,16 +30,19 @@ import static com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAckno
 public class TradeAcknowledgementAuditor {
 
     public TradeAcknowledgement acknowledgement;
+    private TradeAcknowledgementListener auditor;
     
     @EventHandler(propogate = false)
     public void cacheTradeAcknowledgemt(TradeAcknowledgement acknowledgement) {
-        //audit any incoming message
         this.acknowledgement = acknowledgement;
+        if(auditor!=null){
+            auditor.processAcknowledgemnt(acknowledgement);
+        }
     }
     
     @EventHandler(filterString = TA_LISTENER, propogate = false)
     public void registerAuditor(ListenerRegisration<TradeAcknowledgementListener> registration){
-        
+        this.auditor = registration.getListener();
     }
     
     

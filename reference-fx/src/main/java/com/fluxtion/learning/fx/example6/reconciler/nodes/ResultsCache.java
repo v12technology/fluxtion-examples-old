@@ -17,7 +17,6 @@
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
 import com.fluxtion.api.annotations.OnEvent;
-import com.fluxtion.api.annotations.OnParentUpdate;
 
 /**
  * Caches results from the reconcile results from the TradeReconciler. Child
