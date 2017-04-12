@@ -19,9 +19,14 @@ package com.fluxtion.learning.fx.example6.reconciler.events;
 import com.fluxtion.runtime.event.Event;
 
 /**
- * Control signal for a node that also provides an optional enable flag. The
- * ControlSignal has a filter string. A node can mark a method with a filtered
- * EventHandler annotation to receive a control message:
+ * ControlSignal is an event that provides a generic method for nodes to receive
+ * control signals without having to define bespoke control events for each type
+ * of signal. The ControlSiganl also provides an optional enable flag the
+ * receiver can inspect.
+ *
+ * The ControlSignal has a filter string, which allows the receiver to filter
+ * which ControlSignals it should be informed of. A node marks a method with a
+ * filtered EventHandler annotation to receive a control message:
  *
  * <pre>
  *

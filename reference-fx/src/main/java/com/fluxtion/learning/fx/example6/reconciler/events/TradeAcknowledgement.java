@@ -19,22 +19,24 @@ package com.fluxtion.learning.fx.example6.reconciler.events;
 import com.fluxtion.runtime.event.Event;
 
 /**
- * A sample trade acknowledgement event, filtered by venueId. 
- * 
+ * A TradeAcknowledgement event indicates a venue has acknowledged a Trade. The
+ * TradeAcknowledgement is a filtered event where the filterString is the
+ * venueId.
+ *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public class TradeAcknowledgement extends Event{
- 
+public class TradeAcknowledgement extends Event {
+
     public int tradeId;
     public String tradeStringId;
     public long time;
-    
-    public void setVenueId(String venueId){
+
+    public void setVenueId(String venueId) {
         filterString = venueId;
     }
-    
-    public String venueId(){
+
+    public String venueId() {
         return filterString;
     }
-    
+
 }

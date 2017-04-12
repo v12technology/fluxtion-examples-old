@@ -26,6 +26,8 @@ import com.fluxtion.fx.event.ControlSignal;
 public interface ControlSignals {
 
     public static final String PUBLISH_RESULT = "com.fluxtion.fx.reconciler.publishResults";
+    public static final String CLEAR_RECONCILE_STATE = "com.fluxtion.fx.reconciler.clearReconcileState";
 
     public static final ControlSignal PUBLISH_RESULT_ACTION = new ControlSignal(PUBLISH_RESULT, true);
+    public static final ControlSignal CLEAR_CACHE_ACTION = new ControlSignal(CLEAR_RECONCILE_STATE, true);
 }
