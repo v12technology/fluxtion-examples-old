@@ -26,8 +26,8 @@ import com.fluxtion.learning.fx.example6.reconciler.builder.ReconcilerBuilder;
 public class ReconcilerSEP extends SEPConfig {
 
         public ReconcilerSEP() {
-            ReconcilerBuilder builder = new ReconcilerBuilder();
-            builder.setMandatorySource(new String[]{"EBS", "COLO_1", "TRIANA"});
+            ReconcilerBuilder builder = new ReconcilerBuilder("EBS_LD4");
+            builder.setMandatorySource("EBS", "COLO_1", "TRIANA");
             builder.build();
         }
 

@@ -25,17 +25,17 @@ import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileS
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener;
 
 /**
- * A SummaryPublisher publishes the change in state of the current
- reconcile status for a set of ReconcileStatus records in the TradeReconciler.
- * Only the changed ReconcileStatus records due to processing of new
- TradeAcknowledgement events are published to the ReconcileSummaryListener.
-
- A ReconcileSummaryListener registers with the SummaryPublisher using a
- ListenerRegisration event and pushing the event to the generated SEP.
- Currently only one registered ReconcileSummaryListener is supported.
-
- The responsibility for reporting on the reconcile status of all
- ReconcileStaus records lies with the ReconcileReportPublisher.
+ * A SummaryPublisher publishes the change in state of the current reconcile
+ * status for a set of ReconcileStatus records in the TradeReconciler. Only the
+ * changed ReconcileStatus records due to processing of new TradeAcknowledgement
+ * events are published to the ReconcileSummaryListener.
+ *
+ * A ReconcileSummaryListener registers with the SummaryPublisher using a
+ * ListenerRegisration event and pushing the event to the generated SEP.
+ * Currently only one registered ReconcileSummaryListener is supported.
+ *
+ * The responsibility for reporting on the reconcile status of all
+ * ReconcileStaus records lies with the ReconcileReportPublisher.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */

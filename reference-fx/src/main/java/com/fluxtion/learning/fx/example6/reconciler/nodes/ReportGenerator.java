@@ -53,13 +53,13 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPu
  */
 public class ReportGenerator {
 
-    public ResultsCache reconcileResultcCche;
+    public ResultsCache reconcileStatusCache;
     private ReconcileReportPublisher publisher;
     public TimedNotifier alarm;
 
     private void publishReport() {
         if (publisher != null) {
-            publisher.publishReport(reconcileResultcCche);
+            publisher.publishReport(reconcileStatusCache);
         }
     }
 

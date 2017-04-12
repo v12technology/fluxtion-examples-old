@@ -53,15 +53,17 @@ import org.apache.velocity.exception.ResourceNotFoundException;
 public class ReconcilerBuilder {
 
     private String[] mandatorySources;
+    private final String reconcilerId;
     private final ImportMap importMap;
     private static final String PACKAGE = "/template/fxreconciler";
     private static final String RECONCILER_TEMPLATE = PACKAGE + "/ReconcilerTemplate.vsl";
 
-    public ReconcilerBuilder() {
+    public ReconcilerBuilder(String reconcilerId) {
         importMap = ImportMap.newMap();
+        this.reconcilerId = reconcilerId;
     }
 
-    public void setMandatorySource(String[] sources) {
+    public void setMandatorySource(String... sources) {
         for (String source : sources) {
             if (source == null) {
                 throw new IllegalArgumentException("source name is null valid name required");
@@ -95,7 +97,7 @@ public class ReconcilerBuilder {
             updatePublisher.alarm = notifier;
             //report generator
             ReportGenerator resultsPublisher = new ReportGenerator();
-            resultsPublisher.reconcileResultcCche = cache;
+            resultsPublisher.reconcileStatusCache = cache;
             resultsPublisher.alarm = notifier;
             //add items to the event graph in any order, Fluxtion will figure 
             //out all the optimal event delegation :)
@@ -123,7 +125,7 @@ public class ReconcilerBuilder {
         importMap.addImport(TradeAcknowledgementAuditor.class);
         importMap.addImport(ReconcileStatus.class);
         VelocityContext ctx = new VelocityContext();
-        String genClassName = "TradeReconciler_" + GenerationContext.nextId();
+        String genClassName = "TradeReconciler_" + reconcilerId;
         ctx.put(functionClass.name(), genClassName);
         ctx.put("reconcilerBuilder", this);
         ctx.put("imports", importMap.asString());
@@ -132,7 +134,7 @@ public class ReconcilerBuilder {
         Class<TradeReconciler> aggClass = FunctionGeneratorHelper.generateAndCompile(null, RECONCILER_TEMPLATE, GenerationContext.SINGLETON, ctx);
         //reconciler - dynamically generated
         TradeReconciler result = aggClass.newInstance();
-        aggClass.getField("tradeAcknowledgementCache").set(result, auditor);
+        aggClass.getField("auditor").set(result, auditor);
         return result;
     }
 }
