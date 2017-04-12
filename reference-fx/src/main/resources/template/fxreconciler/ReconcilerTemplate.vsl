@@ -105,5 +105,11 @@ public class  ${functionClass} implements TradeReconciler{
             time_$source = 0;
 #end
         }
+
+        @Override
+        public Status status(){
+            //TODO add implementation
+            return null;
+        }
     }
 }
