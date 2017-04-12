@@ -23,27 +23,31 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAcknowledgem
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAcknowledgementListener.TA_LISTENER;
 
 /**
- * Receives a TradeAcknowledgement and uses the registered auditor to persist
- * 
+ * Receives a TradeAcknowledgement and delegates to the registered auditor to
+ * persist all incoming trade messages.
+ *
+ * A TradeAcknowledgementListener registers with the TradeAcknowledgementAuditor
+ * using a ListenerRegisration event and pushing the event to the generated SEP.
+ * Only a single auditor can be registered.
+ *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
 public class TradeAcknowledgementAuditor {
 
     public TradeAcknowledgement acknowledgement;
     private TradeAcknowledgementListener auditor;
-    
+
     @EventHandler(propogate = false)
     public void cacheTradeAcknowledgemt(TradeAcknowledgement acknowledgement) {
         this.acknowledgement = acknowledgement;
-        if(auditor!=null){
+        if (auditor != null) {
             auditor.processAcknowledgemnt(acknowledgement);
         }
     }
-    
+
     @EventHandler(filterString = TA_LISTENER, propogate = false)
-    public void registerAuditor(ListenerRegisration<TradeAcknowledgementListener> registration){
+    public void registerAuditor(ListenerRegisration<TradeAcknowledgementListener> registration) {
         this.auditor = registration.getListener();
     }
-    
-    
+
 }

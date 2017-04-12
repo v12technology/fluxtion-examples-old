@@ -23,6 +23,17 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListene
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener.RECONCILE_LISTENER;
 
 /**
+ * A ReconcileUpdatePublisher publishes the change in state of the current
+ * reconcile status for a set of ReconcileStatus records in the TradeReconciler.
+ * Only the changed ReconcileStatus records due to processing of new
+ * TradeAcknowledgement events are published to the ReconcilerListener.
+ *
+ * A ReconcilerListener registers with the ReconcileUpdatePublisher using a
+ * ListenerRegisration event and pushing the event to the generated SEP.
+ * Currently only one registered ReconcilerListener is supported.
+ *
+ * The responsibility for reporting on the reconcile status of all
+ * ReconcileStaus records lies with the ReconcileReportPublisher.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
@@ -38,7 +49,7 @@ public class ReconcileUpdatePublisher {
 
     @OnEvent
     public void publishReconcileUpdates() {
-        if(reconcilerListener!=null){
+        if (reconcilerListener != null) {
             //pushUpdates
         }
     }
