@@ -29,12 +29,12 @@ public class  ${functionClass} implements TradeReconciler{
 
     private Int2ObjectOpenHashMap<ReconcileRecord> id2Reconcile;
     private ArrayDeque<ReconcileRecord> freeList;
-    public TradeAcknowledgementAuditor tradeAcknowledgementCache;
+    public TradeAcknowledgementAuditor auditor;
 
 #foreach( $source in $reconcilerBuilder.mandatorySources)
     @EventHandler(filterString = "$source")
     public void handleTradeSource_$source (TradeAcknowledgement acknowledgement){
-        ReconcileRecord record = getRecord(tradeAcknowledgementCache.acknowledgement);
+        ReconcileRecord record = getRecord(auditor.acknowledgement);
         record.received_$source = true;
         if (record.matched()) {
             matchedRecord(record);
