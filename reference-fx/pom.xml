@@ -146,6 +146,7 @@
                                     <className>ReconcilerTest</className>
                                     <packageName>com.fluxtion.learning.fx.example3.generated</packageName>
                                     <configClass>com.fluxtion.learning.fx.example6.ReconcilerSEP</configClass>
+                                    <nodeNamingClass>com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcilerNameProducer</nodeNamingClass>
                                     <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
