@@ -41,7 +41,7 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryL
  */
 public class SummaryPublisher {
 
-    public TradeReconciler reconiler;
+    public TradeReconciler reconciler;
     public TimedNotifier alarm;
     private ReconcileSummaryListener reconcilerListener;
 
@@ -57,8 +57,4 @@ public class SummaryPublisher {
         }
     }
 
-    @OnParentUpdate
-    public void collectUpdates(TradeReconciler reconiler) {
-        //collect updates
-    }
 }

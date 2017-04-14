@@ -16,19 +16,23 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
+import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.api.annotations.OnParentUpdate;
+import com.fluxtion.fx.node.biascheck.TimedNotifier;
+
 /**
  *
- * Work in progress, this is the interface the generated TradeReconciler will 
+ * Work in progress, this is the interface the generated TradeReconciler will
  * conform to.
- * 
+ *
  * Listens to TradeAcknowledgements and audits all incoming messages, if
- * required. 
- * 
- * 
- * 
- * TA is converted to a bespoke ReconcileRecord for the venue
- * ReconcileRecords are stored in a map for processing The map can be queried to
- * generate a JSON report of all trades processed today.
+ * required.
+ *
+ *
+ *
+ * TA is converted to a bespoke ReconcileRecord for the venue ReconcileRecords
+ * are stored in a map for processing The map can be queried to generate a JSON
+ * report of all trades processed today.
  *
  * Call back listener for ReconcileUpdate, for publishing summary statistics
  *
@@ -40,6 +44,10 @@ package com.fluxtion.learning.fx.example6.reconciler.nodes;
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public interface TradeReconciler {
+public abstract class TradeReconciler {
 
+    public TimedNotifier alarm;
+    public String id;
+    public TradeAcknowledgementAuditor auditor;
+    
 }

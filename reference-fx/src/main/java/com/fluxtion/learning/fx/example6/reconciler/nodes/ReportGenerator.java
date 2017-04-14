@@ -16,7 +16,12 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
+import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.api.annotations.NoEventReference;
+import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.api.annotations.OnEventComplete;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
@@ -31,7 +36,7 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPu
  * upon the implementation of the registered ReconcileReportPublisher.
  *
  * The registered ReconcileReportPublisher is invoked with an instance of
- * ResultsCache, which gives access to ReconcileStatus records, regardless of
+ * ReconcileCache, which gives access to ReconcileStatus records, regardless of
  * the reconcile status of the record. The number of ReconcileStatus records in
  * the cache is dependent upon the cache implementation.
  *
@@ -53,19 +58,22 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPu
  */
 public class ReportGenerator {
 
-    public ResultsCache reconcileStatusCache;
-    private ReconcileReportPublisher publisher;
+    public ReconcileCache reconcileStatusCache;
     public TimedNotifier alarm;
+    public String id;
+    private ReconcileReportPublisher publisher;
+    private boolean publishNotification;
 
-    private void publishReport() {
-        if (publisher != null) {
+    @OnEvent
+    public void publishReport() {
+        if (publisher != null & publishNotification) {
             publisher.publishReport(reconcileStatusCache);
         }
     }
 
     @OnParentUpdate
-    public void publishReconcileReport(TimedNotifier TimedNotifier) {
-        publishReport();
+    public void publishTimeout(TimedNotifier TimedNotifier) {
+        publishNotification = true;
     }
 
     @EventHandler(filterString = RESULT_PUBLISHER, propogate = false)
@@ -75,6 +83,18 @@ public class ReportGenerator {
 
     @EventHandler(filterString = ControlSignals.PUBLISH_RESULT, propogate = false)
     public void publisResults(ControlSignal publishSignal) {
-        publishReport();
+        if (publisher != null) {
+            publisher.publishReport(reconcileStatusCache);
+        }
+    }
+
+    @Initialise
+    public void init() {
+        publishNotification = false;
+    }
+
+    @AfterEvent
+    public void eventFinished() {
+        publishNotification = false;
     }
 }
