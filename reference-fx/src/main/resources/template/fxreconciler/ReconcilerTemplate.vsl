@@ -20,21 +20,33 @@ package ${functionPackage};
 #foreach( $import in $imports)
 import $import;
 #end
+
 /**
- * Fluxtion generated TradeReconciler
+ * Fluxtion generated TradeReconciler id:${reconcilerBuilder.reconcilerId}
+ * Acknowledgements must be received from all monitored venues for a 
+ * trade to have RECONCILED status.
+ *
+ * Acknowledging venues: ${venues}
  *
  * @author greg higgins (greg.higgins@v12technology.com)
  */
-public class  ${functionClass} implements TradeReconciler{
+public class  ${functionClass} extends TradeReconciler{
 
     private Int2ObjectOpenHashMap<ReconcileRecord> id2Reconcile;
     private ArrayDeque<ReconcileRecord> freeList;
+    public TimedNotifier alarm;
+    public String id;
     public TradeAcknowledgementAuditor auditor;
+
+    @OnParentUpdate
+    public void expireTimedOutReconciles(TimedNotifier TimedNotifier) {
+        //reomve reconcilerecords if acks are too late
+    }
 
 #foreach( $source in $reconcilerBuilder.mandatorySources)
     @EventHandler(filterString = "$source")
     public void handleTradeSource_$source (TradeAcknowledgement acknowledgement){
-        ReconcileRecord record = getRecord(auditor.acknowledgement);
+        ReconcileRecord record = getRecord(acknowledgement);
         record.received_$source = true;
         if (record.matched()) {
             matchedRecord(record);
@@ -60,6 +72,11 @@ public class  ${functionClass} implements TradeReconciler{
             id2Reconcile.put(acknowledgement.tradeId, record);
         }
         return record;
+    }
+
+    @OnEvent
+    public void reconcileUpdated(){
+        //required to keep event path unbroken
     }
 
     @Initialise
