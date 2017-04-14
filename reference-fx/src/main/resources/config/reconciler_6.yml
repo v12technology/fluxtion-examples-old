@@ -1,4 +1,4 @@
-## Config for example 20 - character matcher
+## A sample configuration for trade reconcilers
 ---
 rootNodeMappings: 
     com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler: classifier
