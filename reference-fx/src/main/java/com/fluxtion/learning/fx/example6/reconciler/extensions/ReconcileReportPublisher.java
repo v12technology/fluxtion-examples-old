@@ -16,7 +16,7 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.extensions;
 
-import com.fluxtion.learning.fx.example6.reconciler.nodes.ResultsCache;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
 
 
 /**
@@ -42,6 +42,6 @@ public interface ReconcileReportPublisher {
      * 
      * @param reconcileResultcCche access to the current ReconcileRecord set
      */
-    void publishReport( ResultsCache reconcileResultcCche);
+    void publishReport( ReconcileCache reconcileResultcCche);
     
 }
