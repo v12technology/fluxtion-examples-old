@@ -1,0 +1,16 @@
+## Config for example 20 - character matcher
+---
+rootNodeMappings: 
+    com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler: classifier
+config:
+    reconilers:
+        REUTERS_DC1:
+            venues: [dc_ln_1, MiddleOffice]
+            timeout: 10
+        EBS_LD4:
+            venues: [LD_4, MiddleOffice, triana]
+            timeout: 5
+        EBS_NY2:
+            venues: [NY_2, MiddleOffice, triana]
+            timeout: 9
+        

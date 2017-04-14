@@ -155,6 +155,38 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>build-example6-yaml-reconciler</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>example6</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <className>ReconcilerFromYml</className>
+                                    <packageName>com.fluxtion.learning.fx.example6.yml.generated</packageName>
+                                    <configClass>com.fluxtion.learning.fx.example6.reconciler.builder.ReconilerFactory</configClass>
+                                    <yamlFactoryConfig>src/main/resources/config/reconciler_6.yml</yamlFactoryConfig>
+                                    <nodeNamingClass>com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcilerNameProducer</nodeNamingClass>
+                                    <!--<logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
     
     

@@ -36,6 +36,7 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import java.util.ArrayDeque;
 import java.util.HashMap;
+import java.util.List;
 import org.apache.velocity.VelocityContext;
 
 /**
@@ -89,7 +90,8 @@ public class ReconcilerBuilder {
         return reconcilerId;
     }
 
-    public TradeReconciler build() {
+    public TradeReconciler build(List nodeList){
+        
         try {
             //reconciler
             TradeReconciler reconciler = generateTradeReconciler();
@@ -109,17 +111,21 @@ public class ReconcilerBuilder {
             resultsPublisher.id = getReconcilerId();
             //add items to the event graph in any order, Fluxtion will figure 
             //out all the optimal event delegation :)
-            GenerationContext.SINGLETON.getNodeList().add(auditor);
-            GenerationContext.SINGLETON.getNodeList().add(reconciler);
-            GenerationContext.SINGLETON.getNodeList().add(timeHandler);
-            GenerationContext.SINGLETON.getNodeList().add(notifier);
-            GenerationContext.SINGLETON.getNodeList().add(updatePublisher);
-            GenerationContext.SINGLETON.getNodeList().add(cache);
-            GenerationContext.SINGLETON.getNodeList().add(resultsPublisher);
+            nodeList.add(auditor);
+            nodeList.add(reconciler);
+            nodeList.add(timeHandler);
+            nodeList.add(notifier);
+            nodeList.add(updatePublisher);
+            nodeList.add(cache);
+            nodeList.add(resultsPublisher);
             return reconciler;
         } catch (Exception e) {
             throw new RuntimeException("could not build TradeReconciler " + e.getMessage(), e);
         }
+    }
+    
+    public TradeReconciler build() {
+        return build(GenerationContext.SINGLETON.getNodeList());
     }
 
     private TradeReconciler generateTradeReconciler() throws Exception {
