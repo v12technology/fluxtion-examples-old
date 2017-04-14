@@ -18,6 +18,8 @@ package com.fluxtion.learning.fx.example6.reconciler.builder;
 
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.api.generation.GenerationContext;
 import com.fluxtion.extension.declarative.builder.factory.FunctionGeneratorHelper;
 import static com.fluxtion.extension.declarative.builder.factory.FunctionKeys.functionClass;
@@ -28,16 +30,13 @@ import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ReportGenerator;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.SummaryPublisher;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.ResultsCache;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import java.io.IOException;
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import org.apache.velocity.VelocityContext;
-import org.apache.velocity.exception.MethodInvocationException;
-import org.apache.velocity.exception.ParseErrorException;
-import org.apache.velocity.exception.ResourceNotFoundException;
 
 /**
  * A utility for building a trade reconciler as a Static Event Processor.
@@ -54,13 +53,20 @@ public class ReconcilerBuilder {
 
     private String[] mandatorySources;
     private final String reconcilerId;
-    private final ImportMap importMap;
+    private final TimedNotifier notifier;
+    //globals - shared
+    private final static ImportMap importMap;
+    private final static TradeAcknowledgementAuditor auditor;
+    private final static TimeHandlerSeconds timeHandler;
+    private final static ReconcileCache cache;
+    private final static HashMap<Integer, TimedNotifier> period2Notifier;
+    //templates
     private static final String PACKAGE = "/template/fxreconciler";
     private static final String RECONCILER_TEMPLATE = PACKAGE + "/ReconcilerTemplate.vsl";
 
-    public ReconcilerBuilder(String reconcilerId) {
-        importMap = ImportMap.newMap();
+    public ReconcilerBuilder(String reconcilerId, int publishPeriod) {
         this.reconcilerId = reconcilerId;
+        notifier = period2Notifier.computeIfAbsent(publishPeriod, period -> new TimedNotifier(period, timeHandler));
     }
 
     public void setMandatorySource(String... sources) {
@@ -79,51 +85,44 @@ public class ReconcilerBuilder {
         return mandatorySources;
     }
 
+    public String getReconcilerId() {
+        return reconcilerId;
+    }
+
     public TradeReconciler build() {
         try {
-            //alarm
-            TimeHandlerSeconds timeHandler = new TimeHandlerSeconds();
-            TimedNotifier notifier = new TimedNotifier(1, timeHandler);
-            //auditor
-            TradeAcknowledgementAuditor auditor = new TradeAcknowledgementAuditor();
             //reconciler
-            TradeReconciler reconiler = generateTradeReconciler(auditor);
+            TradeReconciler reconciler = generateTradeReconciler();
+            reconciler.auditor = auditor;
+            reconciler.id = reconcilerId;
+            reconciler.alarm = notifier;
             //cache
-            ResultsCache cache = new ResultsCache();
-            cache.reconciler = reconiler;
+            cache.addReconciler(reconciler);
             //update publisher
             SummaryPublisher updatePublisher = new SummaryPublisher();
-            updatePublisher.reconiler = reconiler;
+            updatePublisher.reconciler = reconciler;
             updatePublisher.alarm = notifier;
             //report generator
             ReportGenerator resultsPublisher = new ReportGenerator();
             resultsPublisher.reconcileStatusCache = cache;
             resultsPublisher.alarm = notifier;
+            resultsPublisher.id = getReconcilerId();
             //add items to the event graph in any order, Fluxtion will figure 
             //out all the optimal event delegation :)
             GenerationContext.SINGLETON.getNodeList().add(auditor);
-            GenerationContext.SINGLETON.getNodeList().add(reconiler);
+            GenerationContext.SINGLETON.getNodeList().add(reconciler);
             GenerationContext.SINGLETON.getNodeList().add(timeHandler);
             GenerationContext.SINGLETON.getNodeList().add(notifier);
             GenerationContext.SINGLETON.getNodeList().add(updatePublisher);
             GenerationContext.SINGLETON.getNodeList().add(cache);
             GenerationContext.SINGLETON.getNodeList().add(resultsPublisher);
-            return reconiler;
+            return reconciler;
         } catch (Exception e) {
             throw new RuntimeException("could not build TradeReconciler " + e.getMessage(), e);
         }
     }
 
-    private TradeReconciler generateTradeReconciler(TradeAcknowledgementAuditor auditor) throws IOException, MethodInvocationException, ParseErrorException, ResourceNotFoundException, ClassNotFoundException, InstantiationException, IllegalAccessException, NoSuchFieldException {
-        importMap.addImport(TradeReconciler.class);
-        importMap.addImport(EventHandler.class);
-        importMap.addImport(TradeAcknowledgement.class);
-        importMap.addImport(TradeReconciler.class);
-        importMap.addImport(Int2ObjectOpenHashMap.class);
-        importMap.addImport(Initialise.class);
-        importMap.addImport(ArrayDeque.class);
-        importMap.addImport(TradeAcknowledgementAuditor.class);
-        importMap.addImport(ReconcileStatus.class);
+    private TradeReconciler generateTradeReconciler() throws Exception {
         VelocityContext ctx = new VelocityContext();
         String genClassName = "TradeReconciler_" + reconcilerId;
         ctx.put(functionClass.name(), genClassName);
@@ -134,7 +133,29 @@ public class ReconcilerBuilder {
         Class<TradeReconciler> aggClass = FunctionGeneratorHelper.generateAndCompile(null, RECONCILER_TEMPLATE, GenerationContext.SINGLETON, ctx);
         //reconciler - dynamically generated
         TradeReconciler result = aggClass.newInstance();
-        aggClass.getField("auditor").set(result, auditor);
+//        aggClass.getField("auditor").set(result, auditor);
         return result;
+    }
+
+    static {
+        auditor = new TradeAcknowledgementAuditor();
+        timeHandler = new TimeHandlerSeconds();
+        cache = new ReconcileCache();
+        period2Notifier = new HashMap<>();
+        period2Notifier.put(1, new TimedNotifier(1, timeHandler));
+        period2Notifier.put(3, new TimedNotifier(1, timeHandler));
+        importMap = ImportMap.newMap();
+        importMap.addImport(TradeReconciler.class);
+        importMap.addImport(EventHandler.class);
+        importMap.addImport(TradeAcknowledgement.class);
+        importMap.addImport(TradeReconciler.class);
+        importMap.addImport(Int2ObjectOpenHashMap.class);
+        importMap.addImport(Initialise.class);
+        importMap.addImport(OnEvent.class);
+        importMap.addImport(OnParentUpdate.class);
+        importMap.addImport(TimedNotifier.class);
+        importMap.addImport(TradeAcknowledgementAuditor.class);
+        importMap.addImport(ArrayDeque.class);
+        importMap.addImport(ReconcileStatus.class);
     }
 }
