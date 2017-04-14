@@ -54,20 +54,22 @@ public class ReconcilerBuilder {
 
     private String[] mandatorySources;
     private final String reconcilerId;
-    private final TimedNotifier notifier;
+    private final TimedNotifier reconileExpiryNotifier;
+    private final TimedNotifier publishNotifier;
     //globals - shared
-    private final static ImportMap importMap;
-    private final static TradeAcknowledgementAuditor auditor;
-    private final static TimeHandlerSeconds timeHandler;
-    private final static ReconcileCache cache;
-    private final static HashMap<Integer, TimedNotifier> period2Notifier;
+    private final static ImportMap IMPORT_MAP;
+    private final static TradeAcknowledgementAuditor AUDITOR;
+    private final static TimeHandlerSeconds TIME_HANDLER;
+    private final static ReconcileCache CACHE;
+    private final static HashMap<Integer, TimedNotifier> PERIOD_2_NOTIFIER;
     //templates
     private static final String PACKAGE = "/template/fxreconciler";
     private static final String RECONCILER_TEMPLATE = PACKAGE + "/ReconcilerTemplate.vsl";
 
-    public ReconcilerBuilder(String reconcilerId, int publishPeriod) {
+    public ReconcilerBuilder(String reconcilerId, int reconcileExpiry, int publishPeriod) {
         this.reconcilerId = reconcilerId;
-        notifier = period2Notifier.computeIfAbsent(publishPeriod, period -> new TimedNotifier(period, timeHandler));
+        reconileExpiryNotifier = PERIOD_2_NOTIFIER.computeIfAbsent(reconcileExpiry, period -> new TimedNotifier(period, TIME_HANDLER));
+        publishNotifier = PERIOD_2_NOTIFIER.computeIfAbsent(publishPeriod, period -> new TimedNotifier(period, TIME_HANDLER));
     }
 
     public void setMandatorySource(String... sources) {
@@ -95,28 +97,29 @@ public class ReconcilerBuilder {
         try {
             //reconciler
             TradeReconciler reconciler = generateTradeReconciler();
-            reconciler.auditor = auditor;
+            reconciler.auditor = AUDITOR;
             reconciler.id = reconcilerId;
-            reconciler.alarm = notifier;
+            reconciler.alarm = reconileExpiryNotifier;
             //cache
-            cache.addReconciler(reconciler);
+            CACHE.addReconciler(reconciler);
             //update publisher
             SummaryPublisher updatePublisher = new SummaryPublisher();
             updatePublisher.reconciler = reconciler;
-            updatePublisher.alarm = notifier;
+            updatePublisher.alarm = publishNotifier;
             //report generator
             ReportGenerator resultsPublisher = new ReportGenerator();
-            resultsPublisher.reconcileStatusCache = cache;
-            resultsPublisher.alarm = notifier;
+            resultsPublisher.reconcileStatusCache = CACHE;
+            resultsPublisher.alarm = publishNotifier;
             resultsPublisher.id = getReconcilerId();
             //add items to the event graph in any order, Fluxtion will figure 
             //out all the optimal event delegation :)
-            nodeList.add(auditor);
+            nodeList.add(AUDITOR);
             nodeList.add(reconciler);
-            nodeList.add(timeHandler);
-            nodeList.add(notifier);
+            nodeList.add(TIME_HANDLER);
+            nodeList.add(reconileExpiryNotifier);
+            nodeList.add(publishNotifier);
             nodeList.add(updatePublisher);
-            nodeList.add(cache);
+            nodeList.add(CACHE);
             nodeList.add(resultsPublisher);
             return reconciler;
         } catch (Exception e) {
@@ -133,7 +136,7 @@ public class ReconcilerBuilder {
         String genClassName = "TradeReconciler_" + reconcilerId;
         ctx.put(functionClass.name(), genClassName);
         ctx.put("reconcilerBuilder", this);
-        ctx.put("imports", importMap.asString());
+        ctx.put("imports", IMPORT_MAP.asString());
         ctx.put("matching", "received_" + String.join(" & received_", mandatorySources));
         ctx.put("venues", "\"" + String.join("\", \"", mandatorySources) + "\"");
         Class<TradeReconciler> aggClass = FunctionGeneratorHelper.generateAndCompile(null, RECONCILER_TEMPLATE, GenerationContext.SINGLETON, ctx);
@@ -144,24 +147,24 @@ public class ReconcilerBuilder {
     }
 
     static {
-        auditor = new TradeAcknowledgementAuditor();
-        timeHandler = new TimeHandlerSeconds();
-        cache = new ReconcileCache();
-        period2Notifier = new HashMap<>();
-        period2Notifier.put(1, new TimedNotifier(1, timeHandler));
-        period2Notifier.put(3, new TimedNotifier(1, timeHandler));
-        importMap = ImportMap.newMap();
-        importMap.addImport(TradeReconciler.class);
-        importMap.addImport(EventHandler.class);
-        importMap.addImport(TradeAcknowledgement.class);
-        importMap.addImport(TradeReconciler.class);
-        importMap.addImport(Int2ObjectOpenHashMap.class);
-        importMap.addImport(Initialise.class);
-        importMap.addImport(OnEvent.class);
-        importMap.addImport(OnParentUpdate.class);
-        importMap.addImport(TimedNotifier.class);
-        importMap.addImport(TradeAcknowledgementAuditor.class);
-        importMap.addImport(ArrayDeque.class);
-        importMap.addImport(ReconcileStatus.class);
+        AUDITOR = new TradeAcknowledgementAuditor();
+        TIME_HANDLER = new TimeHandlerSeconds();
+        CACHE = new ReconcileCache();
+        PERIOD_2_NOTIFIER = new HashMap<>();
+        PERIOD_2_NOTIFIER.put(1, new TimedNotifier(1, TIME_HANDLER));
+        PERIOD_2_NOTIFIER.put(3, new TimedNotifier(1, TIME_HANDLER));
+        IMPORT_MAP = ImportMap.newMap();
+        IMPORT_MAP.addImport(TradeReconciler.class);
+        IMPORT_MAP.addImport(EventHandler.class);
+        IMPORT_MAP.addImport(TradeAcknowledgement.class);
+        IMPORT_MAP.addImport(TradeReconciler.class);
+        IMPORT_MAP.addImport(Int2ObjectOpenHashMap.class);
+        IMPORT_MAP.addImport(Initialise.class);
+        IMPORT_MAP.addImport(OnEvent.class);
+        IMPORT_MAP.addImport(OnParentUpdate.class);
+        IMPORT_MAP.addImport(TimedNotifier.class);
+        IMPORT_MAP.addImport(TradeAcknowledgementAuditor.class);
+        IMPORT_MAP.addImport(ArrayDeque.class);
+        IMPORT_MAP.addImport(ReconcileStatus.class);
     }
 }

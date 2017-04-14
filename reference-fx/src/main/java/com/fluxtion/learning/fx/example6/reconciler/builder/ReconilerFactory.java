@@ -38,10 +38,11 @@ public class ReconilerFactory extends SEPConfig implements NodeFactory<TradeReco
         for (Map.Entry object : reconcilerMap.entrySet()) {
             String reconcilerId = (String) object.getKey();
             Map value = (Map) object.getValue();
-            int timeout = (int) (value).get("timeout");
+            int timeout = (int) (value).get("reconcileExpiry");
+            int publishFrequency = (int) (value).get("publishFrequency");
             List<String> venues = (List) ((Map) value).get("venues");
             String[] venuesAsArray = venues.toArray(new String[venues.size()]);
-            ReconcilerBuilder builder = new ReconcilerBuilder(reconcilerId, timeout);
+            ReconcilerBuilder builder = new ReconcilerBuilder(reconcilerId, timeout, publishFrequency);
             builder.setMandatorySource(venuesAsArray);
             builder.build(nodeList);
         }

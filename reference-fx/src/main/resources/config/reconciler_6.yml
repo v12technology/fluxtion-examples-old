@@ -6,11 +6,14 @@ config:
     reconilers:
         REUTERS_DC1:
             venues: [dc_ln_1, MiddleOffice]
-            timeout: 10
+            reconcileExpiry: 10
+            publishFrequency: 2
         EBS_LD4:
             venues: [LD_4, MiddleOffice, triana]
-            timeout: 5
+            reconcileExpiry: 5
+            publishFrequency: 2
         EBS_NY2:
             venues: [NY_2, MiddleOffice, triana]
-            timeout: 9
+            reconcileExpiry: 9
+            publishFrequency: 2
         
