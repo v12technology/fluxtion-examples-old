@@ -20,7 +20,7 @@ import com.fluxtion.api.generation.NodeNameProducer;
 import com.fluxtion.fx.eventhandler.TimeHandlerSeconds;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ReportGenerator;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.ResultsCache;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.SummaryPublisher;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
@@ -31,6 +31,8 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
  */
 public class ReconcilerNameProducer implements NodeNameProducer {
 
+    static int count;
+    
     @Override
     public String mappedNodeName(Object nodeToMap) {
         String name = null;
@@ -39,13 +41,15 @@ public class ReconcilerNameProducer implements NodeNameProducer {
             name = "alarm_" + handler.periodInSeconds + "s";
         }
         if (nodeToMap instanceof ReportGenerator) {
-            name = "reportGenerator";
+            ReportGenerator cache = (ReportGenerator)nodeToMap;
+            name = "reportGenerator_" + cache.id;
         }
-        if (nodeToMap instanceof ResultsCache) {
-            name = "reconcileCache";
+        if (nodeToMap instanceof ReconcileCache) {
+            name = "reconcileCache_Global";
         }
         if (nodeToMap instanceof SummaryPublisher) {
-            name = "summaryPublisher";
+            SummaryPublisher pub = (SummaryPublisher)nodeToMap;
+            name = "summaryPublisher_" + pub.reconciler.id;
         }
         if (nodeToMap instanceof TradeAcknowledgementAuditor) {
             name = "auditor";
@@ -54,7 +58,7 @@ public class ReconcilerNameProducer implements NodeNameProducer {
             name = "timeHandler";
         }
         if (nodeToMap instanceof TradeReconciler) {
-            name = "reconciler";
+            name = "reconciler_" + ((TradeReconciler)nodeToMap).id;
         }
         return name;
     }
