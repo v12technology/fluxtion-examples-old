@@ -139,7 +139,7 @@ public class ReconcilerBuilder {
 
     private TradeReconciler generateTradeReconciler() throws Exception {
         VelocityContext ctx = new VelocityContext();
-        String genClassName = "TradeReconciler_" + reconcilerId;
+        String genClassName = "Reconciler_" + reconcilerId;
         ctx.put(functionClass.name(), genClassName);
         ctx.put("reconcilerBuilder", this);
         ctx.put("imports", IMPORT_MAP.asString());

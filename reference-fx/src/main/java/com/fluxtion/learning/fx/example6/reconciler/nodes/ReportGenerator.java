@@ -63,18 +63,18 @@ public class ReportGenerator {
     public TimedNotifier alarm;
     public String id;
     private ReconcileReportPublisher publisher;
-    private boolean publishNotification;
+    private boolean publishReport;
 
     @OnEvent
     public void publishReport() {
-        if (publisher != null & publishNotification) {
+        if (publisher != null & publishReport) {
             publisher.publishReport(reconcileStatusCache);
         }
     }
 
     @OnParentUpdate
     public void publishTimeout(TimedNotifier TimedNotifier) {
-        publishNotification = true;
+        publishReport = true;
     }
 
     @EventHandler(filterString = RESULT_PUBLISHER, propogate = false)
@@ -91,11 +91,11 @@ public class ReportGenerator {
 
     @Initialise
     public void init() {
-        publishNotification = false;
+        publishReport = false;
     }
 
     @AfterEvent
-    public void eventFinished() {
-        publishNotification = false;
+    public void resetPublishFlag() {
+        publishReport = false;
     }
 }
