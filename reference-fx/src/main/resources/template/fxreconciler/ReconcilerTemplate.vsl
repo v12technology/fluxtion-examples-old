@@ -34,9 +34,6 @@ public class  ${functionClass} extends TradeReconciler{
 
     private Int2ObjectOpenHashMap<ReconcileRecord> id2Reconcile;
     private ArrayDeque<ReconcileRecord> freeList;
-    public TimedNotifier alarm;
-    public String id;
-    public TradeAcknowledgementAuditor auditor;
 
     @OnParentUpdate
     public void expireTimedOutReconciles(TimedNotifier TimedNotifier) {
@@ -72,11 +69,6 @@ public class  ${functionClass} extends TradeReconciler{
             id2Reconcile.put(acknowledgement.tradeId, record);
         }
         return record;
-    }
-
-    @OnEvent
-    public void reconcileUpdated(){
-        //required to keep event path unbroken
     }
 
     @Initialise
