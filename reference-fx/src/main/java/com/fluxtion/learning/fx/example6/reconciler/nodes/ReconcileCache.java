@@ -17,10 +17,12 @@
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
 import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.api.annotations.NoEventReference;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
+import com.fluxtion.fx.event.TimingPulseEvent;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache.RECONCILE_STATUS_CACHE;
@@ -61,6 +63,11 @@ public class ReconcileCache {
     @OnParentUpdate
     public void updateReconcileCache(TradeReconciler reconciler) {
         //TODO extract delta update from the TradeReconciler and pussh to cache
+    }
+    
+    @EventHandler(filterId = 1)
+    public void cacheExpiryUpdates(TimingPulseEvent pulse) {
+        //loop through reconcilers and 
     }
     
     public void addReconciler(TradeReconciler reconcilier){

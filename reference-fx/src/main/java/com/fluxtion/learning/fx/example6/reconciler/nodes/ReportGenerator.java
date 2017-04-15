@@ -58,6 +58,7 @@ import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPu
  */
 public class ReportGenerator {
 
+    @NoEventReference
     public ReconcileCache reconcileStatusCache;
     public TimedNotifier alarm;
     public String id;

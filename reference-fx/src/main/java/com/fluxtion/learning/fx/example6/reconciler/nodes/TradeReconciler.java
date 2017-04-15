@@ -44,10 +44,12 @@ import com.fluxtion.fx.node.biascheck.TimedNotifier;
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public abstract class TradeReconciler {
+public class TradeReconciler {
 
-    public TimedNotifier alarm;
+    public TimedNotifier alarmReapExpired;
     public String id;
     public TradeAcknowledgementAuditor auditor;
-    
+    public int reconcileTimeout;
+
+
 }

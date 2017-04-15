@@ -27,11 +27,11 @@ public class ReconcilerSEP extends SEPConfig {
 
         public ReconcilerSEP() {
             //EBS reconciliation
-            ReconcilerBuilder builder = new ReconcilerBuilder("EBS_LD4", 2, 5);
+            ReconcilerBuilder builder = new ReconcilerBuilder("EBS_LD4", 2, 5, 1);
             builder.setMandatorySource("EBS", "LD4", "TRIANA");
             builder.build();
             //Reuters reconciliation
-            ReconcilerBuilder reuters_LD4 = new ReconcilerBuilder("REUTERS_COLO_1", 2, 10);
+            ReconcilerBuilder reuters_LD4 = new ReconcilerBuilder("REUTERS_COLO_1", 2, 10, 1);
             reuters_LD4.setMandatorySource("REUTERS", "COLO_1", "TRIANA");
             reuters_LD4.build();
         }
