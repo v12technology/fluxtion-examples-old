@@ -26,23 +26,33 @@ import java.util.Map;
 
 /**
  * Process a yaml configuration and generate a TradeReconciler SEP.
- * 
+ *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public class ReconilerFactory extends SEPConfig implements NodeFactory<TradeReconciler>   {
+public class ReconilerFactory extends SEPConfig implements NodeFactory<TradeReconciler> {
 
     @Override
     public TradeReconciler createNode(Map config, NodeRegistry registry) {
+        //defaults
+        Map defaults = (Map) config.get("defaults");
+        int reconcileTimeoutDefault = (int) defaults.getOrDefault("reconcileTimeout", 10);
+        int publishFrequencyDefault = (int) defaults.getOrDefault("publishFrequency", 5);
+        int checkExpiredFrequencyDefault = (int) defaults.getOrDefault("checkExpiredFrequency", 2);
         nodeList = new ArrayList();
-        Map<?, ?> reconcilerMap = (Map) config.get("reconilers");
+        Map<?, ?> reconcilerMap = (Map) config.get("reconcilers");
         for (Map.Entry object : reconcilerMap.entrySet()) {
             String reconcilerId = (String) object.getKey();
             Map value = (Map) object.getValue();
-            int timeout = (int) (value).get("reconcileExpiry");
-            int publishFrequency = (int) (value).get("publishFrequency");
+            int reconcileTimeout = (int) value.getOrDefault("reconcileTimeout", reconcileTimeoutDefault);
+            int publishFrequency = (int) (value).getOrDefault("publishFrequency", publishFrequencyDefault);
+            int checkExpiredFrequency = (int) (value).getOrDefault("checkExpiredFrequency", checkExpiredFrequencyDefault);
             List<String> venues = (List) ((Map) value).get("venues");
             String[] venuesAsArray = venues.toArray(new String[venues.size()]);
-            ReconcilerBuilder builder = new ReconcilerBuilder(reconcilerId, timeout, publishFrequency);
+            ReconcilerBuilder builder = new ReconcilerBuilder(
+                    reconcilerId,
+                    reconcileTimeout,
+                    publishFrequency,
+                    checkExpiredFrequency);
             builder.setMandatorySource(venuesAsArray);
             builder.build(nodeList);
         }
@@ -52,4 +62,3 @@ public class ReconilerFactory extends SEPConfig implements NodeFactory<TradeReco
         return null;
     }
 }
-

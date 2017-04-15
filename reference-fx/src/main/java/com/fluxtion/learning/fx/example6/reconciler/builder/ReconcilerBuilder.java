@@ -65,11 +65,16 @@ public class ReconcilerBuilder {
     //templates
     private static final String PACKAGE = "/template/fxreconciler";
     private static final String RECONCILER_TEMPLATE = PACKAGE + "/ReconcilerTemplate.vsl";
+    private final int reconcileTimeout;
 
-    public ReconcilerBuilder(String reconcilerId, int reconcileExpiry, int publishPeriod) {
+    public ReconcilerBuilder(String reconcilerId, 
+            int reconcileTimeout, 
+            int publishFrequency, 
+            int reapExpiredFrequency) {
         this.reconcilerId = reconcilerId;
-        reconileExpiryNotifier = PERIOD_2_NOTIFIER.computeIfAbsent(reconcileExpiry, period -> new TimedNotifier(period, TIME_HANDLER));
-        publishNotifier = PERIOD_2_NOTIFIER.computeIfAbsent(publishPeriod, period -> new TimedNotifier(period, TIME_HANDLER));
+        this.reconcileTimeout = reconcileTimeout;
+        reconileExpiryNotifier = PERIOD_2_NOTIFIER.computeIfAbsent(reapExpiredFrequency, period -> new TimedNotifier(period, TIME_HANDLER));
+        publishNotifier = PERIOD_2_NOTIFIER.computeIfAbsent(publishFrequency, period -> new TimedNotifier(period, TIME_HANDLER));
     }
 
     public void setMandatorySource(String... sources) {
@@ -99,7 +104,8 @@ public class ReconcilerBuilder {
             TradeReconciler reconciler = generateTradeReconciler();
             reconciler.auditor = AUDITOR;
             reconciler.id = reconcilerId;
-            reconciler.alarm = reconileExpiryNotifier;
+            reconciler.reconcileTimeout = reconcileTimeout;
+            reconciler.alarmReapExpired = reconileExpiryNotifier;
             //cache
             CACHE.addReconciler(reconciler);
             //update publisher
@@ -151,8 +157,6 @@ public class ReconcilerBuilder {
         TIME_HANDLER = new TimeHandlerSeconds();
         CACHE = new ReconcileCache();
         PERIOD_2_NOTIFIER = new HashMap<>();
-        PERIOD_2_NOTIFIER.put(1, new TimedNotifier(1, TIME_HANDLER));
-        PERIOD_2_NOTIFIER.put(3, new TimedNotifier(1, TIME_HANDLER));
         IMPORT_MAP = ImportMap.newMap();
         IMPORT_MAP.addImport(TradeReconciler.class);
         IMPORT_MAP.addImport(EventHandler.class);
