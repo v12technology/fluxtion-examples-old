@@ -42,7 +42,7 @@ public class  ${functionClass} extends TradeReconciler{
 
 #foreach( $source in $reconcilerBuilder.mandatorySources)
     @EventHandler(filterString = "$source")
-    public void handleTradeSource_$source (TradeAcknowledgement acknowledgement){
+    public void tradeAckFrom_$source (TradeAcknowledgement acknowledgement){
         ReconcileRecord record = getRecord(acknowledgement);
         record.received_$source = true;
         if (record.matched()) {
