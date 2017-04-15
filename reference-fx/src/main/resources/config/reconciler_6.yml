@@ -3,17 +3,22 @@
 rootNodeMappings: 
     com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler: classifier
 config:
-    reconilers:
+    defaults:
+        reconcileTimeout: 10
+        publishFrequency: 6
+        checkExpiredFrequency: 2
+    reconcilers:
         REUTERS_DC1:
-            venues: [dc_ln_1, MiddleOffice]
-            reconcileExpiry: 10
-            publishFrequency: 2
+            venues: [dcln_1_reuters, MiddleOffice_reuters_dc1]
         EBS_LD4:
-            venues: [LD_4, MiddleOffice, triana]
-            reconcileExpiry: 5
+            venues: [LD_4_EBS, MiddleOffice_EBS_LD4, triana_EBS_LD4]
+            reconcileTimeout: 5
             publishFrequency: 2
+            checkExpiredFrequency: 1
         EBS_NY2:
-            venues: [NY_2, MiddleOffice, triana]
-            reconcileExpiry: 9
-            publishFrequency: 2
+            venues: [NY_2, MiddleOffice_NY2]
+            publishFrequency: 3
+        FXALL_NY3:
+            venues: [NY_3_FXALL, MiddleOffice_NY3_FXALL]
+            checkExpiredFrequency: 17
         
