@@ -30,10 +30,7 @@ import $import;
  *
  * @author greg higgins (greg.higgins@v12technology.com)
  */
-public class  ${functionClass} extends TradeReconciler{
-
-    private Int2ObjectOpenHashMap<ReconcileRecord> id2Reconcile;
-    private ArrayDeque<ReconcileRecord> freeList;
+public class  ${functionClass} extends TradeReconciler<${functionClass}.ReconcileRecord>{
 
     @OnParentUpdate
     public void expireTimedOutReconciles(TimedNotifier TimedNotifier) {
@@ -43,20 +40,15 @@ public class  ${functionClass} extends TradeReconciler{
 #foreach( $source in $reconcilerBuilder.mandatorySources)
     @EventHandler(filterString = "$source")
     public void tradeAckFrom_$source (TradeAcknowledgement acknowledgement){
-        ReconcileRecord record = getRecord(acknowledgement);
-        record.received_$source = true;
-        if (record.matched()) {
-            matchedRecord(record);
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.received_$source = true;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            freeList.addLast(currentRecord);  
         }
     }
 
 #end
-    private void matchedRecord(ReconcileRecord record) {
-        record.reset();
-        id2Reconcile.remove(record.tradeId);
-        freeList.addLast(record);
-        //TODO notify matched listener
-    }
 
     private ReconcileRecord getRecord(TradeAcknowledgement acknowledgement) {
         ReconcileRecord record = id2Reconcile.get(acknowledgement.tradeId);
@@ -66,6 +58,7 @@ public class  ${functionClass} extends TradeReconciler{
                 record = new ReconcileRecord();
             }
             record.firstReceivedTime = acknowledgement.time;
+            record.tradeId = acknowledgement.tradeId;
             id2Reconcile.put(acknowledgement.tradeId, record);
         }
         return record;
@@ -78,6 +71,14 @@ public class  ${functionClass} extends TradeReconciler{
         for (int i = 0; i < 50; i++) {
             freeList.add(new ReconcileRecord());
         }
+    }
+
+    @AfterEvent
+    public void removeMatched(){
+        if (currentRecord != null) {
+            currentRecord.reset();
+            currentRecord = null;
+        } 
     }
 
     public static class ReconcileRecord implements ReconcileStatus<Integer>{

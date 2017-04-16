@@ -27,6 +27,8 @@ import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache.RECONCILE_STATUS_CACHE;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import java.util.ArrayList;
 
 /**
  * A ReconcileStatusCache holds a set of ReconcileStatus records ready for
@@ -63,6 +65,7 @@ public class ReconcileCache {
     @OnParentUpdate
     public void updateReconcileCache(TradeReconciler reconciler) {
         //TODO extract delta update from the TradeReconciler and pussh to cache
+        ReconcileStatus rec = reconciler.currentRecord;
     }
     
     @EventHandler(filterId = 1)

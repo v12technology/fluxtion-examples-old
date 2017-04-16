@@ -16,6 +16,7 @@
  */
 package com.fluxtion.learning.fx.example6;
 
+import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
@@ -52,6 +53,12 @@ public class ReconcilerTest {
     public void testReconcilerIds() {
         assertThat(stream(cache.reconcilers).map(i -> i.id).toArray(),
                 arrayContainingInAnyOrder("REUTERS_DC1", "EBS_LD4", "EBS_NY2", "FXALL_NY3"));
+    }
+    
+    @Test
+    public void testSimpleReconcile(){
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 200));
+        reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200));
     }
 
 }

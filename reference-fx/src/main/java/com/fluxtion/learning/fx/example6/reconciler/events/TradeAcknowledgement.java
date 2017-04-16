@@ -31,6 +31,16 @@ public class TradeAcknowledgement extends Event {
     public String tradeStringId;
     public long time;
 
+    public TradeAcknowledgement() {
+        super();
+    }
+
+    public TradeAcknowledgement(String venueId, int tradeId) {
+        super();
+        filterString = venueId;
+        this.tradeId = tradeId;
+    }
+
     public void setVenueId(String venueId) {
         filterString = venueId;
     }

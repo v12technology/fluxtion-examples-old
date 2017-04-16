@@ -176,6 +176,7 @@
                                     <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
                                     <className>ReconcilerExample6</className>
                                     <packageName>com.fluxtion.learning.fx.example6.generated</packageName>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.learning.fx.example6.reconciler.builder.ReconilerFactory</configClass>
                                     <yamlFactoryConfig>src/main/resources/config/reconciler_6.yml</yamlFactoryConfig>
                                     <nodeNamingClass>com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcilerNameProducer</nodeNamingClass>

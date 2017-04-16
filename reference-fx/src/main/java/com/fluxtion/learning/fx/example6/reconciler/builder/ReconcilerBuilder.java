@@ -16,6 +16,7 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.builder;
 
+import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.OnEvent;
@@ -35,6 +36,7 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAu
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.velocity.VelocityContext;
@@ -169,6 +171,8 @@ public class ReconcilerBuilder {
         IMPORT_MAP.addImport(TimedNotifier.class);
         IMPORT_MAP.addImport(TradeAcknowledgementAuditor.class);
         IMPORT_MAP.addImport(ArrayDeque.class);
+        IMPORT_MAP.addImport(ArrayList.class);
         IMPORT_MAP.addImport(ReconcileStatus.class);
+        IMPORT_MAP.addImport(AfterEvent.class);
     }
 }

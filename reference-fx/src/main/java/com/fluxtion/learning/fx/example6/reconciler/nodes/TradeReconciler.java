@@ -16,9 +16,16 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
+import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
+import com.fluxtion.learning.fx.example6.generated.Reconciler_EBS_LD4;
+import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 
 /**
  *
@@ -43,13 +50,24 @@ import com.fluxtion.fx.node.biascheck.TimedNotifier;
  *
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
+ * @param <T>
  */
-public class TradeReconciler {
+public abstract class TradeReconciler<T extends ReconcileStatus<Integer>> {
 
     public TimedNotifier alarmReapExpired;
     public String id;
     public TradeAcknowledgementAuditor auditor;
     public int reconcileTimeout;
 
+    protected Int2ObjectOpenHashMap<T> id2Reconcile;
+    public T currentRecord;
+    protected ArrayList<T> expiredList;
+    protected ArrayDeque<T> freeList;
+
+    
+    protected void matchedRecord(T record) {
+        currentRecord = record;
+        id2Reconcile.remove(record.id());
+    }
 
 }

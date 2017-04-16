@@ -16,17 +16,19 @@
  */
 package com.fluxtion.learning.fx.example6.generated;
 
-import com.fluxtion.api.annotations.EventHandler;
-import com.fluxtion.api.annotations.Initialise;
-import com.fluxtion.api.annotations.OnEvent;
-import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
 import java.util.ArrayDeque;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
+import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
-import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import java.util.ArrayList;
+import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.api.annotations.OnParentUpdate;
+import com.fluxtion.api.annotations.AfterEvent;
+import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
 
 /**
  * Fluxtion generated TradeReconciler id:EBS_NY2
@@ -37,10 +39,7 @@ import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
  *
  * @author greg higgins (greg.higgins@v12technology.com)
  */
-public class  Reconciler_EBS_NY2 extends TradeReconciler{
-
-    private Int2ObjectOpenHashMap<ReconcileRecord> id2Reconcile;
-    private ArrayDeque<ReconcileRecord> freeList;
+public class  Reconciler_EBS_NY2 extends TradeReconciler<Reconciler_EBS_NY2.ReconcileRecord>{
 
     @OnParentUpdate
     public void expireTimedOutReconciles(TimedNotifier TimedNotifier) {
@@ -49,28 +48,24 @@ public class  Reconciler_EBS_NY2 extends TradeReconciler{
 
     @EventHandler(filterString = "NY_2")
     public void tradeAckFrom_NY_2 (TradeAcknowledgement acknowledgement){
-        ReconcileRecord record = getRecord(acknowledgement);
-        record.received_NY_2 = true;
-        if (record.matched()) {
-            matchedRecord(record);
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.received_NY_2 = true;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            freeList.addLast(currentRecord);  
         }
     }
 
     @EventHandler(filterString = "MiddleOffice_NY2")
     public void tradeAckFrom_MiddleOffice_NY2 (TradeAcknowledgement acknowledgement){
-        ReconcileRecord record = getRecord(acknowledgement);
-        record.received_MiddleOffice_NY2 = true;
-        if (record.matched()) {
-            matchedRecord(record);
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.received_MiddleOffice_NY2 = true;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            freeList.addLast(currentRecord);  
         }
     }
 
-    private void matchedRecord(ReconcileRecord record) {
-        record.reset();
-        id2Reconcile.remove(record.tradeId);
-        freeList.addLast(record);
-        //TODO notify matched listener
-    }
 
     private ReconcileRecord getRecord(TradeAcknowledgement acknowledgement) {
         ReconcileRecord record = id2Reconcile.get(acknowledgement.tradeId);
@@ -80,6 +75,7 @@ public class  Reconciler_EBS_NY2 extends TradeReconciler{
                 record = new ReconcileRecord();
             }
             record.firstReceivedTime = acknowledgement.time;
+            record.tradeId = acknowledgement.tradeId;
             id2Reconcile.put(acknowledgement.tradeId, record);
         }
         return record;
@@ -92,6 +88,14 @@ public class  Reconciler_EBS_NY2 extends TradeReconciler{
         for (int i = 0; i < 50; i++) {
             freeList.add(new ReconcileRecord());
         }
+    }
+
+    @AfterEvent
+    public void removeMatched(){
+        if (currentRecord != null) {
+            currentRecord.reset();
+            currentRecord = null;
+        } 
     }
 
     public static class ReconcileRecord implements ReconcileStatus<Integer>{
