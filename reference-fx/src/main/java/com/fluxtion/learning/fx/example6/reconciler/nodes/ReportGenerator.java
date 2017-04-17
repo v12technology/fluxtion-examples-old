@@ -83,7 +83,7 @@ public class ReportGenerator {
     }
 
     @EventHandler(filterString = ControlSignals.PUBLISH_REPORT, propogate = false)
-    public void publisResults(ControlSignal publishSignal) {
+    public void publishResults(ControlSignal publishSignal) {
         if (publisher != null) {
             publisher.publishReport(reconcileStatusCache);
         }
