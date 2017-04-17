@@ -16,19 +16,22 @@
  */
 package com.fluxtion.learning.fx.example6.generated;
 
-import java.util.ArrayDeque;
-import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
-import com.fluxtion.api.annotations.Initialise;
-import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
-import java.util.ArrayList;
-import com.fluxtion.api.annotations.EventHandler;
+import java.util.ArrayDeque;
 import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.api.annotations.AfterEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
+import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
+import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import com.fluxtion.api.annotations.AfterEvent;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import java.util.ArrayList;
+import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.*;
 
 /**
  * Fluxtion generated TradeReconciler id:EBS_LD4
@@ -41,38 +44,39 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
  */
 public class  Reconciler_EBS_LD4 extends TradeReconciler<Reconciler_EBS_LD4.ReconcileRecord>{
 
-    @OnParentUpdate
-    public void expireTimedOutReconciles(TimedNotifier TimedNotifier) {
-        //reomve reconcilerecords if acks are too late
-    }
-
     @EventHandler(filterString = "LD_4_EBS")
     public void tradeAckFrom_LD_4_EBS (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
-        currentRecord.received_LD_4_EBS = true;
+        currentRecord.time_LD_4_EBS = acknowledgement.time;
         if (currentRecord.matched()) {
             id2Reconcile.remove(currentRecord.id());
-            freeList.addLast(currentRecord);  
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
         }
     }
 
     @EventHandler(filterString = "MiddleOffice_EBS_LD4")
     public void tradeAckFrom_MiddleOffice_EBS_LD4 (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
-        currentRecord.received_MiddleOffice_EBS_LD4 = true;
+        currentRecord.time_MiddleOffice_EBS_LD4 = acknowledgement.time;
         if (currentRecord.matched()) {
             id2Reconcile.remove(currentRecord.id());
-            freeList.addLast(currentRecord);  
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
         }
     }
 
     @EventHandler(filterString = "triana_EBS_LD4")
     public void tradeAckFrom_triana_EBS_LD4 (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
-        currentRecord.received_triana_EBS_LD4 = true;
+        currentRecord.time_triana_EBS_LD4 = acknowledgement.time;
         if (currentRecord.matched()) {
             id2Reconcile.remove(currentRecord.id());
-            freeList.addLast(currentRecord);  
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
         }
     }
 
@@ -80,49 +84,38 @@ public class  Reconciler_EBS_LD4 extends TradeReconciler<Reconciler_EBS_LD4.Reco
     private ReconcileRecord getRecord(TradeAcknowledgement acknowledgement) {
         ReconcileRecord record = id2Reconcile.get(acknowledgement.tradeId);
         if (record == null) {
-            record = freeList.pollLast();
-            if (record == null) {
-                record = new ReconcileRecord();
-            }
+            record = new ReconcileRecord();
             record.firstReceivedTime = acknowledgement.time;
             record.tradeId = acknowledgement.tradeId;
             id2Reconcile.put(acknowledgement.tradeId, record);
+            reconciling++;
         }
         return record;
-    }
-
-    @Initialise
-    public void init(){
-        id2Reconcile = new Int2ObjectOpenHashMap<>();
-        freeList = new ArrayDeque<>();
-        for (int i = 0; i < 50; i++) {
-            freeList.add(new ReconcileRecord());
-        }
-    }
-
-    @AfterEvent
-    public void removeMatched(){
-        if (currentRecord != null) {
-            currentRecord.reset();
-            currentRecord = null;
-        } 
     }
 
     public static class ReconcileRecord implements ReconcileStatus<Integer>{
 
         private static final String[] VENUES = new String[]{"LD_4_EBS", "MiddleOffice_EBS_LD4", "triana_EBS_LD4"};
+        Status status = RECONCILING;;
         int tradeId;
-        long firstReceivedTime;
-        boolean received_LD_4_EBS;
-        boolean received_MiddleOffice_EBS_LD4;
-        boolean received_triana_EBS_LD4;
-        long time_LD_4_EBS;
-        long time_MiddleOffice_EBS_LD4;
-        long time_triana_EBS_LD4;
+        long firstReceivedTime = -1;
+        long time_LD_4_EBS = -1;
+        long time_MiddleOffice_EBS_LD4 = -1;
+        long time_triana_EBS_LD4 = -1;
 
         @Override
         public boolean matched(){
-            return received_LD_4_EBS & received_MiddleOffice_EBS_LD4 & received_triana_EBS_LD4;
+            return time_LD_4_EBS > 0 & time_MiddleOffice_EBS_LD4 > 0 & time_triana_EBS_LD4>0;
+        }
+
+        @Override
+        public boolean expired(long currentTime, int expiryTimeout){
+            return !matched()  & ((currentTime - firstReceivedTime) > expiryTimeout);
+        }
+
+        @Override
+        public void setStatus(Status status){
+            this.status = status;
         }
 
         @Override
@@ -130,23 +123,30 @@ public class  Reconciler_EBS_LD4 extends TradeReconciler<Reconciler_EBS_LD4.Reco
             return tradeId;
         }
 
+        @Override
         public String[] venues(){
             return VENUES;
         }
 
         void reset(){
-            received_LD_4_EBS = false;
-            received_MiddleOffice_EBS_LD4 = false;
-            received_triana_EBS_LD4 = false;
-            time_LD_4_EBS = 0;
-            time_MiddleOffice_EBS_LD4 = 0;
-            time_triana_EBS_LD4 = 0;
+            status = RECONCILING;
+            time_LD_4_EBS = -1;
+            time_MiddleOffice_EBS_LD4 = -1;
+            time_triana_EBS_LD4 = -1;
         }
 
         @Override
-        public Status status(){
-            //TODO add implementation
-            return null;
+        public Status status() {
+            return status;
+        }
+
+        @Override
+        public String toString() {
+            return "ReconcileRecord{" 
+                    + "tradeId=" + tradeId 
+                    + ", firstReceivedTime=" + firstReceivedTime 
+                    + ", status=" + status 
+                    + '}';
         }
     }
 }

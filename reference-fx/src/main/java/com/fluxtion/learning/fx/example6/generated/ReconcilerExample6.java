@@ -163,6 +163,14 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
   public void handleEvent(ControlSignal typedEvent) {
     switch (typedEvent.filterString()) {
       case ("com.fluxtion.fx.reconciler.clearReconcileState"):
+        reconciler_REUTERS_DC1.clearReconcileState(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_REUTERS_DC1);
+        reconciler_EBS_NY2.clearReconcileState(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_EBS_NY2);
+        reconciler_EBS_LD4.clearReconcileState(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_EBS_LD4);
+        reconciler_FXALL_NY3.clearReconcileState(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_FXALL_NY3);
         reconcileCache_Global.clearCache(typedEvent);
         afterEvent();
         return;
@@ -212,16 +220,16 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         timeHandler.onTimingPulse(typedEvent);
         isDirty_alarm_2s = alarm_2s.processTimePulse();
         if (isDirty_alarm_2s) {
-          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
           reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
           summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
           reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
+          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
         }
         isDirty_alarm_6s = alarm_6s.processTimePulse();
         if (isDirty_alarm_6s) {
-          summaryPublisher_REUTERS_DC1.publishReconcileDelta(alarm_6s);
           summaryPublisher_FXALL_NY3.publishReconcileDelta(alarm_6s);
           reportGenerator_FXALL_NY3.publishTimeout(alarm_6s);
+          summaryPublisher_REUTERS_DC1.publishReconcileDelta(alarm_6s);
           reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
         }
         isDirty_alarm_1s = alarm_1s.processTimePulse();
@@ -325,10 +333,10 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
     summaryPublisher_EBS_LD4.resetNotificationFlag();
     summaryPublisher_EBS_NY2.resetNotificationFlag();
     summaryPublisher_REUTERS_DC1.resetNotificationFlag();
-    reconciler_FXALL_NY3.removeMatched();
-    reconciler_EBS_LD4.removeMatched();
-    reconciler_EBS_NY2.removeMatched();
-    reconciler_REUTERS_DC1.removeMatched();
+    reconciler_FXALL_NY3.resetAfterUpdate();
+    reconciler_EBS_LD4.resetAfterUpdate();
+    reconciler_EBS_NY2.resetAfterUpdate();
+    reconciler_REUTERS_DC1.resetAfterUpdate();
     alarm_3s.resetFiredFlag();
     alarm_17s.resetFiredFlag();
     alarm_1s.resetFiredFlag();
