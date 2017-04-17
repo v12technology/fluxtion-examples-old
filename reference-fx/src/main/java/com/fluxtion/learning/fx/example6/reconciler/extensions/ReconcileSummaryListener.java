@@ -27,10 +27,11 @@ public interface ReconcileSummaryListener {
     
     /**
      * Summary update notification
+     * @param reconcilerId reconciler identifier
      * @param matchedTrades number of matched trades
      * @param reconcilingTrades number of trades awaiting reconciliation and not timed out
      * @param unMatchedTrades number of trades, un-reconciled within expiry time
      */
-    public void reconcileSummary(int matchedTrades, int reconcilingTrades, int unMatchedTrades);   
+    public void reconcileSummary(String reconcilerId, int matchedTrades, int reconcilingTrades, int unMatchedTrades);   
     
 }

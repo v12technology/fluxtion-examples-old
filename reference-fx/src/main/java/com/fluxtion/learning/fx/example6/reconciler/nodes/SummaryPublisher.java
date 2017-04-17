@@ -63,7 +63,10 @@ public class SummaryPublisher {
     @OnEvent
     public void pushNotifications() {
         if (reconcilerListener != null & publishNotification) {
-            reconcilerListener.reconcileSummary(0, 0, 0);
+            reconcilerListener.reconcileSummary(reconciler.id,
+                    reconciler.getReconciled(),
+                    reconciler.getReconciling(),
+                    reconciler.getReconcile_expired());
         }
     }
 

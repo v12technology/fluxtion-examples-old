@@ -64,13 +64,22 @@ public class ReconcileCache {
 
     @OnParentUpdate
     public void updateReconcileCache(TradeReconciler reconciler) {
-        //TODO extract delta update from the TradeReconciler and pussh to cache
-        ReconcileStatus rec = reconciler.currentRecord;
+        if(cache!=null && reconciler.currentRecord!=null){
+            ReconcileStatus rec = reconciler.currentRecord;
+            cache.update(reconciler.id, rec);
+        }
     }
     
     @EventHandler(filterId = 1)
     public void cacheExpiryUpdates(TimingPulseEvent pulse) {
-        //loop through reconcilers and 
+        for (int i = 0; i < reconcilers.length; i++) {
+            TradeReconciler reconciler = reconcilers[i];
+            ArrayList<ReconcileStatus> expiredList = reconciler.expiredList;
+            for (int j = 0; j < expiredList.size(); j++) {
+                ReconcileStatus recStatus = expiredList.get(j);
+                cache.update(reconciler.id, recStatus);
+            }
+        }
     }
     
     public void addReconciler(TradeReconciler reconcilier){

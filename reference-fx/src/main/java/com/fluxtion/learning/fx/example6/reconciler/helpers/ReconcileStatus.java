@@ -60,6 +60,10 @@ public interface ReconcileStatus<T> {
      */
     Status status();
 
+    boolean expired(long currentTime, int expiryTimeout);
+    
+    void setStatus(Status status);
+    
     public enum Status {
         RECONCILING, RECONCILED, EXPIRED_RECONCILE, RECONCILED_AFTER_EXPIRY;
     }

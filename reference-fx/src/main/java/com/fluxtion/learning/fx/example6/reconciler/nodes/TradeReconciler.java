@@ -16,38 +16,28 @@
  */
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
+import com.fluxtion.api.annotations.AfterEvent;
+import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
+import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.generated.Reconciler_EBS_LD4;
+import com.fluxtion.learning.fx.example6.generated.Reconciler_EBS_NY2;
+import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.EXPIRED_RECONCILE;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
 /**
- *
- * Work in progress, this is the interface the generated TradeReconciler will
- * conform to.
- *
- * Listens to TradeAcknowledgements and audits all incoming messages, if
- * required.
- *
- *
- *
- * TA is converted to a bespoke ReconcileRecord for the venue ReconcileRecords
- * are stored in a map for processing The map can be queried to generate a JSON
- * report of all trades processed today.
- *
- * Call back listener for ReconcileUpdate, for publishing summary statistics
- *
- * The JSON reports are generated at regular intervals for download
- *
- *
- *
- *
+ * 
+ * Base class for reconciling TradeAcknowledgements  from a a set of monitored venues. 
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  * @param <T>
@@ -64,10 +54,63 @@ public abstract class TradeReconciler<T extends ReconcileStatus<Integer>> {
     protected ArrayList<T> expiredList;
     protected ArrayDeque<T> freeList;
 
-    
+    protected int reconciled;
+    protected int reconciling;
+    protected int reconcile_expired;
+
     protected void matchedRecord(T record) {
         currentRecord = record;
         id2Reconcile.remove(record.id());
+    }
+
+    public int getReconciled() {
+        return reconciled;
+    }
+
+    public int getReconciling() {
+        return reconciling;
+    }
+
+    public int getReconcile_expired() {
+        return reconcile_expired;
+    }
+    
+    @OnParentUpdate
+    public void expireTimedOutReconciles(TimedNotifier timedNotifier) {
+        long timeInSeconds = timedNotifier.timeInSeconds();
+        Int2ObjectMap.FastEntrySet<T> int2ObjectEntrySet = id2Reconcile.int2ObjectEntrySet();
+        ObjectIterator<Int2ObjectMap.Entry<T>> fastIterator = int2ObjectEntrySet.fastIterator();
+        while(fastIterator.hasNext()){
+            Int2ObjectMap.Entry<T> next = fastIterator.next();
+            T record = next.getValue();
+            if(record.expired(timeInSeconds*1000, reconcileTimeout*1000)){
+                record.setStatus(EXPIRED_RECONCILE);
+                fastIterator.remove();
+                expiredList.add(record);
+                reconcile_expired++;
+                reconciling--;
+            }
+        }
+    }
+
+    @EventHandler(filterString = ControlSignals.CLEAR_RECONCILE_STATE, propogate = false)
+    public void clearReconcileState(ControlSignal publishSignal) {
+        init();
+    }
+
+    @Initialise
+    public void init() {
+        id2Reconcile = new Int2ObjectOpenHashMap<>();
+        expiredList = new ArrayList<>();
+        reconciled = 0;
+        reconciling = 0;
+        reconcile_expired = 0;
+    }
+    
+    @AfterEvent
+    public void resetAfterUpdate(){
+        currentRecord = null;
+        expiredList.clear();
     }
 
 }

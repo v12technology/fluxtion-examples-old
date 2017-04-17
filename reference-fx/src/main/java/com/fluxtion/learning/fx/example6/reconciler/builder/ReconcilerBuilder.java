@@ -34,7 +34,9 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.SummaryPublisher;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -145,7 +147,7 @@ public class ReconcilerBuilder {
         ctx.put(functionClass.name(), genClassName);
         ctx.put("reconcilerBuilder", this);
         ctx.put("imports", IMPORT_MAP.asString());
-        ctx.put("matching", "received_" + String.join(" & received_", mandatorySources));
+        ctx.put("matching", "time_" + String.join(" > 0 & time_", mandatorySources) + ">0");
         ctx.put("venues", "\"" + String.join("\", \"", mandatorySources) + "\"");
         Class<TradeReconciler> aggClass = FunctionGeneratorHelper.generateAndCompile(null, RECONCILER_TEMPLATE, GenerationContext.SINGLETON, ctx);
         //reconciler - dynamically generated
@@ -174,5 +176,7 @@ public class ReconcilerBuilder {
         IMPORT_MAP.addImport(ArrayList.class);
         IMPORT_MAP.addImport(ReconcileStatus.class);
         IMPORT_MAP.addImport(AfterEvent.class);
+        IMPORT_MAP.addImport(Int2ObjectMap.class);
+        IMPORT_MAP.addImport(ObjectIterator.class);
     }
 }

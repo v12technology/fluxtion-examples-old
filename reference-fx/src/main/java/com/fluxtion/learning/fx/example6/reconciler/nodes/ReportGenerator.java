@@ -82,7 +82,7 @@ public class ReportGenerator {
         this.publisher = registration.getListener();
     }
 
-    @EventHandler(filterString = ControlSignals.PUBLISH_RESULT, propogate = false)
+    @EventHandler(filterString = ControlSignals.PUBLISH_REPORT, propogate = false)
     public void publisResults(ControlSignal publishSignal) {
         if (publisher != null) {
             publisher.publishReport(reconcileStatusCache);
