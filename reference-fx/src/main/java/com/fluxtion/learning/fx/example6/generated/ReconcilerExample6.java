@@ -175,10 +175,10 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         afterEvent();
         return;
       case ("com.fluxtion.fx.reconciler.publishResults"):
-        reportGenerator_REUTERS_DC1.publisResults(typedEvent);
-        reportGenerator_EBS_LD4.publisResults(typedEvent);
-        reportGenerator_EBS_NY2.publisResults(typedEvent);
-        reportGenerator_FXALL_NY3.publisResults(typedEvent);
+        reportGenerator_REUTERS_DC1.publishResults(typedEvent);
+        reportGenerator_EBS_LD4.publishResults(typedEvent);
+        reportGenerator_EBS_NY2.publishResults(typedEvent);
+        reportGenerator_FXALL_NY3.publishResults(typedEvent);
         afterEvent();
         return;
     }
@@ -191,7 +191,7 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         reconcileCache_Global.registerReconcileCache(typedEvent);
         afterEvent();
         return;
-      case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcilerListener"):
+      case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener"):
         summaryPublisher_REUTERS_DC1.registerReconcileListerner(typedEvent);
         summaryPublisher_EBS_NY2.registerReconcileListerner(typedEvent);
         summaryPublisher_EBS_LD4.registerReconcileListerner(typedEvent);
@@ -221,9 +221,9 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         isDirty_alarm_2s = alarm_2s.processTimePulse();
         if (isDirty_alarm_2s) {
           reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
+          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
           summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
           reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
-          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
         }
         isDirty_alarm_6s = alarm_6s.processTimePulse();
         if (isDirty_alarm_6s) {
