@@ -33,16 +33,20 @@ import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStat
  */
 public class  ${functionClass} extends TradeReconciler<${functionClass}.ReconcileRecord>{
 
+    @OnParentUpdate
+    public void expireTimedOutReconciles(TimedNotifier TimedNotifier) {
+        //reomve reconcilerecords if acks are too late
+    }
+
 #foreach( $source in $reconcilerBuilder.mandatorySources)
     @EventHandler(filterString = "$source")
     public void tradeAckFrom_$source (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
-        currentRecord.time_$source = acknowledgement.time;
+        currentRecord.received_$source = true;
         if (currentRecord.matched()) {
             id2Reconcile.remove(currentRecord.id());
+            //freeList.addLast(currentRecord);  
             currentRecord.status = RECONCILED;
-            reconciled++;
-            reconciling--;
         }
     }
 
@@ -51,13 +55,32 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
     private ReconcileRecord getRecord(TradeAcknowledgement acknowledgement) {
         ReconcileRecord record = id2Reconcile.get(acknowledgement.tradeId);
         if (record == null) {
-            record = new ReconcileRecord();
+            record = freeList.pollLast();
+            if (record == null) {
+                record = new ReconcileRecord();
+            }
             record.firstReceivedTime = acknowledgement.time;
             record.tradeId = acknowledgement.tradeId;
             id2Reconcile.put(acknowledgement.tradeId, record);
-            reconciling++;
         }
         return record;
+    }
+
+    @Initialise
+    public void init(){
+        id2Reconcile = new Int2ObjectOpenHashMap<>();
+        freeList = new ArrayDeque<>();
+        for (int i = 0; i < 50; i++) {
+            freeList.add(new ReconcileRecord());
+        }
+    }
+
+    @AfterEvent
+    public void removeMatched(){
+        if (currentRecord != null && currentRecord.matched()) {
+            //currentRecord.reset();
+            currentRecord = null;
+        } 
     }
 
     public static class ReconcileRecord implements ReconcileStatus<Integer>{
@@ -65,9 +88,12 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
         private static final String[] VENUES = new String[]{${venues}};
         Status status = RECONCILING;;
         int tradeId;
-        long firstReceivedTime = -1;
+        long firstReceivedTime;
 #foreach( $source in $reconcilerBuilder.mandatorySources)
-        long time_$source = -1;
+        boolean received_$source;
+#end
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+        long time_$source;
 #end
 
         @Override
@@ -76,21 +102,10 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
         }
 
         @Override
-        public boolean expired(long currentTime, int expiryTimeout){
-            return !matched()  & ((currentTime - firstReceivedTime) > expiryTimeout);
-        }
-
-        @Override
-        public void setStatus(Status status){
-            this.status = status;
-        }
-
-        @Override
         public Integer id() {
             return tradeId;
         }
 
-        @Override
         public String[] venues(){
             return VENUES;
         }
@@ -98,7 +113,10 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
         void reset(){
             status = RECONCILING;
 #foreach( $source in $reconcilerBuilder.mandatorySources)
-            time_$source = -1;
+            received_$source = false;
+#end
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+            time_$source = 0;
 #end
         }
 
