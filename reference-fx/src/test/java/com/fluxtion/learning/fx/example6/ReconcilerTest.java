@@ -20,6 +20,7 @@ import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.event.TimingPulseEvent;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
+import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.EXPIRED_RECONCILE;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.RECONCILED;
@@ -91,7 +92,6 @@ public class ReconcilerTest {
         recordStatus(RECONCILING, "EBS_NY2", 200);
         reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
         recordStatus(RECONCILED, "EBS_NY2", 200);
-        
         //expire a trade
         timingPulseEvent.setCurrentTimeMillis(10*1000);
         reconciler.onEvent(timingPulseEvent);
@@ -119,8 +119,28 @@ public class ReconcilerTest {
         reconciler.onEvent(timingPulseEvent);
         cacheSize(1);
         recordStatus(EXPIRED_RECONCILE, "EBS_NY2", 200);
-        
     }
+    
+    @Test
+    public void testSummaryListener(){
+        SummaryListener summaryListener = new SummaryListener();
+        reconciler.onEvent(new ListenerRegisration(summaryListener, ReconcileSummaryListener.class));
+        final TimingPulseEvent timingPulseEvent = new TimingPulseEvent(1);
+        timingPulseEvent.setCurrentTimeMillis(1*1000);
+        reconciler.onEvent(timingPulseEvent);
+        //match a trade
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 200, 2000));
+        timingPulseEvent.setCurrentTimeMillis(2*1000);
+        reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
+        timingPulseEvent.setCurrentTimeMillis(3*1000);
+        //expire a trade
+        timingPulseEvent.setCurrentTimeMillis(10*1000);
+        reconciler.onEvent(timingPulseEvent);
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11,10*1000));
+        timingPulseEvent.setCurrentTimeMillis(21*1000);
+        reconciler.onEvent(timingPulseEvent);
+    }
+    
 
     protected void cacheSize(int expectedSise) {
         assertThat(expectedSise, is(cacheTarget.key2Status.size()));
