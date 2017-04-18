@@ -22,8 +22,10 @@ import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.NoEventReference;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
+import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.node.biascheck.TimedNotifier;
+import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener.RECONCILE_LISTENER;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener;
 
@@ -60,6 +62,12 @@ public class SummaryPublisher {
         publishNotification = true;
     }
 
+    @EventHandler(filterString = ControlSignals.PUBLISH_SUMMARY, propogate = false)
+    public void publishResults(ControlSignal publishSignal) {
+        publishNotification = true;
+        pushNotifications();
+    }
+    
     @OnEvent
     public void pushNotifications() {
         if (reconcilerListener != null & publishNotification) {

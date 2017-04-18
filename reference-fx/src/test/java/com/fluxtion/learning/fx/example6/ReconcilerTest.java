@@ -18,6 +18,9 @@ package com.fluxtion.learning.fx.example6;
 
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.event.TimingPulseEvent;
+import com.fluxtion.learning.fx.example6.SummaryListener.SummaryDetails;
+import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignal;
+import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener;
@@ -31,6 +34,7 @@ import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
 import java.lang.reflect.Field;
 import static java.util.Arrays.stream;
+import java.util.HashMap;
 import java.util.Map;
 import net.vidageek.mirror.dsl.Mirror;
 import static org.hamcrest.CoreMatchers.is;
@@ -80,11 +84,11 @@ public class ReconcilerTest {
         recordStatus(RECONCILED, "EBS_NY2", 200);
         cacheSize(1);
     }
-    
+
     @Test
-    public void testSummaryStatistics(){
+    public void testSummaryStatistics() {
         final TimingPulseEvent timingPulseEvent = new TimingPulseEvent(1);
-        timingPulseEvent.setCurrentTimeMillis(1*1000);
+        timingPulseEvent.setCurrentTimeMillis(1 * 1000);
         reconciler.onEvent(timingPulseEvent);
         //match a trade
         reconciler.onEvent(new TradeAcknowledgement("NY_2", 200, 2000));
@@ -93,10 +97,10 @@ public class ReconcilerTest {
         reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
         recordStatus(RECONCILED, "EBS_NY2", 200);
         //expire a trade
-        timingPulseEvent.setCurrentTimeMillis(10*1000);
+        timingPulseEvent.setCurrentTimeMillis(10 * 1000);
         reconciler.onEvent(timingPulseEvent);
-        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11,10*1000));
-        timingPulseEvent.setCurrentTimeMillis(21*1000);
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11, 10 * 1000));
+        timingPulseEvent.setCurrentTimeMillis(21 * 1000);
         reconciler.onEvent(timingPulseEvent);
         cacheSize(2);
         recordStatus(EXPIRED_RECONCILE, "EBS_NY2", 11);
@@ -106,42 +110,111 @@ public class ReconcilerTest {
         assertThat(reconciler_EBS_NY2.getReconciled(), is(1));
         assertThat(reconciler_EBS_NY2.getReconciling(), is(0));
     }
-    
+
     @Test
-    public void testSImpleTimeout(){
+    public void testSImpleTimeout() {
         final TimingPulseEvent timingPulseEvent = new TimingPulseEvent(1);
-        timingPulseEvent.setCurrentTimeMillis(1*1000);
+        timingPulseEvent.setCurrentTimeMillis(1 * 1000);
         reconciler.onEvent(timingPulseEvent);
-        timingPulseEvent.setCurrentTimeMillis(10*1000);
+        timingPulseEvent.setCurrentTimeMillis(10 * 1000);
         reconciler.onEvent(timingPulseEvent);
-        reconciler.onEvent(new TradeAcknowledgement("NY_2", 200,10*1000));
-        timingPulseEvent.setCurrentTimeMillis(21*1000);
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 200, 10 * 1000));
+        timingPulseEvent.setCurrentTimeMillis(21 * 1000);
         reconciler.onEvent(timingPulseEvent);
         cacheSize(1);
         recordStatus(EXPIRED_RECONCILE, "EBS_NY2", 200);
     }
-    
+
     @Test
-    public void testSummaryListener(){
+    public void testSummaryListener() {
         SummaryListener summaryListener = new SummaryListener();
         reconciler.onEvent(new ListenerRegisration(summaryListener, ReconcileSummaryListener.class));
         final TimingPulseEvent timingPulseEvent = new TimingPulseEvent(1);
-        timingPulseEvent.setCurrentTimeMillis(1*1000);
+        timingPulseEvent.setCurrentTimeMillis(1 * 1000);
         reconciler.onEvent(timingPulseEvent);
+        summarySize(summaryListener, 0);
         //match a trade
         reconciler.onEvent(new TradeAcknowledgement("NY_2", 200, 2000));
-        timingPulseEvent.setCurrentTimeMillis(2*1000);
+        timingPulseEvent.setCurrentTimeMillis(2 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        summarySize(summaryListener, 1);
+        
         reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
-        timingPulseEvent.setCurrentTimeMillis(3*1000);
+        timingPulseEvent.setCurrentTimeMillis(3 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        summarySize(summaryListener, 2);
+        checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 0));
+        
         //expire a trade
-        timingPulseEvent.setCurrentTimeMillis(10*1000);
+        timingPulseEvent.setCurrentTimeMillis(10 * 1000);
         reconciler.onEvent(timingPulseEvent);
-        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11,10*1000));
-        timingPulseEvent.setCurrentTimeMillis(21*1000);
+        //no update sent as time hasnt moved
+        checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 0));
+        summarySize(summaryListener, 4);
+
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11, 10 * 1000));
+        timingPulseEvent.setCurrentTimeMillis(21 * 1000);
         reconciler.onEvent(timingPulseEvent);
+        checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 1));
+        summarySize(summaryListener, 4);
     }
     
+    
+    @Test
+    public void testClear(){
+        SummaryListener summaryListener = new SummaryListener();
+//        summaryListener.logToConsole = true;
+        reconciler.onEvent(new ListenerRegisration(summaryListener, ReconcileSummaryListener.class));
+        final TimingPulseEvent timingPulseEvent = new TimingPulseEvent(1);
+        timingPulseEvent.setCurrentTimeMillis(1 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        summarySize(summaryListener, 0);
+        //match a trade
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 200, 2000));
+        timingPulseEvent.setCurrentTimeMillis(2 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        summarySize(summaryListener, 1);
+        
+        reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
+        timingPulseEvent.setCurrentTimeMillis(3 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        summarySize(summaryListener, 2);
+        checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 0));
+        
+        //expire a trade
+        timingPulseEvent.setCurrentTimeMillis(10 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        //no update sent as time hasnt moved
+        checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 0));
+        summarySize(summaryListener, 4);
 
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11, 10 * 1000));
+        timingPulseEvent.setCurrentTimeMillis(21 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 1));
+        summarySize(summaryListener, 4);
+        
+        //clear
+        reconciler.onEvent(ControlSignals.CLEAR_CACHE_ACTION);
+        reconciler.onEvent(ControlSignals.PUBLISH_SUMMARY_ACTION);
+        summarySize(summaryListener, 4);
+        checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 0, 0, 0));
+        cacheSize(0);
+        
+    }
+
+    protected void summarySize(  SummaryListener summaryListener, int expectedize){
+        HashMap<String, SummaryListener.SummaryDetails> reconciler2Update = summaryListener.reconciler2Update;
+        assertThat( reconciler2Update.size(), is(expectedize));
+        
+    }
+    
+    protected void checkSummary(SummaryListener summaryListener, SummaryDetails details){
+        HashMap<String, SummaryListener.SummaryDetails> reconciler2Update = summaryListener.reconciler2Update;
+        SummaryListener.SummaryDetails storedDetails = reconciler2Update.get(details.reconcilerId);
+        assertThat(storedDetails, is(details));
+    }
+    
     protected void cacheSize(int expectedSise) {
         assertThat(expectedSise, is(cacheTarget.key2Status.size()));
     }
@@ -151,15 +224,15 @@ public class ReconcilerTest {
         assertNotNull(recRecord);
         assertThat(recRecord.status(), is(status));
     }
-    
-    protected TradeReconciler getReconcilerById(String id){
-        TradeReconciler reconciler = null;
+
+    protected TradeReconciler getReconcilerById(String id) {
+        TradeReconciler matchingReconciler = null;
         for (TradeReconciler rec : cacheManager.reconcilers) {
-            if(rec.id.equals(id)){
-                reconciler = rec;
+            if (rec.id.equals(id)) {
+                matchingReconciler = rec;
                 break;
             }
         }
-        return reconciler;
+        return matchingReconciler;
     }
 }
