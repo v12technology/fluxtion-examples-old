@@ -1,0 +1,30 @@
+## YAML Template.
+---
+#{
+#reconciler:{
+#    id: "EBS_NY2",
+#    status: "reconciled",
+#     acks:[
+#        {
+#            venue: "EBS_BY",
+#            ackTime: 2332
+#        },
+#        {
+#            venue: "EBS_LN",
+#            ackTime: 2885
+#        }
+#    ]
+#}
+#
+#}
+
+#"reconcilers":[
+#{"id":"EBS_NY2","status":"reconciled","acks":[{"venue":"EBS_BY","ackTime":2332},{"venue":"EBS_LN","ackTime":2885}]},
+#{"id":"EBS_NY2","status":"reconciled","acks":[{"venue":"EBS_BY","ackTime":2332},{"venue":"EBS_LN","ackTime":2885}]}
+#],
+
+#JSON string for summary update
+{reconciler: EBS_NY2, records:[
+{tradeId: 11, status: EXPIRED_RECONCILE, acks: [{venue: "NY_2", ackTime: 10000}, {venue: "MiddleOffice_NY2", ackTime: -1}]},
+{tradeId: 200, status: RECONCILED, acks: [{venue: "NY_2", ackTime: 2000}, {venue: "MiddleOffice_NY2", ackTime: 3000}]}
+]}

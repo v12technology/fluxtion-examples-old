@@ -107,6 +107,20 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
             return status;
         }
 
+        public void appendAsJson(StringBuilder builder){
+            builder.append('{')
+                    .append("tradeId: ").append(tradeId)
+                    .append(", status: ").append(status.name())
+                    .append(", acks: [")
+#foreach( $source in $reconcilerBuilder.mandatorySources)
+                    .append("{")
+                    .append("venue: \"$source\"")
+                    .append(", ackTime: ").append(time_$source)
+                    .append("}#if( $foreach.hasNext ), #end")
+#end
+                    .append("]}");
+        }
+
         @Override
         public String toString() {
             return "ReconcileRecord{" 

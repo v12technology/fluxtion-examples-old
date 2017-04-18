@@ -62,6 +62,8 @@ public interface ReconcileStatus<T> {
 
     boolean expired(long currentTime, int expiryTimeout);
     
+    void appendAsJson(StringBuilder builder);
+            
     void setStatus(Status status);
     
     public enum Status {

@@ -68,7 +68,7 @@ public class ReportGenerator {
     @OnEvent
     public void publishReport() {
         if (publisher != null & publishReport) {
-            publisher.publishReport(reconcileStatusCache);
+            publisher.publishReport(reconcileStatusCache, id);
         }
     }
 
@@ -85,7 +85,7 @@ public class ReportGenerator {
     @EventHandler(filterString = ControlSignals.PUBLISH_REPORT, propogate = false)
     public void publishResults(ControlSignal publishSignal) {
         if (publisher != null) {
-            publisher.publishReport(reconcileStatusCache);
+            publisher.publishReport(reconcileStatusCache, id);
         }
     }
 

@@ -16,21 +16,21 @@
  */
 package com.fluxtion.learning.fx.example6.generated;
 
-import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.api.annotations.OnParentUpdate;
-import java.util.ArrayDeque;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import com.fluxtion.api.annotations.AfterEvent;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import java.util.ArrayList;
-import com.fluxtion.api.annotations.Initialise;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.api.annotations.OnEvent;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
-import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import com.fluxtion.fx.node.biascheck.TimedNotifier;
+import java.util.ArrayList;
+import java.util.ArrayDeque;
+import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.api.annotations.Initialise;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.*;
 
 /**
@@ -138,6 +138,26 @@ public class  Reconciler_EBS_LD4 extends TradeReconciler<Reconciler_EBS_LD4.Reco
         @Override
         public Status status() {
             return status;
+        }
+
+        public void appendAsJson(StringBuilder builder){
+            builder.append('{')
+                    .append("tradeId: ").append(tradeId)
+                    .append(", status: ").append(status.name())
+                    .append(", acks: [")
+                    .append("{")
+                    .append("venue: \"LD_4_EBS\"")
+                    .append(", ackTime: ").append(time_LD_4_EBS)
+                    .append("}, ")
+                    .append("{")
+                    .append("venue: \"MiddleOffice_EBS_LD4\"")
+                    .append(", ackTime: ").append(time_MiddleOffice_EBS_LD4)
+                    .append("}, ")
+                    .append("{")
+                    .append("venue: \"triana_EBS_LD4\"")
+                    .append(", ackTime: ").append(time_triana_EBS_LD4)
+                    .append("}")
+                    .append("]}");
         }
 
         @Override

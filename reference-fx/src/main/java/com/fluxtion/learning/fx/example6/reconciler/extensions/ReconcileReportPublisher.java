@@ -35,13 +35,14 @@ import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
  */
 public interface ReconcileReportPublisher {
 
-    public static final String RESULT_PUBLISHER = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReportPublisher";
+    public static final String RESULT_PUBLISHER = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher";
 
     /**
-     * AQ request to publish a report
+     * A request to publish a report
      * 
      * @param reconcileResultcCche access to the current ReconcileRecord set
+     * @param reconcilerId The reconcilerId to publish the report for
      */
-    void publishReport( ReconcileCache reconcileResultcCche);
+    void publishReport( ReconcileCache reconcileResultcCche, String reconcilerId);
     
 }

@@ -205,7 +205,7 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         summaryPublisher_FXALL_NY3.registerReconcileListerner(typedEvent);
         afterEvent();
         return;
-      case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReportPublisher"):
+      case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher"):
         reportGenerator_REUTERS_DC1.registerPublisher(typedEvent);
         reportGenerator_EBS_LD4.registerPublisher(typedEvent);
         reportGenerator_EBS_NY2.registerPublisher(typedEvent);
@@ -227,16 +227,16 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         timeHandler.onTimingPulse(typedEvent);
         isDirty_alarm_2s = alarm_2s.processTimePulse();
         if (isDirty_alarm_2s) {
-          summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
-          reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
           reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
           reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
+          summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
+          reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
         }
         isDirty_alarm_6s = alarm_6s.processTimePulse();
         if (isDirty_alarm_6s) {
           summaryPublisher_REUTERS_DC1.publishReconcileDelta(alarm_6s);
-          reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
           summaryPublisher_FXALL_NY3.publishReconcileDelta(alarm_6s);
+          reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
           reportGenerator_FXALL_NY3.publishTimeout(alarm_6s);
         }
         isDirty_alarm_1s = alarm_1s.processTimePulse();
@@ -249,8 +249,8 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         }
         isDirty_alarm_3s = alarm_3s.processTimePulse();
         if (isDirty_alarm_3s) {
-          reportGenerator_EBS_NY2.publishTimeout(alarm_3s);
           summaryPublisher_EBS_NY2.publishReconcileDelta(alarm_3s);
+          reportGenerator_EBS_NY2.publishTimeout(alarm_3s);
         }
         summaryPublisher_REUTERS_DC1.pushNotifications();
         summaryPublisher_EBS_NY2.pushNotifications();

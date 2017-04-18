@@ -22,6 +22,7 @@ import com.fluxtion.learning.fx.example6.SummaryListener.SummaryDetails;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignal;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
+import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
@@ -201,6 +202,29 @@ public class ReconcilerTest {
         checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 0, 0, 0));
         cacheSize(0);
         
+    }
+    
+    @Test
+    public void dumpReconcileRecordsAsJson(){
+        TestReportPublisher publisher = new TestReportPublisher();
+        reconciler.onEvent(new ListenerRegisration(publisher, ReconcileReportPublisher.class));
+        
+        final TimingPulseEvent timingPulseEvent = new TimingPulseEvent(1);
+        timingPulseEvent.setCurrentTimeMillis(1 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        //match a trade
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 200, 2000));
+        timingPulseEvent.setCurrentTimeMillis(2 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
+        timingPulseEvent.setCurrentTimeMillis(3 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        //expire a trade
+        timingPulseEvent.setCurrentTimeMillis(10 * 1000);
+        reconciler.onEvent(timingPulseEvent);    
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11, 10 * 1000));
+        timingPulseEvent.setCurrentTimeMillis(21 * 1000);
+        reconciler.onEvent(timingPulseEvent);    
     }
 
     protected void summarySize(  SummaryListener summaryListener, int expectedize){

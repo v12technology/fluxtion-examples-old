@@ -29,6 +29,8 @@ import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileS
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.function.BiConsumer;
 
 /**
  * A ReconcileStatusCache holds a set of ReconcileStatus records ready for
@@ -51,7 +53,11 @@ public class ReconcileCache {
 
     public TradeReconciler[] reconcilers;
     private ReconcileStatusCache cache;
-
+    
+    public void stream(BiConsumer<? super ReconcileStatusCache.ReconcileKey, ? super ReconcileStatus>  consumer){
+        cache.stream(consumer);
+    }
+    
     @EventHandler(filterString = RECONCILE_STATUS_CACHE, propogate = false)
     public void registerReconcileCache(ListenerRegisration<ReconcileStatusCache> registration) {
         this.cache = registration.getListener();
