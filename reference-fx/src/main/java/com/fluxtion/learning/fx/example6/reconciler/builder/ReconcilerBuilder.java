@@ -39,6 +39,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.apache.velocity.VelocityContext;
@@ -57,6 +58,7 @@ import org.apache.velocity.VelocityContext;
 public class ReconcilerBuilder {
 
     private String[] mandatorySources;
+    private String[] oneOfSources;
     private final String reconcilerId;
     private final TimedNotifier reconileExpiryNotifier;
     private final TimedNotifier publishNotifier;
@@ -71,9 +73,9 @@ public class ReconcilerBuilder {
     private static final String RECONCILER_TEMPLATE = PACKAGE + "/ReconcilerTemplate.vsl";
     private final int reconcileTimeout;
 
-    public ReconcilerBuilder(String reconcilerId, 
-            int reconcileTimeout, 
-            int publishFrequency, 
+    public ReconcilerBuilder(String reconcilerId,
+            int reconcileTimeout,
+            int publishFrequency,
             int reapExpiredFrequency) {
         this.reconcilerId = reconcilerId;
         this.reconcileTimeout = reconcileTimeout;
@@ -97,12 +99,29 @@ public class ReconcilerBuilder {
         return mandatorySources;
     }
 
+    public String[] getOneOfSources() {
+        return oneOfSources;
+    }
+
+    public void setOneOfSources(String... oneOfSources) {
+        this.oneOfSources = oneOfSources;
+    }
+
+    public List<String> getSources() {
+        ArrayList<String> l = new ArrayList();
+        l.addAll(Arrays.asList(mandatorySources));
+        if (oneOfSources != null) {
+            l.addAll(Arrays.asList(oneOfSources));
+        }
+        return l;
+    }
+
     public String getReconcilerId() {
         return reconcilerId;
     }
 
-    public TradeReconciler build(List nodeList){
-        
+    public TradeReconciler build(List nodeList) {
+
         try {
             //reconciler
             TradeReconciler reconciler = generateTradeReconciler();
@@ -136,7 +155,7 @@ public class ReconcilerBuilder {
             throw new RuntimeException("could not build TradeReconciler " + e.getMessage(), e);
         }
     }
-    
+
     public TradeReconciler build() {
         return build(GenerationContext.SINGLETON.getNodeList());
     }
@@ -147,7 +166,12 @@ public class ReconcilerBuilder {
         ctx.put(functionClass.name(), genClassName);
         ctx.put("reconcilerBuilder", this);
         ctx.put("imports", IMPORT_MAP.asString());
-        ctx.put("matching", "time_" + String.join(" > 0 & time_", mandatorySources) + ">0");
+        if (oneOfSources == null) {
+            ctx.put("matching", "time_" + String.join(" > 0 & time_", mandatorySources) + " > 0");
+        } else {
+            ctx.put("matching", "time_" + String.join(" > 0 & time_", mandatorySources) + " > 0 & ( time_"  + String.join(" > 0 | time_", oneOfSources) + " > 0)");
+            ctx.put("oneOfSources", "\"" + String.join("\", \"", oneOfSources) + "\"");
+        }
         ctx.put("venues", "\"" + String.join("\", \"", mandatorySources) + "\"");
         Class<TradeReconciler> aggClass = FunctionGeneratorHelper.generateAndCompile(null, RECONCILER_TEMPLATE, GenerationContext.SINGLETON, ctx);
         //reconciler - dynamically generated

@@ -34,15 +34,51 @@ import java.util.ArrayDeque;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.*;
 
 /**
- * Fluxtion generated TradeReconciler id:REUTERS_DC1
+ * Fluxtion generated TradeReconciler id:MIDDLE_OFFICE
  * Acknowledgements must be received from all monitored venues for a 
  * trade to have RECONCILED status.
  *
- * Acknowledging venues: "dcln_1_reuters", "MiddleOffice_reuters_dc1"
+ * Acknowledging venues: "MiddleOffice_efx"
  *
  * @author greg higgins (greg.higgins@v12technology.com)
  */
-public class  Reconciler_REUTERS_DC1 extends TradeReconciler<Reconciler_REUTERS_DC1.ReconcileRecord>{
+public class  Reconciler_MIDDLE_OFFICE extends TradeReconciler<Reconciler_MIDDLE_OFFICE.ReconcileRecord>{
+
+    @EventHandler(filterString = "MiddleOffice_efx")
+    public void tradeAckFrom_MiddleOffice_efx (TradeAcknowledgement acknowledgement){
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.time_MiddleOffice_efx = acknowledgement.time;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
+        }
+    }
+
+    @EventHandler(filterString = "sdp")
+    public void tradeAckFrom_sdp (TradeAcknowledgement acknowledgement){
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.time_sdp = acknowledgement.time;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
+        }
+    }
+
+    @EventHandler(filterString = "LD_4_EBS")
+    public void tradeAckFrom_LD_4_EBS (TradeAcknowledgement acknowledgement){
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.time_LD_4_EBS = acknowledgement.time;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
+        }
+    }
 
     @EventHandler(filterString = "dcln_1_reuters")
     public void tradeAckFrom_dcln_1_reuters (TradeAcknowledgement acknowledgement){
@@ -56,10 +92,10 @@ public class  Reconciler_REUTERS_DC1 extends TradeReconciler<Reconciler_REUTERS_
         }
     }
 
-    @EventHandler(filterString = "MiddleOffice_reuters_dc1")
-    public void tradeAckFrom_MiddleOffice_reuters_dc1 (TradeAcknowledgement acknowledgement){
+    @EventHandler(filterString = "NY_3_FXALL")
+    public void tradeAckFrom_NY_3_FXALL (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
-        currentRecord.time_MiddleOffice_reuters_dc1 = acknowledgement.time;
+        currentRecord.time_NY_3_FXALL = acknowledgement.time;
         if (currentRecord.matched()) {
             id2Reconcile.remove(currentRecord.id());
             currentRecord.status = RECONCILED;
@@ -83,17 +119,20 @@ public class  Reconciler_REUTERS_DC1 extends TradeReconciler<Reconciler_REUTERS_
 
     public static class ReconcileRecord implements ReconcileStatus<Integer>{
 
-        private static final String[] VENUES = new String[]{"dcln_1_reuters", "MiddleOffice_reuters_dc1"};
-        private static final String[] VENUES_ONE_OF = new String[0];
+        private static final String[] VENUES = new String[]{"MiddleOffice_efx"};
+        private static final String[] VENUES_ONE_OF = new String[]{"sdp", "LD_4_EBS", "dcln_1_reuters", "NY_3_FXALL"};
         Status status = RECONCILING;;
         int tradeId;
         long firstReceivedTime = -1;
+        long time_MiddleOffice_efx = -1;
+        long time_sdp = -1;
+        long time_LD_4_EBS = -1;
         long time_dcln_1_reuters = -1;
-        long time_MiddleOffice_reuters_dc1 = -1;
+        long time_NY_3_FXALL = -1;
 
         @Override
         public boolean matched(){
-            return time_dcln_1_reuters > 0 & time_MiddleOffice_reuters_dc1 > 0;
+            return time_MiddleOffice_efx > 0 & ( time_sdp > 0 | time_LD_4_EBS > 0 | time_dcln_1_reuters > 0 | time_NY_3_FXALL > 0);
         }
 
         @Override
@@ -123,8 +162,11 @@ public class  Reconciler_REUTERS_DC1 extends TradeReconciler<Reconciler_REUTERS_
 
         void reset(){
             status = RECONCILING;
+            time_MiddleOffice_efx = -1;
+            time_sdp = -1;
+            time_LD_4_EBS = -1;
             time_dcln_1_reuters = -1;
-            time_MiddleOffice_reuters_dc1 = -1;
+            time_NY_3_FXALL = -1;
         }
 
         @Override
@@ -138,12 +180,24 @@ public class  Reconciler_REUTERS_DC1 extends TradeReconciler<Reconciler_REUTERS_
                     .append(", status: ").append(status.name())
                     .append(", acks: [")
                     .append("{")
+                    .append("venue: \"MiddleOffice_efx\"")
+                    .append(", ackTime: ").append(time_MiddleOffice_efx)
+                    .append("}, ")
+                    .append("{")
+                    .append("venue: \"sdp\"")
+                    .append(", ackTime: ").append(time_sdp)
+                    .append("}, ")
+                    .append("{")
+                    .append("venue: \"LD_4_EBS\"")
+                    .append(", ackTime: ").append(time_LD_4_EBS)
+                    .append("}, ")
+                    .append("{")
                     .append("venue: \"dcln_1_reuters\"")
                     .append(", ackTime: ").append(time_dcln_1_reuters)
                     .append("}, ")
                     .append("{")
-                    .append("venue: \"MiddleOffice_reuters_dc1\"")
-                    .append(", ackTime: ").append(time_MiddleOffice_reuters_dc1)
+                    .append("venue: \"NY_3_FXALL\"")
+                    .append(", ackTime: ").append(time_NY_3_FXALL)
                     .append("}")
                     .append("]}");
         }

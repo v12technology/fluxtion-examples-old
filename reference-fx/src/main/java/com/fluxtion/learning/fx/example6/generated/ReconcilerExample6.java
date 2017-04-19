@@ -12,6 +12,7 @@ import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.generated.Reconciler_EBS_LD4;
 import com.fluxtion.learning.fx.example6.generated.Reconciler_EBS_NY2;
 import com.fluxtion.learning.fx.example6.generated.Reconciler_FXALL_NY3;
+import com.fluxtion.learning.fx.example6.generated.Reconciler_MIDDLE_OFFICE;
 import com.fluxtion.learning.fx.example6.generated.Reconciler_REUTERS_DC1;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ReportGenerator;
@@ -35,15 +36,18 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
   private final Reconciler_EBS_LD4 reconciler_EBS_LD4 = new Reconciler_EBS_LD4();
   private final Reconciler_EBS_NY2 reconciler_EBS_NY2 = new Reconciler_EBS_NY2();
   private final Reconciler_FXALL_NY3 reconciler_FXALL_NY3 = new Reconciler_FXALL_NY3();
+  private final Reconciler_MIDDLE_OFFICE reconciler_MIDDLE_OFFICE = new Reconciler_MIDDLE_OFFICE();
   private final Reconciler_REUTERS_DC1 reconciler_REUTERS_DC1 = new Reconciler_REUTERS_DC1();
   private final ReconcileCache reconcileCache_Global = new ReconcileCache();
   private final ReportGenerator reportGenerator_EBS_LD4 = new ReportGenerator();
   private final ReportGenerator reportGenerator_EBS_NY2 = new ReportGenerator();
   private final ReportGenerator reportGenerator_FXALL_NY3 = new ReportGenerator();
+  private final ReportGenerator reportGenerator_MIDDLE_OFFICE = new ReportGenerator();
   private final ReportGenerator reportGenerator_REUTERS_DC1 = new ReportGenerator();
   private final SummaryPublisher summaryPublisher_EBS_LD4 = new SummaryPublisher();
   private final SummaryPublisher summaryPublisher_EBS_NY2 = new SummaryPublisher();
   private final SummaryPublisher summaryPublisher_FXALL_NY3 = new SummaryPublisher();
+  private final SummaryPublisher summaryPublisher_MIDDLE_OFFICE = new SummaryPublisher();
   private final SummaryPublisher summaryPublisher_REUTERS_DC1 = new SummaryPublisher();
   private final TradeAcknowledgementAuditor auditor = new TradeAcknowledgementAuditor();
   //Dirty flags
@@ -86,17 +90,23 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
     reconciler_FXALL_NY3.id = "FXALL_NY3";
     reconciler_FXALL_NY3.auditor = auditor;
     reconciler_FXALL_NY3.reconcileTimeout = (int) 10;
+    //reconciler_MIDDLE_OFFICE
+    reconciler_MIDDLE_OFFICE.alarmReapExpired = alarm_2s;
+    reconciler_MIDDLE_OFFICE.id = "MIDDLE_OFFICE";
+    reconciler_MIDDLE_OFFICE.auditor = auditor;
+    reconciler_MIDDLE_OFFICE.reconcileTimeout = (int) 10;
     //reconciler_REUTERS_DC1
     reconciler_REUTERS_DC1.alarmReapExpired = alarm_2s;
     reconciler_REUTERS_DC1.id = "REUTERS_DC1";
     reconciler_REUTERS_DC1.auditor = auditor;
     reconciler_REUTERS_DC1.reconcileTimeout = (int) 10;
     //reconcileCache_Global
-    reconcileCache_Global.reconcilers = new TradeReconciler[4];
+    reconcileCache_Global.reconcilers = new TradeReconciler[5];
     reconcileCache_Global.reconcilers[0] = reconciler_REUTERS_DC1;
     reconcileCache_Global.reconcilers[1] = reconciler_EBS_LD4;
     reconcileCache_Global.reconcilers[2] = reconciler_EBS_NY2;
     reconcileCache_Global.reconcilers[3] = reconciler_FXALL_NY3;
+    reconcileCache_Global.reconcilers[4] = reconciler_MIDDLE_OFFICE;
     //reportGenerator_EBS_LD4
     reportGenerator_EBS_LD4.reconcileStatusCache = reconcileCache_Global;
     reportGenerator_EBS_LD4.alarm = alarm_2s;
@@ -109,6 +119,10 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
     reportGenerator_FXALL_NY3.reconcileStatusCache = reconcileCache_Global;
     reportGenerator_FXALL_NY3.alarm = alarm_6s;
     reportGenerator_FXALL_NY3.id = "FXALL_NY3";
+    //reportGenerator_MIDDLE_OFFICE
+    reportGenerator_MIDDLE_OFFICE.reconcileStatusCache = reconcileCache_Global;
+    reportGenerator_MIDDLE_OFFICE.alarm = alarm_6s;
+    reportGenerator_MIDDLE_OFFICE.id = "MIDDLE_OFFICE";
     //reportGenerator_REUTERS_DC1
     reportGenerator_REUTERS_DC1.reconcileStatusCache = reconcileCache_Global;
     reportGenerator_REUTERS_DC1.alarm = alarm_6s;
@@ -122,6 +136,9 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
     //summaryPublisher_FXALL_NY3
     summaryPublisher_FXALL_NY3.reconciler = reconciler_FXALL_NY3;
     summaryPublisher_FXALL_NY3.alarm = alarm_6s;
+    //summaryPublisher_MIDDLE_OFFICE
+    summaryPublisher_MIDDLE_OFFICE.reconciler = reconciler_MIDDLE_OFFICE;
+    summaryPublisher_MIDDLE_OFFICE.alarm = alarm_6s;
     //summaryPublisher_REUTERS_DC1
     summaryPublisher_REUTERS_DC1.reconciler = reconciler_REUTERS_DC1;
     summaryPublisher_REUTERS_DC1.alarm = alarm_6s;
@@ -167,6 +184,8 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         reconcileCache_Global.updateReconcileCache(reconciler_REUTERS_DC1);
         reconciler_EBS_NY2.clearReconcileState(typedEvent);
         reconcileCache_Global.updateReconcileCache(reconciler_EBS_NY2);
+        reconciler_MIDDLE_OFFICE.clearReconcileState(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_MIDDLE_OFFICE);
         reconciler_EBS_LD4.clearReconcileState(typedEvent);
         reconcileCache_Global.updateReconcileCache(reconciler_EBS_LD4);
         reconciler_FXALL_NY3.clearReconcileState(typedEvent);
@@ -179,11 +198,13 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         reportGenerator_EBS_LD4.publishResults(typedEvent);
         reportGenerator_EBS_NY2.publishResults(typedEvent);
         reportGenerator_FXALL_NY3.publishResults(typedEvent);
+        reportGenerator_MIDDLE_OFFICE.publishResults(typedEvent);
         afterEvent();
         return;
       case ("com.fluxtion.fx.reconciler.publishSummary"):
         summaryPublisher_REUTERS_DC1.publishResults(typedEvent);
         summaryPublisher_EBS_NY2.publishResults(typedEvent);
+        summaryPublisher_MIDDLE_OFFICE.publishResults(typedEvent);
         summaryPublisher_EBS_LD4.publishResults(typedEvent);
         summaryPublisher_FXALL_NY3.publishResults(typedEvent);
         afterEvent();
@@ -194,6 +215,14 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
 
   public void handleEvent(ListenerRegisration typedEvent) {
     switch (typedEvent.filterString()) {
+      case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher"):
+        reportGenerator_REUTERS_DC1.registerPublisher(typedEvent);
+        reportGenerator_EBS_LD4.registerPublisher(typedEvent);
+        reportGenerator_EBS_NY2.registerPublisher(typedEvent);
+        reportGenerator_FXALL_NY3.registerPublisher(typedEvent);
+        reportGenerator_MIDDLE_OFFICE.registerPublisher(typedEvent);
+        afterEvent();
+        return;
       case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache"):
         reconcileCache_Global.registerReconcileCache(typedEvent);
         afterEvent();
@@ -201,15 +230,9 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
       case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener"):
         summaryPublisher_REUTERS_DC1.registerReconcileListerner(typedEvent);
         summaryPublisher_EBS_NY2.registerReconcileListerner(typedEvent);
+        summaryPublisher_MIDDLE_OFFICE.registerReconcileListerner(typedEvent);
         summaryPublisher_EBS_LD4.registerReconcileListerner(typedEvent);
         summaryPublisher_FXALL_NY3.registerReconcileListerner(typedEvent);
-        afterEvent();
-        return;
-      case ("com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher"):
-        reportGenerator_REUTERS_DC1.registerPublisher(typedEvent);
-        reportGenerator_EBS_LD4.registerPublisher(typedEvent);
-        reportGenerator_EBS_NY2.registerPublisher(typedEvent);
-        reportGenerator_FXALL_NY3.registerPublisher(typedEvent);
         afterEvent();
         return;
       case ("com.fluxtion.learning.fx.example6.reconciler.extensions.TradeAcknowledgementListener"):
@@ -228,14 +251,17 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         isDirty_alarm_2s = alarm_2s.processTimePulse();
         if (isDirty_alarm_2s) {
           reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
-          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
           summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
           reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
+          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
+          reconciler_MIDDLE_OFFICE.expireTimedOutReconciles(alarm_2s);
         }
         isDirty_alarm_6s = alarm_6s.processTimePulse();
         if (isDirty_alarm_6s) {
           summaryPublisher_REUTERS_DC1.publishReconcileDelta(alarm_6s);
           summaryPublisher_FXALL_NY3.publishReconcileDelta(alarm_6s);
+          summaryPublisher_MIDDLE_OFFICE.publishReconcileDelta(alarm_6s);
+          reportGenerator_MIDDLE_OFFICE.publishTimeout(alarm_6s);
           reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
           reportGenerator_FXALL_NY3.publishTimeout(alarm_6s);
         }
@@ -254,6 +280,7 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         }
         summaryPublisher_REUTERS_DC1.pushNotifications();
         summaryPublisher_EBS_NY2.pushNotifications();
+        summaryPublisher_MIDDLE_OFFICE.pushNotifications();
         summaryPublisher_EBS_LD4.pushNotifications();
         reconcileCache_Global.cacheExpiryUpdates(typedEvent);
         summaryPublisher_FXALL_NY3.pushNotifications();
@@ -261,6 +288,7 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         reportGenerator_EBS_LD4.publishReport();
         reportGenerator_EBS_NY2.publishReport();
         reportGenerator_FXALL_NY3.publishReport();
+        reportGenerator_MIDDLE_OFFICE.publishReport();
         afterEvent();
         return;
     }
@@ -271,6 +299,8 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
     switch (typedEvent.filterString()) {
       case ("LD_4_EBS"):
         auditor.auditAcknowledgemt(typedEvent);
+        reconciler_MIDDLE_OFFICE.tradeAckFrom_LD_4_EBS(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_MIDDLE_OFFICE);
         reconciler_EBS_LD4.tradeAckFrom_LD_4_EBS(typedEvent);
         reconcileCache_Global.updateReconcileCache(reconciler_EBS_LD4);
         afterEvent();
@@ -293,6 +323,12 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         reconcileCache_Global.updateReconcileCache(reconciler_FXALL_NY3);
         afterEvent();
         return;
+      case ("MiddleOffice_efx"):
+        auditor.auditAcknowledgemt(typedEvent);
+        reconciler_MIDDLE_OFFICE.tradeAckFrom_MiddleOffice_efx(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_MIDDLE_OFFICE);
+        afterEvent();
+        return;
       case ("MiddleOffice_reuters_dc1"):
         auditor.auditAcknowledgemt(typedEvent);
         reconciler_REUTERS_DC1.tradeAckFrom_MiddleOffice_reuters_dc1(typedEvent);
@@ -307,6 +343,8 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         return;
       case ("NY_3_FXALL"):
         auditor.auditAcknowledgemt(typedEvent);
+        reconciler_MIDDLE_OFFICE.tradeAckFrom_NY_3_FXALL(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_MIDDLE_OFFICE);
         reconciler_FXALL_NY3.tradeAckFrom_NY_3_FXALL(typedEvent);
         reconcileCache_Global.updateReconcileCache(reconciler_FXALL_NY3);
         afterEvent();
@@ -315,6 +353,14 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         auditor.auditAcknowledgemt(typedEvent);
         reconciler_REUTERS_DC1.tradeAckFrom_dcln_1_reuters(typedEvent);
         reconcileCache_Global.updateReconcileCache(reconciler_REUTERS_DC1);
+        reconciler_MIDDLE_OFFICE.tradeAckFrom_dcln_1_reuters(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_MIDDLE_OFFICE);
+        afterEvent();
+        return;
+      case ("sdp"):
+        auditor.auditAcknowledgemt(typedEvent);
+        reconciler_MIDDLE_OFFICE.tradeAckFrom_sdp(typedEvent);
+        reconcileCache_Global.updateReconcileCache(reconciler_MIDDLE_OFFICE);
         afterEvent();
         return;
       case ("triana_EBS_LD4"):
@@ -332,16 +378,19 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
 
   @Override
   public void afterEvent() {
+    reportGenerator_MIDDLE_OFFICE.resetPublishFlag();
     reportGenerator_FXALL_NY3.resetPublishFlag();
     reportGenerator_EBS_NY2.resetPublishFlag();
     reportGenerator_EBS_LD4.resetPublishFlag();
     reportGenerator_REUTERS_DC1.resetPublishFlag();
     summaryPublisher_FXALL_NY3.resetNotificationFlag();
     summaryPublisher_EBS_LD4.resetNotificationFlag();
+    summaryPublisher_MIDDLE_OFFICE.resetNotificationFlag();
     summaryPublisher_EBS_NY2.resetNotificationFlag();
     summaryPublisher_REUTERS_DC1.resetNotificationFlag();
     reconciler_FXALL_NY3.resetAfterUpdate();
     reconciler_EBS_LD4.resetAfterUpdate();
+    reconciler_MIDDLE_OFFICE.resetAfterUpdate();
     reconciler_EBS_NY2.resetAfterUpdate();
     reconciler_REUTERS_DC1.resetAfterUpdate();
     alarm_3s.resetFiredFlag();
@@ -365,16 +414,19 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
     alarm_3s.init();
     reconciler_REUTERS_DC1.init();
     reconciler_EBS_NY2.init();
+    reconciler_MIDDLE_OFFICE.init();
     reconciler_EBS_LD4.init();
     reconciler_FXALL_NY3.init();
     summaryPublisher_REUTERS_DC1.init();
     summaryPublisher_EBS_NY2.init();
+    summaryPublisher_MIDDLE_OFFICE.init();
     summaryPublisher_EBS_LD4.init();
     summaryPublisher_FXALL_NY3.init();
     reportGenerator_REUTERS_DC1.init();
     reportGenerator_EBS_LD4.init();
     reportGenerator_EBS_NY2.init();
     reportGenerator_FXALL_NY3.init();
+    reportGenerator_MIDDLE_OFFICE.init();
   }
 
   @Override

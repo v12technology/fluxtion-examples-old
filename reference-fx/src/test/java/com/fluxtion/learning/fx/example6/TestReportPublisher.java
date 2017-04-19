@@ -17,12 +17,9 @@
 package com.fluxtion.learning.fx.example6;
 
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher;
-import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache.ReconcileKey;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileCacheQuery;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.function.Consumer;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  *
@@ -30,20 +27,20 @@ import java.util.function.Consumer;
  */
 public class TestReportPublisher implements ReconcileReportPublisher {
 
+    private final AtomicBoolean updated = new AtomicBoolean(false);
     @Override
-    public void publishReport(ReconcileCache reconcileResultcCche, String reconcilerId) {
+    public void publishReport(ReconcileCacheQuery reconcileResultcCche, String reconcilerId) {
         final StringBuilder sb = new StringBuilder("{reconciler: " + reconcilerId + ", records:[\n");
-        boolean[] ans = new boolean[]{false};
-        reconcileResultcCche.stream((ReconcileKey t, ReconcileStatus u) -> {
-            if (t.reconcileId.equals(reconcilerId)) {
-                u.appendAsJson(sb);
+        updated.lazySet(false);
+        reconcileResultcCche.stream((ReconcileStatus s) -> {
+                updated.lazySet(true);
+                s.appendAsJson(sb);
                 sb.append(",\n");
-                ans[0] = true;
-            }
-        });
+        }, reconcilerId);
+        
         sb.setLength(sb.lastIndexOf(","));
         sb.append("\n]}");
-        if(ans[0]){
+        if(updated.get()){
             System.out.println("AS JSON:\n" + sb.toString());
         }
     }

@@ -47,6 +47,7 @@ public class ReconilerFactory extends SEPConfig implements NodeFactory<TradeReco
             int publishFrequency = (int) (value).getOrDefault("publishFrequency", publishFrequencyDefault);
             int checkExpiredFrequency = (int) (value).getOrDefault("checkExpiredFrequency", checkExpiredFrequencyDefault);
             List<String> venues = (List) ((Map) value).get("venues");
+            List<String> oneOfVenues = (List) ((Map) value).get("anyVenue");
             String[] venuesAsArray = venues.toArray(new String[venues.size()]);
             ReconcilerBuilder builder = new ReconcilerBuilder(
                     reconcilerId,
@@ -54,6 +55,9 @@ public class ReconilerFactory extends SEPConfig implements NodeFactory<TradeReco
                     publishFrequency,
                     checkExpiredFrequency);
             builder.setMandatorySource(venuesAsArray);
+            if(oneOfVenues!=null && oneOfVenues.size() >0){
+                builder.setOneOfSources(oneOfVenues.toArray(new String[oneOfVenues.size()]));
+            }
             builder.build(nodeList);
         }
         for (Object object : nodeList) {

@@ -40,6 +40,12 @@ public interface ReconcileStatus<T> {
     String[] venues();
 
     /**
+     * One of the these venues must acknowledge the trade for the record to be RECONCILED
+     * 
+     * @return the one of reconciling venues
+     */
+    String[] oneOfVenues();
+    /**
      * A boolean flag indicating whether all venues have acknowledged the trade.
      *
      * @return is reconciled
@@ -60,12 +66,30 @@ public interface ReconcileStatus<T> {
      */
     Status status();
 
+    /**
+     * query method to determine whether this record has expired
+     *
+     * @param currentTime the time to measure the expiry against
+     * @param expiryTimeout the length of time to wait before expiring the
+     * reconcile record
+     * @return
+     */
     boolean expired(long currentTime, int expiryTimeout);
-    
+
+    /**
+     * Appends a json formatted string to the StringBuilder for this record.
+     *
+     * @param builder
+     */
     void appendAsJson(StringBuilder builder);
-            
+
+    /**
+     * set the status of the reconcile record
+     *
+     * @param status
+     */
     void setStatus(Status status);
-    
+
     public enum Status {
         RECONCILING, RECONCILED, EXPIRED_RECONCILE, RECONCILED_AFTER_EXPIRY;
     }

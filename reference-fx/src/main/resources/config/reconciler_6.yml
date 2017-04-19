@@ -21,4 +21,7 @@ config:
         FXALL_NY3:
             venues: [NY_3_FXALL, MiddleOffice_NY3_FXALL]
             checkExpiredFrequency: 17
+        MIDDLE_OFFICE:
+            venues: [MiddleOffice_efx]
+            anyVenue: [sdp, LD_4_EBS, dcln_1_reuters, NY_3_FXALL]
         

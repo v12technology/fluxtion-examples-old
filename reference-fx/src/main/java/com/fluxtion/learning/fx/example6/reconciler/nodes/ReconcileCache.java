@@ -17,20 +17,19 @@
 package com.fluxtion.learning.fx.example6.reconciler.nodes;
 
 import com.fluxtion.api.annotations.EventHandler;
-import com.fluxtion.api.annotations.NoEventReference;
-import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.event.TimingPulseEvent;
-import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import static com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache.RECONCILE_STATUS_CACHE;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
+import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache.ReconcileKey;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileCacheQuery;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 /**
  * A ReconcileStatusCache holds a set of ReconcileStatus records ready for
@@ -49,13 +48,23 @@ import java.util.function.BiConsumer;
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public class ReconcileCache {
+public class ReconcileCache implements ReconcileCacheQuery{
 
     public TradeReconciler[] reconcilers;
     private ReconcileStatusCache cache;
     
+    @Override
     public void stream(BiConsumer<? super ReconcileStatusCache.ReconcileKey, ? super ReconcileStatus>  consumer){
         cache.stream(consumer);
+    }
+    
+    @Override
+    public void stream(Consumer<? super ReconcileStatus> consumer, String reconcilerId){
+        stream((ReconcileStatusCache.ReconcileKey t, ReconcileStatus u) -> {
+            if (t.reconcileId.equals(reconcilerId)) {
+                consumer.accept(u);
+            }
+        });        
     }
     
     @EventHandler(filterString = RECONCILE_STATUS_CACHE, propogate = false)
@@ -100,5 +109,7 @@ public class ReconcileCache {
             reconcilers = tmp;
         }
     }
+    
+
     
 }

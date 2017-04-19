@@ -72,7 +72,7 @@ public class ReconcilerTest {
     @Test
     public void testReconcilerIds() {
         assertThat(stream(cacheManager.reconcilers).map(i -> i.id).toArray(),
-                arrayContainingInAnyOrder("REUTERS_DC1", "EBS_LD4", "EBS_NY2", "FXALL_NY3"));
+                arrayContainingInAnyOrder("REUTERS_DC1", "EBS_LD4", "EBS_NY2", "FXALL_NY3", "MIDDLE_OFFICE"));
     }
 
     @Test
@@ -83,6 +83,17 @@ public class ReconcilerTest {
         recordStatus(RECONCILING, "EBS_NY2", 200);
         reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
         recordStatus(RECONCILED, "EBS_NY2", 200);
+        cacheSize(1);
+    }
+
+    @Test
+    public void testSimpleOptionalReconcile() {
+        cacheSize(0);
+        reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_efx", 200, 2000));
+        cacheSize(1);
+        recordStatus(RECONCILING, "MIDDLE_OFFICE", 200);
+        reconciler.onEvent(new TradeAcknowledgement("sdp", 200, 3000));
+        recordStatus(RECONCILED, "MIDDLE_OFFICE", 200);
         cacheSize(1);
     }
 
@@ -151,13 +162,13 @@ public class ReconcilerTest {
         reconciler.onEvent(timingPulseEvent);
         //no update sent as time hasnt moved
         checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 0));
-        summarySize(summaryListener, 4);
+        summarySize(summaryListener, 5);
 
         reconciler.onEvent(new TradeAcknowledgement("NY_2", 11, 10 * 1000));
         timingPulseEvent.setCurrentTimeMillis(21 * 1000);
         reconciler.onEvent(timingPulseEvent);
         checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 1));
-        summarySize(summaryListener, 4);
+        summarySize(summaryListener, 5);
     }
     
     
@@ -187,18 +198,18 @@ public class ReconcilerTest {
         reconciler.onEvent(timingPulseEvent);
         //no update sent as time hasnt moved
         checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 0));
-        summarySize(summaryListener, 4);
+        summarySize(summaryListener, 5);
 
         reconciler.onEvent(new TradeAcknowledgement("NY_2", 11, 10 * 1000));
         timingPulseEvent.setCurrentTimeMillis(21 * 1000);
         reconciler.onEvent(timingPulseEvent);
         checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 1, 0, 1));
-        summarySize(summaryListener, 4);
+        summarySize(summaryListener, 5);
         
         //clear
         reconciler.onEvent(ControlSignals.CLEAR_CACHE_ACTION);
         reconciler.onEvent(ControlSignals.PUBLISH_SUMMARY_ACTION);
-        summarySize(summaryListener, 4);
+        summarySize(summaryListener, 5);
         checkSummary(summaryListener, new SummaryDetails("EBS_NY2", 0, 0, 0));
         cacheSize(0);
         

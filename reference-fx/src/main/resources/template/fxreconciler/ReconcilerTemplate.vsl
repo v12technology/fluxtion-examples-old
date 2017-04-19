@@ -33,7 +33,7 @@ import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStat
  */
 public class  ${functionClass} extends TradeReconciler<${functionClass}.ReconcileRecord>{
 
-#foreach( $source in $reconcilerBuilder.mandatorySources)
+#foreach( $source in $reconcilerBuilder.sources)
     @EventHandler(filterString = "$source")
     public void tradeAckFrom_$source (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
@@ -63,10 +63,15 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
     public static class ReconcileRecord implements ReconcileStatus<Integer>{
 
         private static final String[] VENUES = new String[]{${venues}};
+#if( ${oneOfSources} )
+        private static final String[] VENUES_ONE_OF = new String[]{${oneOfSources}};
+#else
+        private static final String[] VENUES_ONE_OF = new String[0];
+#end
         Status status = RECONCILING;;
         int tradeId;
         long firstReceivedTime = -1;
-#foreach( $source in $reconcilerBuilder.mandatorySources)
+#foreach( $source in $reconcilerBuilder.sources)
         long time_$source = -1;
 #end
 
@@ -95,9 +100,14 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
             return VENUES;
         }
 
+        @Override
+        public String[] oneOfVenues(){
+            return VENUES_ONE_OF;
+        }
+
         void reset(){
             status = RECONCILING;
-#foreach( $source in $reconcilerBuilder.mandatorySources)
+#foreach( $source in $reconcilerBuilder.sources)
             time_$source = -1;
 #end
         }
@@ -112,7 +122,7 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
                     .append("tradeId: ").append(tradeId)
                     .append(", status: ").append(status.name())
                     .append(", acks: [")
-#foreach( $source in $reconcilerBuilder.mandatorySources)
+#foreach( $source in $reconcilerBuilder.sources)
                     .append("{")
                     .append("venue: \"$source\"")
                     .append(", ackTime: ").append(time_$source)

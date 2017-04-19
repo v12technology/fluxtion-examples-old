@@ -17,20 +17,20 @@
 package com.fluxtion.learning.fx.example6.generated;
 
 import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
-import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
-import com.fluxtion.api.annotations.AfterEvent;
+import com.fluxtion.fx.node.biascheck.TimedNotifier;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
+import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectIterator;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.api.annotations.OnEvent;
-import com.fluxtion.fx.node.biascheck.TimedNotifier;
 import java.util.ArrayList;
-import java.util.ArrayDeque;
-import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import com.fluxtion.api.annotations.AfterEvent;
+import java.util.ArrayDeque;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.*;
 
 /**
@@ -84,6 +84,7 @@ public class  Reconciler_EBS_NY2 extends TradeReconciler<Reconciler_EBS_NY2.Reco
     public static class ReconcileRecord implements ReconcileStatus<Integer>{
 
         private static final String[] VENUES = new String[]{"NY_2", "MiddleOffice_NY2"};
+        private static final String[] VENUES_ONE_OF = new String[0];
         Status status = RECONCILING;;
         int tradeId;
         long firstReceivedTime = -1;
@@ -92,7 +93,7 @@ public class  Reconciler_EBS_NY2 extends TradeReconciler<Reconciler_EBS_NY2.Reco
 
         @Override
         public boolean matched(){
-            return time_NY_2 > 0 & time_MiddleOffice_NY2>0;
+            return time_NY_2 > 0 & time_MiddleOffice_NY2 > 0;
         }
 
         @Override
@@ -113,6 +114,11 @@ public class  Reconciler_EBS_NY2 extends TradeReconciler<Reconciler_EBS_NY2.Reco
         @Override
         public String[] venues(){
             return VENUES;
+        }
+
+        @Override
+        public String[] oneOfVenues(){
+            return VENUES_ONE_OF;
         }
 
         void reset(){

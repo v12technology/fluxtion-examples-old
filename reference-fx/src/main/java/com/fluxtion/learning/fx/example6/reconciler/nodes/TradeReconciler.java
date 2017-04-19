@@ -112,5 +112,5 @@ public abstract class TradeReconciler<T extends ReconcileStatus<Integer>> {
         currentRecord = null;
         expiredList.clear();
     }
-
+    
 }
