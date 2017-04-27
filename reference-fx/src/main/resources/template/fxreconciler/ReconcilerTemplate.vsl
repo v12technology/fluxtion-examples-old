@@ -119,13 +119,13 @@ public class  ${functionClass} extends TradeReconciler<${functionClass}.Reconcil
 
         public void appendAsJson(StringBuilder builder){
             builder.append('{')
-                    .append("tradeId: ").append(tradeId)
-                    .append(", status: ").append(status.name())
-                    .append(", acks: [")
+                    .append("\"tradeId\": ").append(tradeId)
+                    .append(", \"status\": \"").append(status.name()).append("\"")
+                    .append(", \"acks\": [")
 #foreach( $source in $reconcilerBuilder.sources)
                     .append("{")
-                    .append("venue: \"$source\"")
-                    .append(", ackTime: ").append(time_$source)
+                    .append("\"venue\": \"$source\"")
+                    .append(", \"ackTime\": ").append(time_$source)
                     .append("}#if( $foreach.hasNext ), #end")
 #end
                     .append("]}");
