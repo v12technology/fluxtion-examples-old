@@ -17,29 +17,38 @@
 package com.fluxtion.learning.fx.example6.reconciler.helpers;
 
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 /**
- * Provides query read access into the ReconcileCache.
+ * In memory volatile ReconcileStatusCache implemented with ConcurrentHashMap.
  * 
  * @author Greg Higgins (greg.higgins@V12technology.com)
+ * @param <T>
  */
-public interface ReconcileCacheQuery {
+public class ConcurrentHashMapReconcileCache<T extends Integer> implements ReconcileStatusCache{
 
-    /**
-     * Streams all the data in the cache to a client
-     * 
-     * @param consumer consumer of reconcile records
-     */
-    void stream(BiConsumer<? super ReconcileStatusCache.ReconcileKey, ? super ReconcileStatus> consumer);
+    public Map<ReconcileKey, ReconcileStatus> key2Status = new ConcurrentHashMap<>();
+    
+    @Override
+    public void reset() {
+        key2Status.clear();
+    }
 
-    /**
-     * Only streams reconcile records that match the reconciler Id provided.
-     * 
-     * @param consumer consumer of reconcile records
-     * @param reconcilerId the reconciler id filter to apply
-     */
-    void stream(Consumer<? super ReconcileStatus> consumer, String reconcilerId);
+    @Override
+    public void update(String reconcilerId, ReconcileStatus reconcileStatus) {
+        key2Status.put(new ReconcileKey(reconcilerId, (int) reconcileStatus.id()), reconcileStatus);
+    }
+    
+    @Override
+    public String toString() {
+        return "TestReconcileCache{" + "key2Status=" + key2Status + '}';
+    }
 
+    @Override
+    public void stream(BiConsumer consumer) {
+        key2Status.forEach( consumer);
+    }
+    
 }

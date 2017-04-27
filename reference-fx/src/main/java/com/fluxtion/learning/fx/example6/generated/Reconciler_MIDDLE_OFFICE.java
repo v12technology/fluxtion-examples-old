@@ -16,30 +16,31 @@
  */
 package com.fluxtion.learning.fx.example6.generated;
 
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.fx.node.biascheck.TimedNotifier;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
-import com.fluxtion.api.annotations.EventHandler;
-import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import java.util.ArrayList;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.api.annotations.Initialise;
-import com.fluxtion.api.annotations.OnEvent;
-import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
+import com.fluxtion.fx.node.biascheck.TimedNotifier;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.AfterEvent;
 import java.util.ArrayDeque;
+import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
+import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.api.annotations.OnParentUpdate;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.*;
 
 /**
  * Fluxtion generated TradeReconciler id:MIDDLE_OFFICE
- * Acknowledgements must be received from all monitored venues for a 
- * trade to have RECONCILED status.
- *
- * Acknowledging venues: "MiddleOffice_efx"
- *
+ * Acknowledgements must be received from all mandatory venues and from any of the one of venues
+ * for a trade to have RECONCILED status.
+ *<ul>
+ * <li>Mandatory acknowledging venues: "MiddleOffice_efx"</li>
+ * <li>One of acknowledging venues: "sdp", "LD_4_EBS", "dcln_1_reuters", "NY_3_FXALL" </li>
+ * </ul>
  * @author greg higgins (greg.higgins@v12technology.com)
  */
 public class  Reconciler_MIDDLE_OFFICE extends TradeReconciler<Reconciler_MIDDLE_OFFICE.ReconcileRecord>{
@@ -176,28 +177,28 @@ public class  Reconciler_MIDDLE_OFFICE extends TradeReconciler<Reconciler_MIDDLE
 
         public void appendAsJson(StringBuilder builder){
             builder.append('{')
-                    .append("tradeId: ").append(tradeId)
-                    .append(", status: ").append(status.name())
-                    .append(", acks: [")
+                    .append("\"tradeId\": ").append(tradeId)
+                    .append(", \"status\": \"").append(status.name()).append("\"")
+                    .append(", \"acks\": [")
                     .append("{")
-                    .append("venue: \"MiddleOffice_efx\"")
-                    .append(", ackTime: ").append(time_MiddleOffice_efx)
+                    .append("\"venue\": \"MiddleOffice_efx\"")
+                    .append(", \"ackTime\": ").append(time_MiddleOffice_efx)
                     .append("}, ")
                     .append("{")
-                    .append("venue: \"sdp\"")
-                    .append(", ackTime: ").append(time_sdp)
+                    .append("\"venue\": \"sdp\"")
+                    .append(", \"ackTime\": ").append(time_sdp)
                     .append("}, ")
                     .append("{")
-                    .append("venue: \"LD_4_EBS\"")
-                    .append(", ackTime: ").append(time_LD_4_EBS)
+                    .append("\"venue\": \"LD_4_EBS\"")
+                    .append(", \"ackTime\": ").append(time_LD_4_EBS)
                     .append("}, ")
                     .append("{")
-                    .append("venue: \"dcln_1_reuters\"")
-                    .append(", ackTime: ").append(time_dcln_1_reuters)
+                    .append("\"venue\": \"dcln_1_reuters\"")
+                    .append(", \"ackTime\": ").append(time_dcln_1_reuters)
                     .append("}, ")
                     .append("{")
-                    .append("venue: \"NY_3_FXALL\"")
-                    .append(", ackTime: ").append(time_NY_3_FXALL)
+                    .append("\"venue\": \"NY_3_FXALL\"")
+                    .append(", \"ackTime\": ").append(time_NY_3_FXALL)
                     .append("}")
                     .append("]}");
         }

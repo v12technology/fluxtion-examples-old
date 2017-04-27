@@ -250,20 +250,20 @@ public class ReconcilerExample6 implements EventHandler, BatchHandler, Lifecycle
         timeHandler.onTimingPulse(typedEvent);
         isDirty_alarm_2s = alarm_2s.processTimePulse();
         if (isDirty_alarm_2s) {
-          reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
-          summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
-          reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
           reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
           reconciler_MIDDLE_OFFICE.expireTimedOutReconciles(alarm_2s);
+          summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
+          reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
+          reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
         }
         isDirty_alarm_6s = alarm_6s.processTimePulse();
         if (isDirty_alarm_6s) {
+          reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
           summaryPublisher_REUTERS_DC1.publishReconcileDelta(alarm_6s);
           summaryPublisher_FXALL_NY3.publishReconcileDelta(alarm_6s);
+          reportGenerator_FXALL_NY3.publishTimeout(alarm_6s);
           summaryPublisher_MIDDLE_OFFICE.publishReconcileDelta(alarm_6s);
           reportGenerator_MIDDLE_OFFICE.publishTimeout(alarm_6s);
-          reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
-          reportGenerator_FXALL_NY3.publishTimeout(alarm_6s);
         }
         isDirty_alarm_1s = alarm_1s.processTimePulse();
         if (isDirty_alarm_1s) {

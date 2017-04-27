@@ -80,6 +80,7 @@ public class ReportGenerator {
     @EventHandler(filterString = RESULT_PUBLISHER, propogate = false)
     public void registerPublisher(ListenerRegisration<ReconcileReportPublisher> registration) {
         this.publisher = registration.getListener();
+        this.publisher.init();
     }
 
     @EventHandler(filterString = ControlSignals.PUBLISH_REPORT, propogate = false)

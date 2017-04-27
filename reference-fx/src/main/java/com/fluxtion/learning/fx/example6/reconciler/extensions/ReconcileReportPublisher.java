@@ -18,32 +18,37 @@ package com.fluxtion.learning.fx.example6.reconciler.extensions;
 
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileCacheQuery;
 import com.fluxtion.learning.fx.example6.reconciler.nodes.ReconcileCache;
-
+import com.fluxtion.runtime.lifecycle.Lifecycle;
 
 /**
  * Provides reporting functionality of the current state of reconciliation. A
- ReconcileReportPublisher is invoked with publishReport when a report is required to
- be published. 
- 
- The implementation is free to choose:
- <ul>
+ * ReconcileReportPublisher is invoked with publishReport when a report is
+ * required to be published. * The implementation is free to choose:
+ * <ul>
  * <li>the format of the report</li>
  * <li>whether to honour the request to publish a report</li>
  * <li>synchronous or asynchronous generation</li>
  * </ul>
- * 
+ *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
-public interface ReconcileReportPublisher {
+public interface ReconcileReportPublisher extends Lifecycle {
 
     public static final String RESULT_PUBLISHER = "com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher";
 
     /**
      * A request to publish a report
-     * 
+     *
      * @param reconcileCache access to the current ReconcileRecord set
      * @param reconcilerId The reconcilerId to publish the report for
      */
-    void publishReport( ReconcileCacheQuery reconcileCache, String reconcilerId);
-    
+    void publishReport(ReconcileCacheQuery reconcileCache, String reconcilerId);
+
+    @Override
+    default void init() {
+    }
+
+    @Override
+    default void tearDown() {
+    }
 }

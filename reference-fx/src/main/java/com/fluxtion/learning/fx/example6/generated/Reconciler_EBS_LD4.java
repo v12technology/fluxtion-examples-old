@@ -16,30 +16,30 @@
  */
 package com.fluxtion.learning.fx.example6.generated;
 
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.fx.node.biascheck.TimedNotifier;
-import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
-import com.fluxtion.api.annotations.EventHandler;
-import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import java.util.ArrayList;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.api.annotations.Initialise;
-import com.fluxtion.api.annotations.OnEvent;
-import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeReconciler;
+import com.fluxtion.fx.node.biascheck.TimedNotifier;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.AfterEvent;
 import java.util.ArrayDeque;
+import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
+import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.api.annotations.OnParentUpdate;
+import com.fluxtion.learning.fx.example6.reconciler.nodes.TradeAcknowledgementAuditor;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.*;
 
 /**
  * Fluxtion generated TradeReconciler id:EBS_LD4
- * Acknowledgements must be received from all monitored venues for a 
- * trade to have RECONCILED status.
- *
- * Acknowledging venues: "LD_4_EBS", "MiddleOffice_EBS_LD4", "triana_EBS_LD4"
- *
+ * Acknowledgements must be received from all mandatory venues and from any of the one of venues
+ * for a trade to have RECONCILED status.
+ *<ul>
+ * <li>Mandatory acknowledging venues: "LD_4_EBS", "MiddleOffice_EBS_LD4", "triana_EBS_LD4"</li>
+ * </ul>
  * @author greg higgins (greg.higgins@v12technology.com)
  */
 public class  Reconciler_EBS_LD4 extends TradeReconciler<Reconciler_EBS_LD4.ReconcileRecord>{
@@ -148,20 +148,20 @@ public class  Reconciler_EBS_LD4 extends TradeReconciler<Reconciler_EBS_LD4.Reco
 
         public void appendAsJson(StringBuilder builder){
             builder.append('{')
-                    .append("tradeId: ").append(tradeId)
-                    .append(", status: ").append(status.name())
-                    .append(", acks: [")
+                    .append("\"tradeId\": ").append(tradeId)
+                    .append(", \"status\": \"").append(status.name()).append("\"")
+                    .append(", \"acks\": [")
                     .append("{")
-                    .append("venue: \"LD_4_EBS\"")
-                    .append(", ackTime: ").append(time_LD_4_EBS)
+                    .append("\"venue\": \"LD_4_EBS\"")
+                    .append(", \"ackTime\": ").append(time_LD_4_EBS)
                     .append("}, ")
                     .append("{")
-                    .append("venue: \"MiddleOffice_EBS_LD4\"")
-                    .append(", ackTime: ").append(time_MiddleOffice_EBS_LD4)
+                    .append("\"venue\": \"MiddleOffice_EBS_LD4\"")
+                    .append(", \"ackTime\": ").append(time_MiddleOffice_EBS_LD4)
                     .append("}, ")
                     .append("{")
-                    .append("venue: \"triana_EBS_LD4\"")
-                    .append(", ackTime: ").append(time_triana_EBS_LD4)
+                    .append("\"venue\": \"triana_EBS_LD4\"")
+                    .append(", \"ackTime\": ").append(time_triana_EBS_LD4)
                     .append("}")
                     .append("]}");
         }
