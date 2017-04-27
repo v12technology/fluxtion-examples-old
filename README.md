@@ -23,7 +23,7 @@ This guide will step you through the process of running the reference-core examp
     * The download will be either an installation package or an archive, unpack/install as ncessary on the local machine.
 * Activating License
     * Fluxtion is a license based product so before running any examples the **Fluxtion license must be activated**.
-    * Locate the install directory and run **fluxtion.exe activate Q3WWS-QBQAY-75JEY-GG7UK-FPKI**, e.g. for windows:
+    * Locate the install directory and run **fluxtion.exe activate Q3WWS-QBQAY-75JEY-GG7UK-FPKIH**, e.g. for windows:
     
 ```bash
 
