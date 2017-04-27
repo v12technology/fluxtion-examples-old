@@ -24,11 +24,13 @@ import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStat
 
 /**
  * Fluxtion generated TradeReconciler id:${reconcilerBuilder.reconcilerId}
- * Acknowledgements must be received from all monitored venues for a 
- * trade to have RECONCILED status.
- *
- * Acknowledging venues: ${venues}
- *
+ * Acknowledgements must be received from all mandatory venues and from any of the one of venues
+ * for a trade to have RECONCILED status.
+ *<ul>
+ * <li>Mandatory acknowledging venues: ${venues}</li>
+#if( ${oneOfSources} ) * <li>One of acknowledging venues: ${oneOfSources} </li>
+#end
+ * </ul>
  * @author greg higgins (greg.higgins@v12technology.com)
  */
 public class  ${functionClass} extends TradeReconciler<${functionClass}.ReconcileRecord>{
