@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.fluxtion.fx.reconciler.sparktest</groupId>
+    <artifactId>SparkFxReconciler</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>fluxtion.casestudy :: reconciler</name>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <fluxtion.plugin.ver>1.0.5</fluxtion.plugin.ver>
+        <fluxtion.ver>0.1.29</fluxtion.ver>
+        <fluxtionfx.ver>0.1.0-SNAPSHOT</fluxtionfx.ver>
+        <fluxtionfx.plugin.ver>1.0.0</fluxtionfx.plugin.ver>
+        <!--
+        either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
+        hardcode a path for fluxtion.exe here
+        -->
+        <fluxtionFx.exe.path>${fluxtionfx.trial}</fluxtionFx.exe.path>
+        <fluxtion.exe.path>${fluxtion.declarative.ext.trial}</fluxtion.exe.path>
+        <netbeans.hint.license>gpl30</netbeans.hint.license>
+    </properties>
+    
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>GNU General Public License, version 3</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Greg Higgins</name>
+            <email>greg.higgins@v12technology.com</email>
+            <organization>V12 Technology Limited</organization>
+        </developer>
+    </developers>
+
+    <repositories>   
+        <repository>
+            <id>fluxtion.repo</id>
+            <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
+        </repository>
+    </repositories>  
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.fluxtion</groupId>
+            <artifactId>fluxtionfx-reconciler-webapp</artifactId>
+            <version>${fluxtionfx.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion</groupId>
+            <artifactId>fluxtion-builder</artifactId>
+        </dependency>
+    </dependencies>
+    
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.fluxtion</groupId>
+                <artifactId>fluxtion-maven-plugin</artifactId>
+                <version>${fluxtion.plugin.ver}</version>
+                <executions>
+                    <execution>
+                        <id>example6</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                            <className>ReconcilerCaseStudy1</className>
+                            <packageName>com.fluxtion.fx.reconciler.casestudy1.generated</packageName>
+                            <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                            <configClass>com.fluxtion.fx.reconciler.builder.ReconilerFactory</configClass>
+                            <yamlFactoryConfig>src/main/resources/config/reconciler_6.yml</yamlFactoryConfig>
+                            <nodeNamingClass>com.fluxtion.fx.reconciler.helpers.ReconcilerNameProducer</nodeNamingClass>
+                            <!--<logDebug>true</logDebug>-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.fluxtion</groupId>
+                <artifactId>fluxtion-bom</artifactId>
+                <version>${fluxtion.ver}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+</project>
