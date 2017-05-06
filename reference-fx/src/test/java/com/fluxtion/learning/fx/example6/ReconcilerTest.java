@@ -19,12 +19,13 @@ package com.fluxtion.learning.fx.example6;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.event.TimingPulseEvent;
 import com.fluxtion.learning.fx.example6.SummaryListener.SummaryDetails;
-import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignal;
 import com.fluxtion.learning.fx.example6.reconciler.events.ControlSignals;
 import com.fluxtion.learning.fx.example6.reconciler.events.TradeAcknowledgement;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileReportPublisher;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileStatusCache;
 import com.fluxtion.learning.fx.example6.reconciler.extensions.ReconcileSummaryListener;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.SynchronousJsonReportPublisher;
+import com.fluxtion.learning.fx.example6.reconciler.helpers.ConcurrentHashMapReconcileCache;
 import com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.EXPIRED_RECONCILE;
 import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.RECONCILED;
@@ -54,7 +55,7 @@ public class ReconcilerTest {
 
     private EventHandler reconciler;
     private ReconcileCache cacheManager;
-    private TestReconcileCache cacheTarget;
+    private ReconcileStatusCache cacheTarget;
     private Map<TestReconcileCache.ReconcileKey, ReconcileStatus> key2Status;
 
     @Before
@@ -64,9 +65,9 @@ public class ReconcilerTest {
         Field field = new Mirror().on(reconciler.getClass()).reflect().field("reconcileCache_Global");
         field.setAccessible(true);
         cacheManager = (ReconcileCache) field.get(reconciler);
-        cacheTarget = new TestReconcileCache();
+        cacheTarget = new ConcurrentHashMapReconcileCache();
         reconciler.onEvent(new ListenerRegisration(cacheTarget, ReconcileStatusCache.class));
-        key2Status = cacheTarget.key2Status;
+        key2Status = ((ConcurrentHashMapReconcileCache)cacheTarget).key2Status;
     }
 
     @Test
@@ -237,6 +238,28 @@ public class ReconcilerTest {
         timingPulseEvent.setCurrentTimeMillis(21 * 1000);
         reconciler.onEvent(timingPulseEvent);    
     }
+    @Test
+    public void dumpReconcileRecordsAsJsonWithAsyncJsonReportPublisher(){
+        SynchronousJsonReportPublisher publisher = new SynchronousJsonReportPublisher();
+        reconciler.onEvent(new ListenerRegisration(publisher, ReconcileReportPublisher.class));
+        
+        final TimingPulseEvent timingPulseEvent = new TimingPulseEvent(1);
+        timingPulseEvent.setCurrentTimeMillis(1 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        //match a trade
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 200, 2000));
+        timingPulseEvent.setCurrentTimeMillis(2 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        reconciler.onEvent(new TradeAcknowledgement("MiddleOffice_NY2", 200, 3000));
+        timingPulseEvent.setCurrentTimeMillis(3 * 1000);
+        reconciler.onEvent(timingPulseEvent);
+        //expire a trade
+        timingPulseEvent.setCurrentTimeMillis(10 * 1000);
+        reconciler.onEvent(timingPulseEvent);    
+        reconciler.onEvent(new TradeAcknowledgement("NY_2", 11, 10 * 1000));
+        timingPulseEvent.setCurrentTimeMillis(21 * 1000);
+        reconciler.onEvent(timingPulseEvent);    
+    }
 
     protected void summarySize(  SummaryListener summaryListener, int expectedize){
         HashMap<String, SummaryListener.SummaryDetails> reconciler2Update = summaryListener.reconciler2Update;
@@ -251,7 +274,7 @@ public class ReconcilerTest {
     }
     
     protected void cacheSize(int expectedSise) {
-        assertThat(expectedSise, is(cacheTarget.key2Status.size()));
+        assertThat(expectedSise, is(key2Status.size()));
     }
 
     protected void recordStatus(ReconcileStatus.Status status, String reconcilerId, int tradeId) {
