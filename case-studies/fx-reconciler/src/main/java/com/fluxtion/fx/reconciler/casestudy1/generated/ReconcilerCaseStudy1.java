@@ -8,7 +8,7 @@ import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.fx.eventhandler.TimeHandlerSeconds;
-import com.fluxtion.fx.node.biascheck.TimedNotifier;
+import com.fluxtion.fx.eventhandler.TimedNotifier;
 import com.fluxtion.fx.reconciler.casestudy1.generated.Reconciler_EBS_LD4;
 import com.fluxtion.fx.reconciler.casestudy1.generated.Reconciler_EBS_NY2;
 import com.fluxtion.fx.reconciler.casestudy1.generated.Reconciler_FXALL_NY3;
@@ -19,10 +19,10 @@ import com.fluxtion.fx.reconciler.nodes.ReportGenerator;
 import com.fluxtion.fx.reconciler.nodes.SummaryPublisher;
 import com.fluxtion.fx.reconciler.nodes.TradeAcknowledgementAuditor;
 import com.fluxtion.fx.reconciler.nodes.TradeReconciler;
+import com.fluxtion.fx.event.ConfigurationEvent;
+import com.fluxtion.fx.event.ControlSignal;
 import com.fluxtion.fx.event.ListenerRegisration;
 import com.fluxtion.fx.event.TimingPulseEvent;
-import com.fluxtion.fx.reconciler.events.ConfigurationEvent;
-import com.fluxtion.fx.reconciler.events.ControlSignal;
 import com.fluxtion.fx.reconciler.events.TradeAcknowledgement;
 
 public class ReconcilerCaseStudy1 implements EventHandler, BatchHandler, Lifecycle {
@@ -149,29 +149,29 @@ public class ReconcilerCaseStudy1 implements EventHandler, BatchHandler, Lifecyc
   @Override
   public void onEvent(com.fluxtion.runtime.event.Event event) {
     switch (event.eventId()) {
-      case (TimingPulseEvent.ID):
-        {
-          TimingPulseEvent typedEvent = (TimingPulseEvent) event;
-          handleEvent(typedEvent);
-          break;
-        }
       case (ConfigurationEvent.ID):
         {
           ConfigurationEvent typedEvent = (ConfigurationEvent) event;
           handleEvent(typedEvent);
           break;
         }
-    }
-    switch (event.getClass().getName()) {
-      case ("com.fluxtion.fx.event.ListenerRegisration"):
+      case (TimingPulseEvent.ID):
         {
-          ListenerRegisration typedEvent = (ListenerRegisration) event;
+          TimingPulseEvent typedEvent = (TimingPulseEvent) event;
           handleEvent(typedEvent);
           break;
         }
-      case ("com.fluxtion.fx.reconciler.events.ControlSignal"):
+    }
+    switch (event.getClass().getName()) {
+      case ("com.fluxtion.fx.event.ControlSignal"):
         {
           ControlSignal typedEvent = (ControlSignal) event;
+          handleEvent(typedEvent);
+          break;
+        }
+      case ("com.fluxtion.fx.event.ListenerRegisration"):
+        {
+          ListenerRegisration typedEvent = (ListenerRegisration) event;
           handleEvent(typedEvent);
           break;
         }
@@ -182,88 +182,6 @@ public class ReconcilerCaseStudy1 implements EventHandler, BatchHandler, Lifecyc
           break;
         }
     }
-  }
-
-  public void handleEvent(ListenerRegisration typedEvent) {
-    switch (typedEvent.filterString()) {
-      case ("com.fluxtion.fx.reconciler.extensions.ReconcileReportPublisher"):
-        reportGenerator_REUTERS_DC1.registerPublisher(typedEvent);
-        reportGenerator_EBS_LD4.registerPublisher(typedEvent);
-        reportGenerator_EBS_NY2.registerPublisher(typedEvent);
-        reportGenerator_FXALL_NY3.registerPublisher(typedEvent);
-        reportGenerator_MIDDLE_OFFICE.registerPublisher(typedEvent);
-        afterEvent();
-        return;
-      case ("com.fluxtion.fx.reconciler.extensions.ReconcileStatusCache"):
-        reconcileCache_Global.registerReconcileCache(typedEvent);
-        afterEvent();
-        return;
-      case ("com.fluxtion.fx.reconciler.extensions.ReconcileSummaryListener"):
-        summaryPublisher_REUTERS_DC1.registerReconcileListerner(typedEvent);
-        summaryPublisher_EBS_NY2.registerReconcileListerner(typedEvent);
-        summaryPublisher_MIDDLE_OFFICE.registerReconcileListerner(typedEvent);
-        summaryPublisher_EBS_LD4.registerReconcileListerner(typedEvent);
-        summaryPublisher_FXALL_NY3.registerReconcileListerner(typedEvent);
-        afterEvent();
-        return;
-      case ("com.fluxtion.fx.reconciler.extensions.TradeAcknowledgementListener"):
-        auditor.registerAuditor(typedEvent);
-        afterEvent();
-        return;
-    }
-    afterEvent();
-  }
-
-  public void handleEvent(TimingPulseEvent typedEvent) {
-    switch (typedEvent.filterId()) {
-        //Event Class:[com.fluxtion.fx.event.TimingPulseEvent] filterId:[1]
-      case (1):
-        timeHandler.onTimingPulse(typedEvent);
-        isDirty_alarm_2s = alarm_2s.processTimePulse();
-        if (isDirty_alarm_2s) {
-          reconciler_MIDDLE_OFFICE.expireTimedOutReconciles(alarm_2s);
-          reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
-          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
-          reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
-          summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
-        }
-        isDirty_alarm_6s = alarm_6s.processTimePulse();
-        if (isDirty_alarm_6s) {
-          summaryPublisher_FXALL_NY3.publishReconcileDelta(alarm_6s);
-          summaryPublisher_REUTERS_DC1.publishReconcileDelta(alarm_6s);
-          reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
-          reportGenerator_FXALL_NY3.publishTimeout(alarm_6s);
-          reportGenerator_MIDDLE_OFFICE.publishTimeout(alarm_6s);
-          summaryPublisher_MIDDLE_OFFICE.publishReconcileDelta(alarm_6s);
-        }
-        isDirty_alarm_1s = alarm_1s.processTimePulse();
-        if (isDirty_alarm_1s) {
-          reconciler_EBS_LD4.expireTimedOutReconciles(alarm_1s);
-        }
-        isDirty_alarm_17s = alarm_17s.processTimePulse();
-        if (isDirty_alarm_17s) {
-          reconciler_FXALL_NY3.expireTimedOutReconciles(alarm_17s);
-        }
-        isDirty_alarm_3s = alarm_3s.processTimePulse();
-        if (isDirty_alarm_3s) {
-          reportGenerator_EBS_NY2.publishTimeout(alarm_3s);
-          summaryPublisher_EBS_NY2.publishReconcileDelta(alarm_3s);
-        }
-        summaryPublisher_REUTERS_DC1.pushNotifications();
-        summaryPublisher_EBS_NY2.pushNotifications();
-        summaryPublisher_MIDDLE_OFFICE.pushNotifications();
-        summaryPublisher_EBS_LD4.pushNotifications();
-        reconcileCache_Global.cacheExpiryUpdates(typedEvent);
-        summaryPublisher_FXALL_NY3.pushNotifications();
-        reportGenerator_REUTERS_DC1.publishReport();
-        reportGenerator_EBS_LD4.publishReport();
-        reportGenerator_EBS_NY2.publishReport();
-        reportGenerator_FXALL_NY3.publishReport();
-        reportGenerator_MIDDLE_OFFICE.publishReport();
-        afterEvent();
-        return;
-    }
-    afterEvent();
   }
 
   public void handleEvent(ConfigurationEvent typedEvent) {
@@ -310,6 +228,88 @@ public class ReconcilerCaseStudy1 implements EventHandler, BatchHandler, Lifecyc
         summaryPublisher_MIDDLE_OFFICE.publishResults(typedEvent);
         summaryPublisher_EBS_LD4.publishResults(typedEvent);
         summaryPublisher_FXALL_NY3.publishResults(typedEvent);
+        afterEvent();
+        return;
+    }
+    afterEvent();
+  }
+
+  public void handleEvent(ListenerRegisration typedEvent) {
+    switch (typedEvent.filterString()) {
+      case ("com.fluxtion.fx.reconciler.extensions.ReconcileReportPublisher"):
+        reportGenerator_REUTERS_DC1.registerPublisher(typedEvent);
+        reportGenerator_EBS_LD4.registerPublisher(typedEvent);
+        reportGenerator_EBS_NY2.registerPublisher(typedEvent);
+        reportGenerator_FXALL_NY3.registerPublisher(typedEvent);
+        reportGenerator_MIDDLE_OFFICE.registerPublisher(typedEvent);
+        afterEvent();
+        return;
+      case ("com.fluxtion.fx.reconciler.extensions.ReconcileStatusCache"):
+        reconcileCache_Global.registerReconcileCache(typedEvent);
+        afterEvent();
+        return;
+      case ("com.fluxtion.fx.reconciler.extensions.ReconcileSummaryListener"):
+        summaryPublisher_REUTERS_DC1.registerReconcileListerner(typedEvent);
+        summaryPublisher_EBS_NY2.registerReconcileListerner(typedEvent);
+        summaryPublisher_MIDDLE_OFFICE.registerReconcileListerner(typedEvent);
+        summaryPublisher_EBS_LD4.registerReconcileListerner(typedEvent);
+        summaryPublisher_FXALL_NY3.registerReconcileListerner(typedEvent);
+        afterEvent();
+        return;
+      case ("com.fluxtion.fx.reconciler.extensions.TradeAcknowledgementListener"):
+        auditor.registerAuditor(typedEvent);
+        afterEvent();
+        return;
+    }
+    afterEvent();
+  }
+
+  public void handleEvent(TimingPulseEvent typedEvent) {
+    switch (typedEvent.filterId()) {
+        //Event Class:[com.fluxtion.fx.event.TimingPulseEvent] filterId:[1]
+      case (1):
+        timeHandler.onTimingPulse(typedEvent);
+        isDirty_alarm_2s = alarm_2s.processTimePulse();
+        if (isDirty_alarm_2s) {
+          reconciler_MIDDLE_OFFICE.expireTimedOutReconciles(alarm_2s);
+          reportGenerator_EBS_LD4.publishTimeout(alarm_2s);
+          reconciler_REUTERS_DC1.expireTimedOutReconciles(alarm_2s);
+          reconciler_EBS_NY2.expireTimedOutReconciles(alarm_2s);
+          summaryPublisher_EBS_LD4.publishReconcileDelta(alarm_2s);
+        }
+        isDirty_alarm_6s = alarm_6s.processTimePulse();
+        if (isDirty_alarm_6s) {
+          summaryPublisher_REUTERS_DC1.publishReconcileDelta(alarm_6s);
+          reportGenerator_FXALL_NY3.publishTimeout(alarm_6s);
+          summaryPublisher_FXALL_NY3.publishReconcileDelta(alarm_6s);
+          reportGenerator_MIDDLE_OFFICE.publishTimeout(alarm_6s);
+          summaryPublisher_MIDDLE_OFFICE.publishReconcileDelta(alarm_6s);
+          reportGenerator_REUTERS_DC1.publishTimeout(alarm_6s);
+        }
+        isDirty_alarm_1s = alarm_1s.processTimePulse();
+        if (isDirty_alarm_1s) {
+          reconciler_EBS_LD4.expireTimedOutReconciles(alarm_1s);
+        }
+        isDirty_alarm_17s = alarm_17s.processTimePulse();
+        if (isDirty_alarm_17s) {
+          reconciler_FXALL_NY3.expireTimedOutReconciles(alarm_17s);
+        }
+        isDirty_alarm_3s = alarm_3s.processTimePulse();
+        if (isDirty_alarm_3s) {
+          reportGenerator_EBS_NY2.publishTimeout(alarm_3s);
+          summaryPublisher_EBS_NY2.publishReconcileDelta(alarm_3s);
+        }
+        summaryPublisher_REUTERS_DC1.pushNotifications();
+        summaryPublisher_EBS_NY2.pushNotifications();
+        summaryPublisher_MIDDLE_OFFICE.pushNotifications();
+        summaryPublisher_EBS_LD4.pushNotifications();
+        reconcileCache_Global.cacheExpiryUpdates(typedEvent);
+        summaryPublisher_FXALL_NY3.pushNotifications();
+        reportGenerator_REUTERS_DC1.publishReport();
+        reportGenerator_EBS_LD4.publishReport();
+        reportGenerator_EBS_NY2.publishReport();
+        reportGenerator_FXALL_NY3.publishReport();
+        reportGenerator_MIDDLE_OFFICE.publishReport();
         afterEvent();
         return;
     }
