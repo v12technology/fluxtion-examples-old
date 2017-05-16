@@ -20,6 +20,9 @@ import com.fluxtion.fx.event.TimingPulseEvent;
 import static com.fluxtion.fx.reconciler.casestudy1.MainByController.QUEUE_PATH;
 import com.fluxtion.fx.reconciler.client.ChronicleClient;
 import com.fluxtion.fx.reconciler.events.TradeAcknowledgement;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -34,6 +37,16 @@ public class AcknowledgemntGenerator {
     static int countId = (int) System.currentTimeMillis();
     static ChronicleClient client = new ChronicleClient(QUEUE_PATH);
     
+    static{
+        Calendar cal = new GregorianCalendar();
+        final Date date = new Date();
+        cal.setTime(date);
+        cal.clear(Calendar.MILLISECOND);
+        cal.clear(Calendar.SECOND);
+        cal.clear(Calendar.MINUTE);
+        cal.clear(Calendar.HOUR);
+        countId = (int) (date.getTime() - cal.getTimeInMillis());
+    }
     
     public static void main(String[] args) {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();

@@ -20,6 +20,8 @@ import com.fluxtion.fx.reconciler.input.ChronicleQueueSource.ChronicleQueueSourc
 import com.fluxtion.fx.reconciler.casestudy1.generated.ReconcilerCaseStudy1;
 import com.fluxtion.fx.reconciler.input.ChronicleQueueSource;
 import com.fluxtion.fx.reconciler.webapp.SparkInitialiserFromController;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -27,7 +29,8 @@ import com.fluxtion.fx.reconciler.webapp.SparkInitialiserFromController;
  */
 public class MainByController {
 
-    public static void main(String[] args) {
+    
+    public static void main(String[] args) throws InterruptedException {
         ChronicleQueueSource queue = new ChronicleQueueSourceBuilder()
                 .eventHandler(new ReconcilerCaseStudy1())
                 .batchReadDelay(250)
@@ -37,7 +40,7 @@ public class MainByController {
         SparkInitialiserFromController spark = new SparkInitialiserFromController(queue);
         spark.init();
     }
-    
+
     public static final String QUEUE_PATH = "private/chroncile/messageQueue";
 
 }
