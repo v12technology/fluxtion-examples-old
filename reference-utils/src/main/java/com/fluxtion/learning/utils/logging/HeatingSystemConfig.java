@@ -20,6 +20,7 @@ import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.node.SEPConfig;
 import com.fluxtion.runtime.event.Event;
+import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor;
 import com.fluxtion.runtime.plugin.logging.EventLogManager;
 import com.fluxtion.runtime.plugin.logging.EventLogSource;
 import com.fluxtion.runtime.plugin.logging.EventLogger;
@@ -52,6 +53,7 @@ public class HeatingSystemConfig extends SEPConfig {
         addPublicNode(new ControlDisplay(boiler, pump), "display");
         //add logger
         addAuditor(new EventLogManager(), "logger");
+        addAuditor(new DelegatingAuditor(), "delegatingAuditor");
     }
 
     public static class Pump implements EventLogSource {
@@ -91,6 +93,7 @@ public class HeatingSystemConfig extends SEPConfig {
         private boolean waterFlow;
         private boolean requestHeating;
         private boolean boilerRunning;
+        private double temperature;
 
         public Boiler(Pump pump) {
             this.pump = pump;
@@ -135,6 +138,7 @@ public class HeatingSystemConfig extends SEPConfig {
         }
 
         private void boilerControl() {
+            temperature++;
             log.info("currentBoilerRunning", boilerRunning);
             log.info("waterFlow", waterFlow);
             log.info("requestHeating", requestHeating);

@@ -20,6 +20,10 @@ import com.fluxtion.learning.utils.logging.HeatingSystemConfig.FlowSensorOff;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.FlowSensorOn;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.HeatOff;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.HeatOn;
+import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor;
+import com.fluxtion.runtime.plugin.monitoring.PropertyRecord;
+import com.fluxtion.runtime.plugin.monitoring.PropertyRecorder;
+import com.fluxtion.runtime.plugin.monitoring.PropertyRecorderControl;
 import org.junit.Test;
 
 /**
@@ -32,6 +36,14 @@ public class HeatingSystemTest {
     public void testHeating(){
         HeatingSystem heatingSystem = new HeatingSystem();
         heatingSystem.init();
+        //
+        PropertyRecorder recorder = new PropertyRecorder();
+        heatingSystem.handleEvent(new DelegatingAuditor.AuditorRegistration(true, recorder));
+        recorder.listenerUpdate(new PropertyRecorder.ListenerUpdate(true, (PropertyRecord p) -> {
+            System.out.println(p.getInstanceName() + "." + p.getPropertyName() + ": " + p.getFormattedValue());
+        }));
+        recorder.recorderControl(new PropertyRecorderControl("boiler", "temperature", true, true));
+        
         heatingSystem.logger.setLogSink(System.out::println);
         //request heating etc
         heatingSystem.onEvent(new HeatOn());
