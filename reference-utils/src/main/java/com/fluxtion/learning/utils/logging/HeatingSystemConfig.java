@@ -187,7 +187,6 @@ public class HeatingSystemConfig extends SEPConfig {
             boolean error = boiler.isBoilerRunning() & !pump.isRunning();
             if (error) {
                 log.info("heatingError", "boiler on no pump running");
-
             } else {
                 log.info("heating", running ? "on" : "off");
             }
