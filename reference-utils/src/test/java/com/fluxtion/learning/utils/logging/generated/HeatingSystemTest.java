@@ -40,8 +40,11 @@ public class HeatingSystemTest {
         System.out.println("testTraceWithFluentApi");
         HeatingSystem heatingSystem = new HeatingSystem();
         heatingSystem.init();
-        //add publisher and property trace fluently
-        heatingSystem.propertyTracer.addConsolePublisher().addPropertyTrace("boiler", "temperature", false);
+        //fluent api -  add property trace
+        PropertyRecorder.addPropertyRecorder(heatingSystem)
+                .addPropertyTrace("boiler", "temperature", false)
+                .addPropertyTrace("boiler", "price", false)
+                .addConsolePublisher();
 //        heatingSystem.logger.setLogSink(System.out::println);
         //request heating etc
         heatingSystem.onEvent(new HeatOn());
