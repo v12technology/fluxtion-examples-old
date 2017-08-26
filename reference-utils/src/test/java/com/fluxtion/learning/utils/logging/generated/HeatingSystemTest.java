@@ -20,10 +20,13 @@ import com.fluxtion.learning.utils.logging.HeatingSystemConfig.FlowSensorOff;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.FlowSensorOn;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.HeatOff;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.HeatOn;
-import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor;
-import com.fluxtion.runtime.plugin.monitoring.PropertyRecord;
-import com.fluxtion.runtime.plugin.monitoring.PropertyRecorder;
-import com.fluxtion.runtime.plugin.monitoring.PropertyRecorderControl;
+import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor.AuditorRegistration;
+import com.fluxtion.runtime.plugin.events.ListenerRegistrationEvent;
+import com.fluxtion.runtime.plugin.tracing.TraceRecord;
+import com.fluxtion.runtime.plugin.tracing.TraceRecordListener;
+import com.fluxtion.runtime.plugin.tracing.Tracer;
+import com.fluxtion.runtime.plugin.tracing.TracerConfigEvent;
+
 import org.junit.Test;
 
 /**
@@ -31,20 +34,15 @@ import org.junit.Test;
  * @author V12 Technology Limited
  */
 public class HeatingSystemTest {
-    
+
     @Test
-    public void testHeating(){
+    public void testTraceWithFluentApi() {
+        System.out.println("testTraceWithFluentApi");
         HeatingSystem heatingSystem = new HeatingSystem();
         heatingSystem.init();
-        //
-        PropertyRecorder recorder = new PropertyRecorder();
-        heatingSystem.handleEvent(new DelegatingAuditor.AuditorRegistration(true, recorder));
-        recorder.listenerUpdate(new PropertyRecorder.ListenerUpdate(true, (PropertyRecord p) -> {
-            System.out.println(p.getInstanceName() + "." + p.getPropertyName() + ": " + p.getFormattedValue());
-        }));
-        recorder.recorderControl(new PropertyRecorderControl("boiler", "temperature", true, true));
-        
-        heatingSystem.logger.setLogSink(System.out::println);
+        //add publisher and property trace fluently
+        heatingSystem.propertyTracer.addConsolePublisher().addPropertyTrace("boiler", "temperature", false);
+//        heatingSystem.logger.setLogSink(System.out::println);
         //request heating etc
         heatingSystem.onEvent(new HeatOn());
         heatingSystem.onEvent(new FlowSensorOn());
@@ -52,6 +50,50 @@ public class HeatingSystemTest {
         heatingSystem.onEvent(new HeatOff());
         heatingSystem.onEvent(new HeatOn());
         heatingSystem.onEvent(new FlowSensorOff());
-        
+    }
+    
+    
+    @Test
+    public void traceWithDelegatingAuditorConfig(){
+        System.out.println("traceWithDelegatingAuditorConfig");
+        HeatingSystem heatingSystem = new HeatingSystem();
+        heatingSystem.init();
+        //create and register a tracer with delegating auditor
+        Tracer recorder = new Tracer();
+        heatingSystem.handleEvent(new AuditorRegistration(true, recorder));
+        //add publisher
+        recorder.listenerUpdate(new ListenerRegistrationEvent<>(TraceRecordListener.class,  (p) -> {
+            System.out.println(p.getInstanceName() + "." + p.getPropertyName() + ": " + p.getFormattedValue());
+        }, true));
+        //add property trace
+        recorder.recorderControl(new TracerConfigEvent("boiler", "temperature", true, false));
+        //request heating etc
+        heatingSystem.onEvent(new HeatOn());
+        heatingSystem.onEvent(new FlowSensorOn());
+        //off - on - fail pump
+        heatingSystem.onEvent(new HeatOff());
+        heatingSystem.onEvent(new HeatOn());
+        heatingSystem.onEvent(new FlowSensorOff());
+    }
+    
+    
+    @Test
+    public void traceWithEventConfig(){
+        System.out.println("traceWithEventConfig");
+        HeatingSystem heatingSystem = new HeatingSystem();
+        heatingSystem.init();
+        //add tracer publisher 
+        heatingSystem.onEvent(new ListenerRegistrationEvent<>(TraceRecordListener.class, (TraceRecordListener) (TraceRecord p) -> {
+            System.out.println(p.getInstanceName() + "." + p.getPropertyName() + ": " + p.getFormattedValue());
+        }, true));
+        //add property trace
+        heatingSystem.onEvent(new TracerConfigEvent("boiler", "temperature", true, false));
+        //request heating etc
+        heatingSystem.onEvent(new HeatOn());
+        heatingSystem.onEvent(new FlowSensorOn());
+        //off - on - fail pump
+        heatingSystem.onEvent(new HeatOff());
+        heatingSystem.onEvent(new HeatOn());
+        heatingSystem.onEvent(new FlowSensorOff());  
     }
 }

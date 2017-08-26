@@ -8,13 +8,17 @@ import com.fluxtion.learning.utils.logging.HeatingSystemConfig.Boiler;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.ControlDisplay;
 import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor;
 import com.fluxtion.runtime.plugin.logging.EventLogManager;
+import com.fluxtion.runtime.plugin.tracing.Tracer;
 import com.fluxtion.runtime.audit.Auditor;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.FlowSensorOff;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.FlowSensorOn;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.HeatOff;
 import com.fluxtion.learning.utils.logging.HeatingSystemConfig.HeatOn;
 import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor.AuditorRegistration;
+import com.fluxtion.runtime.plugin.events.ListenerRegistrationEvent;
 import com.fluxtion.runtime.plugin.logging.EventLogConfig;
+import com.fluxtion.runtime.plugin.tracing.TraceEvents.PublishProperties;
+import com.fluxtion.runtime.plugin.tracing.TracerConfigEvent;
 
 public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
 
@@ -24,6 +28,7 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
   public final ControlDisplay display = new ControlDisplay(boiler, pump);
   public final DelegatingAuditor delegatingAuditor = new DelegatingAuditor();
   public final EventLogManager logger = new EventLogManager();
+  public final Tracer propertyTracer = new Tracer();
   //Dirty flags
 
   //Filter constants
@@ -32,6 +37,7 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
     //node auditors
     initialiseAuditor(delegatingAuditor);
     initialiseAuditor(logger);
+    initialiseAuditor(propertyTracer);
   }
 
   @Override
@@ -67,9 +73,27 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
           handleEvent(typedEvent);
           break;
         }
+      case ("com.fluxtion.runtime.plugin.events.ListenerRegistrationEvent"):
+        {
+          ListenerRegistrationEvent typedEvent = (ListenerRegistrationEvent) event;
+          handleEvent(typedEvent);
+          break;
+        }
       case ("com.fluxtion.runtime.plugin.logging.EventLogConfig"):
         {
           EventLogConfig typedEvent = (EventLogConfig) event;
+          handleEvent(typedEvent);
+          break;
+        }
+      case ("com.fluxtion.runtime.plugin.tracing.TraceEvents$PublishProperties"):
+        {
+          PublishProperties typedEvent = (PublishProperties) event;
+          handleEvent(typedEvent);
+          break;
+        }
+      case ("com.fluxtion.runtime.plugin.tracing.TracerConfigEvent"):
+        {
+          TracerConfigEvent typedEvent = (TracerConfigEvent) event;
           handleEvent(typedEvent);
           break;
         }
@@ -133,6 +157,18 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
     afterEvent();
   }
 
+  public void handleEvent(ListenerRegistrationEvent typedEvent) {
+    auditEvent(typedEvent);
+    switch (typedEvent.filterString()) {
+      case ("com.fluxtion.runtime.plugin.tracing.TraceRecordListener"):
+        auditInvocation(propertyTracer, "propertyTracer", "listenerUpdate", typedEvent);
+        propertyTracer.listenerUpdate(typedEvent);
+        afterEvent();
+        return;
+    }
+    afterEvent();
+  }
+
   public void handleEvent(EventLogConfig typedEvent) {
     auditEvent(typedEvent);
     //Default, no filter methods
@@ -142,9 +178,28 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
     afterEvent();
   }
 
+  public void handleEvent(PublishProperties typedEvent) {
+    auditEvent(typedEvent);
+    //Default, no filter methods
+    auditInvocation(propertyTracer, "propertyTracer", "publishProperties", typedEvent);
+    propertyTracer.publishProperties(typedEvent);
+    //event stack unwind callbacks
+    afterEvent();
+  }
+
+  public void handleEvent(TracerConfigEvent typedEvent) {
+    auditEvent(typedEvent);
+    //Default, no filter methods
+    auditInvocation(propertyTracer, "propertyTracer", "recorderControl", typedEvent);
+    propertyTracer.recorderControl(typedEvent);
+    //event stack unwind callbacks
+    afterEvent();
+  }
+
   private void auditEvent(Object typedEvent) {
     delegatingAuditor.eventReceived(typedEvent);
     logger.eventReceived(typedEvent);
+    propertyTracer.eventReceived(typedEvent);
   }
 
   private void auditInvocation(Object node, String nodeName, String methodName, Object typedEvent) {
@@ -162,6 +217,7 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
   public void afterEvent() {
     delegatingAuditor.processingComplete();
     logger.processingComplete();
+    propertyTracer.processingComplete();
   }
 
   @Override
@@ -169,6 +225,7 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
 
   @Override
   public void tearDown() {
+    propertyTracer.tearDown();
     logger.tearDown();
     delegatingAuditor.tearDown();
   }

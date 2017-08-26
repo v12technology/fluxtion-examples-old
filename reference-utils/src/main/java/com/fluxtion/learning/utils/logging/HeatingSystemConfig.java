@@ -24,6 +24,7 @@ import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor;
 import com.fluxtion.runtime.plugin.logging.EventLogManager;
 import com.fluxtion.runtime.plugin.logging.EventLogSource;
 import com.fluxtion.runtime.plugin.logging.EventLogger;
+import com.fluxtion.runtime.plugin.tracing.Tracer;
 
 /**
  * Simple notional boiler system with a pump and boiler to demonstrate event 
@@ -51,9 +52,10 @@ public class HeatingSystemConfig extends SEPConfig {
         Pump pump = addPublicNode(new Pump(), "pump");
         Boiler boiler = addPublicNode(new Boiler(pump), "boiler");
         addPublicNode(new ControlDisplay(boiler, pump), "display");
-        //add logger
+        //add auditors
         addAuditor(new EventLogManager(), "logger");
         addAuditor(new DelegatingAuditor(), "delegatingAuditor");
+        addAuditor(new Tracer(), "propertyTracer");
     }
 
     public static class Pump implements EventLogSource {
