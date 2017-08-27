@@ -100,7 +100,7 @@
         <dependency>
             <groupId>com.fluxtion.extension</groupId>
             <artifactId>runtime-plugins</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.1</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
