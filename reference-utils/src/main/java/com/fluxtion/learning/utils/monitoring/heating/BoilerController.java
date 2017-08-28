@@ -48,11 +48,15 @@ public class BoilerController extends EventLogNode {
     @EventHandler(filterString = "flowTemperature", propagate = false)
     public void waterFlowTemperatureSensor(NumericSignal flowSignal){
         flowTemperature = flowSignal.value();
+        log.info("flowTemperature", flowTemperature);
+        log.info("returnTemperature", returnTemperature);
     }
     
     @EventHandler(filterString = "returnTemperature", propagate = false)
     public void waterReturnTemperatureSensor(NumericSignal flowSignal){
         returnTemperature = flowSignal.value();
+        log.info("flowTemperature", flowTemperature);
+        log.info("returnTemperature", returnTemperature);
     }
     
     @OnEvent
