@@ -27,8 +27,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.plugin.ver>1.0.6</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.33-SNAPSHOT</fluxtion.ver>
+        <fluxtion.maven-plugin.ver>1.0.6</fluxtion.maven-plugin.ver>
+        <fluxtion.runtime-plugin.ver>1.0.2-SNAPSHOT</fluxtion.runtime-plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -71,7 +71,7 @@
                     <plugin>
                         <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>${fluxtion.plugin.ver}</version>
+                        <version>${fluxtion.maven-plugin.ver}</version>
                         <executions>
                             <execution>
                                 <id>example1</id>
@@ -80,8 +80,9 @@
                                 </goals>
                                 <configuration>
                                     <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                                    <configClass>com.fluxtion.learning.utils.logging.HeatingSystemConfig</configClass>
-                                    <packageName>com.fluxtion.learning.utils.logging.generated</packageName>
+                                    <configClass>com.fluxtion.learning.utils.monitoring.heating.HeatingControllerSEPBuilder</configClass>
+                                    <!--<configClass>com.fluxtion.learning.utils.logging.HeatingSystemConfig</configClass>-->
+                                    <packageName>com.fluxtion.learning.utils.monitoring.heating.generated</packageName>
                                     <className>HeatingSystem</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
@@ -100,7 +101,7 @@
         <dependency>
             <groupId>com.fluxtion.extension</groupId>
             <artifactId>runtime-plugins</artifactId>
-            <version>1.0.1</version>
+            <version>${fluxtion.runtime-plugin.ver}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>

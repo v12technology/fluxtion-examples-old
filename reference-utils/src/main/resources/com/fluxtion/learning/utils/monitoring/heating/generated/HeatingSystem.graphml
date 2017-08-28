@@ -2,11 +2,11 @@
 <key id="vertex_label" for="node" attr.name="nodeData" attr.type="string"/>
 <key id="edge_label" for="edge" attr.name="edgeData" attr.type="string"/>
 <graph edgedefault="directed">
-<node id="heatingSignal_3">
+<node id="timerController_3">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;heatingSignal_3:&#10;HeatingSignal"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;timerController_3:&#10;TimerController"/>
 <jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
@@ -20,21 +20,21 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="boilerController_5">
+<node id="pumpController_5">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="boilerController_5:&#10;BoilerController"/>
-<jGraph:Style properties="NODE"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;pumpController_5:&#10;PumpController"/>
+<jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="pumpController_7">
+<node id="boiler">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="pumpController_7:&#10;PumpController"/>
-<jGraph:Style properties="NODE"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;boiler:&#10;BoilerController"/>
+<jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
 </node>
@@ -42,16 +42,16 @@
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="display:&#10;ControllerDisplay"/>
-<jGraph:Style properties="NODE"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;display:&#10;ControllerDisplay"/>
+<jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="ControlSignal">
+<node id="BooleanSignal">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;ControlSignal"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;BooleanSignal"/>
 <jGraph:Style properties="EVENT"/>
 </jGraph:ShapeNode>
 </data>
@@ -65,32 +65,61 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<edge id="1" source="betweenHoursTest_1" target="heatingSignal_3">
+<node id="NumericSignal">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;NumericSignal"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<edge id="1" source="betweenHoursTest_1" target="timerController_3">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="2" source="heatingSignal_3" target="boilerController_5">
+<edge id="2" source="timerController_3" target="pumpController_5">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="3" source="heatingSignal_3" target="pumpController_7">
+<edge id="3" source="timerController_3" target="boiler">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="4" source="heatingSignal_3" target="display">
+<edge id="4" source="timerController_3" target="display">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="5" source="ControlSignal" target="heatingSignal_3">
+<edge id="5" source="BooleanSignal" target="timerController_3">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
 <edge id="6" source="TimingPulseEvent" target="betweenHoursTest_1">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="7" source="BooleanSignal" target="pumpController_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="8" source="BooleanSignal" target="boiler">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="9" source="NumericSignal" target="boiler">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="10" source="BooleanSignal" target="display">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
