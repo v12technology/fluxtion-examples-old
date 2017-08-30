@@ -29,20 +29,20 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="boiler">
-<data key="vertex_label">
-<jGraph:ShapeNode>
-<jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;boiler:&#10;BoilerController"/>
-<jGraph:Style properties="EVENTHANDLER"/>
-</jGraph:ShapeNode>
-</data>
-</node>
 <node id="display">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
 <jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;display:&#10;ControllerDisplay"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="boiler">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;boiler:&#10;BoilerController"/>
 <jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
@@ -84,12 +84,12 @@
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="3" source="timerController_3" target="boiler">
+<edge id="3" source="timerController_3" target="display">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="4" source="timerController_3" target="display">
+<edge id="4" source="timerController_3" target="boiler">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
@@ -109,17 +109,17 @@
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="8" source="BooleanSignal" target="boiler">
+<edge id="8" source="BooleanSignal" target="display">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="9" source="NumericSignal" target="boiler">
+<edge id="9" source="BooleanSignal" target="boiler">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="10" source="BooleanSignal" target="display">
+<edge id="10" source="NumericSignal" target="boiler">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
