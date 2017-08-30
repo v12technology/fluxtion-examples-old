@@ -50,7 +50,7 @@ public class ControllerDisplay extends EventLogNode {
     
     private void publishDisplayMessage(){
         String notRunning = heatingSignal.isRunning()?"starting":"stopped";
-        System.out.println("Boiler:" + (boilerOn?"running":notRunning));
+        System.out.println("-> Controller display [Boiler:" + (boilerOn?"running":notRunning) + "]");
     }
 
 }
