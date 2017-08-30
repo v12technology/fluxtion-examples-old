@@ -19,9 +19,9 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private final GreaterThanDecorator_1 greaterThanDecorator_1_5 = new GreaterThanDecorator_1();
   public final GroupBy_6 carrierDelayMap = new GroupBy_6();
   //Dirty flags
+  private boolean isDirty_carrierDelayMap = false;
   private boolean isDirty_flightDetailsHandler_2 = false;
   private boolean isDirty_greaterThanDecorator_1_5 = false;
-  private boolean isDirty_carrierDelayMap = false;
   //Filter constants
 
   public FlightDelayMonitor() {
@@ -64,9 +64,9 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   @Override
   public void afterEvent() {
 
+    isDirty_carrierDelayMap = false;
     isDirty_flightDetailsHandler_2 = false;
     isDirty_greaterThanDecorator_1_5 = false;
-    isDirty_carrierDelayMap = false;
   }
 
   @Override

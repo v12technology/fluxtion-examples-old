@@ -28,12 +28,12 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
   private final MatchResultCsvMarshaller4 matchResultCsvMarshaller4_14 =
       new MatchResultCsvMarshaller4();
   //Dirty flags
+  private boolean isDirty_asciiAnyCharMatcher_1_19 = false;
+  private boolean isDirty_asciiAnyCharMatcher_0_18 = false;
   private boolean isDirty_csv2ByteBuffer_2 = false;
   private boolean isDirty_csv2ByteBuffer_8 = false;
   private boolean isDirty_csv2Double_5 = false;
   private boolean isDirty_csv2Double_11 = false;
-  private boolean isDirty_asciiAnyCharMatcher_1_19 = false;
-  private boolean isDirty_asciiAnyCharMatcher_0_18 = false;
   private boolean isDirty_leagueSummary = false;
   private boolean isDirty_matchResultCsvMarshaller4_14 = false;
   //Filter constants
@@ -93,26 +93,26 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.onEol(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.onEol(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         isDirty_matchResultCsvMarshaller4_14 = matchResultCsvMarshaller4_14.onEol(typedEvent);
         if (isDirty_matchResultCsvMarshaller4_14) {
-          leagueSummary.updatematchResultCsvMarshaller41(matchResultCsvMarshaller4_14);
           leagueSummary.updatematchResultCsvMarshaller40(matchResultCsvMarshaller4_14);
+          leagueSummary.updatematchResultCsvMarshaller41(matchResultCsvMarshaller4_14);
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -121,27 +121,27 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
       case (44):
         isDirty_asciiAnyCharMatcher_0_18 = asciiAnyCharMatcher_0_18.onChar_44(typedEvent);
         if (isDirty_asciiAnyCharMatcher_0_18) {
-          csv2Double_5.onDelimiter(asciiAnyCharMatcher_0_18);
-          csv2Double_11.onDelimiter(asciiAnyCharMatcher_0_18);
           csv2ByteBuffer_2.onDelimiter(asciiAnyCharMatcher_0_18);
           csv2ByteBuffer_8.onDelimiter(asciiAnyCharMatcher_0_18);
+          csv2Double_5.onDelimiter(asciiAnyCharMatcher_0_18);
+          csv2Double_11.onDelimiter(asciiAnyCharMatcher_0_18);
         }
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -151,21 +151,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.onSign(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.onSign(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -175,21 +175,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.onDecimalPoint(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.onDecimalPoint(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -199,21 +199,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_0(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_0(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -223,21 +223,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_1(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_1(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -247,21 +247,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_2(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_2(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -271,21 +271,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_3(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_3(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -295,21 +295,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_4(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_4(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -319,21 +319,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_5(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_5(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -343,21 +343,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_6(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_6(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -367,21 +367,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_7(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_7(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -391,21 +391,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_8(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_8(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -415,21 +415,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
         isDirty_csv2Double_5 = csv2Double_5.on_9(typedEvent);
         isDirty_csv2Double_11 = csv2Double_11.on_9(typedEvent);
         isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
         }
         isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
         }
         if (isDirty_matchResultCsvMarshaller4_14) {
           isDirty_leagueSummary = leagueSummary.updated();
         }
         //event stack unwind callbacks
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_8.onEventComplete();
         }
-        if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+        if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
           csv2ByteBuffer_2.onEventComplete();
         }
         afterEvent();
@@ -437,21 +437,21 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
     }
     //Default, no filter methods
     isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+    if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
       isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.onEvent();
     }
     isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+    if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
       isDirty_csv2ByteBuffer_8 = csv2ByteBuffer_8.onEvent();
     }
     if (isDirty_matchResultCsvMarshaller4_14) {
       isDirty_leagueSummary = leagueSummary.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+    if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
       csv2ByteBuffer_2.onEventComplete();
     }
-    if (isDirty_asciiAnyCharMatcher_0_18 || isDirty_asciiAnyCharMatcher_1_19) {
+    if (isDirty_asciiAnyCharMatcher_1_19 || isDirty_asciiAnyCharMatcher_0_18) {
       csv2ByteBuffer_8.onEventComplete();
     }
     afterEvent();
@@ -460,12 +460,12 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
   @Override
   public void afterEvent() {
 
+    isDirty_asciiAnyCharMatcher_1_19 = false;
+    isDirty_asciiAnyCharMatcher_0_18 = false;
     isDirty_csv2ByteBuffer_2 = false;
     isDirty_csv2ByteBuffer_8 = false;
     isDirty_csv2Double_5 = false;
     isDirty_csv2Double_11 = false;
-    isDirty_asciiAnyCharMatcher_1_19 = false;
-    isDirty_asciiAnyCharMatcher_0_18 = false;
     isDirty_leagueSummary = false;
     isDirty_matchResultCsvMarshaller4_14 = false;
   }
