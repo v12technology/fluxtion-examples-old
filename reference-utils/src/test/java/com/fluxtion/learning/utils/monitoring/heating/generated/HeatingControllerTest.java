@@ -31,9 +31,9 @@ public class HeatingControllerTest {
         HeatingSystem heatingSystem = new HeatingSystem();
         heatingSystem.init();
         heatingSystem.logger.setLogSink(System.out::println);
-        heatingSystem.propertyTracer.addConsolePublisher().addPropertyTrace("boiler", "flowTemperature", false);
-        heatingSystem.propertyTracer.addConsolePublisher().addPropertyTrace("boiler", "returnTemperature", false);
-        
+        heatingSystem.propertyTracer.addConsolePublisher()
+                .addPropertyTrace("boiler", "flowTemperature", false)
+                .addPropertyTrace("boiler", "returnTemperature", false);
         
         //send some flow/return temps
         heatingSystem.handleEvent(new NumericSignal("flowTemperature", 57));
