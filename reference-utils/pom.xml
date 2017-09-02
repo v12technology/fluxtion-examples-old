@@ -58,6 +58,16 @@
             <id>fluxtion.repo</id>
             <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
         </repository>
+        <repository>
+            <id>snapshots-repo</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>  
 
     <profiles>     
