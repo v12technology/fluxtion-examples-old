@@ -1,52 +1,43 @@
 package com.fluxtion.learning.example20.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example20.CharClassifierConfigProcessor;
-import com.fluxtion.learning.example20.CharacterClassifier;
 import com.fluxtion.learning.example20.CharacterMatrixFeature;
+import com.fluxtion.learning.example20.CharacterClassifier;
 import com.fluxtion.learning.example20.CharClassifierConfigEvent;
 import com.fluxtion.learning.example20.PixelActivationEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 
 public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final CharClassifierConfigProcessor configProcessor_0 =
-      new CharClassifierConfigProcessor();
-  private final CharClassifierConfigProcessor configProcessor_7 =
-      new CharClassifierConfigProcessor();
-  private final CharClassifierConfigProcessor configProcessor_8 =
-      new CharClassifierConfigProcessor();
   private final CharClassifierConfigProcessor configProcessor_a =
       new CharClassifierConfigProcessor();
   private final CharClassifierConfigProcessor configProcessor_b =
       new CharClassifierConfigProcessor();
   private final CharClassifierConfigProcessor configProcessor_c =
       new CharClassifierConfigProcessor();
-  public final CharacterClassifier classifier = new CharacterClassifier();
-  private final CharacterMatrixFeature charFeature_0 = new CharacterMatrixFeature();
-  private final CharacterMatrixFeature charFeature_7 = new CharacterMatrixFeature();
-  private final CharacterMatrixFeature charFeature_8 = new CharacterMatrixFeature();
+  private final CharClassifierConfigProcessor configProcessor_0 =
+      new CharClassifierConfigProcessor();
+  private final CharClassifierConfigProcessor configProcessor_7 =
+      new CharClassifierConfigProcessor();
+  private final CharClassifierConfigProcessor configProcessor_8 =
+      new CharClassifierConfigProcessor();
   private final CharacterMatrixFeature charFeature_a = new CharacterMatrixFeature();
   private final CharacterMatrixFeature charFeature_b = new CharacterMatrixFeature();
   private final CharacterMatrixFeature charFeature_c = new CharacterMatrixFeature();
+  private final CharacterMatrixFeature charFeature_0 = new CharacterMatrixFeature();
+  private final CharacterMatrixFeature charFeature_7 = new CharacterMatrixFeature();
+  private final CharacterMatrixFeature charFeature_8 = new CharacterMatrixFeature();
+  public final CharacterClassifier classifier = new CharacterClassifier();
   //Dirty flags
 
   //Filter constants
 
   public ScreenProcessor() {
-    //configProcessor_0
-    //configProcessor_7
-    //configProcessor_8
-    //configProcessor_a
-    //configProcessor_b
-    //configProcessor_c
-    //classifier
     classifier.charMatchSet = new CharacterMatrixFeature[6];
     classifier.charMatchSet[0] = charFeature_a;
     classifier.charMatchSet[1] = charFeature_b;
@@ -54,22 +45,16 @@ public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
     classifier.charMatchSet[3] = charFeature_0;
     classifier.charMatchSet[4] = charFeature_7;
     classifier.charMatchSet[5] = charFeature_8;
-    //charFeature_0
     charFeature_0.config = configProcessor_0;
     charFeature_0.matchingChar = '0';
-    //charFeature_7
     charFeature_7.config = configProcessor_7;
     charFeature_7.matchingChar = '7';
-    //charFeature_8
     charFeature_8.config = configProcessor_8;
     charFeature_8.matchingChar = '8';
-    //charFeature_a
     charFeature_a.config = configProcessor_a;
     charFeature_a.matchingChar = 'a';
-    //charFeature_b
     charFeature_b.config = configProcessor_b;
     charFeature_b.matchingChar = 'b';
-    //charFeature_c
     charFeature_c.config = configProcessor_c;
     charFeature_c.matchingChar = 'c';
   }
@@ -93,43 +78,12 @@ public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
   }
 
   public void handleEvent(CharClassifierConfigEvent typedEvent) {
-    switch (typedEvent.filterId()) {
-        //Event Class:[com.fluxtion.learning.example20.CharClassifierConfigEvent] filterId:[48]
-      case (48):
-        configProcessor_0.configureValues(typedEvent);
-        charFeature_0.configUpdate(configProcessor_0);
-        afterEvent();
-        return;
-        //Event Class:[com.fluxtion.learning.example20.CharClassifierConfigEvent] filterId:[55]
-      case (55):
-        configProcessor_7.configureValues(typedEvent);
-        charFeature_7.configUpdate(configProcessor_7);
-        afterEvent();
-        return;
-        //Event Class:[com.fluxtion.learning.example20.CharClassifierConfigEvent] filterId:[56]
-      case (56):
-        configProcessor_8.configureValues(typedEvent);
-        charFeature_8.configUpdate(configProcessor_8);
-        afterEvent();
-        return;
-        //Event Class:[com.fluxtion.learning.example20.CharClassifierConfigEvent] filterId:[97]
-      case (97):
-        configProcessor_a.configureValues(typedEvent);
-        charFeature_a.configUpdate(configProcessor_a);
-        afterEvent();
-        return;
-        //Event Class:[com.fluxtion.learning.example20.CharClassifierConfigEvent] filterId:[98]
-      case (98):
-        configProcessor_b.configureValues(typedEvent);
-        charFeature_b.configUpdate(configProcessor_b);
-        afterEvent();
-        return;
-        //Event Class:[com.fluxtion.learning.example20.CharClassifierConfigEvent] filterId:[99]
-      case (99):
-        configProcessor_c.configureValues(typedEvent);
-        charFeature_c.configUpdate(configProcessor_c);
-        afterEvent();
-        return;
+    FilteredHandlerInvoker invoker =
+        dispatchIntMapCharClassifierConfigEvent.get(typedEvent.filterId());
+    if (invoker != null) {
+      invoker.invoke(typedEvent);
+      afterEvent();
+      return;
     }
     afterEvent();
   }
@@ -144,6 +98,118 @@ public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
     charFeature_8.handlePixelActivated(typedEvent);
     //event stack unwind callbacks
     afterEvent();
+  }
+  //int filter maps
+  private final Int2ObjectOpenHashMap<FilteredHandlerInvoker>
+      dispatchIntMapCharClassifierConfigEvent = initdispatchIntMapCharClassifierConfigEvent();
+
+  //String filter maps
+  private Int2ObjectOpenHashMap<FilteredHandlerInvoker>
+      initdispatchIntMapCharClassifierConfigEvent() {
+    Int2ObjectOpenHashMap<FilteredHandlerInvoker> dispatchMap = new Int2ObjectOpenHashMap<>();
+    dispatchMap.put(
+        48,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharClassifierConfigEvent_48(
+                (com.fluxtion.learning.example20.CharClassifierConfigEvent) event);
+          }
+        });
+    dispatchMap.put(
+        55,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharClassifierConfigEvent_55(
+                (com.fluxtion.learning.example20.CharClassifierConfigEvent) event);
+          }
+        });
+    dispatchMap.put(
+        56,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharClassifierConfigEvent_56(
+                (com.fluxtion.learning.example20.CharClassifierConfigEvent) event);
+          }
+        });
+    dispatchMap.put(
+        97,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharClassifierConfigEvent_97(
+                (com.fluxtion.learning.example20.CharClassifierConfigEvent) event);
+          }
+        });
+    dispatchMap.put(
+        98,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharClassifierConfigEvent_98(
+                (com.fluxtion.learning.example20.CharClassifierConfigEvent) event);
+          }
+        });
+    dispatchMap.put(
+        99,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharClassifierConfigEvent_99(
+                (com.fluxtion.learning.example20.CharClassifierConfigEvent) event);
+          }
+        });
+    return dispatchMap;
+  }
+
+  private void handle_CharClassifierConfigEvent_48(
+      com.fluxtion.learning.example20.CharClassifierConfigEvent typedEvent) {
+    //method body - invoke call tree
+    configProcessor_0.configureValues(typedEvent);
+    charFeature_0.configUpdate(configProcessor_0);
+  }
+
+  private void handle_CharClassifierConfigEvent_55(
+      com.fluxtion.learning.example20.CharClassifierConfigEvent typedEvent) {
+    //method body - invoke call tree
+    configProcessor_7.configureValues(typedEvent);
+    charFeature_7.configUpdate(configProcessor_7);
+  }
+
+  private void handle_CharClassifierConfigEvent_56(
+      com.fluxtion.learning.example20.CharClassifierConfigEvent typedEvent) {
+    //method body - invoke call tree
+    configProcessor_8.configureValues(typedEvent);
+    charFeature_8.configUpdate(configProcessor_8);
+  }
+
+  private void handle_CharClassifierConfigEvent_97(
+      com.fluxtion.learning.example20.CharClassifierConfigEvent typedEvent) {
+    //method body - invoke call tree
+    configProcessor_a.configureValues(typedEvent);
+    charFeature_a.configUpdate(configProcessor_a);
+  }
+
+  private void handle_CharClassifierConfigEvent_98(
+      com.fluxtion.learning.example20.CharClassifierConfigEvent typedEvent) {
+    //method body - invoke call tree
+    configProcessor_b.configureValues(typedEvent);
+    charFeature_b.configUpdate(configProcessor_b);
+  }
+
+  private void handle_CharClassifierConfigEvent_99(
+      com.fluxtion.learning.example20.CharClassifierConfigEvent typedEvent) {
+    //method body - invoke call tree
+    configProcessor_c.configureValues(typedEvent);
+    charFeature_c.configUpdate(configProcessor_c);
   }
 
   @Override

@@ -10,11 +10,11 @@ import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
 import com.fluxtion.learning.declarative.ext.example3.generated.GreaterThanDecorator_4;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.learning.declarative.ext.example3.FlightDelayProcessor.FlightDetails;
 import com.fluxtion.learning.declarative.ext.example3.FlightDelayProcessor.CarrierDelay;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
+import com.fluxtion.learning.declarative.ext.example3.FlightDelayProcessor.FlightDetails;
 
 /**
  * generated group by holder.
