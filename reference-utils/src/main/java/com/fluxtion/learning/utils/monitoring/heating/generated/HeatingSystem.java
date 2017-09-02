@@ -6,8 +6,8 @@ import com.fluxtion.runtime.lifecycle.Lifecycle;
 import com.fluxtion.runtime.plugin.nodes.BetweenHoursTest;
 import com.fluxtion.learning.utils.monitoring.heating.TimerController;
 import com.fluxtion.learning.utils.monitoring.heating.PumpController;
-import com.fluxtion.learning.utils.monitoring.heating.ControllerDisplay;
 import com.fluxtion.learning.utils.monitoring.heating.BoilerController;
+import com.fluxtion.learning.utils.monitoring.heating.ControllerDisplay;
 import com.fluxtion.runtime.plugin.auditing.DelegatingAuditor;
 import com.fluxtion.runtime.plugin.logging.EventLogManager;
 import com.fluxtion.runtime.plugin.profiler.HdrProfiler;
@@ -31,8 +31,8 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
   private final BetweenHoursTest betweenHoursTest_1 = new BetweenHoursTest(7, 22);
   private final TimerController timerController_3 = new TimerController(betweenHoursTest_1);
   private final PumpController pumpController_5 = new PumpController(timerController_3);
-  public final ControllerDisplay display = new ControllerDisplay(timerController_3);
   public final BoilerController boiler = new BoilerController(timerController_3);
+  public final ControllerDisplay display = new ControllerDisplay(timerController_3);
   public final DelegatingAuditor delegatingAuditor = new DelegatingAuditor();
   public final EventLogManager logger = new EventLogManager();
   public final HdrProfiler profiler = new HdrProfiler();
@@ -170,12 +170,12 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
       isDirty_pumpController_5 = pumpController_5.changedState();
     }
     if (isDirty_timerController_3) {
-      auditInvocation(display, "display", "updateDisplay", typedEvent);
-      display.updateDisplay();
-    }
-    if (isDirty_timerController_3) {
       auditInvocation(boiler, "boiler", "changedState", typedEvent);
       boiler.changedState();
+    }
+    if (isDirty_timerController_3) {
+      auditInvocation(display, "display", "updateDisplay", typedEvent);
+      display.updateDisplay();
     }
     //event stack unwind callbacks
     afterEvent();
@@ -305,12 +305,12 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
       isDirty_pumpController_5 = pumpController_5.changedState();
     }
     if (isDirty_timerController_3) {
-      auditInvocation(display, "display", "updateDisplay", typedEvent);
-      display.updateDisplay();
-    }
-    if (isDirty_timerController_3) {
       auditInvocation(boiler, "boiler", "changedState", typedEvent);
       boiler.changedState();
+    }
+    if (isDirty_timerController_3) {
+      auditInvocation(display, "display", "updateDisplay", typedEvent);
+      display.updateDisplay();
     }
   }
 
@@ -328,12 +328,12 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
       isDirty_pumpController_5 = pumpController_5.changedState();
     }
     if (isDirty_timerController_3) {
-      auditInvocation(display, "display", "updateDisplay", typedEvent);
-      display.updateDisplay();
-    }
-    if (isDirty_timerController_3) {
       auditInvocation(boiler, "boiler", "changedState", typedEvent);
       boiler.changedState();
+    }
+    if (isDirty_timerController_3) {
+      auditInvocation(display, "display", "updateDisplay", typedEvent);
+      display.updateDisplay();
     }
   }
 
@@ -351,12 +351,12 @@ public class HeatingSystem implements EventHandler, BatchHandler, Lifecycle {
       isDirty_pumpController_5 = pumpController_5.changedState();
     }
     if (isDirty_timerController_3) {
-      auditInvocation(display, "display", "updateDisplay", typedEvent);
-      display.updateDisplay();
-    }
-    if (isDirty_timerController_3) {
       auditInvocation(boiler, "boiler", "changedState", typedEvent);
       boiler.changedState();
+    }
+    if (isDirty_timerController_3) {
+      auditInvocation(display, "display", "updateDisplay", typedEvent);
+      display.updateDisplay();
     }
   }
 
