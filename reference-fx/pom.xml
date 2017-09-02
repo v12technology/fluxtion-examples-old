@@ -178,9 +178,9 @@
                                     <packageName>com.fluxtion.learning.fx.example6.generated</packageName>
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.learning.fx.example6.reconciler.builder.ReconilerFactory</configClass>
-                                    <yamlFactoryConfig>src/main/resources/config/reconciler_6.yml</yamlFactoryConfig>
+                                    <yamlFactoryConfig>src/test/resources/config/reconciler_6.yml</yamlFactoryConfig>
                                     <nodeNamingClass>com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcilerNameProducer</nodeNamingClass>
-                                    <!--<logDebug>true</logDebug>-->
+                                    <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
                         </executions>
