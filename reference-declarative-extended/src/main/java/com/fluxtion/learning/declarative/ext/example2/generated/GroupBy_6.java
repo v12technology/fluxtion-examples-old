@@ -9,12 +9,12 @@ import com.fluxtion.extension.declarative.api.group.GroupBy;
 import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 import com.fluxtion.learning.declarative.ext.example2.FlightDelayProcessor.CarrierDelay;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 import com.fluxtion.learning.declarative.ext.example2.FlightDelayProcessor.FlightDetails;
 import com.fluxtion.learning.declarative.ext.example2.generated.GreaterThanDecorator_1;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 
 /**
  * generated group by holder.
@@ -36,12 +36,6 @@ public final class GroupBy_6 implements GroupBy<CarrierDelay>{
         CalculationStateGroupBy_6 instance = calcState.getOrCreateInstance(event.getCarrier(), initialisergreaterThanDecorator_10, event);
         target = instance.target;
         {
-			double value = instance.aggregateSum5;
-			value = AggregateSum.calcSum((double)event.getDelay(), (double)value);
-			target.setTotalDelayMins((int)value);
-			instance.aggregateSum5 = value;
-         }
-        {
 			double value = instance.aggregateAverage3;
 			value = instance.aggregateAverage3Function.calcAverage((double)event.getDelay(), (double)value);
 			target.setAvgDelay((int)value);
@@ -52,6 +46,12 @@ public final class GroupBy_6 implements GroupBy<CarrierDelay>{
 			value = AggregateCount.increment((int)event.getDelay(), (int)value);
 			target.setTotalFlights((int)value);
 			instance.aggregateCount4 = value;
+         }
+        {
+			double value = instance.aggregateSum5;
+			value = AggregateSum.calcSum((double)event.getDelay(), (double)value);
+			target.setTotalDelayMins((int)value);
+			instance.aggregateSum5 = value;
          }
         return true;
     }

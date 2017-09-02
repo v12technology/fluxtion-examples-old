@@ -132,8 +132,8 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder8_38.logLevel = (int) 3;
     msgBuilder8_38.initCapacity = (int) 256;
     msgBuilder12_44.source_SubtractInvoker_6_9 = eurNetPos;
-    msgBuilder12_44.source_CumSumInvoker_3_11 = cumSumInvoker_3_32;
     msgBuilder12_44.source_CumSumInvoker_1_10 = cumSumInvoker_1_17;
+    msgBuilder12_44.source_CumSumInvoker_3_11 = cumSumInvoker_3_32;
     msgBuilder12_44.logNotifier = fxTradeHandler_2;
     msgBuilder12_44.logLevel = (int) 3;
     msgBuilder12_44.initCapacity = (int) 256;
@@ -153,8 +153,8 @@ public class FxTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder30_71.logNotifier = lessThanDecorator_28_68;
     msgBuilder30_71.logLevel = (int) 1;
     msgBuilder30_71.initCapacity = (int) 256;
-    eurNetPos.source_CumSumInvoker_3_5 = cumSumInvoker_3_32;
     eurNetPos.source_CumSumInvoker_1_4 = cumSumInvoker_1_17;
+    eurNetPos.source_CumSumInvoker_3_5 = cumSumInvoker_3_32;
   }
 
   @Override

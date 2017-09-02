@@ -280,8 +280,8 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
     }
     isDirty_matchResultCsvMarshaller4_14 = matchResultCsvMarshaller4_14.onEol(typedEvent);
     if (isDirty_matchResultCsvMarshaller4_14) {
-      leagueSummary.updatematchResultCsvMarshaller40(matchResultCsvMarshaller4_14);
       leagueSummary.updatematchResultCsvMarshaller41(matchResultCsvMarshaller4_14);
+      leagueSummary.updatematchResultCsvMarshaller40(matchResultCsvMarshaller4_14);
     }
     if (isDirty_matchResultCsvMarshaller4_14) {
       isDirty_leagueSummary = leagueSummary.updated();
@@ -301,9 +301,9 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
     isDirty_asciiAnyCharMatcher_0_18 = asciiAnyCharMatcher_0_18.onChar_44(typedEvent);
     if (isDirty_asciiAnyCharMatcher_0_18) {
       csv2ByteBuffer_8.onDelimiter(asciiAnyCharMatcher_0_18);
-      csv2Double_11.onDelimiter(asciiAnyCharMatcher_0_18);
       csv2ByteBuffer_2.onDelimiter(asciiAnyCharMatcher_0_18);
       csv2Double_5.onDelimiter(asciiAnyCharMatcher_0_18);
+      csv2Double_11.onDelimiter(asciiAnyCharMatcher_0_18);
     }
     isDirty_csv2ByteBuffer_2 = csv2ByteBuffer_2.appendToBuffer(typedEvent);
     if (isDirty_asciiAnyCharMatcher_1_19 | isDirty_asciiAnyCharMatcher_0_18) {
