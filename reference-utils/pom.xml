@@ -27,13 +27,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.maven-plugin.ver>1.0.6</fluxtion.maven-plugin.ver>
+        <fluxtion.maven-plugin.ver>1.0.5</fluxtion.maven-plugin.ver>
         <fluxtion.runtime-plugin.ver>1.0.2-SNAPSHOT</fluxtion.runtime-plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
         -->
-        <fluxtion.exe.path>${fluxtion.declarative.ext.trial}</fluxtion.exe.path>
+        <fluxtion.exe.path>/home/greg/development/tools/fluxtion/V12/fluxtion-declarative-extended-trial-0.1.12/fluxtion</fluxtion.exe.path>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     
