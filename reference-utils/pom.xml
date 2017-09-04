@@ -33,7 +33,7 @@
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
         -->
-        <fluxtion.exe.path>/home/greg/development/tools/fluxtion/V12/fluxtion-declarative-extended-trial-0.1.12/fluxtion</fluxtion.exe.path>
+        <fluxtion.exe.path>/home/greg/development/tools/fluxtion/V12/fluxtion-declarative-extended-trial-0.1.13/fluxtion</fluxtion.exe.path>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     
@@ -94,6 +94,22 @@
                                     <!--<configClass>com.fluxtion.learning.utils.logging.HeatingSystemConfig</configClass>-->
                                     <packageName>com.fluxtion.learning.utils.monitoring.heating.generated</packageName>
                                     <className>HeatingSystem</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
+                                    <!--<logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>example-cooling</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.utils.monitoring.cooling.CoolingSepConfig</configClass>
+                                    <packageName>com.fluxtion.learning.utils.monitoring.cooling.generated</packageName>
+                                    <className>RackCoolingSystem</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>${basedir}/src/main/java</outputDirectory>
                                     <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
