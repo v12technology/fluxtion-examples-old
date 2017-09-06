@@ -18,6 +18,7 @@ import com.fluxtion.runtime.plugin.events.ListenerRegistrationEvent;
 import com.fluxtion.runtime.plugin.logging.EventLogConfig;
 import com.fluxtion.runtime.plugin.tracing.TraceEvents.PublishProperties;
 import com.fluxtion.runtime.plugin.tracing.TracerConfigEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import java.util.HashMap;
 
@@ -312,9 +313,9 @@ public class RackCoolingSystem implements EventHandler, BatchHandler, Lifecycle 
 
   private void auditEvent(Object typedEvent) {
     delegatingAuditor.eventReceived(typedEvent);
+    logger.eventReceived(typedEvent);
     profiler.eventReceived(typedEvent);
     propertyTracer.eventReceived(typedEvent);
-    logger.eventReceived(typedEvent);
   }
 
   private void auditInvocation(Object node, String nodeName, String methodName, Object typedEvent) {
