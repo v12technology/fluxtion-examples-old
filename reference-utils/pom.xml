@@ -33,7 +33,7 @@
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
         -->
-        <fluxtion.exe.path>/home/greg/development/tools/fluxtion/V12/fluxtion-declarative-extended-trial-0.1.13/fluxtion</fluxtion.exe.path>
+        <fluxtion.exe.path>${fluxtion.declarative.ext.trial}</fluxtion.exe.path>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     
