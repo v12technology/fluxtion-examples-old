@@ -84,6 +84,40 @@
                         <version>${fluxtion.maven-plugin.ver}</version>
                         <executions>
                             <execution>
+                                <id>example-Event</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.utils.events.SEPBuilder</configClass>
+                                    <!--<configClass>com.fluxtion.learning.utils.logging.HeatingSystemConfig</configClass>-->
+                                    <packageName>com.fluxtion.learning.utils.events.generated</packageName>
+                                    <className>AlarmProcessor</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
+                                    <!--<logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>example-Event-Audited</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.utils.events.SEPBuilder$AuditingAlarmBuilder</configClass>
+                                    <!--<configClass>com.fluxtion.learning.utils.logging.HeatingSystemConfig</configClass>-->
+                                    <packageName>com.fluxtion.learning.utils.events.generated</packageName>
+                                    <className>AlarmProcessorAudited</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
+                                    <!--<logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                            <execution>
                                 <id>example1</id>
                                 <goals>
                                     <goal>generate</goal>

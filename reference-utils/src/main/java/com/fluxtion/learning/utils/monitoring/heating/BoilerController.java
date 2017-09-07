@@ -41,7 +41,7 @@ public class BoilerController extends EventLogNode {
     
     @EventHandler(filterString = "flowSignal", propagate = false)
     public void waterFlowSensor(BooleanSignal flowSignal){
-        lphwFlowing = flowSignal.value();
+        lphwFlowing = flowSignal.isEnabled();
         changedState();
     }
     

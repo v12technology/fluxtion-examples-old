@@ -44,7 +44,7 @@ public class ControllerDisplay extends EventLogNode {
 
     @EventHandler(filterString = "burnerSignal")
     public void burnerSensor(BooleanSignal burnerSensorSignal) {
-        boilerOn =  burnerSensorSignal.value();
+        boilerOn =  burnerSensorSignal.isEnabled();
         updateDisplay();
     }
     
