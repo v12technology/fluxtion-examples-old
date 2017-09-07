@@ -28,11 +28,21 @@ import java.util.List;
 
 /**
  * An example alarm clock that only uses events defined in the runtime-plugins
- * module. Re-using pre-defined events removes the need to create additional 
- * events where the requirements are relatively simple. <p>
+ * module. Re-using pre-defined events removes the need to define events
+ * classes. 
  * 
- * Over using string based
- * generic events will create a fragile api!!
+ * The AlarmClock has the following functionality:
+ * <ul>
+ * <li>Turn alarm on/off using {@link BooleanSignal} see {@link #alarmEnable(com.fluxtion.runtime.plugin.events.BooleanSignal) }
+ * <li>Set alarm time using {@link NumericSignal} see {@link #alarmTime(com.fluxtion.runtime.plugin.events.NumericSignal)  }
+ * <li>Set alarm listener using {@link ListenerRegistrationEvent} see {@link #setAlarmListener(com.fluxtion.runtime.plugin.events.ListenerRegistrationEvent)   }
+ * <li>Determine if alarm should comparing time now to alarm time using a {@link TimingPulseEvent} see {@link #tickTock(com.fluxtion.runtime.plugin.events.TimingPulseEvent) }
+ * </ul>
+ * <p>
+ *
+ * Where the requirements are relatively simple this can be an effective
+ * approach. Beware, over using string based generic events will create a fragile api!!
+ *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
 public class AlarmClock {
@@ -69,7 +79,7 @@ public class AlarmClock {
     public boolean tickTock(TimingPulseEvent tick) {
         Calendar c = Calendar.getInstance();
         c.setTimeInMillis(tick.currentTimeMillis);
-        final int currentHour = (int)c.get(Calendar.HOUR_OF_DAY);
+        final int currentHour = (int) c.get(Calendar.HOUR_OF_DAY);
         final boolean fireAlarm = currentHour == alarmHour && alarmEnabled;
         if (fireAlarm) {
             System.out.printf("current_hour:%d, alarm_hour:%d,  alarmEnabled:%b, fire:%b %n", currentHour, alarmHour, alarmEnabled, fireAlarm);
