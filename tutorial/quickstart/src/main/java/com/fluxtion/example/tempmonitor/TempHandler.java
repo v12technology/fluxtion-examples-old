@@ -52,6 +52,8 @@ public class TempHandler {
 
         TemperatureAlarm monitor = new TemperatureAlarm();
         monitor.init();
+        //uncomment to have only WARNING
+//        monitor.handleEvent(LogControlEvent.enableLevelFiltering(3));
         monitor.onEvent(new StartOfDay());
         monitor.onEvent(new TempEvent(10));
         monitor.onEvent(new TempEvent(20));
@@ -62,6 +64,9 @@ public class TempHandler {
         monitor.onEvent(new StartOfDay());
         monitor.onEvent(new TempEvent(6));
         monitor.onEvent(new TempEvent(4));
+        // uncomment to remove logging meta data
+//        monitor.handleEvent(LogControlEvent.recordMsgBuildTime(false));
+//        monitor.handleEvent(LogControlEvent.recordMsgLogLevel(false));
         monitor.onEvent(new TempEvent(26));
         monitor.onEvent(new EndOfDay());
         monitor.onEvent(new StartOfDay());
