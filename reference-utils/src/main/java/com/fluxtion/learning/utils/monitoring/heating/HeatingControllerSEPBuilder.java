@@ -31,10 +31,6 @@ public class HeatingControllerSEPBuilder extends AuditedSep {
         addPublicNode(new BoilerController(heatingSignal), "boiler");
         addNode(new PumpController(heatingSignal));
         addPublicNode(new ControllerDisplay(heatingSignal), "display");
-        //add auditors
-//        addAuditor(new EventLogManager(), "logger");
-//        addAuditor(new DelegatingAuditor(), "delegatingAuditor");
-//        addAuditor(new Tracer(), "propertyTracer");
     }
 
 }
