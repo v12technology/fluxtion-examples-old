@@ -25,6 +25,7 @@ obtained from V12 Technology Limited.
         <module>reference-statemachine</module>
         <module>reference-fx</module>
         <module>case-studies</module>
+        <module>tutorial</module>
     </modules>
     
     <properties>
