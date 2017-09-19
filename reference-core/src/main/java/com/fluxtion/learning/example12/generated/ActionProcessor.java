@@ -1,16 +1,12 @@
 package com.fluxtion.learning.example12.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.learning.example12.ActionArrayMonitor;
-import com.fluxtion.learning.example12.Handlers.ShowActivityHandler;
 import com.fluxtion.learning.example12.Handlers.ShowTickHandler;
 import com.fluxtion.learning.example12.Handlers.ShowTimeHandler;
+import com.fluxtion.learning.example12.Handlers.ShowActivityHandler;
+import com.fluxtion.learning.example12.ActionArrayMonitor;
 import com.fluxtion.learning.example12.Handlers.ActionHandler;
 import com.fluxtion.learning.example12.Events.ShowActivityAction;
 import com.fluxtion.learning.example12.Events.ShowTimeAction;
@@ -19,23 +15,19 @@ import com.fluxtion.learning.example12.Events.Tick;
 public class ActionProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final ActionArrayMonitor actionArrayMonitor_7 = new ActionArrayMonitor();
-  private final ShowActivityHandler showActivityHandler_5 = new ShowActivityHandler();
   private final ShowTickHandler showTickHandler_1 = new ShowTickHandler();
   private final ShowTimeHandler showTimeHandler_3 = new ShowTimeHandler();
+  private final ShowActivityHandler showActivityHandler_5 = new ShowActivityHandler();
+  private final ActionArrayMonitor actionArrayMonitor_7 = new ActionArrayMonitor();
   //Dirty flags
 
   //Filter constants
 
   public ActionProcessor() {
-    //actionArrayMonitor_7
     actionArrayMonitor_7.handlers = new ActionHandler[3];
     actionArrayMonitor_7.handlers[0] = showTickHandler_1;
     actionArrayMonitor_7.handlers[1] = showTimeHandler_3;
     actionArrayMonitor_7.handlers[2] = showActivityHandler_5;
-    //showActivityHandler_5
-    //showTickHandler_1
-    //showTimeHandler_3
   }
 
   @Override

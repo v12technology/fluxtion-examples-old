@@ -1,12 +1,8 @@
 package com.fluxtion.learning.example21.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example21.HistogramBucket;
 import com.fluxtion.learning.example21.Histogram;
 import com.fluxtion.learning.example21.TradeDistributionAnalyser;
@@ -32,37 +28,26 @@ public class HistogramProcessor implements EventHandler, BatchHandler, Lifecycle
   //Filter constants
 
   public HistogramProcessor() {
-    //bucket_0
     bucket_0.min = (int) 0;
     bucket_0.max = (int) 10;
-    //bucket_1
     bucket_1.min = (int) 10;
     bucket_1.max = (int) 20;
-    //bucket_2
     bucket_2.min = (int) 20;
     bucket_2.max = (int) 30;
-    //bucket_3
     bucket_3.min = (int) 30;
     bucket_3.max = (int) 40;
-    //bucket_4
     bucket_4.min = (int) 40;
     bucket_4.max = (int) 50;
-    //bucket_5
     bucket_5.min = (int) 50;
     bucket_5.max = (int) 60;
-    //bucket_6
     bucket_6.min = (int) 60;
     bucket_6.max = (int) 70;
-    //bucket_7
     bucket_7.min = (int) 70;
     bucket_7.max = (int) 80;
-    //bucket_8
     bucket_8.min = (int) 80;
     bucket_8.max = (int) 90;
-    //bucket_9
     bucket_9.min = (int) 90;
     bucket_9.max = (int) 100;
-    //histogram_0
     histogram_0.buckets = new HistogramBucket[10];
     histogram_0.buckets[0] = bucket_0;
     histogram_0.buckets[1] = bucket_1;
@@ -76,7 +61,6 @@ public class HistogramProcessor implements EventHandler, BatchHandler, Lifecycle
     histogram_0.buckets[9] = bucket_9;
     histogram_0.min = (int) 0;
     histogram_0.max = (int) 100;
-    //tradeAnalyser
     tradeAnalyser.tradeDistribution = histogram_0;
   }
 

@@ -1,12 +1,8 @@
 package com.fluxtion.learning.example27.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example27.HighTemperatureTest;
 import com.fluxtion.learning.example27.TemperatureAlertLogger;
 import com.fluxtion.learning.TemperatureEvent;
@@ -25,9 +21,7 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
 
   public TemperatureProcessor() {
     final net.vidageek.mirror.dsl.Mirror assigner = new net.vidageek.mirror.dsl.Mirror();
-    //highTemperatureTest_1
     assigner.on(highTemperatureTest_1).set().field("highLimit").withValue((int) 35);
-    //alertLogger
     assigner.on(alertLogger).set().field("tempTest").withValue(highTemperatureTest_1);
   }
 

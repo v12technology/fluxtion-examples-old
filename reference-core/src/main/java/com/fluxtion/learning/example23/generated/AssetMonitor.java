@@ -1,22 +1,21 @@
 package com.fluxtion.learning.example23.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example18.AssetEventHandler;
 import com.fluxtion.learning.example18.BreachNotifier;
 import com.fluxtion.learning.example18.AssetEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
+import java.util.HashMap;
 
 public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final AssetEventHandler assetHandlerCommodities = new AssetEventHandler();
-  private final AssetEventHandler assetHandlerEquities = new AssetEventHandler();
   private final AssetEventHandler assetHandlerFX = new AssetEventHandler();
+  private final AssetEventHandler assetHandlerEquities = new AssetEventHandler();
+  private final AssetEventHandler assetHandlerCommodities = new AssetEventHandler();
   public final BreachNotifier notifier = new BreachNotifier();
   //Dirty flags
   private boolean isDirty_assetHandlerCommodities = false;
@@ -25,13 +24,9 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
   //Filter constants
 
   public AssetMonitor() {
-    //assetHandlerCommodities
     assetHandlerCommodities.portfolioName = "Commodities";
-    //assetHandlerEquities
     assetHandlerEquities.portfolioName = "Equities";
-    //assetHandlerFX
     assetHandlerFX.portfolioName = "FX";
-    //notifier
     notifier.assets = new AssetEventHandler[3];
     notifier.assets[0] = assetHandlerFX;
     notifier.assets[1] = assetHandlerEquities;
@@ -51,45 +46,84 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
   }
 
   public void handleEvent(AssetEvent typedEvent) {
-    switch (typedEvent.filterString()) {
-      case ("Commodities"):
-        isDirty_assetHandlerCommodities = assetHandlerCommodities.handleValuation(typedEvent);
-        if (isDirty_assetHandlerCommodities) {
-          notifier.assetBreached(assetHandlerCommodities);
-        }
-        if (isDirty_assetHandlerFX
-            || isDirty_assetHandlerCommodities
-            || isDirty_assetHandlerEquities) {
-          notifier.onEvent();
-        }
-        afterEvent();
-        return;
-      case ("Equities"):
-        isDirty_assetHandlerEquities = assetHandlerEquities.handleValuation(typedEvent);
-        if (isDirty_assetHandlerEquities) {
-          notifier.assetBreached(assetHandlerEquities);
-        }
-        if (isDirty_assetHandlerFX
-            || isDirty_assetHandlerCommodities
-            || isDirty_assetHandlerEquities) {
-          notifier.onEvent();
-        }
-        afterEvent();
-        return;
-      case ("FX"):
-        isDirty_assetHandlerFX = assetHandlerFX.handleValuation(typedEvent);
-        if (isDirty_assetHandlerFX) {
-          notifier.assetBreached(assetHandlerFX);
-        }
-        if (isDirty_assetHandlerFX
-            || isDirty_assetHandlerCommodities
-            || isDirty_assetHandlerEquities) {
-          notifier.onEvent();
-        }
-        afterEvent();
-        return;
+    FilteredHandlerInvoker invoker = dispatchStringMapAssetEvent.get(typedEvent.filterString());
+    if (invoker != null) {
+      invoker.invoke(typedEvent);
+      afterEvent();
+      return;
     }
     afterEvent();
+  }
+
+  //int filter maps
+  //String filter maps
+  private final HashMap<String, FilteredHandlerInvoker> dispatchStringMapAssetEvent =
+      initdispatchStringMapAssetEvent();
+
+  private HashMap<String, FilteredHandlerInvoker> initdispatchStringMapAssetEvent() {
+    HashMap<String, FilteredHandlerInvoker> dispatchMap = new HashMap<>();
+    dispatchMap.put(
+        "Commodities",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_AssetEvent_Commodities((com.fluxtion.learning.example18.AssetEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "Equities",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_AssetEvent_Equities((com.fluxtion.learning.example18.AssetEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "FX",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_AssetEvent_FX((com.fluxtion.learning.example18.AssetEvent) event);
+          }
+        });
+    return dispatchMap;
+  }
+
+  private void handle_AssetEvent_Commodities(
+      com.fluxtion.learning.example18.AssetEvent typedEvent) {
+    //method body - invoke call tree
+    isDirty_assetHandlerCommodities = assetHandlerCommodities.handleValuation(typedEvent);
+    if (isDirty_assetHandlerCommodities) {
+      notifier.assetBreached(assetHandlerCommodities);
+    }
+    if (isDirty_assetHandlerCommodities | isDirty_assetHandlerEquities | isDirty_assetHandlerFX) {
+      notifier.onEvent();
+    }
+  }
+
+  private void handle_AssetEvent_Equities(com.fluxtion.learning.example18.AssetEvent typedEvent) {
+    //method body - invoke call tree
+    isDirty_assetHandlerEquities = assetHandlerEquities.handleValuation(typedEvent);
+    if (isDirty_assetHandlerEquities) {
+      notifier.assetBreached(assetHandlerEquities);
+    }
+    if (isDirty_assetHandlerCommodities | isDirty_assetHandlerEquities | isDirty_assetHandlerFX) {
+      notifier.onEvent();
+    }
+  }
+
+  private void handle_AssetEvent_FX(com.fluxtion.learning.example18.AssetEvent typedEvent) {
+    //method body - invoke call tree
+    isDirty_assetHandlerFX = assetHandlerFX.handleValuation(typedEvent);
+    if (isDirty_assetHandlerFX) {
+      notifier.assetBreached(assetHandlerFX);
+    }
+    if (isDirty_assetHandlerCommodities | isDirty_assetHandlerEquities | isDirty_assetHandlerFX) {
+      notifier.onEvent();
+    }
   }
 
   @Override

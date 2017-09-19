@@ -28,7 +28,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.plugin.ver>1.0.6</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.32</fluxtion.ver>
+        <fluxtion.ver>0.1.33</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -87,7 +87,8 @@
                                     <packageName>com.fluxtion.learning.example20.generated</packageName>
                                     <className>ScreenProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                   
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                     <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
@@ -122,7 +123,8 @@
                                     <packageName>com.fluxtion.learning.example1.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -135,7 +137,8 @@
                                     <packageName>com.fluxtion.learning.example2.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -148,7 +151,8 @@
                                     <packageName>com.fluxtion.learning.example3.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -161,7 +165,8 @@
                                     <packageName>com.fluxtion.learning.example4.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -174,7 +179,8 @@
                                     <packageName>com.fluxtion.learning.example5.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -187,7 +193,8 @@
                                     <packageName>com.fluxtion.learning.example6.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -200,7 +207,8 @@
                                     <packageName>com.fluxtion.learning.example8.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -213,7 +221,8 @@
                                     <packageName>com.fluxtion.learning.example9.generated</packageName>
                                     <className>NewsProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -226,7 +235,8 @@
                                     <packageName>com.fluxtion.learning.example10.generated</packageName>
                                     <className>ActivityProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -239,7 +249,8 @@
                                     <packageName>com.fluxtion.learning.example11.generated</packageName>
                                     <className>ActivityProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -252,7 +263,8 @@
                                     <packageName>com.fluxtion.learning.example12.generated</packageName>
                                     <className>ActionProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -265,7 +277,8 @@
                                     <packageName>com.fluxtion.learning.example13.generated</packageName>
                                     <className>ActivityProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -278,7 +291,8 @@
                                     <packageName>com.fluxtion.learning.example14.generated</packageName>
                                     <className>ActivityProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -291,7 +305,8 @@
                                     <packageName>com.fluxtion.learning.example15.generated</packageName>
                                     <className>Calculator</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -304,7 +319,8 @@
                                     <packageName>com.fluxtion.learning.example16.generated</packageName>
                                     <className>SalesProcessorSEP</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -317,7 +333,8 @@
                                     <packageName>com.fluxtion.learning.example17.generated</packageName>
                                     <className>WcSep</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -330,7 +347,8 @@
                                     <packageName>com.fluxtion.learning.example18.generated</packageName>
                                     <className>AssetMonitor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -343,7 +361,8 @@
                                     <packageName>com.fluxtion.learning.example19.generated</packageName>
                                     <className>BatchingAssetMonitor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -357,7 +376,8 @@
                                     <packageName>com.fluxtion.learning.example20.generated</packageName>
                                     <className>ScreenProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -370,7 +390,8 @@
                                     <packageName>com.fluxtion.learning.example21.generated</packageName>
                                     <className>HistogramProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution> 
                             <execution>
@@ -383,7 +404,8 @@
                                     <packageName>com.fluxtion.learning.example22.generated</packageName>
                                     <className>HistogramProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution> 
                             <execution>
@@ -397,7 +419,8 @@
                                     <className>AssetMonitor</className>
                                     <nodeNamingClass>com.fluxtion.learning.example23.AssetsNodeNamer</nodeNamingClass>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -412,7 +435,8 @@
                                     <className>ScreenProcessor</className>
                                     <filterNamingClass>com.fluxtion.learning.example24.CharFilterNamer</filterNamingClass>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -425,7 +449,8 @@
                                     <packageName>com.fluxtion.learning.example25.generated</packageName>
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -438,7 +463,8 @@
                                     <packageName>com.fluxtion.learning.example26.generated</packageName>
                                     <className>ActivityProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                             <execution>
@@ -452,7 +478,8 @@
                                     <className>TemperatureProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <assignNonPublicMembers>true</assignNonPublicMembers>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
+                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>                                    
+                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
                                 </configuration>
                             </execution>
                         </executions>

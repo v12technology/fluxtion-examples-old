@@ -1,39 +1,31 @@
 package com.fluxtion.learning.example26.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.learning.example10.Handlers.StairHandler;
 import com.fluxtion.learning.example10.Handlers.StepHandler;
-import com.fluxtion.learning.example26.ActivityMonitor;
 import com.fluxtion.learning.example26.TickHandler;
+import com.fluxtion.learning.example10.Handlers.StairHandler;
+import com.fluxtion.learning.example26.ActivityMonitor;
 import com.fluxtion.learning.example10.Events.AccelEvent;
 import com.fluxtion.learning.example12.Events.Tick;
 
 public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final StairHandler stairHandler_3 = new StairHandler();
   private final StepHandler stepHandler_1 = new StepHandler();
-  public final ActivityMonitor monitor = new ActivityMonitor();
   private final TickHandler tickHandler_5 = new TickHandler();
+  private final StairHandler stairHandler_3 = new StairHandler();
+  public final ActivityMonitor monitor = new ActivityMonitor();
   //Dirty flags
 
   //Filter constants
 
   public ActivityProcessor() {
-    //stairHandler_3
-    //stepHandler_1
-    //monitor
     monitor.stepHandler = stepHandler_1;
     monitor.stairHandler = stairHandler_3;
     monitor.tickHandler = tickHandler_5;
     monitor.count = (int) 0;
-    //tickHandler_5
   }
 
   @Override

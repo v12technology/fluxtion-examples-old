@@ -1,14 +1,13 @@
 package com.fluxtion.learning.example16.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example16.SalesProcessor;
 import com.fluxtion.learning.example16.SaleEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
+import java.util.HashMap;
 
 public class SalesProcessorSEP implements EventHandler, BatchHandler, Lifecycle {
 
@@ -21,11 +20,8 @@ public class SalesProcessorSEP implements EventHandler, BatchHandler, Lifecycle 
   //Filter constants
 
   public SalesProcessorSEP() {
-    //salesProcessor_1
     salesProcessor_1.salesPerson = "bill murray";
-    //salesProcessor_3
     salesProcessor_3.salesPerson = "jennifer aniston";
-    //salesProcessor_5
     salesProcessor_5.salesPerson = "daniel craig";
   }
 
@@ -42,21 +38,66 @@ public class SalesProcessorSEP implements EventHandler, BatchHandler, Lifecycle 
   }
 
   public void handleEvent(SaleEvent typedEvent) {
-    switch (typedEvent.filterString()) {
-      case ("bill murray"):
-        salesProcessor_1.handleSale(typedEvent);
-        afterEvent();
-        return;
-      case ("daniel craig"):
-        salesProcessor_5.handleSale(typedEvent);
-        afterEvent();
-        return;
-      case ("jennifer aniston"):
-        salesProcessor_3.handleSale(typedEvent);
-        afterEvent();
-        return;
+    FilteredHandlerInvoker invoker = dispatchStringMapSaleEvent.get(typedEvent.filterString());
+    if (invoker != null) {
+      invoker.invoke(typedEvent);
+      afterEvent();
+      return;
     }
     afterEvent();
+  }
+
+  //int filter maps
+  //String filter maps
+  private final HashMap<String, FilteredHandlerInvoker> dispatchStringMapSaleEvent =
+      initdispatchStringMapSaleEvent();
+
+  private HashMap<String, FilteredHandlerInvoker> initdispatchStringMapSaleEvent() {
+    HashMap<String, FilteredHandlerInvoker> dispatchMap = new HashMap<>();
+    dispatchMap.put(
+        "bill murray",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_SaleEvent_bill_murray((com.fluxtion.learning.example16.SaleEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "daniel craig",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_SaleEvent_daniel_craig((com.fluxtion.learning.example16.SaleEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "jennifer aniston",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_SaleEvent_jennifer_aniston((com.fluxtion.learning.example16.SaleEvent) event);
+          }
+        });
+    return dispatchMap;
+  }
+
+  private void handle_SaleEvent_bill_murray(com.fluxtion.learning.example16.SaleEvent typedEvent) {
+    //method body - invoke call tree
+    salesProcessor_1.handleSale(typedEvent);
+  }
+
+  private void handle_SaleEvent_daniel_craig(com.fluxtion.learning.example16.SaleEvent typedEvent) {
+    //method body - invoke call tree
+    salesProcessor_5.handleSale(typedEvent);
+  }
+
+  private void handle_SaleEvent_jennifer_aniston(
+      com.fluxtion.learning.example16.SaleEvent typedEvent) {
+    //method body - invoke call tree
+    salesProcessor_3.handleSale(typedEvent);
   }
 
   @Override

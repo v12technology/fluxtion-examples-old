@@ -1,12 +1,8 @@
 package com.fluxtion.learning.example25.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example25.AvgDayTemp;
 import com.fluxtion.learning.example25.AvgTempLogger;
 import com.fluxtion.learning.EndOfDayEvent;
@@ -22,8 +18,6 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   //Filter constants
 
   public TemperatureProcessor() {
-    //avgDayTemp_1
-    //avgTempLogger_3
     avgTempLogger_3.averageCalc = avgDayTemp_1;
     avgTempLogger_3.updateCount = (int) 0;
   }

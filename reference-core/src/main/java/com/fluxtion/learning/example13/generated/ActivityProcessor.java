@@ -1,12 +1,8 @@
 package com.fluxtion.learning.example13.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example10.Handlers.StairHandler;
 import com.fluxtion.learning.example10.Handlers.StepHandler;
 import com.fluxtion.learning.example13.ActivityMonitor;
@@ -26,9 +22,6 @@ public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle 
   //Filter constants
 
   public ActivityProcessor() {
-    //stairHandler_3
-    //stepHandler_1
-    //activityMonitor_5
     activityMonitor_5.stepHandler = stepHandler_1;
     activityMonitor_5.stairHandler = stairHandler_3;
   }

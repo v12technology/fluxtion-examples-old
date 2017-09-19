@@ -1,15 +1,14 @@
 package com.fluxtion.learning.example18.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example18.AssetEventHandler;
 import com.fluxtion.learning.example18.BreachNotifier;
 import com.fluxtion.learning.example18.AssetEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
+import java.util.HashMap;
 
 public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
 
@@ -25,13 +24,9 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
   //Filter constants
 
   public AssetMonitor() {
-    //assetEventHandler_1
     assetEventHandler_1.portfolioName = "FX";
-    //assetEventHandler_3
     assetEventHandler_3.portfolioName = "Equities";
-    //assetEventHandler_5
     assetEventHandler_5.portfolioName = "Commodities";
-    //notifier
     notifier.assets = new AssetEventHandler[3];
     notifier.assets[0] = assetEventHandler_1;
     notifier.assets[1] = assetEventHandler_3;
@@ -51,45 +46,84 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
   }
 
   public void handleEvent(AssetEvent typedEvent) {
-    switch (typedEvent.filterString()) {
-      case ("Commodities"):
-        isDirty_assetEventHandler_5 = assetEventHandler_5.handleValuation(typedEvent);
-        if (isDirty_assetEventHandler_5) {
-          notifier.assetBreached(assetEventHandler_5);
-        }
-        if (isDirty_assetEventHandler_3
-            || isDirty_assetEventHandler_1
-            || isDirty_assetEventHandler_5) {
-          notifier.onEvent();
-        }
-        afterEvent();
-        return;
-      case ("Equities"):
-        isDirty_assetEventHandler_3 = assetEventHandler_3.handleValuation(typedEvent);
-        if (isDirty_assetEventHandler_3) {
-          notifier.assetBreached(assetEventHandler_3);
-        }
-        if (isDirty_assetEventHandler_3
-            || isDirty_assetEventHandler_1
-            || isDirty_assetEventHandler_5) {
-          notifier.onEvent();
-        }
-        afterEvent();
-        return;
-      case ("FX"):
-        isDirty_assetEventHandler_1 = assetEventHandler_1.handleValuation(typedEvent);
-        if (isDirty_assetEventHandler_1) {
-          notifier.assetBreached(assetEventHandler_1);
-        }
-        if (isDirty_assetEventHandler_3
-            || isDirty_assetEventHandler_1
-            || isDirty_assetEventHandler_5) {
-          notifier.onEvent();
-        }
-        afterEvent();
-        return;
+    FilteredHandlerInvoker invoker = dispatchStringMapAssetEvent.get(typedEvent.filterString());
+    if (invoker != null) {
+      invoker.invoke(typedEvent);
+      afterEvent();
+      return;
     }
     afterEvent();
+  }
+
+  //int filter maps
+  //String filter maps
+  private final HashMap<String, FilteredHandlerInvoker> dispatchStringMapAssetEvent =
+      initdispatchStringMapAssetEvent();
+
+  private HashMap<String, FilteredHandlerInvoker> initdispatchStringMapAssetEvent() {
+    HashMap<String, FilteredHandlerInvoker> dispatchMap = new HashMap<>();
+    dispatchMap.put(
+        "Commodities",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_AssetEvent_Commodities((com.fluxtion.learning.example18.AssetEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "Equities",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_AssetEvent_Equities((com.fluxtion.learning.example18.AssetEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "FX",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_AssetEvent_FX((com.fluxtion.learning.example18.AssetEvent) event);
+          }
+        });
+    return dispatchMap;
+  }
+
+  private void handle_AssetEvent_Commodities(
+      com.fluxtion.learning.example18.AssetEvent typedEvent) {
+    //method body - invoke call tree
+    isDirty_assetEventHandler_5 = assetEventHandler_5.handleValuation(typedEvent);
+    if (isDirty_assetEventHandler_5) {
+      notifier.assetBreached(assetEventHandler_5);
+    }
+    if (isDirty_assetEventHandler_1 | isDirty_assetEventHandler_3 | isDirty_assetEventHandler_5) {
+      notifier.onEvent();
+    }
+  }
+
+  private void handle_AssetEvent_Equities(com.fluxtion.learning.example18.AssetEvent typedEvent) {
+    //method body - invoke call tree
+    isDirty_assetEventHandler_3 = assetEventHandler_3.handleValuation(typedEvent);
+    if (isDirty_assetEventHandler_3) {
+      notifier.assetBreached(assetEventHandler_3);
+    }
+    if (isDirty_assetEventHandler_1 | isDirty_assetEventHandler_3 | isDirty_assetEventHandler_5) {
+      notifier.onEvent();
+    }
+  }
+
+  private void handle_AssetEvent_FX(com.fluxtion.learning.example18.AssetEvent typedEvent) {
+    //method body - invoke call tree
+    isDirty_assetEventHandler_1 = assetEventHandler_1.handleValuation(typedEvent);
+    if (isDirty_assetEventHandler_1) {
+      notifier.assetBreached(assetEventHandler_1);
+    }
+    if (isDirty_assetEventHandler_1 | isDirty_assetEventHandler_3 | isDirty_assetEventHandler_5) {
+      notifier.onEvent();
+    }
   }
 
   @Override

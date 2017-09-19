@@ -1,12 +1,8 @@
 package com.fluxtion.learning.example1.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example1.TemperatureHandler;
 import com.fluxtion.learning.TemperatureEvent;
 
@@ -18,9 +14,7 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
 
   //Filter constants
 
-  public TemperatureProcessor() {
-    //temperatureHandler_1
-  }
+  public TemperatureProcessor() {}
 
   @Override
   public void onEvent(com.fluxtion.runtime.event.Event event) {

@@ -1,17 +1,13 @@
 package com.fluxtion.learning.example11.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.learning.example11.ActivityMonitor;
-import com.fluxtion.learning.example11.Handlers.ShowActivityHandler;
 import com.fluxtion.learning.example11.Handlers.ShowTimeHandler;
-import com.fluxtion.learning.example11.Handlers.StairHandler;
+import com.fluxtion.learning.example11.Handlers.ShowActivityHandler;
 import com.fluxtion.learning.example11.Handlers.StepHandler;
+import com.fluxtion.learning.example11.Handlers.StairHandler;
+import com.fluxtion.learning.example11.ActivityMonitor;
 import com.fluxtion.learning.example11.Events.AccelEvent;
 import com.fluxtion.learning.example11.Events.ShowActivityAction;
 import com.fluxtion.learning.example11.Events.ShowTimeAction;
@@ -20,25 +16,20 @@ import com.fluxtion.learning.example11.Events.Tick;
 public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final ActivityMonitor activityMonitor_9 = new ActivityMonitor();
-  private final ShowActivityHandler showActivityHandler_7 = new ShowActivityHandler();
   private final ShowTimeHandler showTimeHandler_5 = new ShowTimeHandler();
-  private final StairHandler stairHandler_3 = new StairHandler();
+  private final ShowActivityHandler showActivityHandler_7 = new ShowActivityHandler();
   private final StepHandler stepHandler_1 = new StepHandler();
+  private final StairHandler stairHandler_3 = new StairHandler();
+  private final ActivityMonitor activityMonitor_9 = new ActivityMonitor();
   //Dirty flags
 
   //Filter constants
 
   public ActivityProcessor() {
-    //activityMonitor_9
     activityMonitor_9.stepHandler = stepHandler_1;
     activityMonitor_9.stairHandler = stairHandler_3;
     activityMonitor_9.showTimeHandler = showTimeHandler_5;
     activityMonitor_9.showActivityHandler = showActivityHandler_7;
-    //showActivityHandler_7
-    //showTimeHandler_5
-    //stairHandler_3
-    //stepHandler_1
   }
 
   @Override

@@ -1,14 +1,9 @@
 package com.fluxtion.learning.example9.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example9.NewsAnalyser;
-import java.lang.String;
 import com.fluxtion.learning.example9.WordEvent;
 
 public class NewsProcessor implements EventHandler, BatchHandler, Lifecycle {
@@ -20,7 +15,6 @@ public class NewsProcessor implements EventHandler, BatchHandler, Lifecycle {
   //Filter constants
 
   public NewsProcessor() {
-    //newsAnalyser_1
     newsAnalyser_1.positieImpactMatch = new String[3];
     newsAnalyser_1.positieImpactMatch[0] = "IT";
     newsAnalyser_1.positieImpactMatch[1] = "ram";

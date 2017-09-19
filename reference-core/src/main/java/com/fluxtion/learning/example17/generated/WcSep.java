@@ -1,14 +1,12 @@
 package com.fluxtion.learning.example17.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.example17.WordCounter;
 import com.fluxtion.learning.example17.CharEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 
 public class WcSep implements EventHandler, BatchHandler, Lifecycle {
 
@@ -18,9 +16,7 @@ public class WcSep implements EventHandler, BatchHandler, Lifecycle {
 
   //Filter constants
 
-  public WcSep() {
-    //result
-  }
+  public WcSep() {}
 
   @Override
   public void onEvent(com.fluxtion.runtime.event.Event event) {
@@ -35,31 +31,88 @@ public class WcSep implements EventHandler, BatchHandler, Lifecycle {
   }
 
   public void handleEvent(CharEvent typedEvent) {
-    switch (typedEvent.filterId()) {
-        //Event Class:[com.fluxtion.learning.example17.CharEvent] filterId:[9]
-      case (9):
-        result.onTabDelimiter(typedEvent);
-        result.onAnyChar(typedEvent);
-        afterEvent();
-        return;
-        //Event Class:[com.fluxtion.learning.example17.CharEvent] filterId:[10]
-      case (10):
-        result.onEol(typedEvent);
-        result.onAnyChar(typedEvent);
-        afterEvent();
-        return;
-        //Event Class:[com.fluxtion.learning.example17.CharEvent] filterId:[32]
-      case (32):
-        result.onSpaceDelimiter(typedEvent);
-        result.onAnyChar(typedEvent);
-        afterEvent();
-        return;
+    FilteredHandlerInvoker invoker = dispatchIntMapCharEvent.get(typedEvent.filterId());
+    if (invoker != null) {
+      invoker.invoke(typedEvent);
+      afterEvent();
+      return;
     }
     //Default, no filter methods
-    result.onUnmatchedChar(typedEvent);
     result.onAnyChar(typedEvent);
+    result.onUnmatchedChar(typedEvent);
     //event stack unwind callbacks
     afterEvent();
+  }
+
+  //int filter maps
+  private final Int2ObjectOpenHashMap<FilteredHandlerInvoker> dispatchIntMapCharEvent =
+      initdispatchIntMapCharEvent();
+
+  //String filter maps
+  private Int2ObjectOpenHashMap<FilteredHandlerInvoker> initdispatchIntMapCharEvent() {
+    Int2ObjectOpenHashMap<FilteredHandlerInvoker> dispatchMap = new Int2ObjectOpenHashMap<>();
+    dispatchMap.put(
+        9,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharEvent_9((com.fluxtion.learning.example17.CharEvent) event);
+          }
+        });
+    dispatchMap.put(
+        10,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharEvent_10((com.fluxtion.learning.example17.CharEvent) event);
+          }
+        });
+    dispatchMap.put(
+        32,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharEvent_32((com.fluxtion.learning.example17.CharEvent) event);
+          }
+        });
+    dispatchMap.put(
+        0,
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_CharEvent_NoFilter((com.fluxtion.learning.example17.CharEvent) event);
+          }
+        });
+    return dispatchMap;
+  }
+
+  private void handle_CharEvent_9(com.fluxtion.learning.example17.CharEvent typedEvent) {
+    //method body - invoke call tree
+    result.onTabDelimiter(typedEvent);
+    result.onAnyChar(typedEvent);
+  }
+
+  private void handle_CharEvent_10(com.fluxtion.learning.example17.CharEvent typedEvent) {
+    //method body - invoke call tree
+    result.onEol(typedEvent);
+    result.onAnyChar(typedEvent);
+  }
+
+  private void handle_CharEvent_32(com.fluxtion.learning.example17.CharEvent typedEvent) {
+    //method body - invoke call tree
+    result.onSpaceDelimiter(typedEvent);
+    result.onAnyChar(typedEvent);
+  }
+
+  private void handle_CharEvent_NoFilter(com.fluxtion.learning.example17.CharEvent typedEvent) {
+    //method body - invoke call tree
+    result.onAnyChar(typedEvent);
+    result.onUnmatchedChar(typedEvent);
+    //event stack unwind callbacks
   }
 
   @Override

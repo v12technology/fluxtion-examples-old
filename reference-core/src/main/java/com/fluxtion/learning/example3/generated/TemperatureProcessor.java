@@ -1,43 +1,34 @@
 package com.fluxtion.learning.example3.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.learning.example3.AvgTemp;
-import com.fluxtion.learning.example3.DayAvgTempLogger;
 import com.fluxtion.learning.example3.EndOfDayHandler;
 import com.fluxtion.learning.example3.TemperatureHandler;
 import com.fluxtion.learning.example3.WeekdayValidator;
+import com.fluxtion.learning.example3.AvgTemp;
+import com.fluxtion.learning.example3.DayAvgTempLogger;
 import com.fluxtion.learning.EndOfDayEvent;
 import com.fluxtion.learning.TemperatureEvent;
 
 public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final AvgTemp avgTemp_5 = new AvgTemp();
-  private final DayAvgTempLogger dayAvgTempLogger_9 = new DayAvgTempLogger();
   private final EndOfDayHandler endOfDayHandler_3 = new EndOfDayHandler();
   private final TemperatureHandler temperatureHandler_1 = new TemperatureHandler();
   private final WeekdayValidator weekdayValidator_7 = new WeekdayValidator();
+  private final AvgTemp avgTemp_5 = new AvgTemp();
+  private final DayAvgTempLogger dayAvgTempLogger_9 = new DayAvgTempLogger();
   //Dirty flags
 
   //Filter constants
 
   public TemperatureProcessor() {
-    //avgTemp_5
     avgTemp_5.tempHandler = temperatureHandler_1;
     avgTemp_5.dayHandler = endOfDayHandler_3;
-    //dayAvgTempLogger_9
     dayAvgTempLogger_9.avgTemp = avgTemp_5;
     dayAvgTempLogger_9.weekdayTest = weekdayValidator_7;
     dayAvgTempLogger_9.dayHandler = endOfDayHandler_3;
-    //endOfDayHandler_3
-    //temperatureHandler_1
-    //weekdayValidator_7
     weekdayValidator_7.dayHandler = endOfDayHandler_3;
   }
 

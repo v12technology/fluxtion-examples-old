@@ -1,32 +1,28 @@
 package com.fluxtion.learning.example14.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import com.fluxtion.learning.example10.Handlers.StairHandler;
 import com.fluxtion.learning.example10.Handlers.StepHandler;
+import com.fluxtion.learning.example10.Handlers.StairHandler;
 import com.fluxtion.learning.example14.ActivityMonitor;
 import com.fluxtion.learning.example10.Events.AccelEvent;
 import com.fluxtion.learning.example14.ActionEvent;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
+import java.util.HashMap;
 
 public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final StairHandler stairHandler_3 = new StairHandler();
   private final StepHandler stepHandler_1 = new StepHandler();
+  private final StairHandler stairHandler_3 = new StairHandler();
   private final ActivityMonitor activityMonitor_5 = new ActivityMonitor();
   //Dirty flags
 
   //Filter constants
 
   public ActivityProcessor() {
-    //stairHandler_3
-    //stepHandler_1
-    //activityMonitor_5
     activityMonitor_5.stepHandler = stepHandler_1;
     activityMonitor_5.stairHandler = stairHandler_3;
   }
@@ -58,21 +54,66 @@ public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle 
   }
 
   public void handleEvent(ActionEvent typedEvent) {
-    switch (typedEvent.filterString()) {
-      case ("showActivity"):
-        activityMonitor_5.showActivityRequest(typedEvent);
-        afterEvent();
-        return;
-      case ("showTime"):
-        activityMonitor_5.showTimeRequest(typedEvent);
-        afterEvent();
-        return;
-      case ("tick"):
-        activityMonitor_5.timeTick(typedEvent);
-        afterEvent();
-        return;
+    FilteredHandlerInvoker invoker = dispatchStringMapActionEvent.get(typedEvent.filterString());
+    if (invoker != null) {
+      invoker.invoke(typedEvent);
+      afterEvent();
+      return;
     }
     afterEvent();
+  }
+
+  //int filter maps
+  //String filter maps
+  private final HashMap<String, FilteredHandlerInvoker> dispatchStringMapActionEvent =
+      initdispatchStringMapActionEvent();
+
+  private HashMap<String, FilteredHandlerInvoker> initdispatchStringMapActionEvent() {
+    HashMap<String, FilteredHandlerInvoker> dispatchMap = new HashMap<>();
+    dispatchMap.put(
+        "showActivity",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_ActionEvent_showActivity((com.fluxtion.learning.example14.ActionEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "showTime",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_ActionEvent_showTime((com.fluxtion.learning.example14.ActionEvent) event);
+          }
+        });
+    dispatchMap.put(
+        "tick",
+        new FilteredHandlerInvoker() {
+
+          @Override
+          public void invoke(Object event) {
+            handle_ActionEvent_tick((com.fluxtion.learning.example14.ActionEvent) event);
+          }
+        });
+    return dispatchMap;
+  }
+
+  private void handle_ActionEvent_showActivity(
+      com.fluxtion.learning.example14.ActionEvent typedEvent) {
+    //method body - invoke call tree
+    activityMonitor_5.showActivityRequest(typedEvent);
+  }
+
+  private void handle_ActionEvent_showTime(com.fluxtion.learning.example14.ActionEvent typedEvent) {
+    //method body - invoke call tree
+    activityMonitor_5.showTimeRequest(typedEvent);
+  }
+
+  private void handle_ActionEvent_tick(com.fluxtion.learning.example14.ActionEvent typedEvent) {
+    //method body - invoke call tree
+    activityMonitor_5.timeTick(typedEvent);
   }
 
   @Override

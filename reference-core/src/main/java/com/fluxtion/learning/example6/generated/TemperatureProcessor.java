@@ -1,15 +1,11 @@
 package com.fluxtion.learning.example6.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.TemperatureHandler;
-import com.fluxtion.learning.example6.AvgDayTempLogger;
 import com.fluxtion.learning.example6.ResetEodHandler;
+import com.fluxtion.learning.example6.AvgDayTempLogger;
 import com.fluxtion.learning.EndOfDayEvent;
 import com.fluxtion.learning.TemperatureEvent;
 
@@ -17,18 +13,15 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
 
   //Node declarations
   private final TemperatureHandler temperatureHandler_1 = new TemperatureHandler();
-  private final AvgDayTempLogger avgDayTempLogger_5 = new AvgDayTempLogger();
   private final ResetEodHandler resetEodHandler_3 = new ResetEodHandler();
+  private final AvgDayTempLogger avgDayTempLogger_5 = new AvgDayTempLogger();
   //Dirty flags
 
   //Filter constants
 
   public TemperatureProcessor() {
-    //temperatureHandler_1
-    //avgDayTempLogger_5
     avgDayTempLogger_5.eodHandler = resetEodHandler_3;
     avgDayTempLogger_5.tempHandler = temperatureHandler_1;
-    //resetEodHandler_3
   }
 
   @Override
