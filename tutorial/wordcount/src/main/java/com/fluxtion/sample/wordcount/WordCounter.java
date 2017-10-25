@@ -21,11 +21,17 @@ package com.fluxtion.sample.wordcount;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.FilterType;
 import com.fluxtion.api.node.SEPConfig;
-import java.text.DecimalFormat;
-import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
 
 /**
- *
+ * Word count logic replicating behaviour of unix wc for bytes:
+ * <pre>
+ * wc -clw [file]
+ * </pre>
+ * 
+ * Processes a {@link CharEvent} and keeps a running total of chars, words and
+ * lines. Each of the annotated EventHandler methods is an entry point for event
+ * processing. Some of the methods supply optional filters.
+ * 
  * @author Greg Higgins
  */
 public class WordCounter {
@@ -56,6 +62,11 @@ public class WordCounter {
         increment = 1;
     }
 
+    @EventHandler(filterId = '\r')
+    public void onCarriageReturn(CharEvent event) {
+        //do nothing handle \r\n
+    }
+
     @EventHandler(FilterType.unmatched)
     public void onUnmatchedChar(CharEvent event) {
         wordCount += increment;
@@ -64,11 +75,8 @@ public class WordCounter {
 
     @Override
     public String toString() {
-        DecimalFormat formatter = new DecimalFormat("#,###");
-        return "wc result"
-                + "\ncharCount:" + formatter.format(charCount)
-                + "\nwordCount:" + formatter.format(wordCount)
-                + "\nlineCount:" + formatter.format(lineCount);
+        int pad = charCount < 1e6 ? 6 : charCount < 1e9 ? 11 : 14;
+        return String.format("%," + pad + "d chars%n%," + pad + "d words%n%," + pad + "d lines %n", charCount, wordCount, lineCount);
     }
 
     public static class Builder extends SEPConfig {

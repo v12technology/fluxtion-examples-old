@@ -4,7 +4,7 @@ import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
 import com.fluxtion.sample.wordcount.WordCounter;
-import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
+import com.fluxtion.sample.wordcount.CharEvent;
 
 public class WcProcessor implements EventHandler, BatchHandler, Lifecycle {
 
@@ -30,19 +30,25 @@ public class WcProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   public void handleEvent(CharEvent typedEvent) {
     switch (typedEvent.filterId()) {
-        //Event Class:[com.fluxtion.extension.declarative.funclib.api.event.CharEvent] filterId:[9]
+        //Event Class:[com.fluxtion.sample.wordcount.CharEvent] filterId:[9]
       case (9):
         result.onTabDelimiter(typedEvent);
         result.onAnyChar(typedEvent);
         afterEvent();
         return;
-        //Event Class:[com.fluxtion.extension.declarative.funclib.api.event.CharEvent] filterId:[10]
+        //Event Class:[com.fluxtion.sample.wordcount.CharEvent] filterId:[10]
       case (10):
         result.onEol(typedEvent);
         result.onAnyChar(typedEvent);
         afterEvent();
         return;
-        //Event Class:[com.fluxtion.extension.declarative.funclib.api.event.CharEvent] filterId:[32]
+        //Event Class:[com.fluxtion.sample.wordcount.CharEvent] filterId:[13]
+      case (13):
+        result.onCarriageReturn(typedEvent);
+        result.onAnyChar(typedEvent);
+        afterEvent();
+        return;
+        //Event Class:[com.fluxtion.sample.wordcount.CharEvent] filterId:[32]
       case (32):
         result.onSpaceDelimiter(typedEvent);
         result.onAnyChar(typedEvent);
@@ -50,8 +56,8 @@ public class WcProcessor implements EventHandler, BatchHandler, Lifecycle {
         return;
     }
     //Default, no filter methods
-    result.onUnmatchedChar(typedEvent);
     result.onAnyChar(typedEvent);
+    result.onUnmatchedChar(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
