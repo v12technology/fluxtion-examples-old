@@ -20,17 +20,19 @@ package com.fluxtion.sample.wordcount;
 
 import com.fluxtion.sample.wordcount.generated.WcProcessor;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 /**
- * 
+ *
  * @author Greg Higgins
  */
 public class Main {
+
+    public static final int SIZE = 4 * 1024;
 
     public static void main(String[] args) {
         File f = new File(args[0]);
@@ -45,14 +47,21 @@ public class Main {
         WcProcessor processor = new WcProcessor();
         processor.init();
         if (file.exists() && file.isFile()) {
-            FileChannel fileChannel = new FileInputStream(file).getChannel();
+            FileChannel fileChannel = new RandomAccessFile(file, "r").getChannel();
             long size = file.length();
             MappedByteBuffer buffer = fileChannel.map(
                     FileChannel.MapMode.READ_ONLY, 0, size);
             CharEvent charEvent = new CharEvent(' ');
+
+            final byte[] barray = new byte[SIZE];
+            int nGet;
             while (buffer.hasRemaining()) {
-                charEvent.setCharacter((char) buffer.get());
-                processor.handleEvent(charEvent);
+                nGet = Math.min(buffer.remaining(), SIZE);
+                buffer.get(barray, 0, nGet);
+                for (int i = 0; i < nGet; i++) {
+                    charEvent.setCharacter((char) barray[i]);
+                    processor.handleEvent(charEvent);
+                }
             }
             processor.tearDown();
             System.out.println(processor.result.toString());
