@@ -56,8 +56,8 @@ public class WcProcessor implements EventHandler, BatchHandler, Lifecycle {
         return;
     }
     //Default, no filter methods
-    result.onAnyChar(typedEvent);
     result.onUnmatchedChar(typedEvent);
+    result.onAnyChar(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }

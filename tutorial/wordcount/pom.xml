@@ -64,7 +64,8 @@
                     <plugin>
                         <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>${fluxtion.maven-plugin.ver}</version>
+                        <version>1.0.7-SNAPSHOT</version>
+                        <!--<version>${fluxtion.maven-plugin.ver}</version>-->
                         <executions>
                             <execution>
                                 <id>example-Event</id>
@@ -77,10 +78,13 @@
                                     <packageName>com.fluxtion.sample.wordcount.generated</packageName>
                                     <className>WcProcessor</className>
                                     <supportDirtyFiltering>false</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                                    <!--<resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>-->
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <!--<resourcesOutputDirectory>src/main/resources</resourcesOutputDirectory>-->
                                     <!--<logDebug>true</logDebug>-->
                                     <compileGenerated>false</compileGenerated>
+                                    <generateDescription>false</generateDescription>
+                                    <!--<http_proxyHost>localhost</http_proxyHost>-->
+                                    <!--<http_proxyPort>1090</http_proxyPort>-->
                                 </configuration>
                             </execution>
                         </executions>
