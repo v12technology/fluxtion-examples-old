@@ -3,14 +3,14 @@ package com.fluxtion.example.tempmonitor.generated;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
+import com.fluxtion.example.tempmonitor.generated.EndOfDayHandler;
 import com.fluxtion.example.tempmonitor.generated.StartOfDayHandler;
 import com.fluxtion.example.tempmonitor.generated.TempEventHandler;
-import com.fluxtion.example.tempmonitor.generated.EndOfDayHandler;
 import com.fluxtion.example.tempmonitor.generated.MaxInvoker_1;
-import com.fluxtion.example.tempmonitor.generated.AvgInvoker_3;
-import com.fluxtion.example.tempmonitor.generated.GreaterThanDecorator_5;
 import com.fluxtion.example.tempmonitor.generated.MsgBuilder7;
+import com.fluxtion.example.tempmonitor.generated.AvgInvoker_3;
 import com.fluxtion.example.tempmonitor.generated.MsgBuilder9;
+import com.fluxtion.example.tempmonitor.generated.GreaterThanDecorator_5;
 import com.fluxtion.example.tempmonitor.generated.MsgBuilder11;
 import com.fluxtion.extension.declarative.api.log.AsciiConsoleLogger;
 import com.fluxtion.extension.declarative.api.log.MsgBuilder;
@@ -25,49 +25,49 @@ import java.util.HashMap;
 public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final StartOfDayHandler startOfDayHandler_1 = new StartOfDayHandler();
-  private final TempEventHandler tempEventHandler_3 = new TempEventHandler();
-  private final TempEventHandler tempEventHandler_9 = new TempEventHandler();
-  private final StartOfDayHandler startOfDayHandler_7 = new StartOfDayHandler();
-  private final TempEventHandler tempEventHandler_13 = new TempEventHandler();
   private final EndOfDayHandler endOfDayHandler_21 = new EndOfDayHandler();
-  private final TempEventHandler tempEventHandler_25 = new TempEventHandler();
+  private final StartOfDayHandler startOfDayHandler_1 = new StartOfDayHandler();
+  private final StartOfDayHandler startOfDayHandler_7 = new StartOfDayHandler();
+  private final TempEventHandler tempEventHandler_3 = new TempEventHandler();
   private final MaxInvoker_1 maxInvoker_1_5 = new MaxInvoker_1();
-  private final AvgInvoker_3 avgInvoker_3_11 = new AvgInvoker_3();
-  private final GreaterThanDecorator_5 greaterThanDecorator_5_15 = new GreaterThanDecorator_5();
   private final MsgBuilder7 msgBuilder7_17 = new MsgBuilder7();
+  private final TempEventHandler tempEventHandler_9 = new TempEventHandler();
+  private final AvgInvoker_3 avgInvoker_3_11 = new AvgInvoker_3();
   private final MsgBuilder9 msgBuilder9_23 = new MsgBuilder9();
+  private final TempEventHandler tempEventHandler_13 = new TempEventHandler();
+  private final GreaterThanDecorator_5 greaterThanDecorator_5_15 = new GreaterThanDecorator_5();
+  private final TempEventHandler tempEventHandler_25 = new TempEventHandler();
   private final MsgBuilder11 msgBuilder11_27 = new MsgBuilder11();
   private final AsciiConsoleLogger asciiConsoleLogger_19 = new AsciiConsoleLogger();
   //Dirty flags
-  private boolean isDirty_avgInvoker_3_11 = false;
-  private boolean isDirty_endOfDayHandler_21 = false;
-  private boolean isDirty_greaterThanDecorator_5_15 = false;
-  private boolean isDirty_maxInvoker_1_5 = false;
-  private boolean isDirty_msgBuilder7_17 = false;
-  private boolean isDirty_msgBuilder9_23 = false;
-  private boolean isDirty_msgBuilder11_27 = false;
   private boolean isDirty_startOfDayHandler_1 = false;
-  private boolean isDirty_startOfDayHandler_7 = false;
   private boolean isDirty_tempEventHandler_3 = false;
-  private boolean isDirty_tempEventHandler_9 = false;
+  private boolean isDirty_msgBuilder7_17 = false;
+  private boolean isDirty_avgInvoker_3_11 = false;
   private boolean isDirty_tempEventHandler_13 = false;
   private boolean isDirty_tempEventHandler_25 = false;
+  private boolean isDirty_endOfDayHandler_21 = false;
+  private boolean isDirty_startOfDayHandler_7 = false;
+  private boolean isDirty_maxInvoker_1_5 = false;
+  private boolean isDirty_tempEventHandler_9 = false;
+  private boolean isDirty_msgBuilder9_23 = false;
+  private boolean isDirty_greaterThanDecorator_5_15 = false;
+  private boolean isDirty_msgBuilder11_27 = false;
   //Filter constants
 
   public TemperatureAlarm() {
-    avgInvoker_3_11.source_TempEventHandler_2 = tempEventHandler_9;
-    avgInvoker_3_11.resetNotifier = startOfDayHandler_7;
-    greaterThanDecorator_5_15.source_TempEventHandler_4 = tempEventHandler_13;
     maxInvoker_1_5.source_TempEventHandler_0 = tempEventHandler_3;
     maxInvoker_1_5.resetNotifier = startOfDayHandler_1;
     msgBuilder7_17.source_MaxInvoker_1_6 = maxInvoker_1_5;
     msgBuilder7_17.logLevel = (int) 3;
     msgBuilder7_17.initCapacity = (int) 256;
+    avgInvoker_3_11.source_TempEventHandler_2 = tempEventHandler_9;
+    avgInvoker_3_11.resetNotifier = startOfDayHandler_7;
     msgBuilder9_23.source_AvgInvoker_3_8 = avgInvoker_3_11;
     msgBuilder9_23.logNotifier = endOfDayHandler_21;
     msgBuilder9_23.logLevel = (int) 4;
     msgBuilder9_23.initCapacity = (int) 256;
+    greaterThanDecorator_5_15.source_TempEventHandler_4 = tempEventHandler_13;
     msgBuilder11_27.source_TempEventHandler_10 = tempEventHandler_25;
     msgBuilder11_27.logNotifier = greaterThanDecorator_5_15;
     msgBuilder11_27.logLevel = (int) 2;
@@ -138,20 +138,20 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
     if (isDirty_startOfDayHandler_1 | isDirty_tempEventHandler_3) {
       isDirty_maxInvoker_1_5 = maxInvoker_1_5.onEvent();
     }
-    if (isDirty_startOfDayHandler_7 | isDirty_tempEventHandler_9) {
-      isDirty_avgInvoker_3_11 = avgInvoker_3_11.onEvent();
-    }
     if (isDirty_maxInvoker_1_5) {
       isDirty_msgBuilder7_17 = msgBuilder7_17.buildMessage();
       if (isDirty_msgBuilder7_17) {
         asciiConsoleLogger_19.publishMessage(msgBuilder7_17);
       }
     }
+    if (isDirty_tempEventHandler_9 | isDirty_startOfDayHandler_7) {
+      isDirty_avgInvoker_3_11 = avgInvoker_3_11.onEvent();
+    }
     //event stack unwind callbacks
     if (isDirty_startOfDayHandler_1 | isDirty_tempEventHandler_3) {
       maxInvoker_1_5.afterCalculate();
     }
-    if (isDirty_startOfDayHandler_7 | isDirty_tempEventHandler_9) {
+    if (isDirty_tempEventHandler_9 | isDirty_startOfDayHandler_7) {
       avgInvoker_3_11.afterCalculate();
     }
     afterEvent();
@@ -163,23 +163,8 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
     if (isDirty_tempEventHandler_3) {
       maxInvoker_1_5.sourceChange_source_TempEventHandler_0(tempEventHandler_3);
     }
-    isDirty_tempEventHandler_9 = tempEventHandler_9.handleTempEvent(typedEvent);
-    if (isDirty_tempEventHandler_9) {
-      avgInvoker_3_11.sourceChange_source_TempEventHandler_2(tempEventHandler_9);
-    }
-    isDirty_tempEventHandler_13 = tempEventHandler_13.handleTempEvent(typedEvent);
-    isDirty_tempEventHandler_25 = tempEventHandler_25.handleTempEvent(typedEvent);
     if (isDirty_startOfDayHandler_1 | isDirty_tempEventHandler_3) {
       isDirty_maxInvoker_1_5 = maxInvoker_1_5.onEvent();
-    }
-    if (isDirty_startOfDayHandler_7 | isDirty_tempEventHandler_9) {
-      isDirty_avgInvoker_3_11 = avgInvoker_3_11.onEvent();
-    }
-    if (isDirty_tempEventHandler_13) {
-      isDirty_greaterThanDecorator_5_15 = greaterThanDecorator_5_15.onEvent();
-      if (isDirty_greaterThanDecorator_5_15) {
-        msgBuilder11_27.postLog(greaterThanDecorator_5_15);
-      }
     }
     if (isDirty_maxInvoker_1_5) {
       isDirty_msgBuilder7_17 = msgBuilder7_17.buildMessage();
@@ -187,6 +172,21 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
         asciiConsoleLogger_19.publishMessage(msgBuilder7_17);
       }
     }
+    isDirty_tempEventHandler_9 = tempEventHandler_9.handleTempEvent(typedEvent);
+    if (isDirty_tempEventHandler_9) {
+      avgInvoker_3_11.sourceChange_source_TempEventHandler_2(tempEventHandler_9);
+    }
+    if (isDirty_tempEventHandler_9 | isDirty_startOfDayHandler_7) {
+      isDirty_avgInvoker_3_11 = avgInvoker_3_11.onEvent();
+    }
+    isDirty_tempEventHandler_13 = tempEventHandler_13.handleTempEvent(typedEvent);
+    if (isDirty_tempEventHandler_13) {
+      isDirty_greaterThanDecorator_5_15 = greaterThanDecorator_5_15.onEvent();
+      if (isDirty_greaterThanDecorator_5_15) {
+        msgBuilder11_27.postLog(greaterThanDecorator_5_15);
+      }
+    }
+    isDirty_tempEventHandler_25 = tempEventHandler_25.handleTempEvent(typedEvent);
     if (isDirty_greaterThanDecorator_5_15) {
       isDirty_msgBuilder11_27 = msgBuilder11_27.buildMessage();
       if (isDirty_msgBuilder11_27) {
@@ -197,7 +197,7 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
     if (isDirty_startOfDayHandler_1 | isDirty_tempEventHandler_3) {
       maxInvoker_1_5.afterCalculate();
     }
-    if (isDirty_startOfDayHandler_7 | isDirty_tempEventHandler_9) {
+    if (isDirty_tempEventHandler_9 | isDirty_startOfDayHandler_7) {
       avgInvoker_3_11.afterCalculate();
     }
     afterEvent();
@@ -313,28 +313,28 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder11_27.afterEvent();
     msgBuilder9_23.afterEvent();
     msgBuilder7_17.afterEvent();
-    isDirty_avgInvoker_3_11 = false;
-    isDirty_endOfDayHandler_21 = false;
-    isDirty_greaterThanDecorator_5_15 = false;
-    isDirty_maxInvoker_1_5 = false;
-    isDirty_msgBuilder7_17 = false;
-    isDirty_msgBuilder9_23 = false;
-    isDirty_msgBuilder11_27 = false;
     isDirty_startOfDayHandler_1 = false;
-    isDirty_startOfDayHandler_7 = false;
     isDirty_tempEventHandler_3 = false;
-    isDirty_tempEventHandler_9 = false;
+    isDirty_msgBuilder7_17 = false;
+    isDirty_avgInvoker_3_11 = false;
     isDirty_tempEventHandler_13 = false;
     isDirty_tempEventHandler_25 = false;
+    isDirty_endOfDayHandler_21 = false;
+    isDirty_startOfDayHandler_7 = false;
+    isDirty_maxInvoker_1_5 = false;
+    isDirty_tempEventHandler_9 = false;
+    isDirty_msgBuilder9_23 = false;
+    isDirty_greaterThanDecorator_5_15 = false;
+    isDirty_msgBuilder11_27 = false;
   }
 
   @Override
   public void init() {
     maxInvoker_1_5.init();
-    avgInvoker_3_11.init();
-    greaterThanDecorator_5_15.init();
     msgBuilder7_17.init();
+    avgInvoker_3_11.init();
     msgBuilder9_23.init();
+    greaterThanDecorator_5_15.init();
     msgBuilder11_27.init();
     asciiConsoleLogger_19.init();
   }

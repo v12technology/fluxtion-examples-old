@@ -21,7 +21,6 @@ package com.fluxtion.example.tempmonitor;
 import com.fluxtion.api.node.SEPConfig;
 import com.fluxtion.example.tempmonitor.generated.TemperatureAlarm;
 import com.fluxtion.extension.declarative.api.Test;
-import com.fluxtion.extension.declarative.api.log.LogControlEvent;
 import com.fluxtion.extension.declarative.api.numeric.NumericValue;
 import static com.fluxtion.extension.declarative.builder.event.EventSelect.select;
 import static com.fluxtion.extension.declarative.builder.log.LogBuilder.Log;
