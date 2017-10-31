@@ -40,12 +40,6 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
   private final MsgBuilder11 msgBuilder11_27 = new MsgBuilder11();
   private final AsciiConsoleLogger asciiConsoleLogger_19 = new AsciiConsoleLogger();
   //Dirty flags
-  private boolean isDirty_startOfDayHandler_1 = false;
-  private boolean isDirty_tempEventHandler_3 = false;
-  private boolean isDirty_msgBuilder7_17 = false;
-  private boolean isDirty_avgInvoker_3_11 = false;
-  private boolean isDirty_tempEventHandler_13 = false;
-  private boolean isDirty_tempEventHandler_25 = false;
   private boolean isDirty_endOfDayHandler_21 = false;
   private boolean isDirty_startOfDayHandler_7 = false;
   private boolean isDirty_maxInvoker_1_5 = false;
@@ -53,6 +47,12 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
   private boolean isDirty_msgBuilder9_23 = false;
   private boolean isDirty_greaterThanDecorator_5_15 = false;
   private boolean isDirty_msgBuilder11_27 = false;
+  private boolean isDirty_startOfDayHandler_1 = false;
+  private boolean isDirty_tempEventHandler_3 = false;
+  private boolean isDirty_msgBuilder7_17 = false;
+  private boolean isDirty_avgInvoker_3_11 = false;
+  private boolean isDirty_tempEventHandler_13 = false;
+  private boolean isDirty_tempEventHandler_25 = false;
   //Filter constants
 
   public TemperatureAlarm() {
@@ -313,12 +313,6 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
     msgBuilder11_27.afterEvent();
     msgBuilder9_23.afterEvent();
     msgBuilder7_17.afterEvent();
-    isDirty_startOfDayHandler_1 = false;
-    isDirty_tempEventHandler_3 = false;
-    isDirty_msgBuilder7_17 = false;
-    isDirty_avgInvoker_3_11 = false;
-    isDirty_tempEventHandler_13 = false;
-    isDirty_tempEventHandler_25 = false;
     isDirty_endOfDayHandler_21 = false;
     isDirty_startOfDayHandler_7 = false;
     isDirty_maxInvoker_1_5 = false;
@@ -326,6 +320,12 @@ public class TemperatureAlarm implements EventHandler, BatchHandler, Lifecycle {
     isDirty_msgBuilder9_23 = false;
     isDirty_greaterThanDecorator_5_15 = false;
     isDirty_msgBuilder11_27 = false;
+    isDirty_startOfDayHandler_1 = false;
+    isDirty_tempEventHandler_3 = false;
+    isDirty_msgBuilder7_17 = false;
+    isDirty_avgInvoker_3_11 = false;
+    isDirty_tempEventHandler_13 = false;
+    isDirty_tempEventHandler_25 = false;
   }
 
   @Override

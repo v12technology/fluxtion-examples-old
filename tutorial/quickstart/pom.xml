@@ -28,7 +28,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.maven-plugin.ver>1.0.7</fluxtion.maven-plugin.ver>
-        <fluxtion.runtime-plugin.ver>1.0.2-SNAPSHOT</fluxtion.runtime-plugin.ver>
+        <fluxtion.runtime-plugin.ver>1.0.2</fluxtion.runtime-plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -95,7 +95,7 @@
                                     <className>TemperatureAlarm</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>src/main/java</outputDirectory>
-                                    <!--<logDebug>true</logDebug>-->
+<!--                                    <logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
                         </executions>
