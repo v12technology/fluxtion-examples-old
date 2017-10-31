@@ -20,17 +20,17 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   private final MsgBuilder1 msgBuilder1_5 = new MsgBuilder1();
   private final AsciiConsoleLogger asciiConsoleLogger_8 = new AsciiConsoleLogger();
   //Dirty flags
-  private boolean isDirty_msgBuilder1_5 = false;
   private boolean isDirty_temperatureEventHandler_2 = false;
+  private boolean isDirty_msgBuilder1_5 = false;
   //Filter constants
 
   public TemperatureProcessor() {
-    asciiConsoleLogger_8.initCapacity = (int) 512;
-    asciiConsoleLogger_8.msgBuilders = new MsgBuilder[1];
-    asciiConsoleLogger_8.msgBuilders[0] = msgBuilder1_5;
     msgBuilder1_5.source_TemperatureEventHandler_0 = temperatureEventHandler_2;
     msgBuilder1_5.logLevel = (int) 3;
     msgBuilder1_5.initCapacity = (int) 256;
+    asciiConsoleLogger_8.initCapacity = (int) 512;
+    asciiConsoleLogger_8.msgBuilders = new MsgBuilder[1];
+    asciiConsoleLogger_8.msgBuilders[0] = msgBuilder1_5;
   }
 
   @Override
@@ -168,8 +168,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   @Override
   public void afterEvent() {
     msgBuilder1_5.afterEvent();
-    isDirty_msgBuilder1_5 = false;
     isDirty_temperatureEventHandler_2 = false;
+    isDirty_msgBuilder1_5 = false;
   }
 
   @Override
