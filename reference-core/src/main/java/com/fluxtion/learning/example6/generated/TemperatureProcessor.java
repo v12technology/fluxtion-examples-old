@@ -3,8 +3,8 @@ package com.fluxtion.learning.example6.generated;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.learning.TemperatureHandler;
 import com.fluxtion.learning.example6.ResetEodHandler;
+import com.fluxtion.learning.TemperatureHandler;
 import com.fluxtion.learning.example6.AvgDayTempLogger;
 import com.fluxtion.learning.EndOfDayEvent;
 import com.fluxtion.learning.TemperatureEvent;
@@ -12,8 +12,8 @@ import com.fluxtion.learning.TemperatureEvent;
 public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final TemperatureHandler temperatureHandler_1 = new TemperatureHandler();
   private final ResetEodHandler resetEodHandler_3 = new ResetEodHandler();
+  private final TemperatureHandler temperatureHandler_1 = new TemperatureHandler();
   private final AvgDayTempLogger avgDayTempLogger_5 = new AvgDayTempLogger();
   //Dirty flags
 

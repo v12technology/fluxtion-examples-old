@@ -3,10 +3,10 @@ package com.fluxtion.learning.example11.generated;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.learning.example11.Handlers.ShowTimeHandler;
 import com.fluxtion.learning.example11.Handlers.ShowActivityHandler;
-import com.fluxtion.learning.example11.Handlers.StepHandler;
+import com.fluxtion.learning.example11.Handlers.ShowTimeHandler;
 import com.fluxtion.learning.example11.Handlers.StairHandler;
+import com.fluxtion.learning.example11.Handlers.StepHandler;
 import com.fluxtion.learning.example11.ActivityMonitor;
 import com.fluxtion.learning.example11.Events.AccelEvent;
 import com.fluxtion.learning.example11.Events.ShowActivityAction;
@@ -16,10 +16,10 @@ import com.fluxtion.learning.example11.Events.Tick;
 public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final ShowTimeHandler showTimeHandler_5 = new ShowTimeHandler();
   private final ShowActivityHandler showActivityHandler_7 = new ShowActivityHandler();
-  private final StepHandler stepHandler_1 = new StepHandler();
+  private final ShowTimeHandler showTimeHandler_5 = new ShowTimeHandler();
   private final StairHandler stairHandler_3 = new StairHandler();
+  private final StepHandler stepHandler_1 = new StepHandler();
   private final ActivityMonitor activityMonitor_9 = new ActivityMonitor();
   //Dirty flags
 
@@ -64,8 +64,8 @@ public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle 
 
   public void handleEvent(AccelEvent typedEvent) {
     //Default, no filter methods
-    stepHandler_1.onAccel(typedEvent);
     stairHandler_3.onAccel(typedEvent);
+    stepHandler_1.onAccel(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }

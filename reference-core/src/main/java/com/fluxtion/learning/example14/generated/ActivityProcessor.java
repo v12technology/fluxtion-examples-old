@@ -3,8 +3,8 @@ package com.fluxtion.learning.example14.generated;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.learning.example10.Handlers.StepHandler;
 import com.fluxtion.learning.example10.Handlers.StairHandler;
+import com.fluxtion.learning.example10.Handlers.StepHandler;
 import com.fluxtion.learning.example14.ActivityMonitor;
 import com.fluxtion.learning.example10.Events.AccelEvent;
 import com.fluxtion.learning.example14.ActionEvent;
@@ -15,8 +15,8 @@ import java.util.HashMap;
 public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final StepHandler stepHandler_1 = new StepHandler();
   private final StairHandler stairHandler_3 = new StairHandler();
+  private final StepHandler stepHandler_1 = new StepHandler();
   private final ActivityMonitor activityMonitor_5 = new ActivityMonitor();
   //Dirty flags
 
@@ -47,8 +47,8 @@ public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle 
 
   public void handleEvent(AccelEvent typedEvent) {
     //Default, no filter methods
-    stepHandler_1.onAccel(typedEvent);
     stairHandler_3.onAccel(typedEvent);
+    stepHandler_1.onAccel(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }

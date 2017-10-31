@@ -3,9 +3,9 @@ package com.fluxtion.learning.example12.generated;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
+import com.fluxtion.learning.example12.Handlers.ShowActivityHandler;
 import com.fluxtion.learning.example12.Handlers.ShowTickHandler;
 import com.fluxtion.learning.example12.Handlers.ShowTimeHandler;
-import com.fluxtion.learning.example12.Handlers.ShowActivityHandler;
 import com.fluxtion.learning.example12.ActionArrayMonitor;
 import com.fluxtion.learning.example12.Handlers.ActionHandler;
 import com.fluxtion.learning.example12.Events.ShowActivityAction;
@@ -15,9 +15,9 @@ import com.fluxtion.learning.example12.Events.Tick;
 public class ActionProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
+  private final ShowActivityHandler showActivityHandler_5 = new ShowActivityHandler();
   private final ShowTickHandler showTickHandler_1 = new ShowTickHandler();
   private final ShowTimeHandler showTimeHandler_3 = new ShowTimeHandler();
-  private final ShowActivityHandler showActivityHandler_5 = new ShowActivityHandler();
   private final ActionArrayMonitor actionArrayMonitor_7 = new ActionArrayMonitor();
   //Dirty flags
 

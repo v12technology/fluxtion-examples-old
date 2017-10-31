@@ -14,37 +14,30 @@ import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final CharClassifierConfigProcessor configProcessor_a =
-      new CharClassifierConfigProcessor();
-  private final CharClassifierConfigProcessor configProcessor_b =
-      new CharClassifierConfigProcessor();
-  private final CharClassifierConfigProcessor configProcessor_c =
-      new CharClassifierConfigProcessor();
   private final CharClassifierConfigProcessor configProcessor_0 =
       new CharClassifierConfigProcessor();
+  private final CharacterMatrixFeature charFeature_0 = new CharacterMatrixFeature();
   private final CharClassifierConfigProcessor configProcessor_7 =
       new CharClassifierConfigProcessor();
+  private final CharacterMatrixFeature charFeature_7 = new CharacterMatrixFeature();
   private final CharClassifierConfigProcessor configProcessor_8 =
       new CharClassifierConfigProcessor();
-  private final CharacterMatrixFeature charFeature_a = new CharacterMatrixFeature();
-  private final CharacterMatrixFeature charFeature_b = new CharacterMatrixFeature();
-  private final CharacterMatrixFeature charFeature_c = new CharacterMatrixFeature();
-  private final CharacterMatrixFeature charFeature_0 = new CharacterMatrixFeature();
-  private final CharacterMatrixFeature charFeature_7 = new CharacterMatrixFeature();
   private final CharacterMatrixFeature charFeature_8 = new CharacterMatrixFeature();
+  private final CharClassifierConfigProcessor configProcessor_a =
+      new CharClassifierConfigProcessor();
+  private final CharacterMatrixFeature charFeature_a = new CharacterMatrixFeature();
+  private final CharClassifierConfigProcessor configProcessor_b =
+      new CharClassifierConfigProcessor();
+  private final CharacterMatrixFeature charFeature_b = new CharacterMatrixFeature();
+  private final CharClassifierConfigProcessor configProcessor_c =
+      new CharClassifierConfigProcessor();
+  private final CharacterMatrixFeature charFeature_c = new CharacterMatrixFeature();
   public final CharacterClassifier classifier = new CharacterClassifier();
   //Dirty flags
 
   //Filter constants
 
   public ScreenProcessor() {
-    classifier.charMatchSet = new CharacterMatrixFeature[6];
-    classifier.charMatchSet[0] = charFeature_a;
-    classifier.charMatchSet[1] = charFeature_b;
-    classifier.charMatchSet[2] = charFeature_c;
-    classifier.charMatchSet[3] = charFeature_0;
-    classifier.charMatchSet[4] = charFeature_7;
-    classifier.charMatchSet[5] = charFeature_8;
     charFeature_0.config = configProcessor_0;
     charFeature_0.matchingChar = '0';
     charFeature_7.config = configProcessor_7;
@@ -57,6 +50,13 @@ public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
     charFeature_b.matchingChar = 'b';
     charFeature_c.config = configProcessor_c;
     charFeature_c.matchingChar = 'c';
+    classifier.charMatchSet = new CharacterMatrixFeature[6];
+    classifier.charMatchSet[0] = charFeature_a;
+    classifier.charMatchSet[1] = charFeature_b;
+    classifier.charMatchSet[2] = charFeature_c;
+    classifier.charMatchSet[3] = charFeature_0;
+    classifier.charMatchSet[4] = charFeature_7;
+    classifier.charMatchSet[5] = charFeature_8;
   }
 
   @Override
@@ -90,12 +90,12 @@ public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   public void handleEvent(PixelActivationEvent typedEvent) {
     //Default, no filter methods
-    charFeature_a.handlePixelActivated(typedEvent);
-    charFeature_b.handlePixelActivated(typedEvent);
-    charFeature_c.handlePixelActivated(typedEvent);
     charFeature_0.handlePixelActivated(typedEvent);
     charFeature_7.handlePixelActivated(typedEvent);
     charFeature_8.handlePixelActivated(typedEvent);
+    charFeature_a.handlePixelActivated(typedEvent);
+    charFeature_b.handlePixelActivated(typedEvent);
+    charFeature_c.handlePixelActivated(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
@@ -227,11 +227,11 @@ public class ScreenProcessor implements EventHandler, BatchHandler, Lifecycle {
   @Override
   public void batchEnd() {
     classifier.findBestMatch();
-    charFeature_8.endOfBatch();
-    charFeature_7.endOfBatch();
-    charFeature_0.endOfBatch();
     charFeature_c.endOfBatch();
     charFeature_b.endOfBatch();
     charFeature_a.endOfBatch();
+    charFeature_8.endOfBatch();
+    charFeature_7.endOfBatch();
+    charFeature_0.endOfBatch();
   }
 }

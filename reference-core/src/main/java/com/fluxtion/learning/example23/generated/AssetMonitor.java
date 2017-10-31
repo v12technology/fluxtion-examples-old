@@ -13,9 +13,9 @@ import java.util.HashMap;
 public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final AssetEventHandler assetHandlerFX = new AssetEventHandler();
-  private final AssetEventHandler assetHandlerEquities = new AssetEventHandler();
   private final AssetEventHandler assetHandlerCommodities = new AssetEventHandler();
+  private final AssetEventHandler assetHandlerEquities = new AssetEventHandler();
+  private final AssetEventHandler assetHandlerFX = new AssetEventHandler();
   public final BreachNotifier notifier = new BreachNotifier();
   //Dirty flags
   private boolean isDirty_assetHandlerCommodities = false;
@@ -99,7 +99,7 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
     if (isDirty_assetHandlerCommodities) {
       notifier.assetBreached(assetHandlerCommodities);
     }
-    if (isDirty_assetHandlerCommodities | isDirty_assetHandlerEquities | isDirty_assetHandlerFX) {
+    if (isDirty_assetHandlerFX | isDirty_assetHandlerEquities | isDirty_assetHandlerCommodities) {
       notifier.onEvent();
     }
   }
@@ -110,7 +110,7 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
     if (isDirty_assetHandlerEquities) {
       notifier.assetBreached(assetHandlerEquities);
     }
-    if (isDirty_assetHandlerCommodities | isDirty_assetHandlerEquities | isDirty_assetHandlerFX) {
+    if (isDirty_assetHandlerFX | isDirty_assetHandlerEquities | isDirty_assetHandlerCommodities) {
       notifier.onEvent();
     }
   }
@@ -121,7 +121,7 @@ public class AssetMonitor implements EventHandler, BatchHandler, Lifecycle {
     if (isDirty_assetHandlerFX) {
       notifier.assetBreached(assetHandlerFX);
     }
-    if (isDirty_assetHandlerCommodities | isDirty_assetHandlerEquities | isDirty_assetHandlerFX) {
+    if (isDirty_assetHandlerFX | isDirty_assetHandlerEquities | isDirty_assetHandlerCommodities) {
       notifier.onEvent();
     }
   }

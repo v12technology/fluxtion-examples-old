@@ -38,8 +38,8 @@ public class WcSep implements EventHandler, BatchHandler, Lifecycle {
       return;
     }
     //Default, no filter methods
-    result.onAnyChar(typedEvent);
     result.onUnmatchedChar(typedEvent);
+    result.onAnyChar(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
@@ -110,8 +110,8 @@ public class WcSep implements EventHandler, BatchHandler, Lifecycle {
 
   private void handle_CharEvent_NoFilter(com.fluxtion.learning.example17.CharEvent typedEvent) {
     //method body - invoke call tree
-    result.onAnyChar(typedEvent);
     result.onUnmatchedChar(typedEvent);
+    result.onAnyChar(typedEvent);
     //event stack unwind callbacks
   }
 

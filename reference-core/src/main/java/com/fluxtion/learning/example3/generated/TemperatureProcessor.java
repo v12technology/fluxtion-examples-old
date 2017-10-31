@@ -5,8 +5,8 @@ import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
 import com.fluxtion.learning.example3.EndOfDayHandler;
 import com.fluxtion.learning.example3.TemperatureHandler;
-import com.fluxtion.learning.example3.WeekdayValidator;
 import com.fluxtion.learning.example3.AvgTemp;
+import com.fluxtion.learning.example3.WeekdayValidator;
 import com.fluxtion.learning.example3.DayAvgTempLogger;
 import com.fluxtion.learning.EndOfDayEvent;
 import com.fluxtion.learning.TemperatureEvent;
@@ -16,8 +16,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   //Node declarations
   private final EndOfDayHandler endOfDayHandler_3 = new EndOfDayHandler();
   private final TemperatureHandler temperatureHandler_1 = new TemperatureHandler();
-  private final WeekdayValidator weekdayValidator_7 = new WeekdayValidator();
   private final AvgTemp avgTemp_5 = new AvgTemp();
+  private final WeekdayValidator weekdayValidator_7 = new WeekdayValidator();
   private final DayAvgTempLogger dayAvgTempLogger_9 = new DayAvgTempLogger();
   //Dirty flags
 
@@ -26,10 +26,10 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   public TemperatureProcessor() {
     avgTemp_5.tempHandler = temperatureHandler_1;
     avgTemp_5.dayHandler = endOfDayHandler_3;
+    weekdayValidator_7.dayHandler = endOfDayHandler_3;
     dayAvgTempLogger_9.avgTemp = avgTemp_5;
     dayAvgTempLogger_9.weekdayTest = weekdayValidator_7;
     dayAvgTempLogger_9.dayHandler = endOfDayHandler_3;
-    weekdayValidator_7.dayHandler = endOfDayHandler_3;
   }
 
   @Override
@@ -53,8 +53,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   public void handleEvent(EndOfDayEvent typedEvent) {
     //Default, no filter methods
     endOfDayHandler_3.endOfDay(typedEvent);
-    weekdayValidator_7.dayChanged();
     avgTemp_5.calculateAverageTemp();
+    weekdayValidator_7.dayChanged();
     dayAvgTempLogger_9.logEodAvgTemp();
     //event stack unwind callbacks
     afterEvent();

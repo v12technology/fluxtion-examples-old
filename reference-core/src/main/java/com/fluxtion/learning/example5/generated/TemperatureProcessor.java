@@ -11,8 +11,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
 
   //Node declarations
   private final TemperatureBucket temperatureBucket_3 = new TemperatureBucket();
-  private final TemperatureBucket temperatureBucket_7 = new TemperatureBucket();
   private final TemperatureBucket temperatureBucket_5 = new TemperatureBucket();
+  private final TemperatureBucket temperatureBucket_7 = new TemperatureBucket();
   private final TemperatureBucket temperatureBucket_9 = new TemperatureBucket();
   private final TemperatureHistogram temperatureHistogram_1 = new TemperatureHistogram();
   //Dirty flags
@@ -41,8 +41,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   public void handleEvent(TemperatureEvent typedEvent) {
     //Default, no filter methods
     temperatureBucket_3.handleTemp(typedEvent);
-    temperatureBucket_7.handleTemp(typedEvent);
     temperatureBucket_5.handleTemp(typedEvent);
+    temperatureBucket_7.handleTemp(typedEvent);
     temperatureBucket_9.handleTemp(typedEvent);
     temperatureHistogram_1.handleTemp(typedEvent);
     //event stack unwind callbacks
@@ -55,8 +55,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   @Override
   public void init() {
     temperatureBucket_3.init();
-    temperatureBucket_7.init();
     temperatureBucket_5.init();
+    temperatureBucket_7.init();
     temperatureBucket_9.init();
     temperatureHistogram_1.initHistogram();
   }
@@ -65,8 +65,8 @@ public class TemperatureProcessor implements EventHandler, BatchHandler, Lifecyc
   public void tearDown() {
     temperatureHistogram_1.printOutOfRange();
     temperatureBucket_9.dispalyBucketResult();
-    temperatureBucket_5.dispalyBucketResult();
     temperatureBucket_7.dispalyBucketResult();
+    temperatureBucket_5.dispalyBucketResult();
     temperatureBucket_3.dispalyBucketResult();
   }
 

@@ -3,10 +3,10 @@ package com.fluxtion.learning.example10.generated;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
+import com.fluxtion.learning.example10.Handlers.ShowActivityHandler;
+import com.fluxtion.learning.example10.Handlers.ShowTimeHandler;
 import com.fluxtion.learning.example10.Handlers.StairHandler;
 import com.fluxtion.learning.example10.Handlers.StepHandler;
-import com.fluxtion.learning.example10.Handlers.ShowTimeHandler;
-import com.fluxtion.learning.example10.Handlers.ShowActivityHandler;
 import com.fluxtion.learning.example10.ActivityMonitor;
 import com.fluxtion.learning.example10.Events.AccelEvent;
 import com.fluxtion.learning.example10.Events.ShowActivityAction;
@@ -16,10 +16,10 @@ import com.fluxtion.learning.example10.Events.Tick;
 public class ActivityProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
+  private final ShowActivityHandler showActivityHandler_7 = new ShowActivityHandler();
+  private final ShowTimeHandler showTimeHandler_5 = new ShowTimeHandler();
   private final StairHandler stairHandler_3 = new StairHandler();
   private final StepHandler stepHandler_1 = new StepHandler();
-  private final ShowTimeHandler showTimeHandler_5 = new ShowTimeHandler();
-  private final ShowActivityHandler showActivityHandler_7 = new ShowActivityHandler();
   private final ActivityMonitor activityMonitor_9 = new ActivityMonitor();
   //Dirty flags
 
