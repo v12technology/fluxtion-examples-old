@@ -9,11 +9,11 @@ import com.fluxtion.extension.declarative.api.group.GroupBy;
 import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
+import com.fluxtion.learning.declarative.ext.example4.generated.MatchResultCsvMarshaller4;
 import com.fluxtion.learning.declarative.ext.example4.LeaguePosition;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
-import com.fluxtion.learning.declarative.ext.example4.MatchResult;
-import com.fluxtion.learning.declarative.ext.example4.generated.MatchResultCsvMarshaller4;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
+import com.fluxtion.learning.declarative.ext.example4.MatchResult;
 
 /**
  * generated group by holder.
@@ -36,12 +36,6 @@ public final class GroupBy_19 implements GroupBy<LeaguePosition>{
         MatchResult event = eventWrapped.event();
         CalculationStateGroupBy_19 instance = calcState.getOrCreateInstance(event.getHomeTeam(), initialisermatchResultCsvMarshaller40, event);
         target = instance.target;
-        {
-			int value = instance.aggregateCount13;
-			value = AggregateCount.increment((int)event.getHomeGoals(), (int)value);
-			target.setHomeGamesPlayed((int)value);
-			instance.aggregateCount13 = value;
-         }
         {
 			double value = instance.aggregateSum14;
 			value = AggregateSum.calcSum((double)event.getHomeGoals(), (double)value);
@@ -71,6 +65,12 @@ public final class GroupBy_19 implements GroupBy<LeaguePosition>{
 			value = AggregateSum.calcSum((double)event.getAwayGoals(), (double)value);
 			target.setHomeGoalsAgainst((int)value);
 			instance.aggregateSum18 = value;
+         }
+        {
+			int value = instance.aggregateCount13;
+			value = AggregateCount.increment((int)event.getHomeGoals(), (int)value);
+			target.setHomeGamesPlayed((int)value);
+			instance.aggregateCount13 = value;
          }
         return true;
     }

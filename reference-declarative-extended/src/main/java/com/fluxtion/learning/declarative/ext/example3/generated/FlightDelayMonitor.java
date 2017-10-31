@@ -3,10 +3,10 @@ package com.fluxtion.learning.declarative.ext.example3.generated;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.learning.declarative.ext.example3.generated.AsciiAnyCharMatcher_0;
 import com.fluxtion.learning.declarative.ext.example3.generated.AsciiAnyCharMatcher_1;
-import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2Double;
+import com.fluxtion.learning.declarative.ext.example3.generated.AsciiAnyCharMatcher_0;
 import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2ByteBuffer;
+import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2Double;
 import com.fluxtion.learning.declarative.ext.example3.generated.FlightDetailsCsvMarshaller2;
 import com.fluxtion.learning.declarative.ext.example3.generated.GreaterThanDecorator_4;
 import com.fluxtion.learning.declarative.ext.example3.generated.GroupBy_9;
@@ -17,10 +17,10 @@ import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final AsciiAnyCharMatcher_0 asciiAnyCharMatcher_0_15 = new AsciiAnyCharMatcher_0();
   private final AsciiAnyCharMatcher_1 asciiAnyCharMatcher_1_16 = new AsciiAnyCharMatcher_1();
-  private final Csv2Double csv2Double_2 = new Csv2Double();
+  private final AsciiAnyCharMatcher_0 asciiAnyCharMatcher_0_15 = new AsciiAnyCharMatcher_0();
   private final Csv2ByteBuffer csv2ByteBuffer_5 = new Csv2ByteBuffer();
+  private final Csv2Double csv2Double_2 = new Csv2Double();
   private final FlightDetailsCsvMarshaller2 flightDetailsCsvMarshaller2_8 =
       new FlightDetailsCsvMarshaller2();
   private final GreaterThanDecorator_4 greaterThanDecorator_4_11 = new GreaterThanDecorator_4();
@@ -28,11 +28,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   //Dirty flags
   private boolean isDirty_asciiAnyCharMatcher_1_16 = false;
   private boolean isDirty_asciiAnyCharMatcher_0_15 = false;
-  private boolean isDirty_carrierDelayMap = false;
   private boolean isDirty_csv2ByteBuffer_5 = false;
   private boolean isDirty_csv2Double_2 = false;
   private boolean isDirty_flightDetailsCsvMarshaller2_8 = false;
   private boolean isDirty_greaterThanDecorator_4_11 = false;
+  private boolean isDirty_carrierDelayMap = false;
   //Filter constants
 
   public FlightDelayMonitor() {
@@ -71,7 +71,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
     }
     //Default, no filter methods
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
     if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -84,7 +84,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
     afterEvent();
@@ -257,11 +257,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
     if (isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEol(asciiAnyCharMatcher_1_16);
     }
-    isDirty_csv2Double_2 = csv2Double_2.onEol(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.onEol(typedEvent);
     isDirty_flightDetailsCsvMarshaller2_8 = flightDetailsCsvMarshaller2_8.onEol(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
@@ -273,7 +273,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -283,11 +283,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
     //method body - invoke call tree
     isDirty_asciiAnyCharMatcher_0_15 = asciiAnyCharMatcher_0_15.onChar_44(typedEvent);
     if (isDirty_asciiAnyCharMatcher_0_15) {
-      csv2Double_2.onDelimiter(asciiAnyCharMatcher_0_15);
       csv2ByteBuffer_5.onDelimiter(asciiAnyCharMatcher_0_15);
+      csv2Double_2.onDelimiter(asciiAnyCharMatcher_0_15);
     }
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
     if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -300,7 +300,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -308,11 +308,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_45(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.onSign(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.onSign(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -323,7 +323,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -331,11 +331,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_46(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.onDecimalPoint(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.onDecimalPoint(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -346,7 +346,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -354,11 +354,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_48(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_0(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_0(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -369,7 +369,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -377,11 +377,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_49(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_1(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_1(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -392,7 +392,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -400,11 +400,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_50(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_2(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_2(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -415,7 +415,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -423,11 +423,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_51(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_3(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_3(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -438,7 +438,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -446,11 +446,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_52(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_4(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_4(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -461,7 +461,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -469,11 +469,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_53(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_5(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_5(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -484,7 +484,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -492,11 +492,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_54(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_6(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_6(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -507,7 +507,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -515,11 +515,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_55(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_7(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_7(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -530,7 +530,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -538,11 +538,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_56(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_8(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_8(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -553,7 +553,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -561,11 +561,11 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   private void handle_CharEvent_57(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2Double_2 = csv2Double_2.on_9(typedEvent);
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
+    isDirty_csv2Double_2 = csv2Double_2.on_9(typedEvent);
     if (isDirty_flightDetailsCsvMarshaller2_8) {
       isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
       if (isDirty_greaterThanDecorator_4_11) {
@@ -576,7 +576,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -585,7 +585,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
     isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
     if (isDirty_flightDetailsCsvMarshaller2_8) {
@@ -598,7 +598,7 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_1_16 | isDirty_asciiAnyCharMatcher_0_15) {
+    if (isDirty_asciiAnyCharMatcher_0_15 | isDirty_asciiAnyCharMatcher_1_16) {
       csv2ByteBuffer_5.onEventComplete();
     }
   }
@@ -608,17 +608,17 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
 
     isDirty_asciiAnyCharMatcher_1_16 = false;
     isDirty_asciiAnyCharMatcher_0_15 = false;
-    isDirty_carrierDelayMap = false;
     isDirty_csv2ByteBuffer_5 = false;
     isDirty_csv2Double_2 = false;
     isDirty_flightDetailsCsvMarshaller2_8 = false;
     isDirty_greaterThanDecorator_4_11 = false;
+    isDirty_carrierDelayMap = false;
   }
 
   @Override
   public void init() {
-    csv2Double_2.init();
     csv2ByteBuffer_5.init();
+    csv2Double_2.init();
     flightDetailsCsvMarshaller2_8.init();
     greaterThanDecorator_4_11.init();
     carrierDelayMap.init();
