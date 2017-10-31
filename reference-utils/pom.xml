@@ -27,8 +27,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.maven-plugin.ver>1.0.5</fluxtion.maven-plugin.ver>
-        <fluxtion.runtime-plugin.ver>1.0.2-SNAPSHOT</fluxtion.runtime-plugin.ver>
+        <fluxtion.maven-plugin.ver>1.0.7</fluxtion.maven-plugin.ver>
+        <fluxtion.runtime-plugin.ver>1.0.2</fluxtion.runtime-plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -95,8 +95,7 @@
                                     <packageName>com.fluxtion.learning.utils.events.generated</packageName>
                                     <className>AlarmProcessor</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
+                                    <outputDirectory>src/main/java</outputDirectory>
                                     <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
@@ -112,8 +111,7 @@
                                     <packageName>com.fluxtion.learning.utils.events.generated</packageName>
                                     <className>AlarmProcessorAudited</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
+                                    <outputDirectory>src/main/java</outputDirectory>
                                     <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
@@ -129,8 +127,7 @@
                                     <packageName>com.fluxtion.learning.utils.monitoring.heating.generated</packageName>
                                     <className>HeatingSystem</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
+                                    <outputDirectory>src/main/java</outputDirectory>
                                     <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
@@ -145,8 +142,7 @@
                                     <packageName>com.fluxtion.learning.utils.monitoring.cooling.generated</packageName>
                                     <className>RackCoolingSystem</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>${basedir}/src/main/java</outputDirectory>
-                                    <resourcesOutputDirectory>${basedir}/src/main/resources</resourcesOutputDirectory>
+                                    <outputDirectory>src/main/java</outputDirectory>
                                     <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
