@@ -11,7 +11,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.maven-plugin.ver>1.0.6</fluxtion.maven-plugin.ver>
+        <fluxtion.maven-plugin.ver>1.0.7</fluxtion.maven-plugin.ver>
+        <fluxtion.ver>0.1.34</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -64,8 +65,7 @@
                     <plugin>
                         <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>1.0.7-SNAPSHOT</version>
-                        <!--<version>${fluxtion.maven-plugin.ver}</version>-->
+                        <version>${fluxtion.maven-plugin.ver}</version>
                         <executions>
                             <execution>
                                 <id>example-Event</id>
@@ -79,7 +79,6 @@
                                     <className>WcProcessor</className>
                                     <supportDirtyFiltering>false</supportDirtyFiltering>
                                     <outputDirectory>src/main/java</outputDirectory>
-                                    <!--<resourcesOutputDirectory>src/main/resources</resourcesOutputDirectory>-->
                                     <!--<logDebug>true</logDebug>-->
                                     <compileGenerated>false</compileGenerated>
                                     <generateDescription>false</generateDescription>
@@ -156,7 +155,7 @@
             <dependency>
                 <groupId>com.fluxtion</groupId>
                 <artifactId>fluxtion-bom</artifactId>
-                <version>0.1.33</version>
+                <version>${fluxtion.ver}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
