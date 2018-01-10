@@ -60,7 +60,37 @@
         </repository>
     </repositories>  
 
-    <profiles>     
+    <profiles> 
+        <profile>
+            <id>music-examples</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>example1</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.declarative.ext.example1.FxMonitorBuilder</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.example1.generated</packageName>
+                                    <className>FxTradeMonitor</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+            
         <profile>
             <id>build-all-examples</id>
             <activation>
