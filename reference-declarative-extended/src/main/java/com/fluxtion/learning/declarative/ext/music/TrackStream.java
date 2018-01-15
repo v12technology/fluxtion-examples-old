@@ -32,7 +32,16 @@ public class TrackStream {
     String territory;
     String vendor_identifier;
     int streams;
-
+//    columns 
+//    0:date 
+//    1:isrc
+//    2:track_artists
+//    3:track_title 
+//    4:territory 
+//    5:vendor_identifier
+//    6: streams
+    
+    
     public Date getDate() {
         return date;
     }

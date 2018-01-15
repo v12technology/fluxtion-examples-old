@@ -28,7 +28,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.plugin.ver>1.0.7</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.34</fluxtion.ver>
+        <fluxtion.ver>0.1.35-SNAPSHOT</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -77,9 +77,9 @@
                                 </goals>
                                 <configuration>
                                     <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                                    <configClass>com.fluxtion.learning.declarative.ext.example1.FxMonitorBuilder</configClass>
-                                    <packageName>com.fluxtion.learning.declarative.ext.example1.generated</packageName>
-                                    <className>FxTradeMonitor</className>
+                                    <configClass>com.fluxtion.learning.declarative.ext.music.MusicAnalysisConfig</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.music.generated</packageName>
+                                    <className>TrackAnalyser</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <logDebug>true</logDebug>
@@ -199,6 +199,7 @@
                 <groupId>com.fluxtion</groupId>
                 <artifactId>fluxtion-bom</artifactId>
                 <version>${fluxtion.ver}</version>
+<!--            <version>0.1.35-SNAPSHOT</version>-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

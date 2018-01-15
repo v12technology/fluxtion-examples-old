@@ -18,20 +18,20 @@ import com.fluxtion.extension.declarative.api.numeric.NumericValue;
 public class SubtractInvoker_6 extends Number implements NumericValue{
 
     //source operand inputs
-    public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_1 source_CumSumInvoker_1_4;
     public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_3 source_CumSumInvoker_3_5;
+    public com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_1 source_CumSumInvoker_1_4;
     private com.fluxtion.extension.declarative.funclib.api.math.BinaryFunctions.Subtract f = new  com.fluxtion.extension.declarative.funclib.api.math.BinaryFunctions.Subtract();
     private double result;
     private boolean updated;
 
 
 
-    @OnParentUpdate("source_CumSumInvoker_1_4")
-    public void sourceChange_source_CumSumInvoker_1_4(com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_1 updated){
-        calculate();
-    }
     @OnParentUpdate("source_CumSumInvoker_3_5")
     public void sourceChange_source_CumSumInvoker_3_5(com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_3 updated){
+        calculate();
+    }
+    @OnParentUpdate("source_CumSumInvoker_1_4")
+    public void sourceChange_source_CumSumInvoker_1_4(com.fluxtion.learning.declarative.ext.example1.generated.CumSumInvoker_1 updated){
         calculate();
     }
 

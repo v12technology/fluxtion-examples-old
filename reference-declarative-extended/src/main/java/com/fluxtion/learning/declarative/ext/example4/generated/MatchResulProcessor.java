@@ -280,8 +280,8 @@ public class MatchResulProcessor implements EventHandler, BatchHandler, Lifecycl
     isDirty_csv2Double_11 = csv2Double_11.onEol(typedEvent);
     isDirty_matchResultCsvMarshaller4_14 = matchResultCsvMarshaller4_14.onEol(typedEvent);
     if (isDirty_matchResultCsvMarshaller4_14) {
-      leagueSummary.updatematchResultCsvMarshaller41(matchResultCsvMarshaller4_14);
       leagueSummary.updatematchResultCsvMarshaller40(matchResultCsvMarshaller4_14);
+      leagueSummary.updatematchResultCsvMarshaller41(matchResultCsvMarshaller4_14);
     }
     if (isDirty_matchResultCsvMarshaller4_14) {
       isDirty_leagueSummary = leagueSummary.updated();

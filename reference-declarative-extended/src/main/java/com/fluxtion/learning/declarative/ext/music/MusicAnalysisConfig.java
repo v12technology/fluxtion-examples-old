@@ -18,23 +18,52 @@ package com.fluxtion.learning.declarative.ext.music;
 
 import com.fluxtion.api.node.SEPConfig;
 import com.fluxtion.extension.declarative.api.Wrapper;
+import com.fluxtion.extension.declarative.api.group.GroupBy;
 import static com.fluxtion.extension.declarative.builder.group.Group.groupBy;
 import com.fluxtion.extension.declarative.builder.group.GroupByBuilder;
 import com.fluxtion.extension.declarative.builder.log.LogBuilder;
 import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
-import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanFilter;
+
 /**
  *
  * @author gregp
  */
-public class MusicAnalysisConfig extends SEPConfig{
+public class MusicAnalysisConfig extends SEPConfig {
 
-    //columns date,isrc,track_artists,track_title,territory,vendor_identifier,streams
-    
+//    columns 
+//    0:date 
+//    1:isrc
+//    2:track_artists
+//    3:track_title 
+//    4:territory 
+//    5:vendor_identifier
+//    6:streams
+
     @Override
+
     public void buildConfig() {
-        Wrapper<TrackStream> track = csvMarshaller(TrackStream.class).mapString(0, TrackStream::setDateString).build();
-        LogBuilder.Log("processing track", track);
+        //map csv
+        Wrapper<TrackStream> track = csvMarshaller(TrackStream.class)
+                .mapString(0, TrackStream::setDateString)
+                .mapString(1, TrackStream::setIsrc)
+                .mapString(2, TrackStream::setTrack_artists)
+                .mapString(3, TrackStream::setTrack_title)
+                .mapString(4, TrackStream::setTerritory)
+                .mapString(5, TrackStream::setVendor_identifier)
+                .map(6, TrackStream::setStreams)
+                .build();
+        //group by isrc
+        GroupByBuilder<TrackStream, TrackPlaySummary> summary = groupBy(track, TrackStream::getIsrc, TrackPlaySummary.class);
+        //init some values
+        summary.init(TrackStream::getIsrc, TrackPlaySummary::setIsrc);
+        summary.init(TrackStream::getTrack_title, TrackPlaySummary::setTrackName);
+        //summary statistics
+        summary.avg(TrackStream::getStreams, TrackPlaySummary::setAvgDailyPlays);
+        summary.count(TrackStream::getStreams, TrackPlaySummary::setTotalPlays);
+        GroupBy<TrackPlaySummary> build = summary.build();
+        //log
+        LogBuilder.Log("processing track:{}", track, TrackStream::getTrack_title);
+        LogBuilder.Log("summary:", build, build::event);
     }
-    
+
 }
