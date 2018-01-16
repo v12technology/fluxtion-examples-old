@@ -27,6 +27,7 @@ public class TrackStreamCsvMarshaller7 implements Wrapper<TrackStream> {
     public Csv2ByteBuffer csvSrc_4;
     public Csv2ByteBuffer csvSrc_5;
     public Csv2Double csvSrc_6;
+    private int headerLines = 1;
 
     @EventHandler(filterId = '\n')
     public boolean onEol(CharEvent event) {
@@ -37,7 +38,8 @@ public class TrackStreamCsvMarshaller7 implements Wrapper<TrackStream> {
         target.setTerritory((java.lang.String) csvSrc_4.asString());
         target.setVendor_identifier((java.lang.String) csvSrc_5.asString());
         target.setStreams((int) csvSrc_6.doubleValue());
-        return true;
+    headerLines--;
+    return headerLines < 0;
     }
 
     @Override
