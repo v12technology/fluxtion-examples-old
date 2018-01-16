@@ -23,17 +23,16 @@ import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
 import com.fluxtion.extension.declarative.funclib.api.filter.AnyCharMatchFilter;
 
 /**
- * Char notifiers match = '
-'
- *  
+ * Char notifiers match = ' '
+ *
  * @author Greg Higgins
  */
-public class AsciiAnyCharMatcher_1 implements AnyCharMatchFilter{
+public class AsciiAnyCharMatcher_1 implements AnyCharMatchFilter {
 
     private transient char matchedChar;
 
-    @EventHandler(filterId = '\n') 
-    public final boolean onChar_newLine (CharEvent event) {
+    @EventHandler(filterId = '\n')
+    public final boolean onChar_newLine(CharEvent event) {
         matchedChar = '\n';
         return true;
     }

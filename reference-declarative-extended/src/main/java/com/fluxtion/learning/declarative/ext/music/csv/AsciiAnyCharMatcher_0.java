@@ -24,15 +24,15 @@ import com.fluxtion.extension.declarative.funclib.api.filter.AnyCharMatchFilter;
 
 /**
  * Char notifiers match = ','
- *  
+ *
  * @author Greg Higgins
  */
-public class AsciiAnyCharMatcher_0 implements AnyCharMatchFilter{
+public class AsciiAnyCharMatcher_0 implements AnyCharMatchFilter {
 
     private transient char matchedChar;
 
-    @EventHandler(filterId = ',') 
-    public final boolean onChar_44 (CharEvent event) {
+    @EventHandler(filterId = ',')
+    public final boolean onChar_44(CharEvent event) {
         matchedChar = ',';
         return true;
     }

@@ -12,11 +12,10 @@ import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2Double;
 /**
  * generated Test wrapper.
  *
- * target class  : TrackStream
- * 
+ * target class : TrackStream
+ *
  * @author Greg Higgins
  */
-
 public class TrackStreamCsvMarshaller7 implements Wrapper<TrackStream> {
 
     private TrackStream target;
@@ -38,8 +37,8 @@ public class TrackStreamCsvMarshaller7 implements Wrapper<TrackStream> {
         target.setTerritory((java.lang.String) csvSrc_4.asString());
         target.setVendor_identifier((java.lang.String) csvSrc_5.asString());
         target.setStreams((int) csvSrc_6.doubleValue());
-    headerLines--;
-    return headerLines < 0;
+        headerLines--;
+        return headerLines < 0;
     }
 
     @Override
@@ -53,10 +52,8 @@ public class TrackStreamCsvMarshaller7 implements Wrapper<TrackStream> {
     }
 
     @Initialise
-    public void init(){
+    public void init() {
         target = new TrackStream();
     }
 
 }
-
-
