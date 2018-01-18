@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="basePath">target/generated-sources/testlog/</Property>
+    </Properties>
+     
+    <Appenders>
+        <RandomAccessFile  name="indicatorsfileLogger" fileName="${basePath}/indicators.log" append="false" immediateFlush="false">
+            <PatternLayout>
+                <pattern>%msg%n</pattern>
+            </PatternLayout>
+        </RandomAccessFile>
+        <RandomAccessFile  name="notificationsfileLogger" fileName="${basePath}/notifications.log" append="false" immediateFlush="false">
+            <PatternLayout>
+                <pattern>%msg%n</pattern>
+            </PatternLayout>
+        </RandomAccessFile>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-6level] %d{HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="indicators" level="debug" additivity="false">
+            <appender-ref ref="indicatorsfileLogger" level="debug" />
+        </Logger>
+        <Logger name="notifications" level="debug" additivity="false">
+            <appender-ref ref="notificationsfileLogger" level="debug" />
+        </Logger>
+        <Root level="info" additivity="false">
+            <!--<appender-ref ref="fileLogger" level="debug" />-->
+            <appender-ref ref="console" />
+        </Root>
+    </Loggers>
+</Configuration>
