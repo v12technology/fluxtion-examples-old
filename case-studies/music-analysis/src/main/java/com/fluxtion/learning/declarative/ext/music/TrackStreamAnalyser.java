@@ -16,9 +16,9 @@
  */
 package com.fluxtion.learning.declarative.ext.music;
 
-import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
 import com.fluxtion.learning.declarative.ext.music.csv.CsvTrackMarshaller;
 import com.fluxtion.learning.declarative.ext.music.indicators.TrackProcessor;
+import static com.fluxtion.learning.declarative.ext.music.util.AsciiCharEventFileStreamer.streamFromFile;
 import com.fluxtion.learning.declarative.ext.music.util.OrderedPublisher;
 import java.io.File;
 import java.io.IOException;
@@ -32,6 +32,11 @@ public class TrackStreamAnalyser {
     private CsvTrackMarshaller marshaller;
     private OrderedPublisher publisher;
 
+    public static void main(String[] args) throws IOException{
+        TrackStreamAnalyser analyser = new TrackStreamAnalyser();
+        analyser.run(new File(args[0]));
+    }
+    
     public TrackStreamAnalyser() {
         marshaller = new CsvTrackMarshaller();
         publisher = new OrderedPublisher();
