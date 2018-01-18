@@ -1,4 +1,4 @@
-package com.fluxtion.learning.declarative.ext.music.generated;
+package com.fluxtion.learning.declarative.ext.music.indicators;
 
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
@@ -10,10 +10,10 @@ import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
 import com.fluxtion.learning.declarative.ext.music.TrackStream;
-import com.fluxtion.learning.declarative.ext.music.generated.TrackStreamCsvMarshaller7;
 import com.fluxtion.learning.declarative.ext.music.TrackPlaySummary;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
+import com.fluxtion.learning.declarative.ext.music.indicators.MultiKeyFromTrackStream_1;
+import com.fluxtion.learning.declarative.ext.music.util.PassThrough;
 
 /**
  * generated group by holder.
@@ -22,29 +22,29 @@ import com.fluxtion.extension.declarative.api.group.AggregateFunctions.Aggregate
  * 
  * @author Greg Higgins
  */
-public final class GroupBy_11 implements GroupBy<TrackPlaySummary>{
+public final class GroupBy_6 implements GroupBy<TrackPlaySummary>{
 
-    public TrackStreamCsvMarshaller7 trackStreamCsvMarshaller70;
     private TrackPlaySummary target;
-    private GroupByTargetMap<TrackPlaySummary, CalculationStateGroupBy_11> calcState;
-    private GroupByIniitialiser<TrackStream, TrackPlaySummary> initialisertrackStreamCsvMarshaller70;
+    private GroupByTargetMap<TrackPlaySummary, CalculationStateGroupBy_6> calcState;
+    private GroupByIniitialiser<TrackStream, TrackPlaySummary> initialisertrackStream0;
+    private MultiKeyFromTrackStream_1 multiKeyFromTrackStream_12;
 
-    @OnParentUpdate( "trackStreamCsvMarshaller70")
-    public boolean updatetrackStreamCsvMarshaller70(TrackStreamCsvMarshaller7 eventWrapped){
-        TrackStream event = eventWrapped.event();
-        CalculationStateGroupBy_11 instance = calcState.getOrCreateInstance(event.getIsrc(), initialisertrackStreamCsvMarshaller70, event);
+    @EventHandler
+    public boolean updatetrackStream0(TrackStream event){
+        multiKeyFromTrackStream_12.setKey(event);
+        CalculationStateGroupBy_6 instance = calcState.getOrCreateInstance(multiKeyFromTrackStream_12, initialisertrackStream0, event);
         target = instance.target;
         {
-			double value = instance.aggregateAverage9;
-			value = instance.aggregateAverage9Function.calcAverage((double)event.getStreams(), (double)value);
-			target.setAvgDailyPlays((int)value);
-			instance.aggregateAverage9 = value;
+			double value = instance.aggregateSum4;
+			value = AggregateSum.calcSum((double)event.getStreams(), (double)value);
+			target.setTotalPlays((int)value);
+			instance.aggregateSum4 = value;
          }
         {
-			int value = instance.aggregateCount10;
-			value = AggregateCount.increment((int)event.getStreams(), (int)value);
-			target.setTotalPlays((int)value);
-			instance.aggregateCount10 = value;
+			int value = instance.passThrough5;
+			value = PassThrough.passThrough((int)event.getStreams(), (int)value);
+			target.addDailyPlays((int)value);
+			instance.passThrough5 = value;
          }
         return true;
     }
@@ -56,11 +56,13 @@ public final class GroupBy_11 implements GroupBy<TrackPlaySummary>{
 
     @Initialise
     public void init(){
-        calcState = new GroupByTargetMap<>(CalculationStateGroupBy_11.class);
-        initialisertrackStreamCsvMarshaller70 = new GroupByIniitialiser<TrackStream, TrackPlaySummary>(){
+        calcState = new GroupByTargetMap<>(CalculationStateGroupBy_6.class);
+        multiKeyFromTrackStream_12  = new MultiKeyFromTrackStream_1();
+        initialisertrackStream0 = new GroupByIniitialiser<TrackStream, TrackPlaySummary>(){
         
             @Override
             public void apply(TrackStream source, TrackPlaySummary target) {
+                target.setDateString((java.lang.String)source.getDateString());
                 target.setIsrc((java.lang.String)source.getIsrc());
                 target.setTrackName((java.lang.String)source.getTrack_title());
             }

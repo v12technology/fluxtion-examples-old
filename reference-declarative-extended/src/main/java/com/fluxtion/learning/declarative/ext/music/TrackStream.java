@@ -16,22 +16,18 @@
  */
 package com.fluxtion.learning.declarative.ext.music;
 
+import com.fluxtion.runtime.event.Event;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
  * @author gregp
  */
-public class TrackStream {
+public class TrackStream extends Event {
 
-    Date date;
-    String dateString;
-    String isrc;
-    String track_artists;
-    String track_title;
-    String territory;
-    String vendor_identifier;
-    int streams;
 //    columns 
 //    0:date 
 //    1:isrc
@@ -40,8 +36,17 @@ public class TrackStream {
 //    4:territory 
 //    5:vendor_identifier
 //    6: streams
-    
-    
+    Date date;
+    String dateString;
+    String isrc;
+    String track_artists;
+    String track_title;
+    String territory;
+    String vendor_identifier;
+    int streams;
+    private static HashMap<String, Date> dateCache = new HashMap<>();
+    private static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
     public Date getDate() {
         return date;
     }
@@ -56,6 +61,14 @@ public class TrackStream {
 
     public void setDateString(String dateString) {
         this.dateString = dateString;
+        date = dateCache.computeIfAbsent(dateString, s -> {
+            try {
+                return df.parse(dateString);
+            } catch (ParseException ex) {
+//                Logger.getLogger(TrackPlaySummary.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return null;
+        });
     }
 
     public String getIsrc() {
@@ -110,5 +123,18 @@ public class TrackStream {
     public String toString() {
         return "TrackStream{" + "date=" + date + ", dateString=" + dateString + ", isrc=" + isrc + ", track_artists=" + track_artists + ", track_title=" + track_title + ", territory=" + territory + ", vendor_identifier=" + vendor_identifier + ", streams=" + streams + '}';
     }
-    
+
+    public TrackStream copy() {
+        TrackStream clone = new TrackStream();
+        clone.date = date;
+        clone.dateString = dateString;
+        clone.isrc = isrc;
+        clone.track_artists = track_artists;
+        clone.track_title = track_title;
+        clone.territory = territory;
+        clone.vendor_identifier = vendor_identifier;
+        clone.streams = streams;
+        return clone;
+    }
+
 }

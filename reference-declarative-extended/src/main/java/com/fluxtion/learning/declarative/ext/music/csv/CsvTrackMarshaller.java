@@ -8,7 +8,7 @@ import com.fluxtion.learning.declarative.ext.music.csv.AsciiAnyCharMatcher_0;
 import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2ByteBuffer;
 import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2Double;
 import com.fluxtion.learning.declarative.ext.music.csv.TrackStreamCsvMarshaller7;
-import com.fluxtion.learning.declarative.ext.music.TrackPublisher;
+import com.fluxtion.learning.declarative.ext.music.util.TrackPublisher;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
