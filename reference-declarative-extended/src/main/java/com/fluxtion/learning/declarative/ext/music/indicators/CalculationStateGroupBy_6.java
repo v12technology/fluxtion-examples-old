@@ -15,17 +15,18 @@ import com.fluxtion.learning.declarative.ext.music.util.PassThrough;
 /**
  * generated group by calculation state holder. This class holds thr
  *
- * target class  : TrackPlaySummary
- * 
+ * target class : TrackPlaySummary
+ *
  * @author Greg Higgins
  */
-public final class CalculationStateGroupBy_6 implements Wrapper<TrackPlaySummary>{
+public final class CalculationStateGroupBy_6 implements Wrapper<TrackPlaySummary> {
+
     public TrackPlaySummary target;
     public double aggregateSum4;
     public int passThrough5;
 
-    public CalculationStateGroupBy_6(){
-         target = new TrackPlaySummary();
+    public CalculationStateGroupBy_6() {
+        target = new TrackPlaySummary();
     }
 
     @Override

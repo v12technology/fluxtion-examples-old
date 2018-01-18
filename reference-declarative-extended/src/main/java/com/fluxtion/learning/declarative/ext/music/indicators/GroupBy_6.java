@@ -18,11 +18,11 @@ import com.fluxtion.learning.declarative.ext.music.util.PassThrough;
 /**
  * generated group by holder.
  *
- * target class  : TrackPlaySummary
- * 
+ * target class : TrackPlaySummary
+ *
  * @author Greg Higgins
  */
-public final class GroupBy_6 implements GroupBy<TrackPlaySummary>{
+public final class GroupBy_6 implements GroupBy<TrackPlaySummary> {
 
     private TrackPlaySummary target;
     private GroupByTargetMap<TrackPlaySummary, CalculationStateGroupBy_6> calcState;
@@ -30,42 +30,42 @@ public final class GroupBy_6 implements GroupBy<TrackPlaySummary>{
     private MultiKeyFromTrackStream_1 multiKeyFromTrackStream_12;
 
     @EventHandler
-    public boolean updatetrackStream0(TrackStream event){
+    public boolean updatetrackStream0(TrackStream event) {
         multiKeyFromTrackStream_12.setKey(event);
         CalculationStateGroupBy_6 instance = calcState.getOrCreateInstance(multiKeyFromTrackStream_12, initialisertrackStream0, event);
         target = instance.target;
         {
-			double value = instance.aggregateSum4;
-			value = AggregateSum.calcSum((double)event.getStreams(), (double)value);
-			target.setTotalPlays((int)value);
-			instance.aggregateSum4 = value;
-         }
+            double value = instance.aggregateSum4;
+            value = AggregateSum.calcSum((double) event.getStreams(), (double) value);
+            target.setTotalPlays((int) value);
+            instance.aggregateSum4 = value;
+        }
         {
-			int value = instance.passThrough5;
-			value = PassThrough.passThrough((int)event.getStreams(), (int)value);
-			target.addDailyPlays((int)value);
-			instance.passThrough5 = value;
-         }
+            int value = instance.passThrough5;
+            value = PassThrough.passThrough((int) event.getStreams(), (int) value);
+            target.addDailyPlays((int) value);
+            instance.passThrough5 = value;
+        }
         return true;
     }
 
     @OnEvent
-    public boolean updated(){
+    public boolean updated() {
         return true;
     }
 
     @Initialise
-    public void init(){
+    public void init() {
         calcState = new GroupByTargetMap<>(CalculationStateGroupBy_6.class);
-        multiKeyFromTrackStream_12  = new MultiKeyFromTrackStream_1();
-        initialisertrackStream0 = new GroupByIniitialiser<TrackStream, TrackPlaySummary>(){
-        
+        multiKeyFromTrackStream_12 = new MultiKeyFromTrackStream_1();
+        initialisertrackStream0 = new GroupByIniitialiser<TrackStream, TrackPlaySummary>() {
+
             @Override
             public void apply(TrackStream source, TrackPlaySummary target) {
-                target.setIsrc((java.lang.String)source.getIsrc());
-                target.setDateString((java.lang.String)source.getDateString());
-                target.setTrack_artists((java.lang.String)source.getTrack_artists());
-                target.setTrackName((java.lang.String)source.getTrack_title());
+                target.setIsrc((java.lang.String) source.getIsrc());
+                target.setDateString((java.lang.String) source.getDateString());
+                target.setTrack_artists((java.lang.String) source.getTrack_artists());
+                target.setTrackName((java.lang.String) source.getTrack_title());
             }
 
         };

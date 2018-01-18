@@ -15,17 +15,18 @@ import com.fluxtion.learning.declarative.ext.music.indicators.MultiKeyFromTrackS
 /**
  * generated group by calculation state holder. This class holds thr
  *
- * target class  : TrackPlaySummary
- * 
+ * target class : TrackPlaySummary
+ *
  * @author Greg Higgins
  */
-public final class CalculationStateGroupBy_14 implements Wrapper<TrackPlaySummary>{
+public final class CalculationStateGroupBy_14 implements Wrapper<TrackPlaySummary> {
+
     public TrackPlaySummary target;
     public double aggregateSum12;
     public int passThrough13;
 
-    public CalculationStateGroupBy_14(){
-         target = new TrackPlaySummary();
+    public CalculationStateGroupBy_14() {
+        target = new TrackPlaySummary();
     }
 
     @Override
