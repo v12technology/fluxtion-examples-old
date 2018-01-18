@@ -16,22 +16,24 @@
  */
 package com.fluxtion.learning.declarative.ext.music;
 
-import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
-import com.fluxtion.learning.declarative.ext.music.generated.TrackAnalyser;
 import java.io.File;
 import java.io.IOException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 
 /**
  *
+ *
  * @author greg
  */
-public class MusicAnalysisTest {
+public class MusicAnalysisComplexTest {
 
     @Test
     public void sample() throws IOException {
-//        File csvFile = new File("src/test/resources/music/small_data.csv");
-        File csvFile = new File("src/test/resources/music/sp009_sample_ai_data.csv");
-        streamFromFile(csvFile, new TrackAnalyser(), true);
+        System.setProperty("log4j2.contextSelector", "org.apache.logging.log4j.core.async.AsyncLoggerContextSelector");
+        TrackStreamAnalyser analyser = new TrackStreamAnalyser();
+        analyser.run(new File("src/test/resources/music/sp009_sample_ai_data.csv"));
+//        analyser.run(new File("src/test/resources/music/small_data.csv"));
     }
 }

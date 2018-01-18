@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><graphml xmlns="http://graphml.graphdrawing.org/xmlns" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd" xmlns:jGraph="http://www.jgraph.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<key id="vertex_label" for="node" attr.name="nodeData" attr.type="string"/>
+<key id="edge_label" for="edge" attr.name="edgeData" attr.type="string"/>
+<graph edgedefault="directed">
+<node id="greaterThanOrEqualDecorator_7_3">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="greaterThanOrEqualDecorator_7_3:&#10;GreaterThanOrEqualDecorator_7"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="groupBy_5_1">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;groupBy_5_1:&#10;GroupBy_5"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder10_7">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder10_7:&#10;MsgBuilder10"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="trackPlaySummaryHandler_5">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;trackPlaySummaryHandler_5:&#10;TrackPlaySummaryHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="asciiConsoleLogger_9">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;asciiConsoleLogger_9:&#10;AsciiConsoleLogger"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="TrackPlaySummary">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;TrackPlaySummary"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="LogControlEvent">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;LogControlEvent"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<edge id="1" source="groupBy_5_1" target="greaterThanOrEqualDecorator_7_3">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="2" source="trackPlaySummaryHandler_5" target="msgBuilder10_7">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="3" source="greaterThanOrEqualDecorator_7_3" target="msgBuilder10_7">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="4" source="msgBuilder10_7" target="asciiConsoleLogger_9">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="5" source="TrackPlaySummary" target="groupBy_5_1">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="6" source="LogControlEvent" target="msgBuilder10_7">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="7" source="TrackPlaySummary" target="trackPlaySummaryHandler_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="8" source="LogControlEvent" target="asciiConsoleLogger_9">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+</graph>
+</graphml>

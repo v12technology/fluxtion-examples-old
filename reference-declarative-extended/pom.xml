@@ -27,7 +27,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.plugin.ver>1.0.7</fluxtion.plugin.ver>
+        <fluxtion.plugin.ver>1.0.8</fluxtion.plugin.ver>
         <fluxtion.ver>0.1.35-SNAPSHOT</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
@@ -62,6 +62,36 @@
 
     <profiles> 
         <profile>
+            <id>music-indicators</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>grpByTrack</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.declarative.ext.music.sepconfig.TrackAnalysisConfig</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.music.indicators</packageName>
+                                    <className>TrackProcessor</className>
+                                    <formatSource>false</formatSource>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <!--<outputDirectory>src/main/java</outputDirectory>-->
+<!--                                    <logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
             <id>music-examples</id>
             <build>
                 <plugins>
@@ -77,12 +107,43 @@
                                 </goals>
                                 <configuration>
                                     <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                                    <configClass>com.fluxtion.learning.declarative.ext.music.MusicAnalysisConfig</configClass>
-                                    <packageName>com.fluxtion.learning.declarative.ext.music.generated</packageName>
-                                    <className>TrackAnalyser</className>
+                                    <configClass>com.fluxtion.learning.declarative.ext.music.sepconfig.GroupingConfig</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.music.grouping</packageName>
+                                    <className>TrackGrouper</className>
+                                    <formatSource>false</formatSource>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
-                                    <outputDirectory>src/main/java</outputDirectory>
-                                    <logDebug>true</logDebug>
+                                    <!--<outputDirectory>src/main/java</outputDirectory>-->
+<!--                                    <logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>music-csvmarshaller</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>csv-parser</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.learning.declarative.ext.music.sepconfig.CsvToTrackConfig</configClass>
+                                    <packageName>com.fluxtion.learning.declarative.ext.music.csv</packageName>
+                                    <className>CsvTrackMarshaller</className>
+                                    <formatSource>false</formatSource>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <!--<outputDirectory>src/main/java</outputDirectory>-->
+<!--                                    <logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
                         </executions>
@@ -191,6 +252,26 @@
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.3.7</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -199,7 +280,7 @@
                 <groupId>com.fluxtion</groupId>
                 <artifactId>fluxtion-bom</artifactId>
                 <version>${fluxtion.ver}</version>
-<!--            <version>0.1.35-SNAPSHOT</version>-->
+                <!--            <version>0.1.35-SNAPSHOT</version>-->
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
