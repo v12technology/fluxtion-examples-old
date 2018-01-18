@@ -1,8 +1,8 @@
 package com.fluxtion.learning.declarative.ext.music.indicators;
 
-import com.fluxtion.learning.declarative.ext.music.TrackStream;
 import com.fluxtion.extension.declarative.api.numeric.MutableNumericValue;
 import com.fluxtion.extension.declarative.api.group.MultiKey;
+import com.fluxtion.learning.declarative.ext.music.TrackStream;
 
 /**
  * generated multi key class for use with GroupBy functionality

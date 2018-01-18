@@ -10,7 +10,7 @@ import com.fluxtion.learning.declarative.ext.music.TrackStream;
 import com.fluxtion.learning.declarative.ext.music.TrackPlaySummary;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 import com.fluxtion.learning.declarative.ext.music.util.PassThrough;
-import com.fluxtion.learning.declarative.ext.music.indicators.MultiKeyFromTrackStream_9;
+import com.fluxtion.learning.declarative.ext.music.indicators.MultiKeyFromTrackStream_26;
 
 /**
  * generated group by calculation state holder. This class holds thr
@@ -19,12 +19,12 @@ import com.fluxtion.learning.declarative.ext.music.indicators.MultiKeyFromTrackS
  * 
  * @author Greg Higgins
  */
-public final class CalculationStateGroupBy_14 implements Wrapper<TrackPlaySummary>{
+public final class CalculationStateGroupBy_31 implements Wrapper<TrackPlaySummary>{
     public TrackPlaySummary target;
-    public double aggregateSum12;
-    public int passThrough13;
+    public double aggregateSum29;
+    public int passThrough30;
 
-    public CalculationStateGroupBy_14(){
+    public CalculationStateGroupBy_31(){
          target = new TrackPlaySummary();
     }
 

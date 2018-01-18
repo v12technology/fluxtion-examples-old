@@ -46,6 +46,24 @@ public class TrackAnalysisConfig extends SEPConfig {
         BollingerPublisher publisherTerritory = new BollingerPublisher(groupTrackTerr, "track_territory");
         publisherTerritory.territory = true;
         addPublicNode(publisherTerritory, "trackTerritoryAnalyser");
+        
+        //track and vendor
+        GroupByBuilder<TrackStream, TrackPlaySummary> grpByTrackAndVendor = groupBy(TrackStream.class, TrackPlaySummary.class, TrackStream::getIsrc, TrackStream::getVendor_identifier);
+        grpByTrackAndVendor.init(TrackStream::getVendor_identifier, TrackPlaySummary::setVendor_identifier);
+        GroupBy<TrackPlaySummary> groupTrackVend = initGroup(grpByTrackAndVendor, "trackAndVendorByDate");
+        BollingerPublisher publisherVendor= new BollingerPublisher(groupTrackVend, "track_vendor");
+        publisherVendor.vendor = true;
+        addPublicNode(publisherVendor, "trackVendorAnalyser");
+        
+        //track and vendor and territory
+        GroupByBuilder<TrackStream, TrackPlaySummary> grpByTrackVendorTerr = groupBy(TrackStream.class, TrackPlaySummary.class, TrackStream::getIsrc, TrackStream::getVendor_identifier, TrackStream::getTerritory);
+        grpByTrackVendorTerr.init(TrackStream::getVendor_identifier, TrackPlaySummary::setVendor_identifier);
+        grpByTrackVendorTerr.init(TrackStream::getTerritory, TrackPlaySummary::setTerritory);
+        GroupBy<TrackPlaySummary> groupTrackVendTerr = initGroup(grpByTrackVendorTerr, "trackAndVendorAndTerritoryByDate");
+        BollingerPublisher publisherVendorTerr = new BollingerPublisher(groupTrackVendTerr, "track_vendor_territory");
+        publisherVendorTerr.vendor = true;
+        publisherVendorTerr.territory = true;
+        addPublicNode(publisherVendorTerr, "trackVendorTerritoryAnalyser");
     }
 
     protected GroupBy<TrackPlaySummary> initGroup(GroupByBuilder<TrackStream, TrackPlaySummary> grpBy, String name) {
@@ -53,6 +71,7 @@ public class TrackAnalysisConfig extends SEPConfig {
         grpBy.init(TrackStream::getIsrc, TrackPlaySummary::setIsrc);
         grpBy.init(TrackStream::getTrack_title, TrackPlaySummary::setTrackName);
         grpBy.init(TrackStream::getDateString, TrackPlaySummary::setDateString);
+        grpBy.init(TrackStream::getTrack_artists, TrackPlaySummary::setTrack_artists);
         //summary statistics
         grpBy.sum(TrackStream::getStreams, TrackPlaySummary::setTotalPlays);
         grpBy.function(PassThrough.class, TrackStream::getStreams, TrackPlaySummary::addDailyPlays);

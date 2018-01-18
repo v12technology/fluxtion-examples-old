@@ -33,6 +33,7 @@ public class BollingerPublisher {
     private final Logger LOG_INDICATOR = LogManager.getLogger("indicators");
     private final Logger LOG_NOTIFICATION = LogManager.getLogger("notifications");
     public boolean territory = false;
+    public boolean vendor = false;
 
     public BollingerPublisher(GroupBy<TrackPlaySummary> tracks, String name) {
         this.tracks = tracks;
@@ -77,6 +78,7 @@ public class BollingerPublisher {
                 + ", \"artist\":\"{}\""
                 + ", \"percentB\":\"{}\""
                 + ", \"territory\":\"{}\""
+                + ", \"vendor\":\"{}\""
                 + "}",
                 name,
                 eod.dateString,
@@ -84,7 +86,8 @@ public class BollingerPublisher {
                 summary.getTrackName(),
                 summary.getTrack_artists(),
                 summary.getBollingerPercentB(),
-                territory ? summary.getTerritory() : "ALL"
+                territory ? summary.getTerritory() : "ALL",
+                vendor ? summary.getVendor_identifier(): "ALL"
         );
     }
 }
