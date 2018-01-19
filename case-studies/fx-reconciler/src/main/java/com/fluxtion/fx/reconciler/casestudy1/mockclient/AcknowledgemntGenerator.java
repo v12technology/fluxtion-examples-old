@@ -58,7 +58,11 @@ public class AcknowledgemntGenerator {
                 }
                 client.timeUpdate(TIMING_PULSE_EVENT);
                 client.processTradeAcknowledgement(new TradeAcknowledgement("NY_3_FXALL", countId, TIMING_PULSE_EVENT.currentTimeMillis));
-                client.processTradeAcknowledgement(new TradeAcknowledgement("MiddleOffice_NY3_FXALL", ++countId, TIMING_PULSE_EVENT.currentTimeMillis));
+                client.processTradeAcknowledgement(new TradeAcknowledgement("MiddleOffice_NY3_FXALL", countId, TIMING_PULSE_EVENT.currentTimeMillis));
+                client.processTradeAcknowledgement(new TradeAcknowledgement("MiddleOffice_EBS_LD4", ++countId, TIMING_PULSE_EVENT.currentTimeMillis));
+                //reuters pair
+                client.processTradeAcknowledgement(new TradeAcknowledgement("dcln_1_reuters", ++countId, TIMING_PULSE_EVENT.currentTimeMillis));
+                client.processTradeAcknowledgement(new TradeAcknowledgement("MiddleOffice_reuters_dc1", countId, TIMING_PULSE_EVENT.currentTimeMillis));
             } catch (Exception e) {
                 System.err.println("error:" + e.getMessage());
             }
