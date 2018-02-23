@@ -10,15 +10,15 @@ import com.fluxtion.extension.declarative.api.log.MsgBuilder;
 public class MsgBuilder7 extends MsgBuilder{
 
     //source operand inputs
-    public com.fluxtion.example.tempmonitor.generated.MaxInvoker_1 source_MaxInvoker_1_6;
+    public com.fluxtion.example.tempmonitor.generated.StartOfDayHandler source_StartOfDayHandler_6;
 
     @OnEvent
     public boolean buildMessage() {
         if(!isGoodToLog())
             return false;
-        msgSink.append("NEW max temp ");
-        msgSink.append(source_MaxInvoker_1_6.intValue());
-        msgSink.append("C");
+        msgSink.append("===== Start of day ");
+        msgSink.append(((com.fluxtion.example.tempmonitor.TempHandler.StartOfDay)source_StartOfDayHandler_6.event()).day());
+        msgSink.append(" =====");
         msgSink.append('\n');
         return true;
     }

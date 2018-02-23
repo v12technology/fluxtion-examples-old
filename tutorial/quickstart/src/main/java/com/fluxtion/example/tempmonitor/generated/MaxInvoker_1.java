@@ -33,7 +33,7 @@ public class MaxInvoker_1 extends Number implements NumericValue{
 
     public void calculate(){
         double oldValue = result;
-        result = f.max(result, (double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_0.event()).getTemp());
+        result = f.max(result, (double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_0.event()).temp());
         updated = oldValue != result;
     }
 

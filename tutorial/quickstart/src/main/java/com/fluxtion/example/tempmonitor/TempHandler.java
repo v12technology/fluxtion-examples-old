@@ -21,10 +21,12 @@ package com.fluxtion.example.tempmonitor;
 import com.fluxtion.api.node.SEPConfig;
 import com.fluxtion.example.tempmonitor.generated.TemperatureAlarm;
 import com.fluxtion.extension.declarative.api.Test;
+import com.fluxtion.extension.declarative.api.log.LogControlEvent;
 import com.fluxtion.extension.declarative.api.numeric.NumericValue;
 import static com.fluxtion.extension.declarative.builder.event.EventSelect.select;
 import static com.fluxtion.extension.declarative.builder.log.LogBuilder.Log;
 import static com.fluxtion.extension.declarative.builder.log.LogBuilder.LogOnNotify;
+import static com.fluxtion.extension.declarative.builder.log.LogBuilder.buildLog;
 import static com.fluxtion.extension.declarative.funclib.builder.math.AvgFunctions.avg;
 import static com.fluxtion.extension.declarative.funclib.builder.math.MaxFunctions.max;
 import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanOnce;
@@ -53,14 +55,14 @@ public class TempHandler {
         monitor.init();
         //uncomment to have only WARNING
 //        monitor.handleEvent(LogControlEvent.enableLevelFiltering(3));
-        monitor.onEvent(new StartOfDay());
+        monitor.onEvent(new StartOfDay("01 Jun 2018"));
         monitor.onEvent(new TempEvent(10));
         monitor.onEvent(new TempEvent(20));
         monitor.onEvent(new TempEvent(14));
         monitor.onEvent(new TempEvent(16));
         monitor.onEvent(new TempEvent(20));
         monitor.onEvent(new EndOfDay());
-        monitor.onEvent(new StartOfDay());
+        monitor.onEvent(new StartOfDay("02 Jun 2018"));
         monitor.onEvent(new TempEvent(6));
         monitor.onEvent(new TempEvent(4));
         // uncomment to remove logging meta data
@@ -68,14 +70,14 @@ public class TempHandler {
 //        monitor.handleEvent(LogControlEvent.recordMsgLogLevel(false));
         monitor.onEvent(new TempEvent(26));
         monitor.onEvent(new EndOfDay());
-        monitor.onEvent(new StartOfDay());
+        monitor.onEvent(new StartOfDay("03 Jun 2018"));
         monitor.onEvent(new TempEvent(24));
         monitor.onEvent(new TempEvent(26));
         monitor.onEvent(new TempEvent(29));
         monitor.onEvent(new TempEvent(15));
         monitor.onEvent(new TempEvent(28));
         monitor.onEvent(new EndOfDay());
-        monitor.onEvent(new StartOfDay());
+        monitor.onEvent(new StartOfDay("04 Jun 2018"));
         monitor.onEvent(new TempEvent(15));
         monitor.onEvent(new TempEvent(24));
         monitor.onEvent(new TempEvent(20));
@@ -91,12 +93,23 @@ public class TempHandler {
             this.temp = temp;
         }
 
-        public int getTemp() {
+        public int temp() {
             return temp;
         }
     }
 
     public static class StartOfDay extends Event {
+
+        private final String day;
+
+        public StartOfDay(String day) {
+            this.day = day;
+        }
+
+        public String day() {
+            return day;
+        }
+
     }
 
     public static class EndOfDay extends Event {
@@ -106,13 +119,14 @@ public class TempHandler {
 
         @Override
         public void buildConfig() {
-            NumericValue maxDayTemp = max(TempEvent.class, TempEvent::getTemp, select(StartOfDay.class));
-            NumericValue avgDayTemp = avg(TempEvent.class, TempEvent::getTemp, select(StartOfDay.class));
-            Test tempBreach = greaterThanOnce(TempEvent.class, TempEvent::getTemp, 25);
+            NumericValue maxDayTemp = max(TempEvent.class, TempEvent::temp, select(StartOfDay.class));
+            NumericValue avgDayTemp = avg(TempEvent.class, TempEvent::temp, select(StartOfDay.class));
+            Test tempBreach = greaterThanOnce(TempEvent.class, TempEvent::temp, 25);
             //logging
+            Log("===== Start of day {} =====", StartOfDay.class, StartOfDay::day).logLevel = 2;
             Log("NEW max temp {}C", maxDayTemp, maxDayTemp::intValue).logLevel = 3;
             LogOnNotify("End of day - avg temp:{}C", select(EndOfDay.class), avgDayTemp, avgDayTemp::intValue).logLevel = 4;
-            LogOnNotify("Temp {}C has exceeded limit of 25C", tempBreach, select(TempEvent.class), TempEvent::getTemp).logLevel = 2;
+            LogOnNotify("Temp {}C has exceeded limit of 25C", tempBreach, select(TempEvent.class), TempEvent::temp).logLevel = 2;
         }
     }
 

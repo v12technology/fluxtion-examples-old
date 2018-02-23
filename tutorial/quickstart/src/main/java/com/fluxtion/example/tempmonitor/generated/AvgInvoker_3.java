@@ -33,7 +33,7 @@ public class AvgInvoker_3 extends Number implements NumericValue{
 
     public void calculate(){
         double oldValue = result;
-        result = f.avg(result, (double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_2.event()).getTemp());
+        result = f.avg(result, (double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_2.event()).temp());
         updated = oldValue != result;
     }
 

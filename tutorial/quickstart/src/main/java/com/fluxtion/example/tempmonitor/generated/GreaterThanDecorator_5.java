@@ -29,7 +29,7 @@ public class GreaterThanDecorator_5 implements Test{
     @OnEvent
     public boolean onEvent(){
         boolean oldValue = result;
-        result = f.isGreaterThan((double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_4.event()).getTemp(), (double)25);
+        result = f.isGreaterThan((double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_4.event()).temp(), (double)25);
         //updated = (oldValue != result) & result;
         return (!oldValue) & result;
     }

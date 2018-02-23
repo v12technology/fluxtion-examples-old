@@ -9,11 +9,11 @@ import com.fluxtion.api.annotations.OnParentUpdate;
  *
  * @author Greg Higgins
  */
-public class MsgBuilder11 extends MsgBuilder{
+public class MsgBuilder13 extends MsgBuilder{
 
     //source operand inputs
     @NoEventReference
-    public com.fluxtion.example.tempmonitor.generated.AvgInvoker_3 source_AvgInvoker_3_10;
+    public com.fluxtion.example.tempmonitor.generated.TempEventHandler source_TempEventHandler_12;
     public Object logNotifier;
     private boolean notificationToLog;
     
@@ -25,9 +25,9 @@ public class MsgBuilder11 extends MsgBuilder{
     @OnEvent
     public boolean buildMessage() {
         if(notificationToLog & isGoodToLog()){
-            msgSink.append("End of day - avg temp:");
-            msgSink.append(source_AvgInvoker_3_10.intValue());
-            msgSink.append("C");
+            msgSink.append("Temp ");
+            msgSink.append(((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_12.event()).temp());
+            msgSink.append("C has exceeded limit of 25C");
             msgSink.append('\n');
             notificationToLog = false;
             return true;
