@@ -29,6 +29,123 @@
 </jGraph:ShapeNode>
 </data>
 </node>
+<node id="avgInvoker_3_17">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="avgInvoker_3_17:&#10;AvgInvoker_3"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="tempEventHandler_14">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;tempEventHandler_14:&#10;TempEventHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="startOfDayHandler_11">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;startOfDayHandler_11:&#10;StartOfDayHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="greaterThanDecorator_5_23">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="greaterThanDecorator_5_23:&#10;GreaterThanDecorator_5"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="tempEventHandler_20">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;tempEventHandler_20:&#10;TempEventHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder7_29">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder7_29:&#10;MsgBuilder7"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="startOfDayHandler_26">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;startOfDayHandler_26:&#10;StartOfDayHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="asciiConsoleLogger_32">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;asciiConsoleLogger_32:&#10;AsciiConsoleLogger"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder9_35">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder9_35:&#10;MsgBuilder9"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder11_41">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder11_41:&#10;MsgBuilder11"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="endOfDayHandler_38">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;endOfDayHandler_38:&#10;EndOfDayHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder13_47">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder13_47:&#10;MsgBuilder13"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="tempEventHandler_44">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;tempEventHandler_44:&#10;TempEventHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
 <node id="StartOfDay">
 <data key="vertex_label">
 <jGraph:ShapeNode>
@@ -47,6 +164,24 @@
 </jGraph:ShapeNode>
 </data>
 </node>
+<node id="LogControlEvent">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;LogControlEvent"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="EndOfDay">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;EndOfDay"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
 <edge id="1" source="startOfDayHandler_2" target="maxInvoker_1_8">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
@@ -57,12 +192,132 @@
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="3" source="StartOfDay" target="startOfDayHandler_2">
+<edge id="3" source="tempEventHandler_14" target="avgInvoker_3_17">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="4" source="TempEvent" target="tempEventHandler_5">
+<edge id="4" source="startOfDayHandler_11" target="avgInvoker_3_17">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="5" source="tempEventHandler_20" target="greaterThanDecorator_5_23">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="6" source="startOfDayHandler_26" target="msgBuilder7_29">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="7" source="msgBuilder7_29" target="asciiConsoleLogger_32">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="8" source="msgBuilder9_35" target="asciiConsoleLogger_32">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="9" source="maxInvoker_1_8" target="msgBuilder9_35">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="10" source="msgBuilder11_41" target="asciiConsoleLogger_32">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="11" source="avgInvoker_3_17" target="msgBuilder11_41">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="12" source="endOfDayHandler_38" target="msgBuilder11_41">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="13" source="msgBuilder13_47" target="asciiConsoleLogger_32">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="14" source="tempEventHandler_44" target="msgBuilder13_47">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="15" source="greaterThanDecorator_5_23" target="msgBuilder13_47">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="16" source="StartOfDay" target="startOfDayHandler_2">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="17" source="TempEvent" target="tempEventHandler_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="18" source="TempEvent" target="tempEventHandler_14">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="19" source="StartOfDay" target="startOfDayHandler_11">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="20" source="TempEvent" target="tempEventHandler_20">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="21" source="LogControlEvent" target="msgBuilder7_29">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="22" source="StartOfDay" target="startOfDayHandler_26">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="23" source="LogControlEvent" target="asciiConsoleLogger_32">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="24" source="LogControlEvent" target="msgBuilder9_35">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="25" source="LogControlEvent" target="msgBuilder11_41">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="26" source="EndOfDay" target="endOfDayHandler_38">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="27" source="LogControlEvent" target="msgBuilder13_47">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="28" source="TempEvent" target="tempEventHandler_44">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
