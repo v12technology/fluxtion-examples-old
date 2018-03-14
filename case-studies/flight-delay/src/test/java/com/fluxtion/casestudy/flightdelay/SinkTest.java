@@ -38,7 +38,9 @@ public class SinkTest {
     @Test
     public void testCarrierDelayFromCsvFile() throws IOException {
         File queuePath = new File("target/chronicle");
-        FileUtils.cleanDirectory(queuePath); 
+        if (queuePath.exists()) {
+            FileUtils.cleanDirectory(queuePath);
+        }
         CsvToBinaryFlightData flightMonitor = new CsvToBinaryFlightData();
         File csvFile = new File("src/test/resources/flightdetails.csv");
         streamFromFile(csvFile, flightMonitor, true);
@@ -52,10 +54,9 @@ public class SinkTest {
         MethodReader methodReader = tailer.methodReader((FlightDetailsHandler) (FlightDetails e) -> {
             System.out.println("read from chronicle:" + e);
         });
-        
-        
-        while(methodReader.readOne()){
-            
+
+        while (methodReader.readOne()) {
+
         }
     }
 }
