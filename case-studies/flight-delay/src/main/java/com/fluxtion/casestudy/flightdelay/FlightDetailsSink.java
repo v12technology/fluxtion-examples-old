@@ -48,7 +48,6 @@ public class FlightDetailsSink {
     @OnEvent
     public void writeFlightDetails() {
         final FlightDetails flightDetails = source.event();
-        System.out.println(flightDetails);
         chronicleSink.flightDetails(flightDetails);
     }
 

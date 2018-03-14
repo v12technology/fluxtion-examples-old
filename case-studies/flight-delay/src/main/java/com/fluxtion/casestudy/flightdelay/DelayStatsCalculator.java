@@ -48,7 +48,7 @@ public class DelayStatsCalculator {
         ExcerptTailer tailer = queue.createTailer();
         MethodReader methodReader = tailer.methodReader((FlightDetailsSink.FlightDetailsHandler) processor::handleEvent);
         while (methodReader.readOne()) {
-        }  
+        }
         Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
         return (Map<String, Wrapper<CarrierDelay>>) map;
     }
@@ -58,20 +58,26 @@ public class DelayStatsCalculator {
         map.values().stream().map(e -> e.event())
                 .sorted((f1, f2) -> f1.getAvgDelay() - f2.getAvgDelay())
                 .forEach((f) -> sb.append(f).append("\n"));
+        sb.append("\ntotal rows processed:").append(map.values().stream().mapToInt(e -> e.event().getTotalFlights()).sum());
         return sb.toString();
     }
 
     public String renderFromCsv(File file) {
-        return renderFromCsv(file, "CSV carrier delay calc\n==========================\n");
+        return renderFromCsv(file, "\nCSV carrier delay calc\n==========================\n");
     }
 
     public String renderFromBinary(File file) {
-        return renderFromBinary(file, "Binary carrier delay calc\n==========================\n");
+        return renderFromBinary(file, "\nBinary carrier delay calc\n==========================\n");
     }
-    
+
     public String renderFromCsv(File file, String message) {
         try {
-            return renderStats(message, calcFromCsv(file));
+            long delta = System.nanoTime();
+            final Map<String, Wrapper<CarrierDelay>> calcFromCsv = calcFromCsv(file);
+            delta = System.nanoTime() - delta;
+            double duration = (delta / 1_000_000)/1000.0;
+            final String renderStats = renderStats(message, calcFromCsv);
+            return renderStats + "\nprocessing time:" + duration + " seconds";
         } catch (IOException ex) {
             return "failed to process error:" + ex.getMessage();
         }
@@ -79,7 +85,12 @@ public class DelayStatsCalculator {
 
     public String renderFromBinary(File file, String message) {
         try {
-            return renderStats(message, calcFromBinary(file));
+            long delta = System.nanoTime();
+            final Map<String, Wrapper<CarrierDelay>> calcFromCsv = calcFromBinary(file);
+            delta = System.nanoTime() - delta;
+            double duration = (delta / 1_000_000)/1000.0;
+            final String renderStats = renderStats(message, calcFromCsv);
+            return renderStats + "\nprocessing time:" + duration + " seconds";
         } catch (IOException ex) {
             return "failed to process error:" + ex.getMessage();
         }
