@@ -51,6 +51,8 @@ public class BollingerPublisher {
             }
         });
     }
+    
+    
 
     private void logIndicators(Logger logger, TrackPlaySummary summary, EodEvent eod) {
         logger.info("{\"analysis\":\"{}\", \"date\":\"{}\""

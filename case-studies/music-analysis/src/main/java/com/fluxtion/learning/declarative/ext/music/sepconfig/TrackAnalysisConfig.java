@@ -20,8 +20,10 @@ import com.fluxtion.api.node.SEPConfig;
 import com.fluxtion.extension.declarative.api.group.GroupBy;
 import static com.fluxtion.extension.declarative.builder.group.Group.groupBy;
 import com.fluxtion.extension.declarative.builder.group.GroupByBuilder;
+import com.fluxtion.learning.declarative.ext.music.SentimentAnalyser;
 import com.fluxtion.learning.declarative.ext.music.TrackPlaySummary;
 import com.fluxtion.learning.declarative.ext.music.TrackStream;
+import com.fluxtion.learning.declarative.ext.music.TwitterFeed;
 import com.fluxtion.learning.declarative.ext.music.util.BollingerPublisher;
 import com.fluxtion.learning.declarative.ext.music.util.PassThrough;
 
@@ -38,6 +40,8 @@ public class TrackAnalysisConfig extends SEPConfig {
         GroupBy<TrackPlaySummary> group = initGroup(grpByTrack, "trackByDate");
         BollingerPublisher publisher = new BollingerPublisher(group, "track");
         addPublicNode(publisher, "trackAnalyser");
+        TwitterFeed twitter = addNode(new TwitterFeed());
+        addPublicNode(new SentimentAnalyser(twitter, publisher), "sentimentAnalyser");
         
         //track and territory
         GroupByBuilder<TrackStream, TrackPlaySummary> grpByTrackAndTerritory = groupBy(TrackStream.class, TrackPlaySummary.class, TrackStream::getIsrc, TrackStream::getTerritory);
