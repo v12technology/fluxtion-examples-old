@@ -150,7 +150,7 @@
                                     <!--<logDebug>true</logDebug>-->
                                 </configuration>
                             </execution>
-                            <!--                            <execution>
+                            <execution>
                                 <id>flight csv processor</id>
                                 <goals>
                                     <goal>generate</goal>
@@ -177,7 +177,7 @@
                                     <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.BinaryFlightDelayCfg</configClass>
                                     <logDebug>true</logDebug>
                                 </configuration>
-                            </execution>-->
+                            </execution>
                         </executions>
                     </plugin>
                 </plugins>
@@ -197,7 +197,7 @@
             <dependency>
                 <groupId>net.openhft</groupId>
                 <artifactId>chronicle-bom</artifactId>
-                <version>1.15.50</version>
+                <version>1.15.130</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
