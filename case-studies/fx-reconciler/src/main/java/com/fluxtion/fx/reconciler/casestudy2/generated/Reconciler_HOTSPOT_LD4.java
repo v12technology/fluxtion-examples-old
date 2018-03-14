@@ -14,38 +14,38 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.fluxtion.fx.reconciler.casestudy1.generated;
+package com.fluxtion.fx.reconciler.casestudy2.generated;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.fx.reconciler.nodes.TradeAcknowledgementAuditor;
-import com.fluxtion.fx.reconciler.helpers.ReconcileStatus;
 import com.fluxtion.api.annotations.AfterEvent;
-import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.objects.ObjectIterator;
 import com.fluxtion.fx.reconciler.nodes.TradeReconciler;
-import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.fx.reconciler.events.TradeAcknowledgement;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import com.fluxtion.fx.reconciler.nodes.TradeAcknowledgementAuditor;
+import java.util.ArrayDeque;
 import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.fx.reconciler.helpers.ReconcileStatus;
 import com.fluxtion.fx.eventhandler.TimedNotifier;
-import it.unimi.dsi.fastutil.objects.ObjectIterator;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import static com.fluxtion.fx.reconciler.helpers.ReconcileStatus.Status.*;
 
 /**
- * Fluxtion generated TradeReconciler id:FXALL_NY3
+ * Fluxtion generated TradeReconciler id:HOTSPOT_LD4
  * Acknowledgements must be received from all monitored venues for a 
  * trade to have RECONCILED status.
  *
- * Acknowledging venues: "NY_3_FXALL", "MiddleOffice_NY3_FXALL"
+ * Acknowledging venues: "hotspot_ld4", "MiddleOffice_HS_LD4", "triana_hspot_LD4"
  *
  * @author greg higgins (greg.higgins@v12technology.com)
  */
-public class  Reconciler_FXALL_NY3 extends TradeReconciler<Reconciler_FXALL_NY3.ReconcileRecord>{
+public class  Reconciler_HOTSPOT_LD4 extends TradeReconciler<Reconciler_HOTSPOT_LD4.ReconcileRecord>{
 
-    private static final String[] ALL_VENUES = new String[]{ "NY_3_FXALL", "MiddleOffice_NY3_FXALL" };
-    private static final String[] VENUES = new String[]{"NY_3_FXALL", "MiddleOffice_NY3_FXALL"};
+    private static final String[] ALL_VENUES = new String[]{ "hotspot_ld4", "MiddleOffice_HS_LD4", "triana_hspot_LD4" };
+    private static final String[] VENUES = new String[]{"hotspot_ld4", "MiddleOffice_HS_LD4", "triana_hspot_LD4"};
     private static final String[] VENUES_ONE_OF = new String[0];
 
     @Override
@@ -63,10 +63,10 @@ public class  Reconciler_FXALL_NY3 extends TradeReconciler<Reconciler_FXALL_NY3.
         return VENUES_ONE_OF;
     }
 
-    @EventHandler(filterString = "NY_3_FXALL")
-    public void tradeAckFrom_NY_3_FXALL (TradeAcknowledgement acknowledgement){
+    @EventHandler(filterString = "hotspot_ld4")
+    public void tradeAckFrom_hotspot_ld4 (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
-        currentRecord.time_NY_3_FXALL = acknowledgement.time;
+        currentRecord.time_hotspot_ld4 = acknowledgement.time;
         if (currentRecord.matched()) {
             id2Reconcile.remove(currentRecord.id());
             currentRecord.status = RECONCILED;
@@ -75,10 +75,22 @@ public class  Reconciler_FXALL_NY3 extends TradeReconciler<Reconciler_FXALL_NY3.
         }
     }
 
-    @EventHandler(filterString = "MiddleOffice_NY3_FXALL")
-    public void tradeAckFrom_MiddleOffice_NY3_FXALL (TradeAcknowledgement acknowledgement){
+    @EventHandler(filterString = "MiddleOffice_HS_LD4")
+    public void tradeAckFrom_MiddleOffice_HS_LD4 (TradeAcknowledgement acknowledgement){
         currentRecord = getRecord(acknowledgement);
-        currentRecord.time_MiddleOffice_NY3_FXALL = acknowledgement.time;
+        currentRecord.time_MiddleOffice_HS_LD4 = acknowledgement.time;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
+        }
+    }
+
+    @EventHandler(filterString = "triana_hspot_LD4")
+    public void tradeAckFrom_triana_hspot_LD4 (TradeAcknowledgement acknowledgement){
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.time_triana_hspot_LD4 = acknowledgement.time;
         if (currentRecord.matched()) {
             id2Reconcile.remove(currentRecord.id());
             currentRecord.status = RECONCILED;
@@ -105,12 +117,13 @@ public class  Reconciler_FXALL_NY3 extends TradeReconciler<Reconciler_FXALL_NY3.
         Status status = RECONCILING;;
         int tradeId;
         long firstReceivedTime = -1;
-        long time_NY_3_FXALL = -1;
-        long time_MiddleOffice_NY3_FXALL = -1;
+        long time_hotspot_ld4 = -1;
+        long time_MiddleOffice_HS_LD4 = -1;
+        long time_triana_hspot_LD4 = -1;
 
         @Override
         public boolean matched(){
-            return time_NY_3_FXALL > 0 & time_MiddleOffice_NY3_FXALL > 0;
+            return time_hotspot_ld4 > 0 & time_MiddleOffice_HS_LD4 > 0 & time_triana_hspot_LD4 > 0;
         }
 
         @Override
@@ -140,8 +153,9 @@ public class  Reconciler_FXALL_NY3 extends TradeReconciler<Reconciler_FXALL_NY3.
 
         void reset(){
             status = RECONCILING;
-            time_NY_3_FXALL = -1;
-            time_MiddleOffice_NY3_FXALL = -1;
+            time_hotspot_ld4 = -1;
+            time_MiddleOffice_HS_LD4 = -1;
+            time_triana_hspot_LD4 = -1;
         }
 
         @Override
@@ -155,12 +169,16 @@ public class  Reconciler_FXALL_NY3 extends TradeReconciler<Reconciler_FXALL_NY3.
                     .append(", \"status\": \"").append(status.name()).append("\"")
                     .append(", \"acks\": [")
                     .append("{")
-                    .append("\"venue\": \"NY_3_FXALL\"")
-                    .append(", \"ackTime\": ").append(time_NY_3_FXALL)
+                    .append("\"venue\": \"hotspot_ld4\"")
+                    .append(", \"ackTime\": ").append(time_hotspot_ld4)
                     .append("}, ")
                     .append("{")
-                    .append("\"venue\": \"MiddleOffice_NY3_FXALL\"")
-                    .append(", \"ackTime\": ").append(time_MiddleOffice_NY3_FXALL)
+                    .append("\"venue\": \"MiddleOffice_HS_LD4\"")
+                    .append(", \"ackTime\": ").append(time_MiddleOffice_HS_LD4)
+                    .append("}, ")
+                    .append("{")
+                    .append("\"venue\": \"triana_hspot_LD4\"")
+                    .append(", \"ackTime\": ").append(time_triana_hspot_LD4)
                     .append("}")
                     .append("]}");
         }
@@ -171,9 +189,11 @@ public class  Reconciler_FXALL_NY3 extends TradeReconciler<Reconciler_FXALL_NY3.
                     .append(",\"")
                     .append(status.name())
                     .append("\",")
-                    .append(time_NY_3_FXALL)
+                    .append(time_hotspot_ld4)
                     .append(", ")
-                    .append(time_MiddleOffice_NY3_FXALL)
+                    .append(time_MiddleOffice_HS_LD4)
+                    .append(", ")
+                    .append(time_triana_hspot_LD4)
                     .append("")
                     .append("]");
         }
