@@ -52,6 +52,7 @@
         <dependency>
             <groupId>com.fluxtion.extension</groupId>
             <artifactId>fluxtion-declarative-ext-builder</artifactId>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>net.openhft</groupId>
@@ -91,32 +92,98 @@
         </dependency>
     </dependencies>
     
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.fluxtion</groupId>
-                <artifactId>fluxtion-maven-plugin</artifactId>
-                <version>${fluxtion.plugin.ver}</version>
-                <executions>
-                    <execution>
-                        <id>flightcsvsink</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
-                            <className>CsvToBinaryFlightData</className>
-                            <packageName>com.fluxtion.casestudy.flightdelay.generated</packageName>
-                            <outputDirectory>src/main/java</outputDirectory>
-                            <configClass>com.fluxtion.casestudy.flightdelay.FlightDelayProcessor</configClass>
-                            <!--<logDebug>true</logDebug>-->
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+    <profiles>
+        <profile>
+            <id>build-uber-jar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <outputFile>dist/flightdelay-analyser.jar</outputFile>
+                                    <transformers>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                            <mainClass>com.fluxtion.casestudy.flightdelay.Main</mainClass>
+                                        </transformer>
+                                    </transformers>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>fluxtion</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>flightcsvsink</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <className>CsvToBinaryFlightData</className>
+                                    <packageName>com.fluxtion.casestudy.flightdelay.generated.map</packageName>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.FlightDelayCsv2BinaryCfg</configClass>
+                                    <!--<logDebug>true</logDebug>-->
+                                </configuration>
+                            </execution>
+                            <!--                            <execution>
+                                <id>flight csv processor</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <className>CsvFlightDataProcessor</className>
+                                    <packageName>com.fluxtion.casestudy.flightdelay.generated.csv</packageName>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.CsvFlightDelayCfg</configClass>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <id>flight binary processor</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <className>BinaryFlightDataProcessor</className>
+                                    <packageName>com.fluxtion.casestudy.flightdelay.generated.binary</packageName>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.BinaryFlightDelayCfg</configClass>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>-->
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>  
     
     <dependencyManagement>
         <dependencies>

@@ -1,0 +1,87 @@
+/*
+ * Copyright (C) 2018 greg
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.fluxtion.casestudy.flightdelay;
+
+import com.fluxtion.casestudy.flightdelay.generated.binary.BinaryFlightDataProcessor;
+import com.fluxtion.casestudy.flightdelay.generated.csv.CsvFlightDataProcessor;
+import com.fluxtion.extension.declarative.api.Wrapper;
+import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+import net.openhft.chronicle.bytes.MethodReader;
+import net.openhft.chronicle.queue.ExcerptTailer;
+import net.openhft.chronicle.queue.impl.single.SingleChronicleQueue;
+import net.openhft.chronicle.queue.impl.single.SingleChronicleQueueBuilder;
+
+/**
+ *
+ * @author greg
+ */
+public class DelayStatsCalculator {
+
+    public Map<String, Wrapper<CarrierDelay>> calcFromCsv(File csvFile) throws IOException {
+        CsvFlightDataProcessor processor = new CsvFlightDataProcessor();
+        streamFromFile(csvFile, processor, true);
+        Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
+        return (Map<String, Wrapper<CarrierDelay>>) map;
+    }
+
+    public Map<String, Wrapper<CarrierDelay>> calcFromBinary(File queueFile) throws IOException {
+        SingleChronicleQueue queue = SingleChronicleQueueBuilder.binary(queueFile).build();
+        BinaryFlightDataProcessor processor = new BinaryFlightDataProcessor();
+        processor.init();
+        ExcerptTailer tailer = queue.createTailer();
+        MethodReader methodReader = tailer.methodReader((FlightDetailsSink.FlightDetailsHandler) processor::handleEvent);
+        while (methodReader.readOne()) {
+        }  
+        Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
+        return (Map<String, Wrapper<CarrierDelay>>) map;
+    }
+
+    public String renderStats(String message, Map<String, Wrapper<CarrierDelay>> map) {
+        StringBuilder sb = new StringBuilder(message);
+        map.values().stream().map(e -> e.event())
+                .sorted((f1, f2) -> f1.getAvgDelay() - f2.getAvgDelay())
+                .forEach((f) -> sb.append(f).append("\n"));
+        return sb.toString();
+    }
+
+    public String renderFromCsv(File file) {
+        return renderFromCsv(file, "CSV carrier delay calc\n==========================\n");
+    }
+
+    public String renderFromBinary(File file) {
+        return renderFromBinary(file, "Binary carrier delay calc\n==========================\n");
+    }
+    
+    public String renderFromCsv(File file, String message) {
+        try {
+            return renderStats(message, calcFromCsv(file));
+        } catch (IOException ex) {
+            return "failed to process error:" + ex.getMessage();
+        }
+    }
+
+    public String renderFromBinary(File file, String message) {
+        try {
+            return renderStats(message, calcFromBinary(file));
+        } catch (IOException ex) {
+            return "failed to process error:" + ex.getMessage();
+        }
+    }
+}

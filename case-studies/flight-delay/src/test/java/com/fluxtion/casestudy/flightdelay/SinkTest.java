@@ -16,9 +16,8 @@
  */
 package com.fluxtion.casestudy.flightdelay;
 
-import com.fluxtion.casestudy.flightdelay.FlightDelayProcessor.FlightDetails;
 import com.fluxtion.casestudy.flightdelay.FlightDetailsSink.FlightDetailsHandler;
-import com.fluxtion.casestudy.flightdelay.generated.CsvToBinaryFlightData;
+import com.fluxtion.casestudy.flightdelay.generated.map.CsvToBinaryFlightData;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
 import java.io.File;
 import java.io.IOException;
@@ -37,12 +36,15 @@ public class SinkTest {
 
     @Test
     public void testCarrierDelayFromCsvFile() throws IOException {
-        File queuePath = new File("target/chronicle");
+        final String outDir = "target/chronicle";
+//        final String outDir = "src/test/resources/sampledata/chronicle";
+        File queuePath = new File(outDir);
         if (queuePath.exists()) {
             FileUtils.cleanDirectory(queuePath);
         }
         CsvToBinaryFlightData flightMonitor = new CsvToBinaryFlightData();
-        File csvFile = new File("src/test/resources/flightdetails.csv");
+        flightMonitor.chronicleSink.setOutDir(outDir);
+        File csvFile = new File("src/test/resources/sampledata/flightdetails.csv");
         streamFromFile(csvFile, flightMonitor, true);
 
         if (!queuePath.exists()) {
@@ -56,7 +58,20 @@ public class SinkTest {
         });
 
         while (methodReader.readOne()) {
-
         }
+    }
+
+    @Test
+    public void renderTest() {
+        DelayStatsCalculator calc = new DelayStatsCalculator();
+        File csvFile = new File("src/test/resources/sampledata/flightdetails.csv");
+        String csvOut = calc.renderFromCsv(csvFile);
+        //chronicle
+        File chronicleDir = new File("src/test/resources/sampledata/chronicle");
+        String chronicleOut = calc.renderFromBinary(chronicleDir);
+        
+        System.out.println(csvOut);
+        System.out.println(chronicleOut);
+        
     }
 }

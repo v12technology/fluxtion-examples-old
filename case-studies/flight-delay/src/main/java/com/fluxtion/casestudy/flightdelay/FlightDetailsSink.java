@@ -18,9 +18,7 @@ package com.fluxtion.casestudy.flightdelay;
 
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.OnEvent;
-import com.fluxtion.casestudy.flightdelay.FlightDelayProcessor.FlightDetails;
 import com.fluxtion.extension.declarative.api.Wrapper;
-import com.fluxtion.runtime.lifecycle.EventHandler;
 import java.io.File;
 import net.openhft.chronicle.queue.impl.single.SingleChronicleQueue;
 import net.openhft.chronicle.queue.impl.single.SingleChronicleQueueBuilder;
@@ -33,9 +31,18 @@ public class FlightDetailsSink {
 
     private final Wrapper<FlightDetails> source;
     private FlightDetailsHandler chronicleSink;
-
+    private transient String outDir = "target/chronicle";
+    
     public FlightDetailsSink(Wrapper<FlightDetails> source) {
         this.source = source;
+    }
+
+    public String getOutDir() {
+        return outDir;
+    }
+
+    public void setOutDir(String outDir) {
+        this.outDir = outDir;
     }
 
     @OnEvent
@@ -47,7 +54,7 @@ public class FlightDetailsSink {
 
     @Initialise
     public void init() {
-        File queuePath = new File("target/chronicle");
+        File queuePath = new File(outDir);
         if (!queuePath.exists()) {
             queuePath.mkdirs();
         }
