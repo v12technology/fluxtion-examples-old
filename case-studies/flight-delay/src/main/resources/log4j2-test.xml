@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Properties>
+        <Property name="basePath">target/generated-sources/testlog/</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="fileLogger" fileName="${basePath}/fluxtionfx-audit.log" filePattern="${basePath}/fluxtionfx-audit-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+         <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Logger name="net.openhft.chronicle.queue.impl.single" level="info" additivity="false">
+            <appender-ref ref="fileLogger" level="info" />
+        </Logger>
+        <Root level="debug" additivity="false">
+            <appender-ref ref="fileLogger" level="debug" />
+            <appender-ref ref="console" level="info" />
+        </Root>
+    </Loggers>
+</Configuration>
+
+<!--            <PatternLayout pattern="[%-5level] TTT  %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />-->
