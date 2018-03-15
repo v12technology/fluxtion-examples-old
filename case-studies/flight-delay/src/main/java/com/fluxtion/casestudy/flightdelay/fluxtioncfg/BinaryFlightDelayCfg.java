@@ -28,6 +28,18 @@ import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterTha
  * Inspired by
  * https://blog.redelastic.com/diving-into-akka-streams-2770b3aeabb0#.lt2w5bntb
  *
+ * This is the definition file used by Fluxtion stream compiler to generate a
+ * static event processor. The output of generation is an implementation of an
+ * null {@link com.fluxtion.runtime.lifecycle.EventHandler} -
+ * {@link com.fluxtion.casestudy.flightdelay.generated.binary.FlightDetailsHandler}
+ * that the application can link to. Additonal helper classes are generated as
+ * determined by Fluxtion compiler. The event handler will handle any event the
+ * application posts. All dispatch, calculation logic and state management are
+ * encapsulated in the generated EventHandler.
+ *
+ * We specify a public node - carrierDelayMap - that the app can query for
+ * results of the query processing.
+ *
  * Process a FlightDetails event, broadcast when a plane lands to calculate for
  * each carrier:
  * <ul>
@@ -55,7 +67,7 @@ public class BinaryFlightDelayCfg extends SEPConfig {
         carrierDelay.avg(FlightDetails::getDelay, CarrierDelay::setAvgDelay);
         carrierDelay.count(FlightDetails::getDelay, CarrierDelay::setTotalFlights);
         carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
-        //add public node for debug
+        //add public node for debug and actually build the query
         addPublicNode(carrierDelay.build(), "carrierDelayMap");
     }
 

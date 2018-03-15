@@ -30,7 +30,12 @@ import net.openhft.chronicle.queue.impl.single.SingleChronicleQueue;
 import net.openhft.chronicle.queue.impl.single.SingleChronicleQueueBuilder;
 
 /**
- *
+ * Calculates statistics using 3 different serialisation approaches:
+ * <ul>
+ * <li>CSV
+ * <li>chronicle queue - method reader
+ * <li>bespoke binary serialisation
+ * </ul>
  * @author greg
  */
 public class DelayStatsCalculator {
