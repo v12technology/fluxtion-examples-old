@@ -57,6 +57,7 @@ public class Main {
         }
         CsvToBinaryFlightData flightMonitor = new CsvToBinaryFlightData();
         flightMonitor.chronicleSink.setOutDir(outDir);
+        flightMonitor.chronicleSink.setOutFile(Paths.get(outDir).getParent().resolve("flightdelays.bin").toString());
         File csvFile = new File(csvPath);
         streamFromFile(csvFile, flightMonitor, true);
     }
@@ -66,9 +67,11 @@ public class Main {
         File dataFile = Paths.get(dataPathString).toFile();
         if (dataFile.isDirectory()) {
             //chronicle
-            System.out.println(calc.renderFromBinary(dataFile));
-        } else if (dataFile.exists()) {
+            System.out.println(calc.renderFromChronicle(dataFile));
+        } else if (dataFile.exists() && dataFile.toString().toLowerCase().endsWith("csv")) {
             System.out.println(calc.renderFromCsv(dataFile));
+        } else if (dataFile.exists() && dataFile.toString().toLowerCase().endsWith("bin")) {
+            System.out.println(calc.renderFromBinary(dataFile));
         } else {
             System.out.printf("neither directory or real file supplied:'%s'%n", dataPathString);
         }

@@ -19,6 +19,7 @@ package com.fluxtion.casestudy.flightdelay;
 import com.fluxtion.casestudy.flightdelay.FlightDetailsSink.FlightDetailsHandler;
 import com.fluxtion.casestudy.flightdelay.generated.map.CsvToBinaryFlightData;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import com.fluxtion.util.FlightDetailsReader;
 import java.io.File;
 import java.io.IOException;
 import net.openhft.chronicle.bytes.MethodReader;
@@ -37,16 +38,18 @@ public class SinkTest {
     @Test
     public void testCarrierDelayFromCsvFile() throws IOException {
         final String outDir = "target/chronicle";
-//        final String outDir = "src/test/resources/sampledata/chronicle";
+        final String outFile = "target/flightdelays.bin";
         File queuePath = new File(outDir);
         if (queuePath.exists()) {
             FileUtils.cleanDirectory(queuePath);
         }
         CsvToBinaryFlightData flightMonitor = new CsvToBinaryFlightData();
         flightMonitor.chronicleSink.setOutDir(outDir);
+        flightMonitor.chronicleSink.setOutFile(outFile);
         File csvFile = new File("src/test/resources/sampledata/flightdetails.csv");
         streamFromFile(csvFile, flightMonitor, true);
 
+        System.out.println("reading from chronicle");
         if (!queuePath.exists()) {
             queuePath.mkdirs();
         }
@@ -59,6 +62,10 @@ public class SinkTest {
 
         while (methodReader.readOne()) {
         }
+        System.out.println("reading from binary");
+        //read using the custom binary form
+        FlightDetailsReader binMarshaller = new FlightDetailsReader(new File(outFile));
+        binMarshaller.readAll(System.out::println);
     }
 
     @Test
@@ -68,10 +75,14 @@ public class SinkTest {
         String csvOut = calc.renderFromCsv(csvFile);
         //chronicle
         File chronicleDir = new File("src/test/resources/sampledata/chronicle");
-        String chronicleOut = calc.renderFromBinary(chronicleDir);
+        String chronicleOut = calc.renderFromChronicle(chronicleDir);
+        //binary
+        File binaryFile = new File("src/test/resources/sampledata/flightdelays.bin");
+        String binaryOut = calc.renderFromBinary(binaryFile);
         
         System.out.println(csvOut);
         System.out.println(chronicleOut);
+        System.out.println(binaryOut);
         
     }
 }

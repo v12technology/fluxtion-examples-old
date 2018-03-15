@@ -20,6 +20,7 @@ import com.fluxtion.casestudy.flightdelay.generated.binary.BinaryFlightDataProce
 import com.fluxtion.casestudy.flightdelay.generated.csv.CsvFlightDataProcessor;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import com.fluxtion.util.FlightDetailsReader;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -41,7 +42,16 @@ public class DelayStatsCalculator {
         return (Map<String, Wrapper<CarrierDelay>>) map;
     }
 
-    public Map<String, Wrapper<CarrierDelay>> calcFromBinary(File queueFile) throws IOException {
+    public Map<String, Wrapper<CarrierDelay>> calcFromBinary(File binaryFile) throws IOException {
+        BinaryFlightDataProcessor processor = new BinaryFlightDataProcessor();
+        processor.init();
+        FlightDetailsReader binMarshaller = new FlightDetailsReader(binaryFile);
+        binMarshaller.readAll(processor::onEvent);
+        Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
+        return (Map<String, Wrapper<CarrierDelay>>) map;
+    }
+
+    public Map<String, Wrapper<CarrierDelay>> calcFromChronicle(File queueFile) throws IOException {
         SingleChronicleQueue queue = SingleChronicleQueueBuilder.binary(queueFile).build();
         BinaryFlightDataProcessor processor = new BinaryFlightDataProcessor();
         processor.init();
@@ -66,8 +76,12 @@ public class DelayStatsCalculator {
         return renderFromCsv(file, "\nCSV carrier delay calc\n==========================\n");
     }
 
+    public String renderFromChronicle(File file) {
+        return renderFromChronicle(file, "\nChronicle carrier delay calc\n==========================\n");
+    }
+
     public String renderFromBinary(File file) {
-        return renderFromBinary(file, "\nBinary carrier delay calc\n==========================\n");
+        return renderFromBinaryFile(file, "\nBinary carrier delay calc\n==========================\n");
     }
 
     public String renderFromCsv(File file, String message) {
@@ -75,7 +89,7 @@ public class DelayStatsCalculator {
             long delta = System.nanoTime();
             final Map<String, Wrapper<CarrierDelay>> calcFromCsv = calcFromCsv(file);
             delta = System.nanoTime() - delta;
-            double duration = (delta / 1_000_000)/1000.0;
+            double duration = (delta / 1_000_000) / 1000.0;
             final String renderStats = renderStats(message, calcFromCsv);
             return renderStats + "\nprocessing time:" + duration + " seconds";
         } catch (IOException ex) {
@@ -83,12 +97,25 @@ public class DelayStatsCalculator {
         }
     }
 
-    public String renderFromBinary(File file, String message) {
+    public String renderFromChronicle(File file, String message) {
+        try {
+            long delta = System.nanoTime();
+            final Map<String, Wrapper<CarrierDelay>> calcFromCsv = calcFromChronicle(file);
+            delta = System.nanoTime() - delta;
+            double duration = (delta / 1_000_000) / 1000.0;
+            final String renderStats = renderStats(message, calcFromCsv);
+            return renderStats + "\nprocessing time:" + duration + " seconds";
+        } catch (IOException ex) {
+            return "failed to process error:" + ex.getMessage();
+        }
+    }
+
+    public String renderFromBinaryFile(File file, String message) {
         try {
             long delta = System.nanoTime();
             final Map<String, Wrapper<CarrierDelay>> calcFromCsv = calcFromBinary(file);
             delta = System.nanoTime() - delta;
-            double duration = (delta / 1_000_000)/1000.0;
+            double duration = (delta / 1_000_000) / 1000.0;
             final String renderStats = renderStats(message, calcFromCsv);
             return renderStats + "\nprocessing time:" + duration + " seconds";
         } catch (IOException ex) {
