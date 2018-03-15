@@ -27,19 +27,24 @@ import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterTha
 /**
  * Inspired by
  * https://blog.redelastic.com/diving-into-akka-streams-2770b3aeabb0#.lt2w5bntb
+ * <p>
  *
  * This is the definition file used by Fluxtion stream compiler to generate a
- * static event processor. The output of generation is an implementation of an
- * null {@link com.fluxtion.runtime.lifecycle.EventHandler} -
+ * static event processor. The output of generation is an implementation of an {@link com.fluxtion.runtime.lifecycle.EventHandler} -
  * {@link com.fluxtion.casestudy.flightdelay.generated.binary.FlightDetailsHandler}
  * that the application can link to. Additonal helper classes are generated as
- * determined by Fluxtion compiler. The event handler will handle any event the
- * application posts. All dispatch, calculation logic and state management are
- * encapsulated in the generated EventHandler.
+ * determined by the Fluxtion compiler. The event handler will handle any event
+ * the application posts. All dispatch, calculation logic and state management
+ * are encapsulated in the generated EventHandler.
+ * <p>
  *
- * We specify a public node - carrierDelayMap - that the app can query for
- * results of the query processing.
- *
+ * We specify a publicly scoped node, <code>carrierDelayMap</code>, that the app can query
+ * for results of the query processing. The carrierDelayMap node is an implementation of {@link com.fluxtion.extension.declarative.api.group.GroupBy} that holds results of
+ * a grouping query.
+ * <p>
+ * 
+ * <h2>Application requirements</h2>
+ * <p>
  * Process a FlightDetails event, broadcast when a plane lands to calculate for
  * each carrier:
  * <ul>
@@ -49,7 +54,9 @@ import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterTha
  * </ul>
  * FlightDetails contains the carrier name and the delay if any on arrival. A
  * negative delay is an early arrival and a positive value is the number of
- * minutes late the plane landed. The solution demonstrates the use of GroupBy
+ * minutes late the plane landed. Only calculate statistics for a plne that is late, i.e. delay is &gt; 0
+ * <p>
+ * The solution demonstrates the use of GroupBy
  * with aggregate functions to calculate, averages, counts and sums.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
