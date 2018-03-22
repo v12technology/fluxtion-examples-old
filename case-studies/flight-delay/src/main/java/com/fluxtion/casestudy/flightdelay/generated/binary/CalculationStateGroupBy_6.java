@@ -22,10 +22,10 @@ import com.fluxtion.extension.declarative.api.group.AggregateFunctions.Aggregate
  */
 public final class CalculationStateGroupBy_6 implements Wrapper<CarrierDelay>{
     public CarrierDelay target;
-    public double aggregateSum5;
     public AggregateAverage aggregateAverage3Function = new AggregateAverage();
     public double aggregateAverage3;
     public int aggregateCount4;
+    public double aggregateSum5;
 
     public CalculationStateGroupBy_6(){
          target = new CarrierDelay();

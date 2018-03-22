@@ -36,12 +36,6 @@ public final class GroupBy_6 implements GroupBy<CarrierDelay>{
         CalculationStateGroupBy_6 instance = calcState.getOrCreateInstance(event.getCarrier(), initialisergreaterThanDecorator_10, event);
         target = instance.target;
         {
-			double value = instance.aggregateSum5;
-			value = AggregateSum.calcSum((double)event.getDelay(), (double)value);
-			target.setTotalDelayMins((int)value);
-			instance.aggregateSum5 = value;
-         }
-        {
 			double value = instance.aggregateAverage3;
 			value = instance.aggregateAverage3Function.calcAverage((double)event.getDelay(), (double)value);
 			target.setAvgDelay((int)value);
@@ -52,6 +46,12 @@ public final class GroupBy_6 implements GroupBy<CarrierDelay>{
 			value = AggregateCount.increment((int)event.getDelay(), (int)value);
 			target.setTotalFlights((int)value);
 			instance.aggregateCount4 = value;
+         }
+        {
+			double value = instance.aggregateSum5;
+			value = AggregateSum.calcSum((double)event.getDelay(), (double)value);
+			target.setTotalDelayMins((int)value);
+			instance.aggregateSum5 = value;
          }
         return true;
     }
