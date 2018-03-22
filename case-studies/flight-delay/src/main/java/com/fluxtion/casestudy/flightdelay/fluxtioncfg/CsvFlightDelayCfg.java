@@ -26,14 +26,37 @@ import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshall
 import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanFilter;
 
 /**
- * Inspired by
- * https://blog.redelastic.com/diving-into-akka-streams-2770b3aeabb0#.lt2w5bntb
+ * 
  *
- * Process CSV flight data from the
- * http://stat-computing.org/dataexpo/2009/the-data.html
+ * @see
+ * <a href=https://blog.redelastic.com/diving-into-akka-streams-2770b3aeabb0#.lt2w5bntb>Inspired by: Diving
+ * into Akka Streams</a>
+ * <p>
+ * This is the definition file used by Fluxtion stream compiler to generate a
+ * static event processor. The output of generation is an implementation of an {@link com.fluxtion.runtime.lifecycle.EventHandler} -
+ * {@link com.fluxtion.casestudy.flightdelay.generated.binary.FlightDetailsHandler}
+ * that the application can link to. Additonal helper classes are generated as
+ * determined by the Fluxtion compiler. The event handler will handle any event
+ * the application posts. All dispatch, calculation logic and state management
+ * are encapsulated in the generated EventHandler.
+ * <p>
  *
- * Calculate summary delay statistics for each carrier that has a fightdetails
- * record in the CVS source., the summary should:
+ * We specify a publicly scoped node, <code>carrierDelayMap</code>, that the app
+ * can query for results of the query processing. The carrierDelayMap node is an
+ * implementation of
+ * {@link com.fluxtion.extension.declarative.api.group.GroupBy} that holds
+ * results of a grouping query.
+ * <p>
+ *
+ * <h2>Application requirements</h2>
+ * <p>
+ * Process a FlightDetails event, broadcast when a plane lands to calculate for
+ * each carrier. The yearly data is stored in CVS format @see
+ * <a href="http://stat-computing.org/dataexpo/2009/the-data.html">http://stat-computing.org/dataexpo/2009/the-data.html</a>.
+ * <p>
+ *
+ * For a full year calculate summary delay statistics for each carrier that has
+ * a fight details record in the CVS source, the summary should:
  *
  * <ul>
  * <li>Group the carriers by name, column 8
@@ -41,8 +64,8 @@ import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterTha
  * <li>Cumulative sum of total delay
  * <li>Total number of delayed flights
  * <li>Average delay for a flight if it is late
- * </li>
- *
+ * </ul>
+ * <p>
  * FlightDetails contains the carrier name and the delay if any on arrival. A
  * negative delay is an early arrival and a positive value is the number of
  * minutes late the plane landed. The solution demonstrates the use of GroupBy
@@ -69,7 +92,5 @@ public class CsvFlightDelayCfg extends SEPConfig {
         //add public node for debug
         addPublicNode(carrierDelay.build(), "carrierDelayMap");
     }
-
-
 
 }

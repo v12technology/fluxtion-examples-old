@@ -38,26 +38,29 @@ import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterTha
  * are encapsulated in the generated EventHandler.
  * <p>
  *
- * We specify a publicly scoped node, <code>carrierDelayMap</code>, that the app can query
- * for results of the query processing. The carrierDelayMap node is an implementation of {@link com.fluxtion.extension.declarative.api.group.GroupBy} that holds results of
- * a grouping query.
+ * We specify a publicly scoped node, <code>carrierDelayMap</code>, that the app
+ * can query for results of the query processing. The carrierDelayMap node is an
+ * implementation of
+ * {@link com.fluxtion.extension.declarative.api.group.GroupBy} that holds
+ * results of a grouping query.
  * <p>
- * 
+ *
  * <h2>Application requirements</h2>
  * <p>
  * Process a FlightDetails event, broadcast when a plane lands to calculate for
  * each carrier:
  * <ul>
- * <li>a cumulative sum of minutes delayed.
+ * <li>Cumulative sum of minutes delayed.
  * <li>The number of delayed flights.
  * <li>The average delay for a late flight.
  * </ul>
  * FlightDetails contains the carrier name and the delay if any on arrival. A
  * negative delay is an early arrival and a positive value is the number of
- * minutes late the plane landed. Only calculate statistics for a plne that is late, i.e. delay is &gt; 0
+ * minutes late the plane landed. Only calculate statistics for a plne that is
+ * late, i.e. delay is &gt; 0
  * <p>
- * The solution demonstrates the use of GroupBy
- * with aggregate functions to calculate, averages, counts and sums.
+ * The solution demonstrates the use of GroupBy with aggregate functions to
+ * calculate, averages, counts and sums.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
