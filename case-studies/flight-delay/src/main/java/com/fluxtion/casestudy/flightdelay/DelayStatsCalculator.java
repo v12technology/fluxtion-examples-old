@@ -40,9 +40,12 @@ import net.openhft.chronicle.queue.impl.single.SingleChronicleQueueBuilder;
  */
 public class DelayStatsCalculator {
 
+    int totalFlights;
+    
     public Map<String, Wrapper<CarrierDelay>> calcFromCsv(File csvFile) throws IOException {
         CsvFlightDataProcessor processor = new CsvFlightDataProcessor();
         streamFromFile(csvFile, processor, true);
+        totalFlights = processor.totalFlights.intValue();
         Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
         return (Map<String, Wrapper<CarrierDelay>>) map;
     }
@@ -53,6 +56,7 @@ public class DelayStatsCalculator {
         FlightDetailsReader binMarshaller = new FlightDetailsReader(binaryFile);
         binMarshaller.readAll(processor::onEvent);
         Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
+        totalFlights = processor.totalFlights.intValue();
         return (Map<String, Wrapper<CarrierDelay>>) map;
     }
 
@@ -65,6 +69,7 @@ public class DelayStatsCalculator {
         while (methodReader.readOne()) {
         }
         Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
+        totalFlights = processor.totalFlights.intValue();
         return (Map<String, Wrapper<CarrierDelay>>) map;
     }
 
@@ -73,7 +78,8 @@ public class DelayStatsCalculator {
         map.values().stream().map(e -> e.event())
                 .sorted((f1, f2) -> f1.getAvgDelay() - f2.getAvgDelay())
                 .forEach((f) -> sb.append(f).append("\n"));
-        sb.append("\ntotal rows processed:").append(map.values().stream().mapToInt(e -> e.event().getTotalFlights()).sum());
+        sb.append("\ntotal rows processed:").append(totalFlights);
+        sb.append("\ndelay rows processed:").append(map.values().stream().mapToInt(e -> e.event().getTotalFlights()).sum());
         return sb.toString();
     }
 

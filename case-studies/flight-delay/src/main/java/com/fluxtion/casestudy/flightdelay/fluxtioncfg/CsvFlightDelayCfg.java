@@ -22,6 +22,7 @@ import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import static com.fluxtion.extension.declarative.builder.group.Group.groupBy;
 import com.fluxtion.extension.declarative.builder.group.GroupByBuilder;
+import static com.fluxtion.extension.declarative.funclib.builder.math.CountFunction.count;
 import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
 import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanFilter;
 
@@ -91,6 +92,7 @@ public class CsvFlightDelayCfg extends SEPConfig {
         carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
         //add public node for debug
         addPublicNode(carrierDelay.build(), "carrierDelayMap");
+        addPublicNode(count(flightDetails), "totalFlights");
     }
 
 }

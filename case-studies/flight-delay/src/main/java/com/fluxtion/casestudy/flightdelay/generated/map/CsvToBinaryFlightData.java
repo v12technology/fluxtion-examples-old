@@ -521,7 +521,7 @@ public class CsvToBinaryFlightData implements EventHandler, BatchHandler, Lifecy
 
   @Override
   public void tearDown() {
-      chronicleSink.close();
+    chronicleSink.close();
   }
 
   @Override

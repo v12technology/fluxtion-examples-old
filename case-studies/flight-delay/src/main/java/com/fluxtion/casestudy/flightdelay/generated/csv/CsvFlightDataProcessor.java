@@ -10,6 +10,7 @@ import com.fluxtion.extension.declarative.funclib.api.ascii.Csv2Double;
 import com.fluxtion.casestudy.flightdelay.generated.csv.FlightDetailsCsvMarshaller2;
 import com.fluxtion.casestudy.flightdelay.generated.csv.GreaterThanDecorator_4;
 import com.fluxtion.casestudy.flightdelay.generated.csv.GroupBy_9;
+import com.fluxtion.extension.declarative.funclib.builder.math.CountFunction;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
@@ -17,37 +18,39 @@ import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final AsciiAnyCharMatcher_1 asciiAnyCharMatcher_1_11 = new AsciiAnyCharMatcher_1();
-  private final AsciiAnyCharMatcher_0 asciiAnyCharMatcher_0_10 = new AsciiAnyCharMatcher_0();
-  private final Csv2ByteBuffer csv2ByteBuffer_3 = new Csv2ByteBuffer();
-  private final Csv2Double csv2Double_1 = new Csv2Double();
-  private final FlightDetailsCsvMarshaller2 flightDetailsCsvMarshaller2_5 =
+  private final AsciiAnyCharMatcher_1 asciiAnyCharMatcher_1_19 = new AsciiAnyCharMatcher_1();
+  private final AsciiAnyCharMatcher_0 asciiAnyCharMatcher_0_18 = new AsciiAnyCharMatcher_0();
+  private final Csv2ByteBuffer csv2ByteBuffer_5 = new Csv2ByteBuffer();
+  private final Csv2Double csv2Double_2 = new Csv2Double();
+  private final FlightDetailsCsvMarshaller2 flightDetailsCsvMarshaller2_8 =
       new FlightDetailsCsvMarshaller2();
-  private final GreaterThanDecorator_4 greaterThanDecorator_4_7 = new GreaterThanDecorator_4();
+  private final GreaterThanDecorator_4 greaterThanDecorator_4_11 = new GreaterThanDecorator_4();
   public final GroupBy_9 carrierDelayMap = new GroupBy_9();
+  public final CountFunction totalFlights = new CountFunction();
   //Dirty flags
-  private boolean isDirty_asciiAnyCharMatcher_1_11 = false;
-  private boolean isDirty_asciiAnyCharMatcher_0_10 = false;
-  private boolean isDirty_csv2ByteBuffer_3 = false;
-  private boolean isDirty_csv2Double_1 = false;
-  private boolean isDirty_flightDetailsCsvMarshaller2_5 = false;
-  private boolean isDirty_greaterThanDecorator_4_7 = false;
+  private boolean isDirty_asciiAnyCharMatcher_1_19 = false;
+  private boolean isDirty_asciiAnyCharMatcher_0_18 = false;
+  private boolean isDirty_csv2ByteBuffer_5 = false;
+  private boolean isDirty_csv2Double_2 = false;
+  private boolean isDirty_flightDetailsCsvMarshaller2_8 = false;
+  private boolean isDirty_greaterThanDecorator_4_11 = false;
   private boolean isDirty_carrierDelayMap = false;
   //Filter constants
 
   public CsvFlightDataProcessor() {
-    csv2ByteBuffer_3.fieldNumber = (int) 8;
-    csv2ByteBuffer_3.headerLines = (int) 1;
-    csv2ByteBuffer_3.eolNotifier = asciiAnyCharMatcher_1_11;
-    csv2ByteBuffer_3.delimiterNotifier = asciiAnyCharMatcher_0_10;
-    csv2Double_1.fieldNumber = (int) 14;
-    csv2Double_1.headerLines = (int) 1;
-    csv2Double_1.delimiterNotifier = asciiAnyCharMatcher_0_10;
-    flightDetailsCsvMarshaller2_5.csvSrc_0 = csv2Double_1;
-    flightDetailsCsvMarshaller2_5.csvSrc_1 = csv2ByteBuffer_3;
-    greaterThanDecorator_4_7.filterSubject = flightDetailsCsvMarshaller2_5;
-    greaterThanDecorator_4_7.source_FlightDetailsCsvMarshaller2_3 = flightDetailsCsvMarshaller2_5;
-    carrierDelayMap.greaterThanDecorator_40 = greaterThanDecorator_4_7;
+    csv2ByteBuffer_5.fieldNumber = (int) 8;
+    csv2ByteBuffer_5.headerLines = (int) 1;
+    csv2ByteBuffer_5.eolNotifier = asciiAnyCharMatcher_1_19;
+    csv2ByteBuffer_5.delimiterNotifier = asciiAnyCharMatcher_0_18;
+    csv2Double_2.fieldNumber = (int) 14;
+    csv2Double_2.headerLines = (int) 1;
+    csv2Double_2.delimiterNotifier = asciiAnyCharMatcher_0_18;
+    flightDetailsCsvMarshaller2_8.csvSrc_0 = csv2Double_2;
+    flightDetailsCsvMarshaller2_8.csvSrc_1 = csv2ByteBuffer_5;
+    greaterThanDecorator_4_11.filterSubject = flightDetailsCsvMarshaller2_8;
+    greaterThanDecorator_4_11.source_FlightDetailsCsvMarshaller2_3 = flightDetailsCsvMarshaller2_8;
+    carrierDelayMap.greaterThanDecorator_40 = greaterThanDecorator_4_11;
+    totalFlights.tracked = flightDetailsCsvMarshaller2_8;
   }
 
   @Override
@@ -70,22 +73,25 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
       return;
     }
     //Default, no filter methods
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
     afterEvent();
   }
@@ -253,375 +259,421 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
   private void handle_CharEvent_10(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_asciiAnyCharMatcher_1_11 = asciiAnyCharMatcher_1_11.onChar_newLine(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEol(asciiAnyCharMatcher_1_11);
+    isDirty_asciiAnyCharMatcher_1_19 = asciiAnyCharMatcher_1_19.onChar_newLine(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEol(asciiAnyCharMatcher_1_19);
     }
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.onEol(typedEvent);
-    isDirty_flightDetailsCsvMarshaller2_5 = flightDetailsCsvMarshaller2_5.onEol(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.onEol(typedEvent);
+    isDirty_flightDetailsCsvMarshaller2_8 = flightDetailsCsvMarshaller2_8.onEol(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_44(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_asciiAnyCharMatcher_0_10 = asciiAnyCharMatcher_0_10.onChar_44(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10) {
-      csv2ByteBuffer_3.onDelimiter(asciiAnyCharMatcher_0_10);
-      csv2Double_1.onDelimiter(asciiAnyCharMatcher_0_10);
+    isDirty_asciiAnyCharMatcher_0_18 = asciiAnyCharMatcher_0_18.onChar_44(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18) {
+      csv2ByteBuffer_5.onDelimiter(asciiAnyCharMatcher_0_18);
+      csv2Double_2.onDelimiter(asciiAnyCharMatcher_0_18);
     }
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_45(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.onSign(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.onSign(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_46(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.onDecimalPoint(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.onDecimalPoint(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_48(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_0(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_0(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_49(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_1(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_1(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_50(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_2(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_2(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_51(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_3(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_3(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_52(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_4(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_4(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_53(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_5(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_5(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_54(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_6(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_6(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_55(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_7(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_7(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_56(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_8(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_8(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_57(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    isDirty_csv2Double_1 = csv2Double_1.on_9(typedEvent);
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    isDirty_csv2Double_2 = csv2Double_2.on_9(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   private void handle_CharEvent_NoFilter(
       com.fluxtion.extension.declarative.funclib.api.event.CharEvent typedEvent) {
     //method body - invoke call tree
-    isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.appendToBuffer(typedEvent);
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      isDirty_csv2ByteBuffer_3 = csv2ByteBuffer_3.onEvent();
+    isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.appendToBuffer(typedEvent);
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      isDirty_csv2ByteBuffer_5 = csv2ByteBuffer_5.onEvent();
     }
-    if (isDirty_flightDetailsCsvMarshaller2_5) {
-      isDirty_greaterThanDecorator_4_7 = greaterThanDecorator_4_7.onEvent();
-      if (isDirty_greaterThanDecorator_4_7) {
-        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_7);
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      isDirty_greaterThanDecorator_4_11 = greaterThanDecorator_4_11.onEvent();
+      if (isDirty_greaterThanDecorator_4_11) {
+        carrierDelayMap.updategreaterThanDecorator_40(greaterThanDecorator_4_11);
       }
     }
-    if (isDirty_greaterThanDecorator_4_7) {
+    if (isDirty_greaterThanDecorator_4_11) {
       isDirty_carrierDelayMap = carrierDelayMap.updated();
     }
+    if (isDirty_flightDetailsCsvMarshaller2_8) {
+      totalFlights.increment();
+    }
     //event stack unwind callbacks
-    if (isDirty_asciiAnyCharMatcher_0_10 | isDirty_asciiAnyCharMatcher_1_11) {
-      csv2ByteBuffer_3.onEventComplete();
+    if (isDirty_asciiAnyCharMatcher_0_18 | isDirty_asciiAnyCharMatcher_1_19) {
+      csv2ByteBuffer_5.onEventComplete();
     }
   }
 
   @Override
   public void afterEvent() {
 
-    isDirty_asciiAnyCharMatcher_1_11 = false;
-    isDirty_asciiAnyCharMatcher_0_10 = false;
-    isDirty_csv2ByteBuffer_3 = false;
-    isDirty_csv2Double_1 = false;
-    isDirty_flightDetailsCsvMarshaller2_5 = false;
-    isDirty_greaterThanDecorator_4_7 = false;
+    isDirty_asciiAnyCharMatcher_1_19 = false;
+    isDirty_asciiAnyCharMatcher_0_18 = false;
+    isDirty_csv2ByteBuffer_5 = false;
+    isDirty_csv2Double_2 = false;
+    isDirty_flightDetailsCsvMarshaller2_8 = false;
+    isDirty_greaterThanDecorator_4_11 = false;
     isDirty_carrierDelayMap = false;
   }
 
   @Override
   public void init() {
-    csv2ByteBuffer_3.init();
-    csv2Double_1.init();
-    flightDetailsCsvMarshaller2_5.init();
-    greaterThanDecorator_4_7.init();
+    csv2ByteBuffer_5.init();
+    csv2Double_2.init();
+    flightDetailsCsvMarshaller2_8.init();
+    greaterThanDecorator_4_11.init();
     carrierDelayMap.init();
+    totalFlights.init();
   }
 
   @Override

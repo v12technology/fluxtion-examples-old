@@ -20,8 +20,10 @@ import com.fluxtion.api.node.SEPConfig;
 import com.fluxtion.casestudy.flightdelay.CarrierDelay;
 import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.extension.declarative.api.Wrapper;
+import static com.fluxtion.extension.declarative.builder.event.EventSelect.select;
 import static com.fluxtion.extension.declarative.builder.group.Group.groupBy;
 import com.fluxtion.extension.declarative.builder.group.GroupByBuilder;
+import static com.fluxtion.extension.declarative.funclib.builder.math.CountFunction.count;
 import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanFilter;
 
 /**
@@ -79,6 +81,7 @@ public class BinaryFlightDelayCfg extends SEPConfig {
         carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
         //add public node for debug and actually build the query
         addPublicNode(carrierDelay.build(), "carrierDelayMap");
+        addPublicNode(count(select(FlightDetails.class)), "totalFlights");
     }
 
 }
