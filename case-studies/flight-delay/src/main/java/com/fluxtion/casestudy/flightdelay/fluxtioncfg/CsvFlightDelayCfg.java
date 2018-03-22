@@ -92,6 +92,7 @@ public class CsvFlightDelayCfg extends SEPConfig {
         carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
         //add public node for debug
         addPublicNode(carrierDelay.build(), "carrierDelayMap");
+        //total records processed counts FlightDetails events from csvMarshaller
         addPublicNode(count(flightDetails), "totalFlights");
     }
 
