@@ -23,28 +23,21 @@ import com.fluxtion.extension.declarative.api.Wrapper;
 import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
 
 /**
- * Inspired by
- * https://blog.redelastic.com/diving-into-akka-streams-2770b3aeabb0#.lt2w5bntb
- *
- * Process CSV flight data from the
- * http://stat-computing.org/dataexpo/2009/the-data.html
- *
- * Calculate summary delay statistics for each carrier that has a fightdetails
- * record in the CVS source., the summary should:
+ * Convert CSV flight delay data into a binary form. Persist the binary form and
+ * use for processing later. Extract data from the CVS source in the following
+ * columns:
  *
  * <ul>
  * <li>Group the carriers by name, column 8
  * <li>Delay is column 14
- * <li>Cumulative sum of total delay
- * <li>Total number of delayed flights
- * <li>Average delay for a flight if it is late
  * </li>
  *
- * FlightDetails contains the carrier name and the delay if any on arrival. A
- * negative delay is an early arrival and a positive value is the number of
- * minutes late the plane landed. The solution demonstrates the use of GroupBy
- * with aggregate functions to calculate, averages, counts and sums, fed by CSV
- * data.
+ * Original US CSV flight data from:
+ * http://stat-computing.org/dataexpo/2009/the-data.html
+ *
+ *
+ * FlightDetailsSink is informed every time a complete FlightDetails record is
+ * read from the CSV source and streams a binary version to storage.
  *
  * @author Greg Higgins (greg.higgins@V12technology.com)
  */
@@ -53,9 +46,8 @@ public class FlightDelayCsv2BinaryCfg extends SEPConfig {
     {
         //add csv parser
         Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1).map(14, FlightDetails::setDelay).mapString(8, FlightDetails::setCarrier).build();
+        //stream FlightDetails to sink
         addPublicNode(new FlightDetailsSink(flightDetails), "chronicleSink");
     }
-
-
 
 }
