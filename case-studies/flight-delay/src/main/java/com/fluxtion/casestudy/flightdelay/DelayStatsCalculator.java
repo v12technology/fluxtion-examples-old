@@ -36,12 +36,13 @@ import net.openhft.chronicle.queue.impl.single.SingleChronicleQueueBuilder;
  * <li>chronicle queue - method reader
  * <li>bespoke binary serialisation
  * </ul>
+ *
  * @author greg
  */
 public class DelayStatsCalculator {
 
     int totalFlights;
-    
+
     public Map<String, Wrapper<CarrierDelay>> calcFromCsv(File csvFile) throws IOException {
         CsvFlightDataProcessor processor = new CsvFlightDataProcessor();
         streamFromFile(csvFile, processor, true);
@@ -78,8 +79,10 @@ public class DelayStatsCalculator {
         map.values().stream().map(e -> e.event())
                 .sorted((f1, f2) -> f1.getAvgDelay() - f2.getAvgDelay())
                 .forEach((f) -> sb.append(f).append("\n"));
-        sb.append("\ntotal rows processed:").append(totalFlights);
-        sb.append("\ndelay rows processed:").append(map.values().stream().mapToInt(e -> e.event().getTotalFlights()).sum());
+        sb.append("\ntotal rows processed:").append(String.format("%,d", totalFlights));
+        sb.append("\ndelay rows processed:").append(String.format("%,d",
+                map.values().stream().mapToInt(e -> e.event().getTotalFlights()).sum())
+        );
         return sb.toString();
     }
 
