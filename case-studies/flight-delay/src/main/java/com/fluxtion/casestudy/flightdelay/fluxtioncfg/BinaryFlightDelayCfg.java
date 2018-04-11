@@ -72,7 +72,8 @@ public class BinaryFlightDelayCfg extends SEPConfig {
         //filter for positive delays
         Wrapper<FlightDetails> delayedFlight = greaterThanFilter(FlightDetails.class, FlightDetails::getDelay, 0);
         //group by carrier name
-        GroupByBuilder<FlightDetails, CarrierDelay> carrierDelay = groupBy(delayedFlight, FlightDetails::getCarrier, CarrierDelay.class);
+        GroupByBuilder<FlightDetails, CarrierDelay> carrierDelay = 
+                groupBy(delayedFlight, FlightDetails::getCarrier, CarrierDelay.class);
         //init each group record with human readable name
         carrierDelay.init(FlightDetails::getCarrier, CarrierDelay::setCarrierId);
         //aggregate calculations

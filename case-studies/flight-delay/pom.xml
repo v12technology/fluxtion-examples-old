@@ -136,7 +136,7 @@
                         <artifactId>fluxtion-maven-plugin</artifactId>
                         <version>${fluxtion.plugin.ver}</version>
                         <executions>
-                            <execution>
+                            <!--                            <execution>
                                 <id>flightcsvsink</id>
                                 <goals>
                                     <goal>generate</goal>
@@ -147,9 +147,9 @@
                                     <packageName>com.fluxtion.casestudy.flightdelay.generated.map</packageName>
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.FlightDelayCsv2BinaryCfg</configClass>
-                                    <!--<logDebug>true</logDebug>-->
+                                    <logDebug>true</logDebug>
                                 </configuration>
-                            </execution>
+                            </execution>-->
                             <execution>
                                 <id>flight csv processor</id>
                                 <goals>
@@ -161,7 +161,7 @@
                                     <packageName>com.fluxtion.casestudy.flightdelay.generated.csv</packageName>
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.CsvFlightDelayCfg</configClass>
-                                    <logDebug>true</logDebug>
+                                    <logDebug>false</logDebug>
                                 </configuration>
                             </execution>
                             <execution>
@@ -175,7 +175,7 @@
                                     <packageName>com.fluxtion.casestudy.flightdelay.generated.binary</packageName>
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.BinaryFlightDelayCfg</configClass>
-                                    <logDebug>true</logDebug>
+                                    <logDebug>false</logDebug>
                                 </configuration>
                             </execution>
                         </executions>

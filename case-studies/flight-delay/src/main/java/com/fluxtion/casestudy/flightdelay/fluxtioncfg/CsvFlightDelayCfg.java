@@ -79,7 +79,9 @@ public class CsvFlightDelayCfg extends SEPConfig {
 
     {
         //add csv parser
-        Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1).map(14, FlightDetails::setDelay).mapString(8, FlightDetails::setCarrier).build();
+        Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1)
+                .map(14, FlightDetails::setDelay)
+                .mapString(8, FlightDetails::setCarrier).build();
         //filter for positive delays
         Wrapper<FlightDetails> delayedFlight = greaterThanFilter(flightDetails, FlightDetails::getDelay, 0);
         //group by carrier name
