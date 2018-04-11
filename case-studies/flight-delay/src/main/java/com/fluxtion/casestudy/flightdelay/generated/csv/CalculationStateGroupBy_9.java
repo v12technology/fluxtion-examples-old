@@ -6,12 +6,11 @@ import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
-import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.casestudy.flightdelay.generated.csv.GreaterThanDecorator_4;
 import com.fluxtion.casestudy.flightdelay.CarrierDelay;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 import com.fluxtion.casestudy.flightdelay.FlightDetails;
 
 /**
