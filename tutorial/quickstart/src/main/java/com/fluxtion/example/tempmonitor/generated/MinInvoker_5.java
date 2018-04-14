@@ -10,30 +10,30 @@ import com.fluxtion.extension.declarative.api.numeric.NumericValue;
 /**
  * generated NumericFunction wrapper.
  * Wraps a numeric function for invocation.
- * target class  : com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Max
- * target method : max
+ * target class  : com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Min
+ * target method : min
  * 
  * @author Greg Higgins
  */
-public class MaxInvoker_1 extends Number implements NumericValue{
+public class MinInvoker_5 extends Number implements NumericValue{
 
     //source operand inputs
-    public com.fluxtion.example.tempmonitor.generated.TempEventHandler source_TempEventHandler_0;
-    private com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Max f = new  com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Max();
+    public com.fluxtion.example.tempmonitor.generated.TempEventHandler source_TempEventHandler_4;
+    private com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Min f = new  com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Min();
     private double result;
     private boolean updated;
     public Object resetNotifier;
 
 
 
-    @OnParentUpdate("source_TempEventHandler_0")
-    public void sourceChange_source_TempEventHandler_0(com.fluxtion.example.tempmonitor.generated.TempEventHandler updated){
+    @OnParentUpdate("source_TempEventHandler_4")
+    public void sourceChange_source_TempEventHandler_4(com.fluxtion.example.tempmonitor.generated.TempEventHandler updated){
         calculate();
     }
 
     public void calculate(){
         double oldValue = result;
-        result = f.max(result, (double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_0.event()).temp());
+        result = f.min(result, (double)((com.fluxtion.example.tempmonitor.TempHandler.TempEvent)source_TempEventHandler_4.event()).temp());
         updated = oldValue != result;
     }
 
@@ -50,6 +50,7 @@ public class MaxInvoker_1 extends Number implements NumericValue{
     
     @OnParentUpdate("resetNotifier")
     public void reset(Object resetNotifier){
+        double oldValue = result;
         init();
         updated = false;
     }
@@ -59,7 +60,7 @@ public class MaxInvoker_1 extends Number implements NumericValue{
     public void init(){
         f.reset();
         updated = false;
-        result = Integer.MIN_VALUE;
+        result = Integer.MAX_VALUE;
     }
 
     @Override

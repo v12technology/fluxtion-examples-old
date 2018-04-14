@@ -2,8 +2,6 @@ package com.fluxtion.example.tempmonitor.generated;
 
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.extension.declarative.api.log.MsgBuilder;
-import com.fluxtion.api.annotations.NoEventReference;
-import com.fluxtion.api.annotations.OnParentUpdate;
 /**
  * Generated notificationToLogger. 
  *
@@ -12,28 +10,17 @@ import com.fluxtion.api.annotations.OnParentUpdate;
 public class MsgBuilder11 extends MsgBuilder{
 
     //source operand inputs
-    @NoEventReference
-    public com.fluxtion.example.tempmonitor.generated.AvgInvoker_3 source_AvgInvoker_3_10;
-    public Object logNotifier;
-    private boolean notificationToLog;
-    
-    @OnParentUpdate(value = "logNotifier")
-    public void postLog(Object logNotifier){
-        notificationToLog = true;
-    }
+    public com.fluxtion.example.tempmonitor.generated.MaxInvoker_1 source_MaxInvoker_1_10;
 
     @OnEvent
     public boolean buildMessage() {
-        if(notificationToLog & isGoodToLog()){
-            msgSink.append("End of day - avg temp:");
-            msgSink.append(source_AvgInvoker_3_10.intValue());
-            msgSink.append("C");
-            msgSink.append('\n');
-            notificationToLog = false;
-            return true;
-        }
-        notificationToLog = false;
-        return false;
+        if(!isGoodToLog())
+            return false;
+        msgSink.append("NEW max temp ");
+        msgSink.append(source_MaxInvoker_1_10.intValue());
+        msgSink.append("C");
+        msgSink.append('\n');
+        return true;
     }
 }
 
