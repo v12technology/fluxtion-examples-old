@@ -29,6 +29,7 @@ import static com.fluxtion.extension.declarative.builder.log.LogBuilder.LogOnNot
 import static com.fluxtion.extension.declarative.builder.log.LogBuilder.buildLog;
 import static com.fluxtion.extension.declarative.funclib.builder.math.AvgFunctions.avg;
 import static com.fluxtion.extension.declarative.funclib.builder.math.MaxFunctions.max;
+import static com.fluxtion.extension.declarative.funclib.builder.math.MinFunctions.min;
 import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanOnce;
 import com.fluxtion.runtime.event.Event;
 
@@ -59,6 +60,7 @@ public class TempHandler {
         monitor.onEvent(new TempEvent(10));
         monitor.onEvent(new TempEvent(20));
         monitor.onEvent(new TempEvent(14));
+        monitor.onEvent(new TempEvent(4));
         monitor.onEvent(new TempEvent(16));
         monitor.onEvent(new TempEvent(20));
         monitor.onEvent(new EndOfDay());
@@ -121,10 +123,12 @@ public class TempHandler {
         public void buildConfig() {
             NumericValue maxDayTemp = max(TempEvent.class, TempEvent::temp, select(StartOfDay.class));
             NumericValue avgDayTemp = avg(TempEvent.class, TempEvent::temp, select(StartOfDay.class));
+            NumericValue minDayTemp = min(TempEvent.class, TempEvent::temp, select(StartOfDay.class));
             Test tempBreach = greaterThanOnce(TempEvent.class, TempEvent::temp, 25);
             //logging
             Log("===== Start of day {} =====", StartOfDay.class, StartOfDay::day).logLevel = 2;
             Log("NEW max temp {}C", maxDayTemp, maxDayTemp::intValue).logLevel = 3;
+            Log("NEW min temp {}C", minDayTemp, minDayTemp::intValue).logLevel = 3;
             LogOnNotify("End of day - avg temp:{}C", select(EndOfDay.class), avgDayTemp, avgDayTemp::intValue).logLevel = 4;
             LogOnNotify("Temp {}C has exceeded limit of 25C", tempBreach, select(TempEvent.class), TempEvent::temp).logLevel = 2;
         }
