@@ -22,6 +22,7 @@ obtained from V12 Technology Limited.
         <module>fx-reconciler</module>
         <module>music-analysis</module>
         <module>flight-delay</module>
+        <module>credit-monitor</module>
     </modules>
     
     <properties>
