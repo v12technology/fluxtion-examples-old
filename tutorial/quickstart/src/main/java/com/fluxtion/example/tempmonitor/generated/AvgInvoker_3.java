@@ -50,17 +50,17 @@ public class AvgInvoker_3 extends Number implements NumericValue{
     
     @OnParentUpdate("resetNotifier")
     public void reset(Object resetNotifier){
-        double oldValue = result;
+        //double oldValue = result;
         init();
-        updated = oldValue != result;
+        updated = false;
+        //updated = oldValue != result;
     }
 
 
     @Initialise
     public void init(){
-        f.reset();
+        result = f.reset();
         updated = false;
-        result = 0;
     }
 
     @Override

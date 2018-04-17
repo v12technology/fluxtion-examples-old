@@ -18,11 +18,6 @@ public class TempEventHandler implements EventWrapper<TempEvent>{
         return true;
     }
 
-//    @EventHandler
-//    public void handleTempEvent(TempEvent event){
-//        this.event = event;
-//    }
-//    
     @Override
     public TempEvent event() {
         return event;

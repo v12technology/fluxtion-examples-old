@@ -18,11 +18,6 @@ public class StartOfDayHandler implements EventWrapper<StartOfDay>{
         return true;
     }
 
-//    @EventHandler
-//    public void handleStartOfDay(StartOfDay event){
-//        this.event = event;
-//    }
-//    
     @Override
     public StartOfDay event() {
         return event;

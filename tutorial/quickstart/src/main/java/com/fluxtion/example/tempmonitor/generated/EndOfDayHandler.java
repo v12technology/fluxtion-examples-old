@@ -18,11 +18,6 @@ public class EndOfDayHandler implements EventWrapper<EndOfDay>{
         return true;
     }
 
-//    @EventHandler
-//    public void handleEndOfDay(EndOfDay event){
-//        this.event = event;
-//    }
-//    
     @Override
     public EndOfDay event() {
         return event;

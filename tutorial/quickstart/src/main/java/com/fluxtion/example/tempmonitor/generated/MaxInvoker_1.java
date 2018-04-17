@@ -50,16 +50,17 @@ public class MaxInvoker_1 extends Number implements NumericValue{
     
     @OnParentUpdate("resetNotifier")
     public void reset(Object resetNotifier){
+        //double oldValue = result;
         init();
         updated = false;
+        //updated = oldValue != result;
     }
 
 
     @Initialise
     public void init(){
-        f.reset();
+        result = f.reset();
         updated = false;
-        result = Integer.MIN_VALUE;
     }
 
     @Override
