@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 gregp
+ * Copyright (C) 2018 greg
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,36 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.fluxtion.casestudy.creditmonitor.events;
+package com.fluxtion.casestudy.creditmonitor.volatility.events;
 
 import com.fluxtion.runtime.event.Event;
 
 /**
  *
- * @author gregp
+ * @author greg
  */
-public class PurchaseOrder extends Event{
-    public long time;
-    public double amount;
-    public String id;
-    public String productId;
-    public String customerId;
-    public int x;
-    public int y;
-
-    public PurchaseOrder(String productId, double amount, String customerId, int x, int y) {
-        this.amount = amount;
-        this.productId = productId;
-        this.customerId = customerId;
-        this.x = x;
-        this.y = y;
-    }
-    
-    
-
-    @Override
-    public String toString() {
-        return "PurchaseOrder{" + "time=" + time + ", amount=" + amount + ", id=" + id + '}';
-    }
+public class CreditRiskUpdate extends Event{
     
 }

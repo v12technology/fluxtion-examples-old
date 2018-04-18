@@ -34,8 +34,14 @@ public class Main {
         validator.init();
         validator.logger.setLogSink(new Log4JLogRecordListener());
         validator.onEvent(new ConfigurationEvent<>(new UserConfig()));
-        validator.onEvent(new PurchaseOrder());
-        validator.onEvent(new ConfigurationEvent<>(new LocationRuleConfig()));
-        validator.onEvent(new NumericSignal("maxOrderSize", 20_000));
+        validator.onEvent(new PurchaseOrder("desk", 1000, "customer_1", 35, 90));
+        validator.onEvent(new NumericSignal("maxOrderSize", 200));
+        validator.onEvent(new PurchaseOrder("desk", 1000, "customer_1", 35, 90));
+        validator.onEvent(new PurchaseOrder("desk_cheap", 150, "customer_1", 35, 90));
+        validator.onEvent(new PurchaseOrder("desk_secondHand", 50, "customer_1", 400, 900));
+        validator.onEvent(new ConfigurationEvent<>(new LocationRuleConfig(100, 100)));
+        validator.onEvent(new PurchaseOrder("desk_cheap", 150, "customer_1", 35, 90));
+        validator.onEvent(new PurchaseOrder("desk_cheap", 150, "customer_1", 400, 900));
+        validator.onEvent(new PurchaseOrder("desk_secondHand", 50, "customer_1", 400, 900));
     }
 }

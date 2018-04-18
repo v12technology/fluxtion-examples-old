@@ -22,28 +22,6 @@ import com.fluxtion.runtime.event.Event;
  *
  * @author gregp
  */
-public class PurchaseOrder extends Event{
-    public long time;
-    public double amount;
-    public String id;
-    public String productId;
-    public String customerId;
-    public int x;
-    public int y;
-
-    public PurchaseOrder(String productId, double amount, String customerId, int x, int y) {
-        this.amount = amount;
-        this.productId = productId;
-        this.customerId = customerId;
-        this.x = x;
-        this.y = y;
-    }
-    
-    
-
-    @Override
-    public String toString() {
-        return "PurchaseOrder{" + "time=" + time + ", amount=" + amount + ", id=" + id + '}';
-    }
-    
+public class RejectAll extends Event{
+    public boolean rejecting;
 }

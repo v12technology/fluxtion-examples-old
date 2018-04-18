@@ -22,7 +22,7 @@ import com.fluxtion.casestudy.creditmonitor.Rules.LocationRule;
 import com.fluxtion.casestudy.creditmonitor.Rules.MaxOrderSizeRule;
 import com.fluxtion.casestudy.creditmonitor.Rules.OrderRateRule;
 import com.fluxtion.casestudy.creditmonitor.UserContext;
-import com.fluxtion.casestudy.creditmonitor.main.TransactionPublisher;
+import com.fluxtion.casestudy.creditmonitor.TransactionPublisher;
 import com.fluxtion.runtime.plugin.sep.AuditedSep;
 
 /**
@@ -38,7 +38,7 @@ public class CreditMonitorSepCfg extends AuditedSep {
         MaxOrderSizeRule ruleMax = addNode(new MaxOrderSizeRule(userCtx));
         OrderRateRule ruleRate = addNode(new OrderRateRule(userCtx));
         CreditFailReporter failReporter = addNode(new CreditFailReporter(ruleLocation, ruleMax, ruleRate));
-        TransactionPublisher transactionPublisher = addPublicNode(new TransactionPublisher(failReporter), "txPublisher");
+        TransactionPublisher transactionPublisher = addPublicNode(new TransactionPublisher(failReporter, userCtx), "txPublisher");
     }
 
 }

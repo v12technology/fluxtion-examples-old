@@ -17,8 +17,10 @@
 package com.fluxtion.casestudy.creditmonitor;
 
 import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.api.annotations.Inject;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.casestudy.creditmonitor.events.LocationRuleConfig;
+import com.fluxtion.casestudy.creditmonitor.volatility.VolatilityCalc;
 import com.fluxtion.runtime.plugin.events.ConfigurationEvent;
 import com.fluxtion.runtime.plugin.events.NumericSignal;
 import com.fluxtion.runtime.plugin.nodes.EventLogNode;
@@ -35,13 +37,15 @@ public abstract class Rules extends EventLogNode {
         this.userCtx = userCtx;
     }
 
-    protected UserContext getUserCtx() {
+    protected UserContext userCtx() {
         return userCtx;
     }
 
-    public abstract boolean failedRule();
+    public abstract boolean failedValidation();
 
     public static class LocationRule extends Rules {
+
+        private LocationRuleConfig cfg;
 
         public LocationRule(UserContext userCtx) {
             super(userCtx);
@@ -49,15 +53,30 @@ public abstract class Rules extends EventLogNode {
 
         @Override
         @OnEvent
-        public boolean failedRule() {
-            log.info("validateLocation", true);
-            return false;
+        public boolean failedValidation() {
+            boolean failed = false;
+            if (cfg == null) {
+                log.info("noLocationCheck", true);
+            } else if(userCtx().previousPurchaseOrder!=null){
+                int deltaX = Math.abs(userCtx().currentPurchaseOrder.x - userCtx().previousPurchaseOrder.x);
+                int deltaY = Math.abs(userCtx().currentPurchaseOrder.y - userCtx().previousPurchaseOrder.y);
+                if(deltaX > cfg.maxDeltaX || deltaY > cfg.maxDeltaY){
+                    failed = true;
+                    log.info("exceededMovement", true);
+                    log.info("maxDeltaX", cfg.maxDeltaX);
+                    log.info("actualDeltaX", deltaX );
+                    log.info("maxDeltaY", cfg.maxDeltaY);
+                    log.info("actualDeltaY", deltaY );
+                }
+            }
+            log.info("validateLocation", !failed);
+            return failed;
         }
 
         @EventHandler(propagate = false)
         public boolean configUpdate(ConfigurationEvent<LocationRuleConfig> configUpdate) {
             log.info("updateCfg", configUpdate.value.toString());
-            return false;
+            this.cfg = configUpdate.value;
         }
 
     }
@@ -70,29 +89,53 @@ public abstract class Rules extends EventLogNode {
 
         @Override
         @OnEvent
-        public boolean failedRule() {
-            log.info("validateOrderRate", true);
-            return false;
+        public boolean failedValidation() {
+            boolean failed = false;
+            log.info("validateOrderRate", !failed);
+            return failed;
         }
 
     }
 
     public static class MaxOrderSizeRule extends Rules {
 
-        public MaxOrderSizeRule(UserContext userCtx) {
+        private double maxSize = 1000;
+        
+        @Inject
+        private final VolatilityCalc volatilityCalc;
+
+        public MaxOrderSizeRule(VolatilityCalc volatilityCalc, UserContext userCtx) {
             super(userCtx);
+            this.volatilityCalc = volatilityCalc;
         }
         
+        public MaxOrderSizeRule(UserContext userCtx) {
+            this(null, userCtx);
+        }
+
         @EventHandler(filterString = "maxOrderSize", propagate = false)
-        public void numericUpdate(NumericSignal numericSignal) {
-            log.info("orderSize", numericSignal.value());
+        public boolean numericUpdate(NumericSignal numericSignal) {
+            maxSize = numericSignal.value();
+            log.info("maxSize", maxSize);
+            return false;
         }
 
         @Override
         @OnEvent
-        public boolean failedRule() {
-            log.info("validateMaxOrderSize", false);
-            return true;
+        public boolean failedValidation() {
+            boolean failed = false;
+            double amount = userCtx().currentPurchaseOrder.amount;
+            if(volatilityCalc!=null){
+                amount *= volatilityCalc.volatilityMultiplier();
+                log.info("volMultiplier", volatilityCalc.volatilityMultiplier());
+            }
+            if (amount > maxSize) {
+                failed = true;
+                log.info("maxSize", maxSize);
+                log.info("actualSize", userCtx().currentPurchaseOrder.amount);
+            }
+            log.info("validateMaxOrderSize", !failed);
+            return failed;
         }
 
     }

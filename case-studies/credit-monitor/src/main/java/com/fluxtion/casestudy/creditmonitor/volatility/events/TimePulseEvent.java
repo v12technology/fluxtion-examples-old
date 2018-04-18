@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 gregp
+ * Copyright (C) 2018 greg
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.fluxtion.casestudy.creditmonitor.main;
+package com.fluxtion.casestudy.creditmonitor.volatility.events;
 
 import com.fluxtion.runtime.event.Event;
 
 /**
  *
- * @author gregp
+ * @author greg
  */
-public class RejectAll extends Event{
-    public boolean rejecting;
+public class TimePulseEvent extends Event{
+    
 }

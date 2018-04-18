@@ -14,14 +14,16 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.fluxtion.casestudy.creditmonitor.main;
+package com.fluxtion.casestudy.creditmonitor;
 
 import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.casestudy.creditmonitor.CreditFailReporter;
+import com.fluxtion.casestudy.creditmonitor.UserContext;
 import com.fluxtion.casestudy.creditmonitor.events.PurchaseOrder;
+import com.fluxtion.casestudy.creditmonitor.events.RejectAll;
 import com.fluxtion.runtime.plugin.nodes.EventLogNode;
 
 /**
@@ -30,17 +32,24 @@ import com.fluxtion.runtime.plugin.nodes.EventLogNode;
  */
 public class TransactionPublisher extends EventLogNode{
     private final CreditFailReporter failReporter;
+    private final UserContext userContext;
     private boolean failed;
     private boolean rejecting;
     private PurchaseOrder purchaseOrder;
 
-    public TransactionPublisher(CreditFailReporter failReporter) {
+    public TransactionPublisher(CreditFailReporter failReporter, UserContext userContext) {
         this.failReporter = failReporter;
+        this.userContext = userContext;
+    }
+    
+    public TransactionPublisher(CreditFailReporter failReporter) {
+        this(failReporter, null);
     }
     
     @OnParentUpdate
     public void failedCheck(CreditFailReporter failReporter){
         failed = true;
+        userContext.currentPurchaseOrder = null;
     }
     
     @EventHandler

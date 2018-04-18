@@ -25,6 +25,11 @@ public class LocationRuleConfig {
     public int maxDeltaY;
     public int travelTime;
 
+    public LocationRuleConfig(int maxDeltaX, int maxDeltaY) {
+        this.maxDeltaX = maxDeltaX;
+        this.maxDeltaY = maxDeltaY;
+    }
+
     @Override
     public String toString() {
         return "LocationRuleConfig{" + "maxDeltaX=" + maxDeltaX + ", maxDeltaY=" + maxDeltaY + ", travelTime=" + travelTime + '}';
