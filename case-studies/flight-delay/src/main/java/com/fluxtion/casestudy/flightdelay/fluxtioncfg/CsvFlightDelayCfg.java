@@ -80,8 +80,8 @@ public class CsvFlightDelayCfg extends SEPConfig {
     {
         //add csv parser
         Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1)
-                .map(14, FlightDetails::setDelay)
-                .mapString(8, FlightDetails::setCarrier).build();
+                .map(14, FlightDetails::setDelayString)
+                .map(8, FlightDetails::setCarrier).build();
         //filter for positive delays
         Wrapper<FlightDetails> delayedFlight = greaterThanFilter(flightDetails, FlightDetails::getDelay, 0);
         //group by carrier name
@@ -90,12 +90,13 @@ public class CsvFlightDelayCfg extends SEPConfig {
         carrierDelay.init(FlightDetails::getCarrier, CarrierDelay::setCarrierId);
         //aggregate calculations
         carrierDelay.avg(FlightDetails::getDelay, CarrierDelay::setAvgDelay);
-        carrierDelay.count(FlightDetails::getDelay, CarrierDelay::setTotalFlights);
+        carrierDelay.count(CarrierDelay::setTotalFlights);
         carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
         //add public node for debug
         addPublicNode(carrierDelay.build(), "carrierDelayMap");
         //total records processed counts FlightDetails events from csvMarshaller
         addPublicNode(count(flightDetails), "totalFlights");
+        maxFiltersInline = 25;
     }
 
 }

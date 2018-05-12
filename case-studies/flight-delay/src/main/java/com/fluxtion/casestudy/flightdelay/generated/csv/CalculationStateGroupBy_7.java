@@ -6,28 +6,28 @@ import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
-import com.fluxtion.casestudy.flightdelay.generated.csv.GreaterThanDecorator_4;
+import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.casestudy.flightdelay.CarrierDelay;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.casestudy.flightdelay.FlightDetails;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 
 /**
- * generated group by calculation state holder. This class holds thr
+ * generated group by calculation state holder. This class holds the state of
+ * a group by calculation.
  *
  * target class  : CarrierDelay
  * 
  * @author Greg Higgins
  */
-public final class CalculationStateGroupBy_9 implements Wrapper<CarrierDelay>{
+public final class CalculationStateGroupBy_7 implements Wrapper<CarrierDelay>{
     public CarrierDelay target;
-    public AggregateAverage aggregateAverage6Function = new AggregateAverage();
-    public double aggregateAverage6;
-    public int aggregateCount7;
-    public double aggregateSum8;
+    public AggregateAverage aggregateAverage4Function = new AggregateAverage();
+    public double aggregateAverage4;
+    public double aggregateSum6;
+    public int aggregateCount5;
 
-    public CalculationStateGroupBy_9(){
+    public CalculationStateGroupBy_7(){
          target = new CarrierDelay();
     }
 
@@ -39,6 +39,11 @@ public final class CalculationStateGroupBy_9 implements Wrapper<CarrierDelay>{
     @Override
     public Class<CarrierDelay> eventClass() {
         return CarrierDelay.class;
+    }
+
+    @Override
+    public String toString() {
+        return event().toString();
     }
 
 }

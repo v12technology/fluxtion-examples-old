@@ -19,10 +19,18 @@ package com.fluxtion.casestudy.flightdelay;
 import com.fluxtion.casestudy.flightdelay.generated.binary.BinaryFlightDataProcessor;
 import com.fluxtion.casestudy.flightdelay.generated.csv.CsvFlightDataProcessor;
 import com.fluxtion.extension.declarative.api.Wrapper;
+import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
+import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.initSep;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.tearDownSep;
+import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.util.FlightDetailsReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.Map;
 import net.openhft.chronicle.bytes.MethodReader;
 import net.openhft.chronicle.queue.ExcerptTailer;
@@ -49,6 +57,26 @@ public class DelayStatsCalculator {
         totalFlights = processor.totalFlights.intValue();
         Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();
         return (Map<String, Wrapper<CarrierDelay>>) map;
+    }
+
+    public static void streamFromFileLocal(File file, EventHandler eventHandler, boolean callLifeCycleMethods) throws FileNotFoundException, IOException {
+        if (callLifeCycleMethods) {
+            initSep(eventHandler);
+        }
+        if (file.exists() && file.isFile()) {
+            FileChannel fileChannel = new FileInputStream(file).getChannel();
+            long size = file.length();
+            MappedByteBuffer buffer = fileChannel.map(
+                    FileChannel.MapMode.READ_ONLY, 0, size);
+            CharEvent charEvent = new CharEvent(' ');
+            while (buffer.hasRemaining()) {
+                charEvent.setCharacter((char) buffer.get());
+                eventHandler.onEvent(charEvent);
+            }
+        }
+        if (callLifeCycleMethods) {
+            tearDownSep(eventHandler);
+        }
     }
 
     public Map<String, Wrapper<CarrierDelay>> calcFromBinary(File binaryFile) throws IOException {

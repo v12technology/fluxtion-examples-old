@@ -1,4 +1,4 @@
-package com.fluxtion.casestudy.flightdelay.generated.csv;
+package com.fluxtion.casestudy.flightdelay.generated.csv2;
 
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
@@ -16,8 +16,8 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
   public final CountFunction totalFlights = new CountFunction();
   //Dirty flags
   private boolean isDirty_flightDetailsCsvMarshaller0_1 = false;
-  private boolean isDirty_carrierDelayMap = false;
   private boolean isDirty_greaterThanDecorator_2_3 = false;
+  private boolean isDirty_carrierDelayMap = false;
   //Filter constants
 
   public CsvFlightDataProcessor() {
@@ -62,8 +62,8 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
   public void afterEvent() {
 
     isDirty_flightDetailsCsvMarshaller0_1 = false;
-    isDirty_carrierDelayMap = false;
     isDirty_greaterThanDecorator_2_3 = false;
+    isDirty_carrierDelayMap = false;
   }
 
   @Override

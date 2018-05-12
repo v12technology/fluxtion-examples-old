@@ -78,7 +78,7 @@ public class BinaryFlightDelayCfg extends SEPConfig {
         carrierDelay.init(FlightDetails::getCarrier, CarrierDelay::setCarrierId);
         //aggregate calculations
         carrierDelay.avg(FlightDetails::getDelay, CarrierDelay::setAvgDelay);
-        carrierDelay.count(FlightDetails::getDelay, CarrierDelay::setTotalFlights);
+        carrierDelay.count(CarrierDelay::setTotalFlights);
         carrierDelay.sum(FlightDetails::getDelay, CarrierDelay::setTotalDelayMins);
         //add public node for debug and actually build the query
         addPublicNode(carrierDelay.build(), "carrierDelayMap");

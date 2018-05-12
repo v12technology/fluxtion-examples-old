@@ -16,6 +16,7 @@
  */
 package com.fluxtion.casestudy.flightdelay;
 
+import static com.fluxtion.extension.declarative.funclib.api.ascii.Conversion.atoi;
 import com.fluxtion.runtime.event.Event;
 import net.openhft.chronicle.wire.Marshallable;
 
@@ -24,7 +25,7 @@ import net.openhft.chronicle.wire.Marshallable;
  * @author greg
  */
 public class FlightDetails extends Event implements Marshallable {
-    
+
     public int delay;
 
     public void setCarrier(String carrier) {
@@ -32,7 +33,15 @@ public class FlightDetails extends Event implements Marshallable {
     }
 
     public String getCarrier() {
-        return filterString;
+        return filterString.toString();
+    }
+
+    public void setDelayString(StringBuilder seq) {
+        if (seq.length() < 1 || !Character.isDigit(seq.charAt(0))) {
+            delay = 0;
+        } else {
+            delay = atoi(seq);
+        }
     }
 
     public void setDelay(int delay) {
@@ -57,5 +66,5 @@ public class FlightDetails extends Event implements Marshallable {
     public int hashCode() {
         return Marshallable.$hashCode(this);
     }
-    
+
 }

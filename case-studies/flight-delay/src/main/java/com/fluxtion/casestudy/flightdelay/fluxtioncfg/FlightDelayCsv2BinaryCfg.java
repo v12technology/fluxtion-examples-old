@@ -45,7 +45,7 @@ public class FlightDelayCsv2BinaryCfg extends SEPConfig {
 
     {
         //add csv parser
-        Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1).map(14, FlightDetails::setDelay).mapString(8, FlightDetails::setCarrier).build();
+        Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1).map(14, FlightDetails::setDelay).map(8, FlightDetails::setCarrier).build();
         //stream FlightDetails to sink
         addPublicNode(new FlightDetailsSink(flightDetails), "chronicleSink");
     }

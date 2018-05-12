@@ -3,18 +3,18 @@ package com.fluxtion.casestudy.flightdelay.generated.csv;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.OnEvent;
+import com.fluxtion.api.annotations.OnEventComplete;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.api.group.GroupBy;
 import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
-import com.fluxtion.casestudy.flightdelay.generated.csv.GreaterThanDecorator_4;
+import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.casestudy.flightdelay.CarrierDelay;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.casestudy.flightdelay.FlightDetails;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 
 /**
  * generated group by holder.
@@ -23,35 +23,35 @@ import com.fluxtion.casestudy.flightdelay.FlightDetails;
  * 
  * @author Greg Higgins
  */
-public final class GroupBy_9 implements GroupBy<CarrierDelay>{
+public final class GroupBy_7 implements GroupBy<CarrierDelay>{
 
-    public GreaterThanDecorator_4 greaterThanDecorator_40;
+    public GreaterThanDecorator_2 greaterThanDecorator_20;
     private CarrierDelay target;
-    private GroupByTargetMap<CarrierDelay, CalculationStateGroupBy_9> calcState;
-    private GroupByIniitialiser<FlightDetails, CarrierDelay> initialisergreaterThanDecorator_40;
+    private GroupByTargetMap<CarrierDelay, CalculationStateGroupBy_7> calcState;
+    private GroupByIniitialiser<FlightDetails, CarrierDelay> initialisergreaterThanDecorator_20;
 
-    @OnParentUpdate( "greaterThanDecorator_40")
-    public boolean updategreaterThanDecorator_40(GreaterThanDecorator_4 eventWrapped){
+    @OnParentUpdate( "greaterThanDecorator_20")
+    public boolean updategreaterThanDecorator_20(GreaterThanDecorator_2 eventWrapped){
         FlightDetails event = eventWrapped.event();
-        CalculationStateGroupBy_9 instance = calcState.getOrCreateInstance(event.getCarrier(), initialisergreaterThanDecorator_40, event);
+        CalculationStateGroupBy_7 instance = calcState.getOrCreateInstance(event.getCarrier(), initialisergreaterThanDecorator_20, event);
         target = instance.target;
         {
-			double value = instance.aggregateAverage6;
-			value = instance.aggregateAverage6Function.calcAverage((double)event.getDelay(), (double)value);
+			double value = instance.aggregateAverage4;
+			value = instance.aggregateAverage4Function.calcAverage((double)event.getDelay(), (double)value);
 			target.setAvgDelay((int)value);
-			instance.aggregateAverage6 = value;
+			instance.aggregateAverage4 = value;
          }
         {
-			int value = instance.aggregateCount7;
-			value = AggregateCount.increment((int)event.getDelay(), (int)value);
-			target.setTotalFlights((int)value);
-			instance.aggregateCount7 = value;
-         }
-        {
-			double value = instance.aggregateSum8;
+			double value = instance.aggregateSum6;
 			value = AggregateSum.calcSum((double)event.getDelay(), (double)value);
 			target.setTotalDelayMins((int)value);
-			instance.aggregateSum8 = value;
+			instance.aggregateSum6 = value;
+         }
+        {
+			int value = instance.aggregateCount5;
+			value = AggregateCount.increment((int)0, (int)value);
+			target.setTotalFlights((int)value);
+			instance.aggregateCount5 = value;
          }
         return true;
     }
@@ -63,8 +63,8 @@ public final class GroupBy_9 implements GroupBy<CarrierDelay>{
 
     @Initialise
     public void init(){
-        calcState = new GroupByTargetMap<>(CalculationStateGroupBy_9.class);
-        initialisergreaterThanDecorator_40 = new GroupByIniitialiser<FlightDetails, CarrierDelay>(){
+        calcState = new GroupByTargetMap<>(CalculationStateGroupBy_7.class);
+        initialisergreaterThanDecorator_20 = new GroupByIniitialiser<FlightDetails, CarrierDelay>(){
         
             @Override
             public void apply(FlightDetails source, CarrierDelay target) {
