@@ -22,6 +22,7 @@ import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import static com.fluxtion.extension.declarative.builder.group.Group.groupBy;
 import com.fluxtion.extension.declarative.builder.group.GroupByBuilder;
+import com.fluxtion.extension.declarative.funclib.builder.csv.CharTokenConfig;
 import static com.fluxtion.extension.declarative.funclib.builder.math.CountFunction.count;
 import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
 import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanFilter;
@@ -81,7 +82,7 @@ public class CsvFlightDelayCfg extends SEPConfig {
         //add csv parser
         Wrapper<FlightDetails> flightDetails = csvMarshaller(FlightDetails.class, 1)
                 .map(14, FlightDetails::setDelayString)
-                .map(8, FlightDetails::setCarrier).build();
+                .map(8, FlightDetails::setCarrier).tokenConfig(CharTokenConfig.WINDOWS).build();
         //filter for positive delays
         Wrapper<FlightDetails> delayedFlight = greaterThanFilter(flightDetails, FlightDetails::getDelay, 0);
         //group by carrier name

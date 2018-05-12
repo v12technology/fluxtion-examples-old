@@ -6,11 +6,11 @@ import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.casestudy.flightdelay.CarrierDelay;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
 
 /**
  * generated group by calculation state holder. This class holds the state of
@@ -22,10 +22,10 @@ import com.fluxtion.extension.declarative.api.group.AggregateFunctions.Aggregate
  */
 public final class CalculationStateGroupBy_7 implements Wrapper<CarrierDelay>{
     public CarrierDelay target;
+    public int aggregateCount5;
+    public double aggregateSum6;
     public AggregateAverage aggregateAverage4Function = new AggregateAverage();
     public double aggregateAverage4;
-    public double aggregateSum6;
-    public int aggregateCount5;
 
     public CalculationStateGroupBy_7(){
          target = new CarrierDelay();

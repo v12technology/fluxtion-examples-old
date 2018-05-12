@@ -1,12 +1,12 @@
 package com.fluxtion.casestudy.flightdelay.generated.csv;
 
-import com.fluxtion.api.annotations.EventHandler;
-import java.util.HashMap;
-import com.fluxtion.casestudy.flightdelay.FlightDetails;
-import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
-import com.fluxtion.extension.declarative.api.Wrapper;
-import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.extension.declarative.funclib.api.csv.RowProcessor;
+import com.fluxtion.casestudy.flightdelay.FlightDetails;
+import com.fluxtion.extension.declarative.api.Wrapper;
+import com.fluxtion.api.annotations.EventHandler;
+import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
+import java.util.HashMap;
+import com.fluxtion.api.annotations.Initialise;
 
 /**
  * generated CSV marshaller wrapper.
@@ -41,6 +41,9 @@ public class FlightDetailsCsvMarshaller0 implements RowProcessor<FlightDetails> 
     public boolean charEvent(CharEvent event) {
         final char character = event.getCharacter();
         passedValidation = true;
+        if(character == '\r'){
+            return false;
+        }
         if (character == '\n') {
             return processRow();
         }
