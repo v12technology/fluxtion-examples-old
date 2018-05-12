@@ -11,7 +11,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.plugin.ver>1.0.8</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.35-SNAPSHOT</fluxtion.ver>
+        <fluxtion.ver>0.1.37-SNAPSHOT</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -53,7 +53,17 @@
             <groupId>com.fluxtion.extension</groupId>
             <artifactId>fluxtion-declarative-ext-builder</artifactId>
             <scope>compile</scope>
-        </dependency>
+        </dependency>	
+        <dependency>
+            <groupId>com.fluxtion.extension</groupId>
+            <artifactId>fluxtion-declarative-builder</artifactId>
+            <scope>compile</scope>
+        </dependency>	
+        <dependency>
+            <groupId>com.fluxtion</groupId>
+            <artifactId>fluxtion-builder</artifactId>
+            <scope>compile</scope>
+        </dependency>	
         <dependency>
             <groupId>net.openhft</groupId>
             <artifactId>chronicle-queue</artifactId>
@@ -132,9 +142,12 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.fluxtion</groupId>
+                        <groupId>com.fluxtion.internal</groupId>
+                        <artifactId>fluxtion-maven-plugin-inprocess</artifactId>
+                        <version>0.1.17-SNAPSHOT</version>
+                        <!--                        <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>${fluxtion.plugin.ver}</version>
+                        <version>${fluxtion.plugin.ver}</version>-->
                         <executions>
                             <!--                            <execution>
                                 <id>flightcsvsink</id>
@@ -158,13 +171,14 @@
                                 <configuration>
                                     <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
                                     <className>CsvFlightDataProcessor</className>
-                                    <packageName>com.fluxtion.casestudy.flightdelay.generated.csv</packageName>
+                                    <packageName>com.fluxtion.casestudy.flightdelay.generated.csv2</packageName>
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.CsvFlightDelayCfg</configClass>
                                     <logDebug>false</logDebug>
+                                    <ignoreErrors>false</ignoreErrors>
                                 </configuration>
                             </execution>
-                            <execution>
+                            <!--                            <execution>
                                 <id>flight binary processor</id>
                                 <goals>
                                     <goal>generate</goal>
@@ -176,6 +190,59 @@
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.BinaryFlightDelayCfg</configClass>
                                     <logDebug>false</logDebug>
+                                </configuration>
+                            </execution>-->
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>fluxtion-worldCity</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion</groupId>
+                        <artifactId>fluxtion-maven-plugin</artifactId>
+                        <version>${fluxtion.plugin.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>world city csv processor</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <className>CsvWorldCityDataProcessor</className>
+                                    <packageName>com.fluxtion.casestudy.worldcity.generated.csv</packageName>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <configClass>com.fluxtion.casestudy.worldcity.MyBufferCfg</configClass>
+                                    <configClass>com.fluxtion.casestudy.worldcity.WorldCitiesCsvCfg</configClass>
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                                <configuration>
+                                    <outputFile>dist/worldcity-analyser.jar</outputFile>
+                                    <transformers>
+                                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                            <mainClass>com.fluxtion.casestudy.worldcity.Main</mainClass>
+                                        </transformer>
+                                    </transformers>
                                 </configuration>
                             </execution>
                         </executions>
