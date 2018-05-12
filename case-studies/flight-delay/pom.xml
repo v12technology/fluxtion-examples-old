@@ -171,7 +171,7 @@
                                 <configuration>
                                     <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
                                     <className>CsvFlightDataProcessor</className>
-                                    <packageName>com.fluxtion.casestudy.flightdelay.generated.csv2</packageName>
+                                    <packageName>com.fluxtion.casestudy.flightdelay.generated.csv</packageName>
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <configClass>com.fluxtion.casestudy.flightdelay.fluxtioncfg.CsvFlightDelayCfg</configClass>
                                     <logDebug>false</logDebug>
