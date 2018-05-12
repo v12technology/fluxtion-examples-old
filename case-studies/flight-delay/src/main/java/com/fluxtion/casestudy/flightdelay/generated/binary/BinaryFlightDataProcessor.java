@@ -3,9 +3,6 @@ package com.fluxtion.casestudy.flightdelay.generated.binary;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.casestudy.flightdelay.generated.binary.FlightDetailsHandler;
-import com.fluxtion.casestudy.flightdelay.generated.binary.GreaterThanDecorator_1;
-import com.fluxtion.casestudy.flightdelay.generated.binary.GroupBy_6;
 import com.fluxtion.extension.declarative.funclib.builder.math.CountFunction;
 import com.fluxtion.casestudy.flightdelay.FlightDetails;
 
