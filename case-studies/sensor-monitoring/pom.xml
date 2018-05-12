@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.fluxtion.casestudy</groupId>
+    <artifactId>oil-sensor</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>fluxtion.casestudy :: oil sensor</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <fluxtion.maven-plugin.ver>1.0.8</fluxtion.maven-plugin.ver>
+        <fluxtion.runtime-plugin.ver>1.0.3-SNAPSHOT</fluxtion.runtime-plugin.ver>
+        <!--
+        either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
+        hardcode a path for fluxtion.exe here
+        -->
+        <fluxtion.exe.path>${fluxtion.declarative.ext.trial}</fluxtion.exe.path>
+        <netbeans.hint.license>gpl30</netbeans.hint.license>
+    </properties>
+    
+    <licenses>
+        <license>
+            <distribution>repo</distribution>
+            <name>GNU General Public License, version 3</name>
+            <url>http://www.gnu.org/licenses/gpl.txt</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <name>Greg Higgins</name>
+            <email>greg.higgins@v12technology.com</email>
+            <organization>V12 Technology Limited</organization>
+        </developer>
+    </developers>
+
+    <repositories>   
+        <repository>
+            <id>fluxtion.repo</id>
+            <url>https://mymavenrepo.com/repo/a6PnK93U9WA0ChAw8D8u/</url>
+        </repository>
+    </repositories>  
+    
+    <build>
+        <plugins>
+            <plugin>
+                <!--                
+                <groupId>com.fluxtion</groupId>
+                <artifactId>fluxtion-maven-plugin</artifactId>
+                <version>${fluxtion.maven-plugin.ver}</version>
+                -->
+                <groupId>com.fluxtion.internal</groupId>
+                <artifactId>fluxtion-maven-plugin-inprocess</artifactId>
+                <version>0.1.17-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <id>example6</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                            <className>SensorProcessor</className>
+                            <packageName>com.fluxtion.casestudy.oilsensor.generated</packageName>
+                            <outputDirectory>src/main/java</outputDirectory>
+                            <configClass>com.fluxtion.runtime.plugin.sep.AuditedSep</configClass>
+                            <yamlFactoryConfig>src\main\resources\config\sensors.yml</yamlFactoryConfig>
+                            <!--<nodeNamingClass>com.fluxtion.fx.reconciler.helpers.ReconcilerNameProducer</nodeNamingClass>-->
+                            <!--<logDebug>true</logDebug>-->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.fluxtion.extension</groupId>
+            <artifactId>runtime-plugins</artifactId>
+            <version>${fluxtion.runtime-plugin.ver}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-core</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+</project>
