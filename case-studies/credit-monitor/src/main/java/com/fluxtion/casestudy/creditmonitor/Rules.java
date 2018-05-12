@@ -77,6 +77,7 @@ public abstract class Rules extends EventLogNode {
         public boolean configUpdate(ConfigurationEvent<LocationRuleConfig> configUpdate) {
             log.info("updateCfg", configUpdate.value.toString());
             this.cfg = configUpdate.value;
+            return false;
         }
 
     }

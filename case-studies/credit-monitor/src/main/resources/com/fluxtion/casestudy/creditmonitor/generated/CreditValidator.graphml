@@ -56,29 +56,29 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="volatilityCalc_14">
+<node id="volatilityCalc_19">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;volatilityCalc_14:&#10;VolatilityCalc"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;volatilityCalc_19:&#10;VolatilityCalc"/>
 <jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="marketSentiment_11">
+<node id="marketSentiment_16">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;marketSentiment_11:&#10;MarketSentiment"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;marketSentiment_16:&#10;MarketSentiment"/>
 <jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="creditRisk_12">
+<node id="creditRisk_17">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;creditRisk_12:&#10;CreditRisk"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;creditRisk_17:&#10;CreditRisk"/>
 <jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
@@ -128,20 +128,20 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="InterestRateEvent">
-<data key="vertex_label">
-<jGraph:ShapeNode>
-<jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;InterestRateEvent"/>
-<jGraph:Style properties="EVENT"/>
-</jGraph:ShapeNode>
-</data>
-</node>
 <node id="MarketTrades">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
 <jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;MarketTrades"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="InterestRateEvent">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;InterestRateEvent"/>
 <jGraph:Style properties="EVENT"/>
 </jGraph:ShapeNode>
 </data>
@@ -155,7 +155,7 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<edge id="1" source="userContext_1" target="locationRule_3">
+<edge id="1" source="userContext_2" target="locationRule_5">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
@@ -185,47 +185,47 @@
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="7" source="userContext_1" target="txPublisher">
+<edge id="7" source="userContext_2" target="txPublisher">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="8" source="creditFailReporter_9" target="txPublisher">
+<edge id="8" source="creditFailReporter_14" target="txPublisher">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="9" source="volatilityCalc_14" target="maxOrderSizeRule_5">
+<edge id="9" source="volatilityCalc_19" target="maxOrderSizeRule_8">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="10" source="marketSentiment_11" target="volatilityCalc_14">
+<edge id="10" source="marketSentiment_16" target="volatilityCalc_19">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="11" source="creditRisk_12" target="volatilityCalc_14">
+<edge id="11" source="creditRisk_17" target="volatilityCalc_19">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="12" source="ConfigurationEvent" target="locationRule_3">
+<edge id="12" source="ConfigurationEvent" target="locationRule_5">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="13" source="ConfigurationEvent" target="userContext_1">
+<edge id="13" source="PurchaseOrder" target="userContext_2">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="14" source="PurchaseOrder" target="userContext_1">
+<edge id="14" source="ConfigurationEvent" target="userContext_2">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="15" source="NumericSignal" target="maxOrderSizeRule_5">
+<edge id="15" source="NumericSignal" target="maxOrderSizeRule_8">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
@@ -240,22 +240,22 @@
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="18" source="TimingPulseEvent" target="volatilityCalc_14">
+<edge id="18" source="TimingPulseEvent" target="volatilityCalc_19">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="19" source="InterestRateEvent" target="marketSentiment_11">
+<edge id="19" source="MarketTrades" target="marketSentiment_16">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="20" source="MarketTrades" target="marketSentiment_11">
+<edge id="20" source="InterestRateEvent" target="marketSentiment_16">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="21" source="CreditRiskUpdate" target="creditRisk_12">
+<edge id="21" source="CreditRiskUpdate" target="creditRisk_17">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
