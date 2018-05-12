@@ -50,13 +50,14 @@ public abstract class Rules extends EventLogNode {
         @Override
         @OnEvent
         public boolean failedRule() {
-            log.info("validateLocation", false);
+            log.info("validateLocation", true);
             return false;
         }
 
         @EventHandler(propagate = false)
-        public void configUpdate(ConfigurationEvent<LocationRuleConfig> configUpdate) {
+        public boolean configUpdate(ConfigurationEvent<LocationRuleConfig> configUpdate) {
             log.info("updateCfg", configUpdate.value.toString());
+            return false;
         }
 
     }
@@ -70,7 +71,7 @@ public abstract class Rules extends EventLogNode {
         @Override
         @OnEvent
         public boolean failedRule() {
-            log.info("validateOrderRate", false);
+            log.info("validateOrderRate", true);
             return false;
         }
 
@@ -90,7 +91,7 @@ public abstract class Rules extends EventLogNode {
         @Override
         @OnEvent
         public boolean failedRule() {
-            log.info("validateMaxOrderSize", true);
+            log.info("validateMaxOrderSize", false);
             return true;
         }
 
