@@ -27,257 +27,260 @@ import com.fluxtion.runtime.plugin.tracing.TracerConfigEvent;
 
 public class CreditValidator implements EventHandler, BatchHandler, Lifecycle {
 
-  //Node declarations
-  private final UserContext userContext_1 = new UserContext();
-  private final LocationRule locationRule_3 = new LocationRule(userContext_1);
-  private final MaxOrderSizeRule maxOrderSizeRule_5 = new MaxOrderSizeRule(userContext_1);
-  private final OrderRateRule orderRateRule_7 = new OrderRateRule(userContext_1);
-  private final CreditFailReporter creditFailReporter_9 =
-      new CreditFailReporter(new Rules[] {locationRule_3, maxOrderSizeRule_5, orderRateRule_7});
-  public final TransactionPublisher txPublisher = new TransactionPublisher(creditFailReporter_9);
-  public final DelegatingAuditor delegatingAuditor = new DelegatingAuditor();
-  public final EventLogManager logger = new EventLogManager();
-  public final HdrProfiler profiler = new HdrProfiler();
-  public final Tracer propertyTracer = new Tracer();
-  //Dirty flags
-  private boolean isDirty_locationRule_3 = false;
-  private boolean isDirty_orderRateRule_7 = false;
-  //Filter constants
+    //Node declarations
+    private final UserContext userContext_2 = new UserContext();
+    private final LocationRule locationRule_5 = new LocationRule(userContext_2);
+    private final MaxOrderSizeRule maxOrderSizeRule_8 = new MaxOrderSizeRule(userContext_2);
+    private final OrderRateRule orderRateRule_11 = new OrderRateRule(userContext_2);
+    private final CreditFailReporter creditFailReporter_14
+            = new CreditFailReporter(new Rules[]{locationRule_5, maxOrderSizeRule_8, orderRateRule_11});
+    public final TransactionPublisher txPublisher = new TransactionPublisher(creditFailReporter_14);
+    public final DelegatingAuditor delegatingAuditor = new DelegatingAuditor();
+    public final EventLogManager logger = new EventLogManager();
+    public final HdrProfiler profiler = new HdrProfiler();
+    public final Tracer propertyTracer = new Tracer();
+    //Dirty flags
+    private boolean isDirty_maxOrderSizeRule_8 = false;
+    private boolean isDirty_locationRule_5 = false;
+    private boolean isDirty_orderRateRule_11 = false;
+    //Filter constants
 
-  public CreditValidator() {
-    //node auditors
-    initialiseAuditor(delegatingAuditor);
-    initialiseAuditor(logger);
-    initialiseAuditor(profiler);
-    initialiseAuditor(propertyTracer);
-  }
+    public CreditValidator() {
+        logger.trace = (boolean) false;
+        //node auditors
+        initialiseAuditor(delegatingAuditor);
+        initialiseAuditor(logger);
+        initialiseAuditor(profiler);
+        initialiseAuditor(propertyTracer);
+    }
 
-  @Override
-  public void onEvent(com.fluxtion.runtime.event.Event event) {
-    switch (event.getClass().getName()) {
-      case ("com.fluxtion.casestudy.creditmonitor.events.PurchaseOrder"):
-        {
-          PurchaseOrder typedEvent = (PurchaseOrder) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.casestudy.creditmonitor.main.RejectAll"):
-        {
-          RejectAll typedEvent = (RejectAll) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.runtime.plugin.auditing.DelegatingAuditor$AuditorRegistration"):
-        {
-          AuditorRegistration typedEvent = (AuditorRegistration) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.runtime.plugin.events.ConfigurationEvent"):
-        {
-          ConfigurationEvent typedEvent = (ConfigurationEvent) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.runtime.plugin.events.ListenerRegistrationEvent"):
-        {
-          ListenerRegistrationEvent typedEvent = (ListenerRegistrationEvent) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.runtime.plugin.events.NumericSignal"):
-        {
-          NumericSignal typedEvent = (NumericSignal) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.runtime.plugin.logging.EventLogConfig"):
-        {
-          EventLogConfig typedEvent = (EventLogConfig) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.runtime.plugin.tracing.TraceEvents$PublishProperties"):
-        {
-          PublishProperties typedEvent = (PublishProperties) event;
-          handleEvent(typedEvent);
-          break;
-        }
-      case ("com.fluxtion.runtime.plugin.tracing.TracerConfigEvent"):
-        {
-          TracerConfigEvent typedEvent = (TracerConfigEvent) event;
-          handleEvent(typedEvent);
-          break;
+    @Override
+    public void onEvent(com.fluxtion.runtime.event.Event event) {
+        switch (event.getClass().getName()) {
+            case ("com.fluxtion.casestudy.creditmonitor.events.PurchaseOrder"): {
+                PurchaseOrder typedEvent = (PurchaseOrder) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.casestudy.creditmonitor.main.RejectAll"): {
+                RejectAll typedEvent = (RejectAll) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.runtime.plugin.auditing.DelegatingAuditor$AuditorRegistration"): {
+                AuditorRegistration typedEvent = (AuditorRegistration) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.runtime.plugin.events.ConfigurationEvent"): {
+                ConfigurationEvent typedEvent = (ConfigurationEvent) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.runtime.plugin.events.ListenerRegistrationEvent"): {
+                ListenerRegistrationEvent typedEvent = (ListenerRegistrationEvent) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.runtime.plugin.events.NumericSignal"): {
+                NumericSignal typedEvent = (NumericSignal) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.runtime.plugin.logging.EventLogConfig"): {
+                EventLogConfig typedEvent = (EventLogConfig) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.runtime.plugin.tracing.TraceEvents$PublishProperties"): {
+                PublishProperties typedEvent = (PublishProperties) event;
+                handleEvent(typedEvent);
+                break;
+            }
+            case ("com.fluxtion.runtime.plugin.tracing.TracerConfigEvent"): {
+                TracerConfigEvent typedEvent = (TracerConfigEvent) event;
+                handleEvent(typedEvent);
+                break;
+            }
         }
     }
-  }
 
-  public void handleEvent(PurchaseOrder typedEvent) {
-    auditEvent(typedEvent);
-    //Default, no filter methods
-    auditInvocation(userContext_1, "userContext_1", "purchseOrder", typedEvent);
-    userContext_1.purchseOrder(typedEvent);
-    auditInvocation(locationRule_3, "locationRule_3", "failedRule", typedEvent);
-    isDirty_locationRule_3 = locationRule_3.failedRule();
-    if (isDirty_locationRule_3) {
-      creditFailReporter_9.onRuleFailure(locationRule_3);
-    }
-    auditInvocation(maxOrderSizeRule_5, "maxOrderSizeRule_5", "failedRule", typedEvent);
-    maxOrderSizeRule_5.failedRule();
-    creditFailReporter_9.onRuleFailure(maxOrderSizeRule_5);
-    auditInvocation(orderRateRule_7, "orderRateRule_7", "failedRule", typedEvent);
-    isDirty_orderRateRule_7 = orderRateRule_7.failedRule();
-    if (isDirty_orderRateRule_7) {
-      creditFailReporter_9.onRuleFailure(orderRateRule_7);
-    }
-    auditInvocation(creditFailReporter_9, "creditFailReporter_9", "processFailedRules", typedEvent);
-    creditFailReporter_9.processFailedRules();
-    txPublisher.failedCheck(creditFailReporter_9);
-    auditInvocation(txPublisher, "txPublisher", "purchaseOrder", typedEvent);
-    txPublisher.purchaseOrder(typedEvent);
-    auditInvocation(txPublisher, "txPublisher", "publishTransaction", typedEvent);
-    txPublisher.publishTransaction();
-    //event stack unwind callbacks
-    userContext_1.afterEvent();
-    afterEvent();
-  }
-
-  public void handleEvent(RejectAll typedEvent) {
-    auditEvent(typedEvent);
-    //Default, no filter methods
-    auditInvocation(txPublisher, "txPublisher", "rejectAll", typedEvent);
-    txPublisher.rejectAll(typedEvent);
-    //event stack unwind callbacks
-    afterEvent();
-  }
-
-  public void handleEvent(AuditorRegistration typedEvent) {
-    auditEvent(typedEvent);
-    //Default, no filter methods
-    auditInvocation(delegatingAuditor, "delegatingAuditor", "auditorRegistration", typedEvent);
-    delegatingAuditor.auditorRegistration(typedEvent);
-    //event stack unwind callbacks
-    afterEvent();
-  }
-
-  public void handleEvent(ConfigurationEvent typedEvent) {
-    auditEvent(typedEvent);
-    switch (typedEvent.filterString()) {
-      case ("com.fluxtion.casestudy.creditmonitor.events.LocationRuleConfig"):
-        auditInvocation(locationRule_3, "locationRule_3", "configUpdate", typedEvent);
-        locationRule_3.configUpdate(typedEvent);
-        afterEvent();
-        return;
-      case ("com.fluxtion.casestudy.creditmonitor.events.UserConfig"):
-        auditInvocation(userContext_1, "userContext_1", "configUpdate", typedEvent);
-        userContext_1.configUpdate(typedEvent);
+    public void handleEvent(PurchaseOrder typedEvent) {
+        auditEvent(typedEvent);
+        //Default, no filter methods
+        auditInvocation(userContext_2, "userContext_2", "purchseOrder", typedEvent);
+        userContext_2.purchseOrder(typedEvent);
+        auditInvocation(locationRule_5, "locationRule_5", "failedRule", typedEvent);
+        isDirty_locationRule_5 = locationRule_5.failedRule();
+        if (isDirty_locationRule_5) {
+            creditFailReporter_14.onRuleFailure(locationRule_5);
+        }
+        auditInvocation(maxOrderSizeRule_8, "maxOrderSizeRule_8", "failedRule", typedEvent);
+        isDirty_maxOrderSizeRule_8 = maxOrderSizeRule_8.failedRule();
+        if (isDirty_maxOrderSizeRule_8) {
+            creditFailReporter_14.onRuleFailure(maxOrderSizeRule_8);
+        }
+        auditInvocation(orderRateRule_11, "orderRateRule_11", "failedRule", typedEvent);
+        isDirty_orderRateRule_11 = orderRateRule_11.failedRule();
+        if (isDirty_orderRateRule_11) {
+            creditFailReporter_14.onRuleFailure(orderRateRule_11);
+        }
+        if (isDirty_maxOrderSizeRule_8 | isDirty_orderRateRule_11 | isDirty_locationRule_5) {
+            auditInvocation(
+                    creditFailReporter_14, "creditFailReporter_14", "processFailedRules", typedEvent);
+            creditFailReporter_14.processFailedRules();
+            txPublisher.failedCheck(creditFailReporter_14);
+        }
+        auditInvocation(txPublisher, "txPublisher", "purchaseOrder", typedEvent);
+        txPublisher.purchaseOrder(typedEvent);
+        if (isDirty_maxOrderSizeRule_8 | isDirty_orderRateRule_11 | isDirty_locationRule_5) {
+            auditInvocation(txPublisher, "txPublisher", "publishTransaction", typedEvent);
+            txPublisher.publishTransaction();
+        }
         //event stack unwind callbacks
-        userContext_1.afterEvent();
+        userContext_2.afterEvent();
         afterEvent();
-        return;
     }
-    afterEvent();
-  }
 
-  public void handleEvent(ListenerRegistrationEvent typedEvent) {
-    auditEvent(typedEvent);
-    switch (typedEvent.filterString()) {
-      case ("com.fluxtion.runtime.plugin.tracing.TraceRecordListener"):
-        auditInvocation(propertyTracer, "propertyTracer", "listenerUpdate", typedEvent);
-        propertyTracer.listenerUpdate(typedEvent);
+    public void handleEvent(RejectAll typedEvent) {
+        auditEvent(typedEvent);
+        //Default, no filter methods
+        auditInvocation(txPublisher, "txPublisher", "rejectAll", typedEvent);
+        txPublisher.rejectAll(typedEvent);
+        //event stack unwind callbacks
         afterEvent();
-        return;
     }
-    afterEvent();
-  }
 
-  public void handleEvent(NumericSignal typedEvent) {
-    auditEvent(typedEvent);
-    switch (typedEvent.filterString()) {
-      case ("maxOrderSize"):
-        auditInvocation(maxOrderSizeRule_5, "maxOrderSizeRule_5", "numericUpdate", typedEvent);
-        maxOrderSizeRule_5.numericUpdate(typedEvent);
+    public void handleEvent(AuditorRegistration typedEvent) {
+        auditEvent(typedEvent);
+        //Default, no filter methods
+        auditInvocation(delegatingAuditor, "delegatingAuditor", "auditorRegistration", typedEvent);
+        delegatingAuditor.auditorRegistration(typedEvent);
+        //event stack unwind callbacks
         afterEvent();
-        return;
     }
-    afterEvent();
-  }
 
-  public void handleEvent(EventLogConfig typedEvent) {
-    auditEvent(typedEvent);
-    //Default, no filter methods
-    auditInvocation(logger, "logger", "calculationLogConfig", typedEvent);
-    logger.calculationLogConfig(typedEvent);
-    //event stack unwind callbacks
-    afterEvent();
-  }
+    public void handleEvent(ConfigurationEvent typedEvent) {
+        auditEvent(typedEvent);
+        switch (typedEvent.filterString()) {
+            case ("com.fluxtion.casestudy.creditmonitor.events.LocationRuleConfig"):
+                auditInvocation(locationRule_5, "locationRule_5", "configUpdate", typedEvent);
+                isDirty_locationRule_5 = locationRule_5.configUpdate(typedEvent);
+                afterEvent();
+                return;
+            case ("com.fluxtion.casestudy.creditmonitor.events.UserConfig"):
+                auditInvocation(userContext_2, "userContext_2", "configUpdate", typedEvent);
+                userContext_2.configUpdate(typedEvent);
+                //event stack unwind callbacks
+                userContext_2.afterEvent();
+                afterEvent();
+                return;
+        }
+        afterEvent();
+    }
 
-  public void handleEvent(PublishProperties typedEvent) {
-    auditEvent(typedEvent);
-    //Default, no filter methods
-    auditInvocation(propertyTracer, "propertyTracer", "publishProperties", typedEvent);
-    propertyTracer.publishProperties(typedEvent);
-    //event stack unwind callbacks
-    afterEvent();
-  }
+    public void handleEvent(ListenerRegistrationEvent typedEvent) {
+        auditEvent(typedEvent);
+        switch (typedEvent.filterString()) {
+            case ("com.fluxtion.runtime.plugin.tracing.TraceRecordListener"):
+                auditInvocation(propertyTracer, "propertyTracer", "listenerUpdate", typedEvent);
+                propertyTracer.listenerUpdate(typedEvent);
+                afterEvent();
+                return;
+        }
+        afterEvent();
+    }
 
-  public void handleEvent(TracerConfigEvent typedEvent) {
-    auditEvent(typedEvent);
-    //Default, no filter methods
-    auditInvocation(propertyTracer, "propertyTracer", "recorderControl", typedEvent);
-    propertyTracer.recorderControl(typedEvent);
-    //event stack unwind callbacks
-    afterEvent();
-  }
+    public void handleEvent(NumericSignal typedEvent) {
+        auditEvent(typedEvent);
+        switch (typedEvent.filterString()) {
+            case ("maxOrderSize"):
+                auditInvocation(maxOrderSizeRule_8, "maxOrderSizeRule_8", "numericUpdate", typedEvent);
+                maxOrderSizeRule_8.numericUpdate(typedEvent);
+                afterEvent();
+                return;
+        }
+        afterEvent();
+    }
 
-  private void auditEvent(Object typedEvent) {
-    delegatingAuditor.eventReceived(typedEvent);
-    logger.eventReceived(typedEvent);
-    profiler.eventReceived(typedEvent);
-    propertyTracer.eventReceived(typedEvent);
-  }
+    public void handleEvent(EventLogConfig typedEvent) {
+        auditEvent(typedEvent);
+        //Default, no filter methods
+        auditInvocation(logger, "logger", "calculationLogConfig", typedEvent);
+        logger.calculationLogConfig(typedEvent);
+        //event stack unwind callbacks
+        afterEvent();
+    }
 
-  private void auditInvocation(Object node, String nodeName, String methodName, Object typedEvent) {
-    delegatingAuditor.nodeInvoked(node, nodeName, methodName, typedEvent);
-    profiler.nodeInvoked(node, nodeName, methodName, typedEvent);
-  }
+    public void handleEvent(PublishProperties typedEvent) {
+        auditEvent(typedEvent);
+        //Default, no filter methods
+        auditInvocation(propertyTracer, "propertyTracer", "publishProperties", typedEvent);
+        propertyTracer.publishProperties(typedEvent);
+        //event stack unwind callbacks
+        afterEvent();
+    }
 
-  private void initialiseAuditor(Auditor auditor) {
-    auditor.init();
-    auditor.nodeRegistered(userContext_1, "userContext_1");
-    auditor.nodeRegistered(locationRule_3, "locationRule_3");
-    auditor.nodeRegistered(maxOrderSizeRule_5, "maxOrderSizeRule_5");
-    auditor.nodeRegistered(orderRateRule_7, "orderRateRule_7");
-    auditor.nodeRegistered(creditFailReporter_9, "creditFailReporter_9");
-    auditor.nodeRegistered(txPublisher, "txPublisher");
-  }
+    public void handleEvent(TracerConfigEvent typedEvent) {
+        auditEvent(typedEvent);
+        //Default, no filter methods
+        auditInvocation(propertyTracer, "propertyTracer", "recorderControl", typedEvent);
+        propertyTracer.recorderControl(typedEvent);
+        //event stack unwind callbacks
+        afterEvent();
+    }
 
-  @Override
-  public void afterEvent() {
-    delegatingAuditor.processingComplete();
-    logger.processingComplete();
-    profiler.processingComplete();
-    propertyTracer.processingComplete();
-    isDirty_locationRule_3 = false;
-    isDirty_orderRateRule_7 = false;
-  }
+    private void auditEvent(Object typedEvent) {
+        delegatingAuditor.eventReceived(typedEvent);
+        logger.eventReceived(typedEvent);
+        profiler.eventReceived(typedEvent);
+        propertyTracer.eventReceived(typedEvent);
+    }
 
-  @Override
-  public void init() {
-    creditFailReporter_9.init();
-  }
+    private void auditInvocation(Object node, String nodeName, String methodName, Object typedEvent) {
+        delegatingAuditor.nodeInvoked(node, nodeName, methodName, typedEvent);
+        profiler.nodeInvoked(node, nodeName, methodName, typedEvent);
+    }
 
-  @Override
-  public void tearDown() {
-    propertyTracer.tearDown();
-    profiler.tearDown();
-    logger.tearDown();
-    delegatingAuditor.tearDown();
-  }
+    private void initialiseAuditor(Auditor auditor) {
+        auditor.init();
+        auditor.nodeRegistered(userContext_2, "userContext_2");
+        auditor.nodeRegistered(locationRule_5, "locationRule_5");
+        auditor.nodeRegistered(maxOrderSizeRule_8, "maxOrderSizeRule_8");
+        auditor.nodeRegistered(orderRateRule_11, "orderRateRule_11");
+        auditor.nodeRegistered(creditFailReporter_14, "creditFailReporter_14");
+        auditor.nodeRegistered(txPublisher, "txPublisher");
+    }
 
-  @Override
-  public void batchPause() {}
+    @Override
+    public void afterEvent() {
+        delegatingAuditor.processingComplete();
+        logger.processingComplete();
+        profiler.processingComplete();
+        propertyTracer.processingComplete();
+        isDirty_maxOrderSizeRule_8 = false;
+        isDirty_locationRule_5 = false;
+        isDirty_orderRateRule_11 = false;
+    }
 
-  @Override
-  public void batchEnd() {}
+    @Override
+    public void init() {
+        creditFailReporter_14.init();
+    }
+
+    @Override
+    public void tearDown() {
+        propertyTracer.tearDown();
+        profiler.tearDown();
+        logger.tearDown();
+        delegatingAuditor.tearDown();
+    }
+
+    @Override
+    public void batchPause() {
+    }
+
+    @Override
+    public void batchEnd() {
+    }
 }

@@ -28,6 +28,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.maven-plugin.ver>1.0.8</fluxtion.maven-plugin.ver>
+        <fluxtion.maven-plugin-inprocess.ver>0.1.17-SNAPSHOT</fluxtion.maven-plugin-inprocess.ver>
         <fluxtion.runtime-plugin.ver>1.0.3-SNAPSHOT</fluxtion.runtime-plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
@@ -96,7 +97,40 @@
                                     <className>CreditValidator</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>src/main/java</outputDirectory>
-                                    <!--<logDebug>true</logDebug>-->
+                                    <logDebug>true</logDebug>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>build-inprocess</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.fluxtion.internal</groupId>
+                        <artifactId>fluxtion-maven-plugin-inprocess</artifactId>
+                        <version>${fluxtion.maven-plugin-inprocess.ver}</version>
+                        <executions>
+                            <execution>
+                                <id>example-Event</id>
+                                <goals>
+                                    <goal>generate</goal>
+                                </goals>
+                                <configuration>
+                                    <fluxtionExePath>${fluxtion.exe.path}</fluxtionExePath>
+                                    <configClass>com.fluxtion.casestudy.creditmonitor.fluxtioncfg.CreditMonitorSepCfg</configClass>
+                                    <!--<configClass>com.fluxtion.learning.utils.logging.HeatingSystemConfig</configClass>-->
+                                    <packageName>com.fluxtion.casestudy.creditmonitor.generated</packageName>
+                                    <className>CreditValidator</className>
+                                    <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <outputDirectory>src/main/java</outputDirectory>
+                                    <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
                         </executions>
