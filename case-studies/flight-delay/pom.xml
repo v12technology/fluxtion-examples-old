@@ -205,9 +205,12 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.fluxtion</groupId>
+                        <groupId>com.fluxtion.internal</groupId>
+                        <artifactId>fluxtion-maven-plugin-inprocess</artifactId>
+                        <version>0.1.17-SNAPSHOT</version>
+<!--                        <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>${fluxtion.plugin.ver}</version>
+                        <version>${fluxtion.plugin.ver}</version>-->
                         <executions>
                             <execution>
                                 <id>world city csv processor</id>
