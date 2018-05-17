@@ -45,8 +45,9 @@ public class PercentBollinger implements NumericFunctionStateful {
     }
 
     @Override
-    public void reset() {
+    public double reset() {
         stats.clear();
+        return 0;
     }
 
     public double getLower() {
@@ -64,7 +65,5 @@ public class PercentBollinger implements NumericFunctionStateful {
     public double getPercentB() {
         return percentB;
     }
-    
-    
 
 }
