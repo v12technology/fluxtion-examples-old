@@ -1,12 +1,12 @@
 package com.fluxtion.casestudy.worldcity.generated.csv;
 
-import java.util.HashMap;
 import com.fluxtion.api.annotations.EventHandler;
-import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.casestudy.worldcity.WorldCity;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
+import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.funclib.api.csv.RowProcessor;
-import com.fluxtion.casestudy.worldcity.WorldCity;
+import java.util.HashMap;
 
 /**
  * generated CSV marshaller wrapper.
@@ -21,8 +21,8 @@ public class WorldCityCsvMarshaller0 implements RowProcessor<WorldCity> {
     //buffer management
     private final char[] chars = new char[4096];
     private final int[] delimIndex = new int[1024];
-    private int writeIndex = 0;
     private int fieldIndex = 0;
+    private int writeIndex = 0;
     //target
     private WorldCity target;
     //source field index: 0
