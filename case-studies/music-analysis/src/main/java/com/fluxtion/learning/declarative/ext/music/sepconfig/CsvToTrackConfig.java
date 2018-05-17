@@ -17,7 +17,7 @@
 package com.fluxtion.learning.declarative.ext.music.sepconfig;
 
 import com.fluxtion.api.node.SEPConfig;
-import com.fluxtion.extension.declarative.api.Wrapper;
+import com.fluxtion.extension.declarative.funclib.api.csv.RowProcessor;
 import com.fluxtion.learning.declarative.ext.music.util.TrackPublisher;
 import com.fluxtion.learning.declarative.ext.music.TrackStream;
 import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
@@ -37,16 +37,15 @@ public class CsvToTrackConfig extends SEPConfig {
 //    5:vendor_identifier
 //    6:streams
     @Override
-
     public void buildConfig() {
         //map csv
-        Wrapper<TrackStream> track = csvMarshaller(TrackStream.class, 1)
-                .mapString(0, TrackStream::setDateString)
-                .mapString(1, TrackStream::setIsrc)
-                .mapString(2, TrackStream::setTrack_artists)
-                .mapString(3, TrackStream::setTrack_title)
-                .mapString(4, TrackStream::setTerritory)
-                .mapString(5, TrackStream::setVendor_identifier)
+        RowProcessor<TrackStream> track = csvMarshaller(TrackStream.class, 1)
+                .map(0, TrackStream::setDateString)
+                .map(1, TrackStream::setIsrc)
+                .map(2, TrackStream::setTrack_artists)
+                .map(3, TrackStream::setTrack_title)
+                .map(4, TrackStream::setTerritory)
+                .map(5, TrackStream::setVendor_identifier)
                 .map(6, TrackStream::setStreams)
                 .build();
         addPublicNode(new TrackPublisher(track), "tracks");
