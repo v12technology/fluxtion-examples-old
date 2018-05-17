@@ -23,6 +23,7 @@ obtained from V12 Technology Limited.
         <module>music-analysis</module>
         <module>flight-delay</module>
         <module>credit-monitor</module>
+        <module>sensor-monitoring</module>
     </modules>
     
     <properties>
