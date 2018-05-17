@@ -19,7 +19,6 @@ package com.fluxtion.casestudy.worldcity;
 import com.fluxtion.api.node.SEPConfig;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
-import static com.fluxtion.extension.declarative.funclib.builder.math.CountFunction.count;
 
 /**
  *
