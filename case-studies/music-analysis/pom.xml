@@ -28,7 +28,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.plugin.ver>1.0.8</fluxtion.plugin.ver>
-        <fluxtion.ver>0.1.35-SNAPSHOT</fluxtion.ver>
+        <fluxtion.ver>0.1.37-SNAPSHOT</fluxtion.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
         hardcode a path for fluxtion.exe here
@@ -66,9 +66,12 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.fluxtion</groupId>
+                        <groupId>com.fluxtion.internal</groupId>
+                        <artifactId>fluxtion-maven-plugin-inprocess</artifactId>
+                        <version>0.1.17-SNAPSHOT</version>
+<!--                        <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>${fluxtion.plugin.ver}</version>
+                        <version>${fluxtion.plugin.ver}</version>-->
                         <executions>
                             <execution>
                                 <id>grpByTrack</id>
@@ -96,9 +99,12 @@
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>com.fluxtion</groupId>
+                        <groupId>com.fluxtion.internal</groupId>
+                        <artifactId>fluxtion-maven-plugin-inprocess</artifactId>
+                        <version>0.1.17-SNAPSHOT</version>
+<!--                        <groupId>com.fluxtion</groupId>
                         <artifactId>fluxtion-maven-plugin</artifactId>
-                        <version>${fluxtion.plugin.ver}</version>
+                        <version>${fluxtion.plugin.ver}</version>-->
                         <executions>
                             <execution>
                                 <id>csv-parser</id>
@@ -110,7 +116,7 @@
                                     <configClass>com.fluxtion.learning.declarative.ext.music.sepconfig.CsvToTrackConfig</configClass>
                                     <packageName>com.fluxtion.learning.declarative.ext.music.csv</packageName>
                                     <className>CsvTrackMarshaller</className>
-                                    <formatSource>false</formatSource>
+                                    <formatSource>true</formatSource>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <!--<outputDirectory>src/main/java</outputDirectory>-->
 <!--                                    <logDebug>true</logDebug>-->
@@ -152,6 +158,21 @@
     </profiles>
     
     <dependencies>
+        <dependency>
+            <groupId>com.fluxtion</groupId>
+            <artifactId>fluxtion-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion</groupId>
+            <artifactId>fluxtion-builder</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fluxtion.extension</groupId>
+            <artifactId>fluxtion-declarative-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>com.fluxtion.extension</groupId>
             <artifactId>fluxtion-declarative-ext-api</artifactId>
