@@ -1,39 +1,39 @@
 package com.fluxtion.learning.declarative.ext.music.indicators;
 
+import com.fluxtion.learning.declarative.ext.music.indicators.*;
 import com.fluxtion.extension.declarative.api.numeric.MutableNumericValue;
-import com.fluxtion.extension.declarative.api.group.MultiKey;
 import com.fluxtion.learning.declarative.ext.music.TrackStream;
+import com.fluxtion.extension.declarative.api.group.MultiKey;
 
 /**
  * generated multi key class for use with GroupBy functionality
  *
- * source class : TrackStream
- *
+ * source class  : TrackStream
+ * 
  * @author Greg Higgins
  */
-public final class MultiKeyFromTrackStream_1 implements MultiKey<MultiKeyFromTrackStream_1, TrackStream> {
+public final class MultiKeyFor_TrackPlaySummary_1 implements MultiKey<MultiKeyFor_TrackPlaySummary_1> {
 
     private String getIsrc0;
 
-    @Override
-    public void setKey(TrackStream source) {
+    public void setKey(TrackStream source){
         getIsrc0 = source.getIsrc();
     }
 
     @Override
-    public void reset() {
+    public void reset(){
         getIsrc0 = null;
     }
 
     @Override
-    public MultiKeyFromTrackStream_1 copyInto(MultiKeyFromTrackStream_1 copy) {
+    public MultiKeyFor_TrackPlaySummary_1 copyInto(MultiKeyFor_TrackPlaySummary_1 copy){
         copy.getIsrc0 = getIsrc0;
         return copy;
     }
 
     @Override
-    public MultiKeyFromTrackStream_1 copyKey() {
-        return copyInto(new MultiKeyFromTrackStream_1());
+    public MultiKeyFor_TrackPlaySummary_1 copyKey(){
+        return copyInto(new MultiKeyFor_TrackPlaySummary_1());
     }
 
     @Override
@@ -54,9 +54,9 @@ public final class MultiKeyFromTrackStream_1 implements MultiKey<MultiKeyFromTra
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MultiKeyFromTrackStream_1 other = (MultiKeyFromTrackStream_1) obj;
-        if (!((this.getIsrc0 == other.getIsrc0)
-                || (this.getIsrc0 != null && this.getIsrc0.equals(other.getIsrc0)))) {
+        final MultiKeyFor_TrackPlaySummary_1 other = (MultiKeyFor_TrackPlaySummary_1) obj;
+        if(!((this.getIsrc0 == other.getIsrc0) 
+            || (this.getIsrc0 != null && this.getIsrc0.equals(other.getIsrc0)))){
             return false;
         }
         return true;

@@ -1,14 +1,14 @@
 package com.fluxtion.learning.declarative.ext.music.indicators;
 
+import com.fluxtion.learning.declarative.ext.music.indicators.*;
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.learning.declarative.ext.music.indicators.GroupBy_14;
-import com.fluxtion.learning.declarative.ext.music.indicators.GroupBy_31;
-import com.fluxtion.learning.declarative.ext.music.indicators.GroupBy_22;
-import com.fluxtion.learning.declarative.ext.music.indicators.GroupBy_6;
 import com.fluxtion.learning.declarative.ext.music.util.BollingerPublisher;
+import com.fluxtion.learning.declarative.ext.music.TwitterFeed;
+import com.fluxtion.learning.declarative.ext.music.SentimentAnalyser;
 import com.fluxtion.learning.declarative.ext.music.TrackStream;
+import com.fluxtion.learning.declarative.ext.music.Tweet;
 import com.fluxtion.learning.declarative.ext.music.util.EodEvent;
 
 public class TrackProcessor implements EventHandler, BatchHandler, Lifecycle {
@@ -22,11 +22,13 @@ public class TrackProcessor implements EventHandler, BatchHandler, Lifecycle {
     public final BollingerPublisher trackTerritoryAnalyser = new BollingerPublisher(trackAndTerritoryByDate, "track_territory");
     public final BollingerPublisher trackVendorAnalyser = new BollingerPublisher(trackAndVendorByDate, "track_vendor");
     public final BollingerPublisher trackVendorTerritoryAnalyser = new BollingerPublisher(trackAndVendorAndTerritoryByDate, "track_vendor_territory");
+    private final TwitterFeed twitterFeed_1 = new TwitterFeed();
+    public final SentimentAnalyser sentimentAnalyser = new SentimentAnalyser(twitterFeed_1, trackAnalyser);
 //Dirty flags
     private boolean isDirty_trackAndTerritoryByDate = false;
     private boolean isDirty_trackAndVendorAndTerritoryByDate = false;
-    private boolean isDirty_trackAndVendorByDate = false;
     private boolean isDirty_trackByDate = false;
+    private boolean isDirty_trackAndVendorByDate = false;
 //Filter constants
 
     public TrackProcessor() {
@@ -48,6 +50,11 @@ public class TrackProcessor implements EventHandler, BatchHandler, Lifecycle {
                 handleEvent(typedEvent);
                 break;
             }
+            case ("com.fluxtion.learning.declarative.ext.music.Tweet"): {
+                Tweet typedEvent = (Tweet) event;
+                handleEvent(typedEvent);
+                break;
+            }
             case ("com.fluxtion.learning.declarative.ext.music.util.EodEvent"): {
                 EodEvent typedEvent = (EodEvent) event;
                 handleEvent(typedEvent);
@@ -60,13 +67,18 @@ public class TrackProcessor implements EventHandler, BatchHandler, Lifecycle {
     public void handleEvent(TrackStream typedEvent) {
         //Default, no filter methods
         isDirty_trackAndTerritoryByDate = trackAndTerritoryByDate.updatetrackStream0(typedEvent);
-        isDirty_trackAndTerritoryByDate = trackAndTerritoryByDate.updated();
         isDirty_trackAndVendorAndTerritoryByDate = trackAndVendorAndTerritoryByDate.updatetrackStream0(typedEvent);
-        isDirty_trackAndVendorAndTerritoryByDate = trackAndVendorAndTerritoryByDate.updated();
         isDirty_trackAndVendorByDate = trackAndVendorByDate.updatetrackStream0(typedEvent);
-        isDirty_trackAndVendorByDate = trackAndVendorByDate.updated();
         isDirty_trackByDate = trackByDate.updatetrackStream0(typedEvent);
-        isDirty_trackByDate = trackByDate.updated();
+        sentimentAnalyser.calculateSentiment();
+        //event stack unwind callbacks
+        afterEvent();
+    }
+
+    public void handleEvent(Tweet typedEvent) {
+        //Default, no filter methods
+        twitterFeed_1.tweet(typedEvent);
+        sentimentAnalyser.calculateSentiment();
         //event stack unwind callbacks
         afterEvent();
     }
@@ -77,6 +89,7 @@ public class TrackProcessor implements EventHandler, BatchHandler, Lifecycle {
         trackTerritoryAnalyser.eod(typedEvent);
         trackVendorAnalyser.eod(typedEvent);
         trackVendorTerritoryAnalyser.eod(typedEvent);
+        sentimentAnalyser.calculateSentiment();
         //event stack unwind callbacks
         afterEvent();
     }
@@ -86,8 +99,8 @@ public class TrackProcessor implements EventHandler, BatchHandler, Lifecycle {
 
         isDirty_trackAndTerritoryByDate = false;
         isDirty_trackAndVendorAndTerritoryByDate = false;
-        isDirty_trackAndVendorByDate = false;
         isDirty_trackByDate = false;
+        isDirty_trackAndVendorByDate = false;
     }
 
     @Override

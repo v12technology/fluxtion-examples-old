@@ -1,38 +1,38 @@
 package com.fluxtion.learning.declarative.ext.music.indicators;
 
+import com.fluxtion.learning.declarative.ext.music.indicators.*;
 import com.fluxtion.extension.declarative.api.numeric.MutableNumericValue;
-import com.fluxtion.extension.declarative.api.group.MultiKey;
 import com.fluxtion.learning.declarative.ext.music.TrackStream;
+import com.fluxtion.extension.declarative.api.group.MultiKey;
 
 /**
  * generated multi key class for use with GroupBy functionality
  *
- * source class : TrackStream
- *
+ * source class  : TrackStream
+ * 
  * @author Greg Higgins
  */
-public final class MultiKeyFromTrackStream_26 implements MultiKey<MultiKeyFromTrackStream_26, TrackStream> {
+public final class MultiKeyFor_TrackPlaySummary_26 implements MultiKey<MultiKeyFor_TrackPlaySummary_26> {
 
     private String getIsrc23;
     private String getVendor_identifier24;
     private String getTerritory25;
 
-    @Override
-    public void setKey(TrackStream source) {
+    public void setKey(TrackStream source){
         getIsrc23 = source.getIsrc();
         getVendor_identifier24 = source.getVendor_identifier();
         getTerritory25 = source.getTerritory();
     }
 
     @Override
-    public void reset() {
+    public void reset(){
         getIsrc23 = null;
         getVendor_identifier24 = null;
         getTerritory25 = null;
     }
 
     @Override
-    public MultiKeyFromTrackStream_26 copyInto(MultiKeyFromTrackStream_26 copy) {
+    public MultiKeyFor_TrackPlaySummary_26 copyInto(MultiKeyFor_TrackPlaySummary_26 copy){
         copy.getIsrc23 = getIsrc23;
         copy.getVendor_identifier24 = getVendor_identifier24;
         copy.getTerritory25 = getTerritory25;
@@ -40,8 +40,8 @@ public final class MultiKeyFromTrackStream_26 implements MultiKey<MultiKeyFromTr
     }
 
     @Override
-    public MultiKeyFromTrackStream_26 copyKey() {
-        return copyInto(new MultiKeyFromTrackStream_26());
+    public MultiKeyFor_TrackPlaySummary_26 copyKey(){
+        return copyInto(new MultiKeyFor_TrackPlaySummary_26());
     }
 
     @Override
@@ -64,17 +64,17 @@ public final class MultiKeyFromTrackStream_26 implements MultiKey<MultiKeyFromTr
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MultiKeyFromTrackStream_26 other = (MultiKeyFromTrackStream_26) obj;
-        if (!((this.getIsrc23 == other.getIsrc23)
-                || (this.getIsrc23 != null && this.getIsrc23.equals(other.getIsrc23)))) {
+        final MultiKeyFor_TrackPlaySummary_26 other = (MultiKeyFor_TrackPlaySummary_26) obj;
+        if(!((this.getIsrc23 == other.getIsrc23) 
+            || (this.getIsrc23 != null && this.getIsrc23.equals(other.getIsrc23)))){
             return false;
         }
-        if (!((this.getVendor_identifier24 == other.getVendor_identifier24)
-                || (this.getVendor_identifier24 != null && this.getVendor_identifier24.equals(other.getVendor_identifier24)))) {
+        if(!((this.getVendor_identifier24 == other.getVendor_identifier24) 
+            || (this.getVendor_identifier24 != null && this.getVendor_identifier24.equals(other.getVendor_identifier24)))){
             return false;
         }
-        if (!((this.getTerritory25 == other.getTerritory25)
-                || (this.getTerritory25 != null && this.getTerritory25.equals(other.getTerritory25)))) {
+        if(!((this.getTerritory25 == other.getTerritory25) 
+            || (this.getTerritory25 != null && this.getTerritory25.equals(other.getTerritory25)))){
             return false;
         }
         return true;
