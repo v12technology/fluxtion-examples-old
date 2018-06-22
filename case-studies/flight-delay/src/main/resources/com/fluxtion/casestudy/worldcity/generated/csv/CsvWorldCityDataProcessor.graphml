@@ -11,11 +11,11 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="worldCityCsvMarshaller0_2">
+<node id="worldCityCsvMarshaller0_0">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;worldCityCsvMarshaller0_2:&#10;WorldCityCsvMarshaller0"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;worldCityCsvMarshaller0_0:&#10;WorldCityCsvMarshaller0"/>
 <jGraph:Style properties="EVENTHANDLER"/>
 </jGraph:ShapeNode>
 </data>
@@ -29,12 +29,12 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<edge id="1" source="worldCityCsvMarshaller0_2" target="dispatcher">
+<edge id="1" source="worldCityCsvMarshaller0_0" target="dispatcher">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="2" source="CharEvent" target="worldCityCsvMarshaller0_2">
+<edge id="2" source="CharEvent" target="worldCityCsvMarshaller0_0">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>

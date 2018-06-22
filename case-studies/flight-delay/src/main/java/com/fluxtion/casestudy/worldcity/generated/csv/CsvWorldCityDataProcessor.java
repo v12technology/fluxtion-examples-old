@@ -9,10 +9,10 @@ import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
 public class CsvWorldCityDataProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final WorldCityCsvMarshaller0 worldCityCsvMarshaller0_2 = new WorldCityCsvMarshaller0();
-  public final RowDispatcher dispatcher = new RowDispatcher(worldCityCsvMarshaller0_2);
+  private final WorldCityCsvMarshaller0 worldCityCsvMarshaller0_0 = new WorldCityCsvMarshaller0();
+  public final RowDispatcher dispatcher = new RowDispatcher(worldCityCsvMarshaller0_0);
   //Dirty flags
-  private boolean isDirty_worldCityCsvMarshaller0_2 = false;
+  private boolean isDirty_worldCityCsvMarshaller0_0 = false;
   //Filter constants
 
   public CsvWorldCityDataProcessor() {}
@@ -31,8 +31,8 @@ public class CsvWorldCityDataProcessor implements EventHandler, BatchHandler, Li
 
   public void handleEvent(CharEvent typedEvent) {
     //Default, no filter methods
-    isDirty_worldCityCsvMarshaller0_2 = worldCityCsvMarshaller0_2.charEvent(typedEvent);
-    if (isDirty_worldCityCsvMarshaller0_2) {
+    isDirty_worldCityCsvMarshaller0_0 = worldCityCsvMarshaller0_0.charEvent(typedEvent);
+    if (isDirty_worldCityCsvMarshaller0_0) {
       dispatcher.publishRow();
     }
     //event stack unwind callbacks
@@ -42,12 +42,12 @@ public class CsvWorldCityDataProcessor implements EventHandler, BatchHandler, Li
   @Override
   public void afterEvent() {
 
-    isDirty_worldCityCsvMarshaller0_2 = false;
+    isDirty_worldCityCsvMarshaller0_0 = false;
   }
 
   @Override
   public void init() {
-    worldCityCsvMarshaller0_2.init();
+    worldCityCsvMarshaller0_0.init();
   }
 
   @Override

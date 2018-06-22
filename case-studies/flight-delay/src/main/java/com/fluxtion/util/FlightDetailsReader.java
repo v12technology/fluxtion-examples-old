@@ -64,6 +64,35 @@ public class FlightDetailsReader {
             MappedByteBuffer buffer = fileChannel.map(
                     FileChannel.MapMode.READ_ONLY, 0, size);
             while (buffer.hasRemaining()) {
+                long data = buffer.getLong();
+                int delay = (int)data;
+                mutInt.setLong(data);
+                if (cache.containsKey(mutInt)) {
+                    flightDetails.setCarrier(cache.get(mutInt));
+                } else {
+                    String str = mutInt.asString();
+                    flightDetails.setCarrier(str);
+                    cache.put(mutInt, str);
+                    mutInt = new MutableInt();
+                }
+                flightDetails.setDelay(delay);
+                eventHandler.onEvent(flightDetails);
+            }
+        } catch (IOException ex) {
+        }
+    }
+    public void readAllOld(EventHandler eventHandler) {
+        MutableInt mutInt = new MutableInt();
+        FlightDetails flightDetails = new FlightDetails();
+        HashMap<MutableInt, String> cache = new HashMap<>();
+
+        try {
+
+            FileChannel fileChannel = new FileInputStream(dataFile).getChannel();
+            long size = dataFile.length();
+            MappedByteBuffer buffer = fileChannel.map(
+                    FileChannel.MapMode.READ_ONLY, 0, size);
+            while (buffer.hasRemaining()) {
                 mutInt.setChar(buffer);
                 if (cache.containsKey(mutInt)) {
                     flightDetails.setCarrier(cache.get(mutInt));
@@ -100,6 +129,16 @@ public class FlightDetailsReader {
 //            hash = din.readInt();
         }
 
+        void setLong(long l1){
+//            System.out.println("" + Long.toBinaryString(l1));
+//            System.out.println("" + Long.toBinaryString(l1 >>> 6*8));
+//            System.out.println("" + Long.toBinaryString(l1 >>> 4*8));
+            c1 = (char) (l1 >> 6*8) ;
+            c2 = (char)  (l1 >> 4*8);
+            hash = (int)l1>>4*8;
+            
+        }
+        
         String asString() {
             return new String(new char[]{c1, c2});
         }

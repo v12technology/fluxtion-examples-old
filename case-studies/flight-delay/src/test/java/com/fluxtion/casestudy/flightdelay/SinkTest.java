@@ -22,11 +22,14 @@ import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharE
 import com.fluxtion.util.FlightDetailsReader;
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import net.openhft.chronicle.bytes.MethodReader;
 import net.openhft.chronicle.queue.ExcerptTailer;
 import net.openhft.chronicle.queue.impl.single.SingleChronicleQueue;
 import net.openhft.chronicle.queue.impl.single.SingleChronicleQueueBuilder;
 import org.apache.commons.io.FileUtils;
+import static org.hamcrest.CoreMatchers.is;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -35,6 +38,27 @@ import org.junit.Test;
  */
 public class SinkTest {
 
+    @Test
+    public void testChar(){
+        ByteBuffer buf = ByteBuffer.allocate(8);
+        buf.putChar('a');
+        buf.putChar('b');
+        buf.putChar('c');
+        buf.putChar('d');
+        
+        buf.flip();
+        
+        long l = buf.getLong();
+        char c = (char) (l >>> 48);
+        Assert.assertThat(c, is('a'));
+        c = (char) (l >>> 32);
+        Assert.assertThat(c, is('b'));
+        c = (char) (l >>> 16);
+        Assert.assertThat(c, is('c'));
+        c = (char) (l );
+        Assert.assertThat(c, is('d'));
+    }
+    
     @Test
     public void testCarrierDelayFromCsvFile() throws IOException {
         final String outDir = "target/chronicle";

@@ -17,10 +17,18 @@
 package com.fluxtion.casestudy.worldcity;
 
 import com.fluxtion.casestudy.worldcity.generated.csv.CsvWorldCityDataProcessor;
+import com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import com.fluxtion.extension.declarative.funclib.builder.util.CharEventStreamer;
+import com.fluxtion.runtime.lifecycle.EventHandler;
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.nio.file.Paths;
+import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
 
 /**
  *
@@ -28,24 +36,29 @@ import java.nio.file.Paths;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         Main m = new Main();
         for (int i = 0; i < 25; i++) {
             count = 0;
             m.run(args);
         }
+//        streamer.shutDown();
     }
     static int count;
 
-    public void run(String[] args) throws IOException {
+    public void run(String[] args) throws Exception {
+        CharEventStreamer streamer = new CharEventStreamer();
         long delta = System.nanoTime();
-
         String dataPathString = "dist/worldcity/worldcitiespop.csv";
-//        String dataPathString = "dist/worldcity/test.csv";
         File dataFile = Paths.get(dataPathString).toFile();
         CsvWorldCityDataProcessor processor = new CsvWorldCityDataProcessor();
         processor.dispatcher.setConsumer((t) -> count++);
-        streamFromFile(dataFile, processor, true);
+        if (args.length > 0) {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(dataFile)));
+            streamer.streamFromReader(reader, processor);
+        } else {
+            streamer.streamFromFile(dataFile, processor);
+        }
         delta = System.nanoTime() - delta;
         double duration = (delta / 1_000_000) / 1000.0;
         System.out.println("processed file:" + dataFile.getAbsolutePath());

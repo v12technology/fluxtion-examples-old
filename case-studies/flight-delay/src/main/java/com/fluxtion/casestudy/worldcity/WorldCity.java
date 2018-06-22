@@ -16,12 +16,22 @@
  */
 package com.fluxtion.casestudy.worldcity;
 
+import com.fluxtion.api.node.SEPConfig;
+import com.fluxtion.extension.declarative.api.Wrapper;
+import static com.fluxtion.extension.declarative.funclib.builder.csv.CsvMarshallerBuilder.csvMarshaller;
+
 /**
  *
  * @author gregp
  */
 public class WorldCity {
 
+    
+    public static class CsvCfg extends SEPConfig{{
+        Wrapper<WorldCity> cityDetails = csvMarshaller(WorldCity.class).build();
+        addPublicNode(new RowDispatcher(cityDetails), "dispatcher");
+    }}
+    
     private CharSequence country;//col 0
     private CharSequence City;//col 1
     private CharSequence AccentCity;//col 2

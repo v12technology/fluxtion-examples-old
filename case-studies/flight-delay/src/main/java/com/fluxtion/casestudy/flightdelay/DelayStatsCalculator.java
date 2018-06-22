@@ -22,6 +22,7 @@ import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.initSep;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
+import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFileLong;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.tearDownSep;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.util.FlightDetailsReader;
@@ -53,6 +54,7 @@ public class DelayStatsCalculator {
 
     public Map<String, Wrapper<CarrierDelay>> calcFromCsv(File csvFile) throws IOException {
         CsvFlightDataProcessor processor = new CsvFlightDataProcessor();
+//        streamFromFileLong(csvFile, processor, true);
         streamFromFile(csvFile, processor, true);
         totalFlights = processor.totalFlights.intValue();
         Map<?, Wrapper<CarrierDelay>> map = processor.carrierDelayMap.getMap();

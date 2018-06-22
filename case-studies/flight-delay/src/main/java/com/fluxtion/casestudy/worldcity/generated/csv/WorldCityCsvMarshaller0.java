@@ -1,12 +1,14 @@
 package com.fluxtion.casestudy.worldcity.generated.csv;
 
 import com.fluxtion.api.annotations.EventHandler;
-import com.fluxtion.casestudy.worldcity.WorldCity;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
-import com.fluxtion.api.annotations.Initialise;
-import com.fluxtion.extension.declarative.api.Wrapper;
-import com.fluxtion.extension.declarative.funclib.api.csv.RowProcessor;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.ArrayList;
+import com.fluxtion.extension.declarative.funclib.api.csv.RowProcessor;
+import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.casestudy.worldcity.WorldCity;
+import java.util.List;
 
 /**
  * generated CSV marshaller wrapper.
@@ -26,30 +28,31 @@ public class WorldCityCsvMarshaller0 implements RowProcessor<WorldCity> {
     //target
     private WorldCity target;
     //source field index: 0
-    private final StringBuilder setCountry = new StringBuilder();
-    private final int fieldIndex_0 = 0;
-    //source field index: 1
-    private final StringBuilder setCity = new StringBuilder();
-    private final int fieldIndex_1 = 1;
-    //source field index: 2
     private final StringBuilder setAccentCity = new StringBuilder();
-    private final int fieldIndex_2 = 2;
-    //source field index: 3
-    private final StringBuilder setRegion = new StringBuilder();
-    private final int fieldIndex_3 = 3;
-    //source field index: 4
-    private final StringBuilder setPopulation = new StringBuilder();
-    private final int fieldIndex_4 = 4;
-    //source field index: 5
-    private final StringBuilder setLongitude = new StringBuilder();
-    private final int fieldIndex_5 = 5;
-    //source field index: 6
+    private int fieldName_accentCity = 0;
+    //source field index: 0
+    private final StringBuilder setCity = new StringBuilder();
+    private int fieldName_city = 0;
+    //source field index: 0
+    private final StringBuilder setCountry = new StringBuilder();
+    private int fieldName_country = 0;
+    //source field index: 0
     private final StringBuilder setLatitude = new StringBuilder();
-    private final int fieldIndex_6 = 6;
+    private int fieldName_latitude = 0;
+    //source field index: 0
+    private final StringBuilder setLongitude = new StringBuilder();
+    private int fieldName_longitude = 0;
+    //source field index: 0
+    private final StringBuilder setPopulation = new StringBuilder();
+    private int fieldName_population = 0;
+    //source field index: 0
+    private final StringBuilder setRegion = new StringBuilder();
+    private int fieldName_region = 0;
     //processing state and meta-data
     private int rowNumber;
     private final HashMap fieldMap = new HashMap<>();
     private static final int HEADER_ROWS = 1;
+    private static final int MAPPING_ROW = 1;
     private boolean passedValidation;
 
     @EventHandler
@@ -72,21 +75,72 @@ public class WorldCityCsvMarshaller0 implements RowProcessor<WorldCity> {
         if (HEADER_ROWS < rowNumber) {
             //updateTarget();
             targetChanged = updateTarget();
+        } else if(rowNumber==MAPPING_ROW){
+            mapHeader();
         } 
         writeIndex = 0;
         fieldIndex = 0;
         return targetChanged;
     }
 
+    private void mapHeader(){
+        String header = new String(chars).trim();
+        //List<String> headers = Arrays.asList(header.split(","));
+
+        List<String> headers = new ArrayList();
+        for (String colName : header.split(",")) {
+            char c[] = colName.trim().toCharArray();
+            c[0] = Character.toLowerCase(c[0]);
+            headers.add(new String(c));
+        }
+
+
+        fieldName_accentCity = headers.indexOf("accentCity");
+        fieldMap.put(fieldName_accentCity, "setAccentCity");
+        if (fieldName_accentCity < 0) {
+            throw new RuntimeException("problem mapping field:'accentCity' index row:" + rowNumber);
+        }
+        fieldName_city = headers.indexOf("city");
+        fieldMap.put(fieldName_city, "setCity");
+        if (fieldName_city < 0) {
+            throw new RuntimeException("problem mapping field:'city' index row:" + rowNumber);
+        }
+        fieldName_country = headers.indexOf("country");
+        fieldMap.put(fieldName_country, "setCountry");
+        if (fieldName_country < 0) {
+            throw new RuntimeException("problem mapping field:'country' index row:" + rowNumber);
+        }
+        fieldName_latitude = headers.indexOf("latitude");
+        fieldMap.put(fieldName_latitude, "setLatitude");
+        if (fieldName_latitude < 0) {
+            throw new RuntimeException("problem mapping field:'latitude' index row:" + rowNumber);
+        }
+        fieldName_longitude = headers.indexOf("longitude");
+        fieldMap.put(fieldName_longitude, "setLongitude");
+        if (fieldName_longitude < 0) {
+            throw new RuntimeException("problem mapping field:'longitude' index row:" + rowNumber);
+        }
+        fieldName_population = headers.indexOf("population");
+        fieldMap.put(fieldName_population, "setPopulation");
+        if (fieldName_population < 0) {
+            throw new RuntimeException("problem mapping field:'population' index row:" + rowNumber);
+        }
+        fieldName_region = headers.indexOf("region");
+        fieldMap.put(fieldName_region, "setRegion");
+        if (fieldName_region < 0) {
+            throw new RuntimeException("problem mapping field:'region' index row:" + rowNumber);
+        }
+    }
+
     private boolean updateTarget() {
         updateFieldIndex();
-        extractCharSequence(setCountry, fieldIndex_0);
-        extractCharSequence(setCity, fieldIndex_1);
-        extractCharSequence(setAccentCity, fieldIndex_2);
-        extractCharSequence(setRegion, fieldIndex_3);
-        extractCharSequence(setPopulation, fieldIndex_4);
-        extractCharSequence(setLongitude, fieldIndex_5);
-        extractCharSequence(setLatitude, fieldIndex_6);
+        extractCharSequence(setAccentCity, fieldName_accentCity);
+        extractCharSequence(setCity, fieldName_city);
+        extractCharSequence(setCountry, fieldName_country);
+        extractCharSequence(setLatitude, fieldName_latitude);
+        extractCharSequence(setLongitude, fieldName_longitude);
+        extractCharSequence(setPopulation, fieldName_population);
+        extractCharSequence(setRegion, fieldName_region);
         //target
         return pushData();
     }
@@ -98,20 +152,20 @@ public class WorldCityCsvMarshaller0 implements RowProcessor<WorldCity> {
 
     private boolean pushData(){
         try{
-            fieldIndex = fieldIndex_0;
-            target.setCountry(setCountry);
-            fieldIndex = fieldIndex_1;
-            target.setCity(setCity);
-            fieldIndex = fieldIndex_2;
+            fieldIndex = fieldName_accentCity;
             target.setAccentCity(setAccentCity);
-            fieldIndex = fieldIndex_3;
-            target.setRegion(setRegion);
-            fieldIndex = fieldIndex_4;
-            target.setPopulation(setPopulation);
-            fieldIndex = fieldIndex_5;
-            target.setLongitude(setLongitude);
-            fieldIndex = fieldIndex_6;
+            fieldIndex = fieldName_city;
+            target.setCity(setCity);
+            fieldIndex = fieldName_country;
+            target.setCountry(setCountry);
+            fieldIndex = fieldName_latitude;
             target.setLatitude(setLatitude);
+            fieldIndex = fieldName_longitude;
+            target.setLongitude(setLongitude);
+            fieldIndex = fieldName_population;
+            target.setPopulation(setPopulation);
+            fieldIndex = fieldName_region;
+            target.setRegion(setRegion);
             return true;
         } catch (Exception e) {
             throw new RuntimeException("problem pushing data from row:" + rowNumber 
@@ -169,13 +223,13 @@ public class WorldCityCsvMarshaller0 implements RowProcessor<WorldCity> {
     @Initialise
     public void init(){
         target = new WorldCity();
-        fieldMap.put(fieldIndex_0, "setCountry");
-        fieldMap.put(fieldIndex_1, "setCity");
-        fieldMap.put(fieldIndex_2, "setAccentCity");
-        fieldMap.put(fieldIndex_3, "setRegion");
-        fieldMap.put(fieldIndex_4, "setPopulation");
-        fieldMap.put(fieldIndex_5, "setLongitude");
-        fieldMap.put(fieldIndex_6, "setLatitude");
+        fieldMap.put(fieldName_accentCity, "setAccentCity");
+        fieldMap.put(fieldName_city, "setCity");
+        fieldMap.put(fieldName_country, "setCountry");
+        fieldMap.put(fieldName_latitude, "setLatitude");
+        fieldMap.put(fieldName_longitude, "setLongitude");
+        fieldMap.put(fieldName_population, "setPopulation");
+        fieldMap.put(fieldName_region, "setRegion");
     }
 
     @Override

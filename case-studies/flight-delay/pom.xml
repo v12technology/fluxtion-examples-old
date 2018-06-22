@@ -222,8 +222,7 @@
                                     <className>CsvWorldCityDataProcessor</className>
                                     <packageName>com.fluxtion.casestudy.worldcity.generated.csv</packageName>
                                     <outputDirectory>src/main/java</outputDirectory>
-                                    <configClass>com.fluxtion.casestudy.worldcity.MyBufferCfg</configClass>
-                                    <configClass>com.fluxtion.casestudy.worldcity.WorldCitiesCsvCfg</configClass>
+                                    <configClass>com.fluxtion.casestudy.worldcity.WorldCity$CsvCfg</configClass>
                                     <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
