@@ -32,7 +32,7 @@ public class LocationRuleConfig {
 
     @Override
     public String toString() {
-        return "LocationRuleConfig{" + "maxDeltaX=" + maxDeltaX + ", maxDeltaY=" + maxDeltaY + ", travelTime=" + travelTime + '}';
+        return "{" + "maxDeltaX=" + maxDeltaX + ", maxDeltaY=" + maxDeltaY + ", travelTime=" + travelTime + '}';
     }
     
 }

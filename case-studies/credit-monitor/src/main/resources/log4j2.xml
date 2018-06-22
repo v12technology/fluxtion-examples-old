@@ -17,7 +17,7 @@
     <Loggers>
         <Root level="info" additivity="false">
             <appender-ref ref="fileLogger" level="debug" />
-            <appender-ref ref="console" />
+            <!--<appender-ref ref="console" />-->
         </Root>
     </Loggers>
 </Configuration>

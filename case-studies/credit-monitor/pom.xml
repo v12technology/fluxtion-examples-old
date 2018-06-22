@@ -130,7 +130,7 @@
                                     <className>CreditValidator</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>src/main/java</outputDirectory>
-                                    <logDebug>true</logDebug>
+                                    <logDebug>false</logDebug>
                                 </configuration>
                             </execution>
                         </executions>

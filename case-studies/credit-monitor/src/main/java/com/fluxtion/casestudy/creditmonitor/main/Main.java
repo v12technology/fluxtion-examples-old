@@ -43,5 +43,6 @@ public class Main {
         validator.onEvent(new PurchaseOrder("desk_cheap", 150, "customer_1", 35, 90));
         validator.onEvent(new PurchaseOrder("desk_cheap", 150, "customer_1", 400, 900));
         validator.onEvent(new PurchaseOrder("desk_secondHand", 50, "customer_1", 400, 900));
+        validator.onEvent(new PurchaseOrder("Big Yacht", 50e6, "fantasy customer", 400, 900));
     }
 }

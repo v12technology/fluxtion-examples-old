@@ -43,7 +43,35 @@ public class PurchaseOrder extends Event{
 
     @Override
     public String toString() {
-        return "PurchaseOrder{" + "time=" + time + ", amount=" + amount + ", id=" + id + '}';
+        return "{" + "time=" + time + ", amount=" + amount + ", id=" + id + '}';
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
     
 }

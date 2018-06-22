@@ -27,7 +27,7 @@ public class UserConfig {
 
     @Override
     public String toString() {
-        return "UserConfig{" + "name=" + name + ", maxCredit=" + maxCredit + '}';
+        return "{" + "name=" + name + ", maxCredit=" + maxCredit + '}';
     }
     
 }

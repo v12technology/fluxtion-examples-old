@@ -43,6 +43,8 @@ public class UserContext extends EventLogNode {
         currentPurchaseOrder = purchaseOrder;
     }
     
+    
+    
     @OnEventComplete
     public void afterEvent(){
         if(currentPurchaseOrder!=null){

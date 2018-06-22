@@ -102,7 +102,7 @@ public abstract class Rules extends EventLogNode {
 
         private double maxSize = 1000;
         
-        @Inject
+//        @Inject
         private final VolatilityCalc volatilityCalc;
 
         public MaxOrderSizeRule(VolatilityCalc volatilityCalc, UserContext userCtx) {

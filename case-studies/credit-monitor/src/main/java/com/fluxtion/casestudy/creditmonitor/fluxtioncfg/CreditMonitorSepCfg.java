@@ -17,12 +17,16 @@
 package com.fluxtion.casestudy.creditmonitor.fluxtioncfg;
 
 import com.fluxtion.casestudy.creditmonitor.CreditFailReporter;
-import com.fluxtion.casestudy.creditmonitor.Rules;
 import com.fluxtion.casestudy.creditmonitor.Rules.LocationRule;
 import com.fluxtion.casestudy.creditmonitor.Rules.MaxOrderSizeRule;
 import com.fluxtion.casestudy.creditmonitor.Rules.OrderRateRule;
 import com.fluxtion.casestudy.creditmonitor.UserContext;
 import com.fluxtion.casestudy.creditmonitor.TransactionPublisher;
+import com.fluxtion.casestudy.creditmonitor.events.PurchaseOrder;
+import com.fluxtion.extension.declarative.api.Wrapper;
+import com.fluxtion.extension.declarative.builder.log.LogBuilder;
+import static com.fluxtion.extension.declarative.builder.log.LogBuilder.*;
+import static com.fluxtion.extension.declarative.funclib.builder.test.GreaterThanHelper.greaterThanFilter;
 import com.fluxtion.runtime.plugin.sep.AuditedSep;
 
 /**
@@ -39,6 +43,13 @@ public class CreditMonitorSepCfg extends AuditedSep {
         OrderRateRule ruleRate = addNode(new OrderRateRule(userCtx));
         CreditFailReporter failReporter = addNode(new CreditFailReporter(ruleLocation, ruleMax, ruleRate));
         TransactionPublisher transactionPublisher = addPublicNode(new TransactionPublisher(failReporter, userCtx), "txPublisher");
+        
+        //add a declarative rule
+        Wrapper<PurchaseOrder> bigOrder = greaterThanFilter(PurchaseOrder.class, PurchaseOrder::getAmount, 1e6);
+        Log("very big order: {} customer:{}", bigOrder, 
+                PurchaseOrder::getAmount,
+                PurchaseOrder::getCustomerId
+        );
     }
 
 }
