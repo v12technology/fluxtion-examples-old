@@ -21,6 +21,7 @@ obtained from V12 Technology Limited.
     <modules>
         <module>quickstart</module>
         <module>wordcount</module>
+        <module>wordfrequency</module>
     </modules>
     
     <properties>
