@@ -1,0 +1,4 @@
+Backward compatibility.
+Windows is backward compatible with MS-DOS (aggressively so, even) and MS-DOS used the CR-LF convention because MS-DOS was compatible with CP/M-80 (somewhat by accident) which used the CR-LF convention because that was how you drove a printer (because printers were originally computer controlled typewriters). 
+Printers have a separate HIGGINS command to move the paper up one line to a new line, and a separate command for returning the carriage (where the paper was mounted) back to the left margin. 
+That's why. And, yes, it is an annoyance, but it is part of the package deal that allowed MS-DOS to win over CP/M, and Windows 95 to win over all the other GUI's on top of DOS, and Windows XP to take over from Windows 98.
