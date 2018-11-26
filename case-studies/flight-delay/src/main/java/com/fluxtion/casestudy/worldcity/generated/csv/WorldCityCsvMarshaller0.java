@@ -1,14 +1,15 @@
 package com.fluxtion.casestudy.worldcity.generated.csv;
 
-import com.fluxtion.api.annotations.EventHandler;
-import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
-import java.util.Arrays;
+import com.fluxtion.extension.declarative.funclib.api.event.EofEvent;
 import java.util.HashMap;
-import java.util.ArrayList;
-import com.fluxtion.extension.declarative.funclib.api.csv.RowProcessor;
 import com.fluxtion.api.annotations.Initialise;
+import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
+import com.fluxtion.extension.declarative.funclib.api.csv.RowProcessor;
 import com.fluxtion.casestudy.worldcity.WorldCity;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import com.fluxtion.api.annotations.EventHandler;
 
 /**
  * generated CSV marshaller wrapper.
@@ -69,6 +70,11 @@ public class WorldCityCsvMarshaller0 implements RowProcessor<WorldCity> {
         return false;
     }
 
+    @EventHandler
+    public boolean eof(EofEvent eof){
+        return writeIndex==0?false:processRow();
+    }
+
     private boolean processRow() {
         boolean targetChanged = false;
         rowNumber++;
@@ -85,16 +91,13 @@ public class WorldCityCsvMarshaller0 implements RowProcessor<WorldCity> {
 
     private void mapHeader(){
         String header = new String(chars).trim();
-        //List<String> headers = Arrays.asList(header.split(","));
-
+        header = header.replace("\"", "");
         List<String> headers = new ArrayList();
         for (String colName : header.split(",")) {
             char c[] = colName.trim().toCharArray();
             c[0] = Character.toLowerCase(c[0]);
             headers.add(new String(c));
         }
-
-
         fieldName_accentCity = headers.indexOf("accentCity");
         fieldMap.put(fieldName_accentCity, "setAccentCity");
         if (fieldName_accentCity < 0) {

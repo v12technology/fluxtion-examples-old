@@ -5,6 +5,7 @@ import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
 import com.fluxtion.casestudy.worldcity.RowDispatcher;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
+import com.fluxtion.extension.declarative.funclib.api.event.EofEvent;
 
 public class CsvWorldCityDataProcessor implements EventHandler, BatchHandler, Lifecycle {
 
@@ -26,12 +27,28 @@ public class CsvWorldCityDataProcessor implements EventHandler, BatchHandler, Li
           handleEvent(typedEvent);
           break;
         }
+      case (EofEvent.ID):
+        {
+          EofEvent typedEvent = (EofEvent) event;
+          handleEvent(typedEvent);
+          break;
+        }
     }
   }
 
   public void handleEvent(CharEvent typedEvent) {
     //Default, no filter methods
     isDirty_worldCityCsvMarshaller0_0 = worldCityCsvMarshaller0_0.charEvent(typedEvent);
+    if (isDirty_worldCityCsvMarshaller0_0) {
+      dispatcher.publishRow();
+    }
+    //event stack unwind callbacks
+    afterEvent();
+  }
+
+  public void handleEvent(EofEvent typedEvent) {
+    //Default, no filter methods
+    isDirty_worldCityCsvMarshaller0_0 = worldCityCsvMarshaller0_0.eof(typedEvent);
     if (isDirty_worldCityCsvMarshaller0_0) {
       dispatcher.publishRow();
     }
