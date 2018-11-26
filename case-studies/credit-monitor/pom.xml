@@ -28,7 +28,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <fluxtion.maven-plugin.ver>1.0.8</fluxtion.maven-plugin.ver>
-        <fluxtion.maven-plugin-inprocess.ver>0.1.17-SNAPSHOT</fluxtion.maven-plugin-inprocess.ver>
+        <!--<fluxtion.maven-plugin-inprocess.ver>0.1.17-SNAPSHOT</fluxtion.maven-plugin-inprocess.ver>-->
         <fluxtion.runtime-plugin.ver>1.0.3-SNAPSHOT</fluxtion.runtime-plugin.ver>
         <!--
         either use settings.xml to set ${fluxtion.trial} or remove propeerty and 
@@ -96,6 +96,8 @@
                                     <packageName>com.fluxtion.casestudy.creditmonitor.generated</packageName>
                                     <className>CreditValidator</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
+                                    <formatSource>false</formatSource>
+                                    <compileGenerated>false</compileGenerated>
                                     <outputDirectory>src/main/java</outputDirectory>
                                     <logDebug>true</logDebug>
                                 </configuration>
