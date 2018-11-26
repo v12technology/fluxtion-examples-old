@@ -38,7 +38,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         Main m = new Main();
-        for (int i = 0; i < 25; i++) {
+        for (int i = 0; i < 7; i++) {
             count = 0;
             m.run(args);
         }
