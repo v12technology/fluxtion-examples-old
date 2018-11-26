@@ -24,6 +24,7 @@
             <properties>
                 <exec.args>-classpath %classpath com.fluxtion.casestudy.flightdelay.Main dist/data/2008.csv</exec.args>
                 <exec.executable>java</exec.executable>
+                <exec.workingdir>.</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -39,6 +40,7 @@
                 <exec.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -classpath %classpath com.fluxtion.casestudy.flightdelay.Main dist/data/2008.csv</exec.args>
                 <exec.executable>java</exec.executable>
                 <jpda.listen>true</jpda.listen>
+                <exec.workingdir>.</exec.workingdir>
             </properties>
         </action>
         <action>
@@ -53,6 +55,7 @@
             <properties>
                 <exec.args>-classpath %classpath com.fluxtion.casestudy.flightdelay.Main dist/data/2008.csv</exec.args>
                 <exec.executable>java</exec.executable>
+                <exec.workingdir>.</exec.workingdir>
             </properties>
         </action>
         <action>
