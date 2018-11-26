@@ -8,11 +8,11 @@ import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import java.util.Map;
 import java.util.BitSet;
-import com.fluxtion.casestudy.flightdelay.CarrierDelay;
 import com.fluxtion.casestudy.flightdelay.FlightDetails;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
+import com.fluxtion.casestudy.flightdelay.CarrierDelay;
 
 /**
  * generated group by calculation state holder. This class holds the state of
@@ -28,9 +28,9 @@ public final class CalculationStateGroupBy_7 implements Wrapper<CarrierDelay>{
     private final BitSet updateMap = new BitSet(SOURCE_COUNT);
 
     public CarrierDelay target;
+    public double aggregateSum6;
     public AggregateAverage aggregateAverage4Function = new AggregateAverage();
     public double aggregateAverage4;
-    public double aggregateSum6;
     public int aggregateCount5;
 
     public CalculationStateGroupBy_7(){

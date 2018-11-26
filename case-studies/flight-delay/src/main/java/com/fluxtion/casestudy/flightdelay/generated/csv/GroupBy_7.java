@@ -10,11 +10,11 @@ import com.fluxtion.extension.declarative.api.group.GroupBy;
 import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
-import com.fluxtion.casestudy.flightdelay.CarrierDelay;
 import com.fluxtion.casestudy.flightdelay.FlightDetails;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
 import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
+import com.fluxtion.casestudy.flightdelay.CarrierDelay;
 
 /**
  * generated group by holder.
@@ -37,16 +37,16 @@ public final class GroupBy_7 implements GroupBy<CarrierDelay>{
         boolean allMatched = instance.processSource( 1, initialisergreaterThanDecorator_20,  event);
         target = instance.target;
         {
-			double value = instance.aggregateAverage4;
-			value = instance.aggregateAverage4Function.calcAverage((double)event.getDelay(), (double)value);
-			target.setAvgDelay((int)value);
-			instance.aggregateAverage4 = value;
-         }
-        {
 			double value = instance.aggregateSum6;
 			value = AggregateSum.calcSum((double)event.getDelay(), (double)value);
 			target.setTotalDelayMins((int)value);
 			instance.aggregateSum6 = value;
+         }
+        {
+			double value = instance.aggregateAverage4;
+			value = instance.aggregateAverage4Function.calcAverage((double)event.getDelay(), (double)value);
+			target.setAvgDelay((int)value);
+			instance.aggregateAverage4 = value;
          }
         {
 			int value = instance.aggregateCount5;
