@@ -5,6 +5,7 @@ import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
 import com.fluxtion.extension.declarative.funclib.builder.math.CountFunction;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
+import com.fluxtion.extension.declarative.funclib.api.event.EofEvent;
 
 public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifecycle {
 
@@ -16,7 +17,6 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
   public final CountFunction totalFlights = new CountFunction();
   //Dirty flags
   private boolean isDirty_flightDetailsCsvMarshaller0_0 = false;
-  private boolean isDirty_carrierDelayMap = false;
   private boolean isDirty_greaterThanDecorator_2_1 = false;
   //Filter constants
 
@@ -36,6 +36,12 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
           handleEvent(typedEvent);
           break;
         }
+      case (EofEvent.ID):
+        {
+          EofEvent typedEvent = (EofEvent) event;
+          handleEvent(typedEvent);
+          break;
+        }
     }
   }
 
@@ -48,8 +54,21 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
         carrierDelayMap.updategreaterThanDecorator_20(greaterThanDecorator_2_1);
       }
     }
-    if (isDirty_greaterThanDecorator_2_1) {
-      isDirty_carrierDelayMap = carrierDelayMap.updated();
+    if (isDirty_flightDetailsCsvMarshaller0_0) {
+      totalFlights.increment();
+    }
+    //event stack unwind callbacks
+    afterEvent();
+  }
+
+  public void handleEvent(EofEvent typedEvent) {
+    //Default, no filter methods
+    isDirty_flightDetailsCsvMarshaller0_0 = flightDetailsCsvMarshaller0_0.eof(typedEvent);
+    if (isDirty_flightDetailsCsvMarshaller0_0) {
+      isDirty_greaterThanDecorator_2_1 = greaterThanDecorator_2_1.onEvent();
+      if (isDirty_greaterThanDecorator_2_1) {
+        carrierDelayMap.updategreaterThanDecorator_20(greaterThanDecorator_2_1);
+      }
     }
     if (isDirty_flightDetailsCsvMarshaller0_0) {
       totalFlights.increment();
@@ -62,7 +81,6 @@ public class CsvFlightDataProcessor implements EventHandler, BatchHandler, Lifec
   public void afterEvent() {
 
     isDirty_flightDetailsCsvMarshaller0_0 = false;
-    isDirty_carrierDelayMap = false;
     isDirty_greaterThanDecorator_2_1 = false;
   }
 

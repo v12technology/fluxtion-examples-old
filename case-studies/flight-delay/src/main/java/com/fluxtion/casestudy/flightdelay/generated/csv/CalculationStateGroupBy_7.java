@@ -5,12 +5,14 @@ import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
+import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import java.util.Map;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
-import com.fluxtion.casestudy.flightdelay.FlightDetails;
+import java.util.BitSet;
 import com.fluxtion.casestudy.flightdelay.CarrierDelay;
+import com.fluxtion.casestudy.flightdelay.FlightDetails;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 
 /**
  * generated group by calculation state holder. This class holds the state of
@@ -21,14 +23,35 @@ import com.fluxtion.casestudy.flightdelay.CarrierDelay;
  * @author Greg Higgins
  */
 public final class CalculationStateGroupBy_7 implements Wrapper<CarrierDelay>{
+
+    private static final int SOURCE_COUNT = 1;
+    private final BitSet updateMap = new BitSet(SOURCE_COUNT);
+
     public CarrierDelay target;
-    public int aggregateCount5;
-    public double aggregateSum6;
     public AggregateAverage aggregateAverage4Function = new AggregateAverage();
     public double aggregateAverage4;
+    public double aggregateSum6;
+    public int aggregateCount5;
 
     public CalculationStateGroupBy_7(){
-         target = new CarrierDelay();
+        target = new CarrierDelay();
+    }
+
+    public boolean allMatched(){
+        return SOURCE_COUNT == updateMap.cardinality();
+    }
+
+    public boolean processSource(int index, GroupByIniitialiser initialiser, Object source) {
+        if (!updateMap.get(index)) {
+            initialiser.apply(source, target);
+        }
+        updateMap.set(index);
+        return allMatched();
+    }
+
+    public boolean processSource(int index, Object source) {
+        updateMap.set(index);
+        return allMatched();
     }
 
     @Override

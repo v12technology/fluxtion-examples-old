@@ -10,11 +10,11 @@ import com.fluxtion.extension.declarative.api.group.GroupBy;
 import com.fluxtion.extension.declarative.api.group.GroupByIniitialiser;
 import com.fluxtion.extension.declarative.api.group.GroupByTargetMap;
 import java.util.Map;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
-import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
-import com.fluxtion.casestudy.flightdelay.FlightDetails;
 import com.fluxtion.casestudy.flightdelay.CarrierDelay;
+import com.fluxtion.casestudy.flightdelay.FlightDetails;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateAverage;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateCount;
+import com.fluxtion.extension.declarative.api.group.AggregateFunctions.AggregateSum;
 
 /**
  * generated group by holder.
@@ -33,13 +33,14 @@ public final class GroupBy_7 implements GroupBy<CarrierDelay>{
     @OnParentUpdate( "greaterThanDecorator_20")
     public boolean updategreaterThanDecorator_20(GreaterThanDecorator_2 eventWrapped){
         FlightDetails event = eventWrapped.event();
-        CalculationStateGroupBy_7 instance = calcState.getOrCreateInstance(event.getCarrier(), initialisergreaterThanDecorator_20, event);
+        CalculationStateGroupBy_7 instance = calcState.getOrCreateInstance(event.getCarrier());
+        boolean allMatched = instance.processSource( 1, initialisergreaterThanDecorator_20,  event);
         target = instance.target;
         {
-			int value = instance.aggregateCount5;
-			value = AggregateCount.increment((int)0, (int)value);
-			target.setTotalFlights((int)value);
-			instance.aggregateCount5 = value;
+			double value = instance.aggregateAverage4;
+			value = instance.aggregateAverage4Function.calcAverage((double)event.getDelay(), (double)value);
+			target.setAvgDelay((int)value);
+			instance.aggregateAverage4 = value;
          }
         {
 			double value = instance.aggregateSum6;
@@ -48,23 +49,18 @@ public final class GroupBy_7 implements GroupBy<CarrierDelay>{
 			instance.aggregateSum6 = value;
          }
         {
-			double value = instance.aggregateAverage4;
-			value = instance.aggregateAverage4Function.calcAverage((double)event.getDelay(), (double)value);
-			target.setAvgDelay((int)value);
-			instance.aggregateAverage4 = value;
+			int value = instance.aggregateCount5;
+			value = AggregateCount.increment((int)0, (int)value);
+			target.setTotalFlights((int)value);
+			instance.aggregateCount5 = value;
          }
-        return true;
-    }
-
-    @OnEvent
-    public boolean updated(){
-        return true;
+        return allMatched;
     }
 
     @Initialise
     public void init(){
         calcState = new GroupByTargetMap<>(CalculationStateGroupBy_7.class);
-        initialisergreaterThanDecorator_20 = new GroupByIniitialiser<FlightDetails, CarrierDelay>(){
+        initialisergreaterThanDecorator_20 = new GroupByIniitialiser<FlightDetails, CarrierDelay>() {
         
             @Override
             public void apply(FlightDetails source, CarrierDelay target) {
