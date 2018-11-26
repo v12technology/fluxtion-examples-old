@@ -17,7 +17,7 @@ public class AlarmProcessor implements EventHandler, BatchHandler, Lifecycle {
   private final AnnoyingNotification annoyingNotification_3 =
       new AnnoyingNotification(alarmClock_1);
   //Dirty flags
-  private boolean isDirty_alarmClock_1 = false;
+
   //Filter constants
 
   public AlarmProcessor() {}
@@ -86,19 +86,14 @@ public class AlarmProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   public void handleEvent(TimingPulseEvent typedEvent) {
     //Default, no filter methods
-    isDirty_alarmClock_1 = alarmClock_1.tickTock(typedEvent);
-    if (isDirty_alarmClock_1) {
-      annoyingNotification_3.annoy();
-    }
+    alarmClock_1.tickTock(typedEvent);
+    annoyingNotification_3.annoy();
     //event stack unwind callbacks
     afterEvent();
   }
 
   @Override
-  public void afterEvent() {
-
-    isDirty_alarmClock_1 = false;
-  }
+  public void afterEvent() {}
 
   @Override
   public void init() {

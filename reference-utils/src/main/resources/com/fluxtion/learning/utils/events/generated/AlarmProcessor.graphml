@@ -20,11 +20,11 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="BooleanSignal">
+<node id="TimingPulseEvent">
 <data key="vertex_label">
 <jGraph:ShapeNode>
 <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;BooleanSignal"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;TimingPulseEvent"/>
 <jGraph:Style properties="EVENT"/>
 </jGraph:ShapeNode>
 </data>
@@ -38,6 +38,15 @@
 </jGraph:ShapeNode>
 </data>
 </node>
+<node id="BooleanSignal">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;BooleanSignal"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
 <node id="ListenerRegistrationEvent">
 <data key="vertex_label">
 <jGraph:ShapeNode>
@@ -47,21 +56,12 @@
 </jGraph:ShapeNode>
 </data>
 </node>
-<node id="TimingPulseEvent">
-<data key="vertex_label">
-<jGraph:ShapeNode>
-<jGraph:Geometry height="70" width="160" x="20" y="20"/>
-<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;TimingPulseEvent"/>
-<jGraph:Style properties="EVENT"/>
-</jGraph:ShapeNode>
-</data>
-</node>
 <edge id="1" source="alarmClock_1" target="annoyingNotification_3">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="2" source="BooleanSignal" target="alarmClock_1">
+<edge id="2" source="TimingPulseEvent" target="alarmClock_1">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
@@ -71,12 +71,12 @@
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="4" source="ListenerRegistrationEvent" target="alarmClock_1">
+<edge id="4" source="BooleanSignal" target="alarmClock_1">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
 </edge>
-<edge id="5" source="TimingPulseEvent" target="alarmClock_1">
+<edge id="5" source="ListenerRegistrationEvent" target="alarmClock_1">
 <data key="edge_label">
 <jGraph:ShapeEdge/>
 </data>
