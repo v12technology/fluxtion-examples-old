@@ -44,7 +44,7 @@ public class DiamondConfig extends AuditedSep {
     @Override
     public void buildConfig() {
         try {
-            //input signal
+            //input signal event handler
             EventWrapper<NumericSignal> signal = select(NumericSignal.class);
             //filtered branch
             Wrapper<NumericSignal> greaterThan5 = greaterThanFilter(signal, NumericSignal::value, 5.0);
