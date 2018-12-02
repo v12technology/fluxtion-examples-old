@@ -20,10 +20,9 @@ import com.fluxtion.casestudy.flightdelay.generated.binary.BinaryFlightDataProce
 import com.fluxtion.casestudy.flightdelay.generated.csv.CsvFlightDataProcessor;
 import com.fluxtion.extension.declarative.api.Wrapper;
 import com.fluxtion.extension.declarative.funclib.api.event.CharEvent;
-import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.initSep;
 import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFile;
-import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.streamFromFileLong;
-import static com.fluxtion.extension.declarative.funclib.builder.util.AsciiCharEventFileStreamer.tearDownSep;
+import static com.fluxtion.extension.declarative.funclib.builder.util.StringDriver.initSep;
+import static com.fluxtion.extension.declarative.funclib.builder.util.StringDriver.tearDownSep;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.util.FlightDetailsReader;
 import java.io.File;
