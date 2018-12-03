@@ -38,13 +38,13 @@ public class Calculator implements EventHandler, BatchHandler, Lifecycle {
   public final HdrProfiler profiler = new HdrProfiler();
   public final Tracer propertyTracer = new Tracer();
   //Dirty flags
-  private boolean isDirty_greaterThanDecorator_1_1 = false;
-  private boolean isDirty_msgBuilder10_7 = false;
-  private boolean isDirty_numericSignalHandler_0 = false;
-  private boolean isDirty_multiplyInvoker_3_2 = false;
   private boolean isDirty_msgBuilder8_5 = false;
-  private boolean isDirty_merged = false;
+  private boolean isDirty_multiplyInvoker_3_2 = false;
+  private boolean isDirty_numericSignalHandler_0 = false;
   private boolean isDirty_defaultNumeric_3 = false;
+  private boolean isDirty_msgBuilder10_7 = false;
+  private boolean isDirty_merged = false;
+  private boolean isDirty_greaterThanDecorator_1_1 = false;
   //Filter constants
 
   public Calculator() {
@@ -66,6 +66,7 @@ public class Calculator implements EventHandler, BatchHandler, Lifecycle {
     asciiConsoleLogger_6.msgBuilders = new MsgBuilder[2];
     asciiConsoleLogger_6.msgBuilders[0] = msgBuilder8_5;
     asciiConsoleLogger_6.msgBuilders[1] = msgBuilder10_7;
+    logger.trace = (boolean) false;
     //node auditors
     initialiseAuditor(delegatingAuditor);
     initialiseAuditor(logger);
@@ -181,7 +182,7 @@ public class Calculator implements EventHandler, BatchHandler, Lifecycle {
         merged.sourceChange_source_DefaultNumeric_5(defaultNumeric_3);
       }
     }
-    if (isDirty_numericSignalHandler_0 | isDirty_defaultNumeric_3) {
+    if (isDirty_defaultNumeric_3 | isDirty_numericSignalHandler_0) {
       auditInvocation(merged, "merged", "onEvent", typedEvent);
       isDirty_merged = merged.onEvent();
     }
@@ -203,7 +204,7 @@ public class Calculator implements EventHandler, BatchHandler, Lifecycle {
     if (isDirty_greaterThanDecorator_1_1) {
       multiplyInvoker_3_2.afterCalculate();
     }
-    if (isDirty_numericSignalHandler_0 | isDirty_defaultNumeric_3) {
+    if (isDirty_defaultNumeric_3 | isDirty_numericSignalHandler_0) {
       merged.afterCalculate();
     }
     afterEvent();
@@ -368,13 +369,13 @@ public class Calculator implements EventHandler, BatchHandler, Lifecycle {
     logger.processingComplete();
     profiler.processingComplete();
     propertyTracer.processingComplete();
-    isDirty_greaterThanDecorator_1_1 = false;
-    isDirty_msgBuilder10_7 = false;
-    isDirty_numericSignalHandler_0 = false;
-    isDirty_multiplyInvoker_3_2 = false;
     isDirty_msgBuilder8_5 = false;
-    isDirty_merged = false;
+    isDirty_multiplyInvoker_3_2 = false;
+    isDirty_numericSignalHandler_0 = false;
     isDirty_defaultNumeric_3 = false;
+    isDirty_msgBuilder10_7 = false;
+    isDirty_merged = false;
+    isDirty_greaterThanDecorator_1_1 = false;
   }
 
   @Override

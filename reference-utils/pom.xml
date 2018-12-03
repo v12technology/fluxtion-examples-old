@@ -96,7 +96,7 @@
                                     <className>Calculator</className>
                                     <supportDirtyFiltering>true</supportDirtyFiltering>
                                     <outputDirectory>src/main/java</outputDirectory>
-                                    <!--<logDebug>true</logDebug>-->
+                                    <logDebug>true</logDebug>
                                 </configuration>
                             </execution>
                         </executions>
