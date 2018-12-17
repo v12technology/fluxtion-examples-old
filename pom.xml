@@ -26,6 +26,7 @@ obtained from V12 Technology Limited.
         <module>reference-fx</module>
         <module>case-studies</module>
         <module>tutorial</module>
+        <module>updated-reference-core</module>
     </modules>
     
     <properties>
