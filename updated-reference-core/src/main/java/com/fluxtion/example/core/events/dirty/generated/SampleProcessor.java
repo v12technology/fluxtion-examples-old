@@ -14,21 +14,32 @@
  * along with this program.  If not, see
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
-package com.fluxtion.example.core.events.filtering.generated;
+package com.fluxtion.example.core.events.dirty.generated;
 
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.example.core.events.filtering.MyEventProcessor;
-import com.fluxtion.example.shared.ConfigEvent;
+import com.fluxtion.example.shared.DataEventHandler;
+import com.fluxtion.example.core.events.dirty.DirtyNode;
+import com.fluxtion.example.shared.MyEventHandler;
+import com.fluxtion.example.core.events.dirty.DirtyAggregator;
+import com.fluxtion.example.shared.DataEvent;
 import com.fluxtion.example.shared.MyEvent;
 
 public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final MyEventProcessor myEventProcessor_1 = new MyEventProcessor("cfg.acl");
+  private final DataEventHandler dataEventHandler_1 = new DataEventHandler();
+  private final DirtyNode dirtyNode_5 = new DirtyNode(dataEventHandler_1);
+  private final DirtyNode dirtyNode_7 = new DirtyNode(dataEventHandler_1);
+  private final MyEventHandler myEventHandler_3 = new MyEventHandler();
+  private final DirtyNode dirtyNode_9 = new DirtyNode(myEventHandler_3);
+  private final DirtyAggregator dirtyAggregator_11 =
+      new DirtyAggregator(dirtyNode_7, dirtyNode_5, dirtyNode_9);
   //Dirty flags
-
+  private boolean isDirty_dirtyNode_7 = false;
+  private boolean isDirty_dirtyNode_9 = false;
+  private boolean isDirty_dirtyNode_5 = false;
   //Filter constants
 
   public SampleProcessor() {}
@@ -36,9 +47,9 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
   @Override
   public void onEvent(com.fluxtion.runtime.event.Event event) {
     switch (event.getClass().getName()) {
-      case ("com.fluxtion.example.shared.ConfigEvent"):
+      case ("com.fluxtion.example.shared.DataEvent"):
         {
-          ConfigEvent typedEvent = (ConfigEvent) event;
+          DataEvent typedEvent = (DataEvent) event;
           handleEvent(typedEvent);
           break;
         }
@@ -51,45 +62,36 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
     }
   }
 
-  public void handleEvent(ConfigEvent typedEvent) {
-    switch (typedEvent.filterString()) {
-      case ("cfg.acl"):
-        myEventProcessor_1.handleMyVariableConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-      case ("java.util.Date"):
-        myEventProcessor_1.dateConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-      case ("maxConnection"):
-        myEventProcessor_1.handleMaxConnectionsConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-      case ("timeout"):
-        myEventProcessor_1.handleTimeoutConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-    }
+  public void handleEvent(DataEvent typedEvent) {
     //Default, no filter methods
-    myEventProcessor_1.unHandledConfig(typedEvent);
-    myEventProcessor_1.handleConfigEvent(typedEvent);
+    dataEventHandler_1.handleEvent(typedEvent);
+    isDirty_dirtyNode_5 = dirtyNode_5.isDirty();
+    isDirty_dirtyNode_7 = dirtyNode_7.isDirty();
+    if (isDirty_dirtyNode_7 | isDirty_dirtyNode_5 | isDirty_dirtyNode_9) {
+      dirtyAggregator_11.publishDirty();
+    }
     //event stack unwind callbacks
     afterEvent();
   }
 
   public void handleEvent(MyEvent typedEvent) {
     //Default, no filter methods
-    myEventProcessor_1.handleEvent(typedEvent);
+    myEventHandler_3.handleEvent(typedEvent);
+    isDirty_dirtyNode_9 = dirtyNode_9.isDirty();
+    if (isDirty_dirtyNode_7 | isDirty_dirtyNode_5 | isDirty_dirtyNode_9) {
+      dirtyAggregator_11.publishDirty();
+    }
     //event stack unwind callbacks
     afterEvent();
   }
 
   @Override
-  public void afterEvent() {}
+  public void afterEvent() {
+
+    isDirty_dirtyNode_7 = false;
+    isDirty_dirtyNode_9 = false;
+    isDirty_dirtyNode_5 = false;
+  }
 
   @Override
   public void init() {}
