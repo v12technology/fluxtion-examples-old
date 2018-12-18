@@ -83,7 +83,7 @@
                             <className>SampleProcessor</className>
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
-                    </execution>-->
+                    </execution>
                     <execution>
                         <id>clean</id>
                         <goals>
@@ -92,6 +92,19 @@
                         <configuration>
                             <configClass>com.fluxtion.example.core.events.clean.Builder</configClass>
                             <packageName>com.fluxtion.example.core.events.clean.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
+                    -->
+                    <execution>
+                        <id>lifecycle</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.events.lifecycle.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.events.lifecycle.generated</packageName>
                             <className>SampleProcessor</className>
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
