@@ -5,7 +5,7 @@
     <artifactId>reference_core</artifactId>
     <version>1.5.4-SNAPSHOT</version>
     <packaging>jar</packaging>
-        <name>fluxtion.example :: ref.core_UPDATED</name>
+    <name>fluxtion.example :: ref.core_UPDATED</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -23,7 +23,7 @@
                 <artifactId>fluxtion-maven-plugin</artifactId>
                 <version>${fluxtion.ver}</version>
                 <executions>
-<!--                    <execution>
+                    <execution>
                         <id>filtering</id>
                         <goals>
                             <goal>generate</goal>
@@ -96,7 +96,6 @@
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
                     </execution>
-                    -->
                     <execution>
                         <id>lifecycle</id>
                         <goals>
@@ -105,6 +104,18 @@
                         <configuration>
                             <configClass>com.fluxtion.example.core.events.lifecycle.Builder</configClass>
                             <packageName>com.fluxtion.example.core.events.lifecycle.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>push</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.events.push.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.events.push.generated</packageName>
                             <className>SampleProcessor</className>
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
