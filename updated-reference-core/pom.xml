@@ -10,7 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <fluxtion.ver>1.5.3</fluxtion.ver>
+        <fluxtion.ver>1.5.4-SNAPSHOT</fluxtion.ver>
         <netbeans.hint.license>gpl30</netbeans.hint.license>
     </properties>
     
@@ -18,6 +18,16 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.fluxtion</groupId>
                 <artifactId>fluxtion-maven-plugin</artifactId>
@@ -116,6 +126,18 @@
                         <configuration>
                             <configClass>com.fluxtion.example.core.events.push.Builder</configClass>
                             <packageName>com.fluxtion.example.core.events.push.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>propagation</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.events.propagation.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.events.propagation.generated</packageName>
                             <className>SampleProcessor</className>
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>

@@ -14,19 +14,26 @@
  * along with this program.  If not, see
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
-package com.fluxtion.example.core.events.filtering.generated;
+package com.fluxtion.example.core.events.propagation.generated;
 
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import com.fluxtion.example.core.events.filtering.MyEventProcessor;
+import com.fluxtion.example.shared.DataEventHandler;
+import com.fluxtion.example.core.events.propagation.PropagateControlledhandler;
+import com.fluxtion.example.core.events.propagation.PropagateControlledNode;
 import com.fluxtion.example.shared.ConfigEvent;
+import com.fluxtion.example.shared.DataEvent;
 import com.fluxtion.example.shared.MyEvent;
 
 public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final MyEventProcessor myEventProcessor_1 = new MyEventProcessor("cfg.acl");
+  private final DataEventHandler dataEventHandler_1 = new DataEventHandler();
+  private final PropagateControlledhandler propagateControlledhandler_3 =
+      new PropagateControlledhandler();
+  private final PropagateControlledNode propagateControlledNode_5 =
+      new PropagateControlledNode(propagateControlledhandler_3, dataEventHandler_1);
   //Dirty flags
 
   //Filter constants
@@ -42,6 +49,12 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
           handleEvent(typedEvent);
           break;
         }
+      case ("com.fluxtion.example.shared.DataEvent"):
+        {
+          DataEvent typedEvent = (DataEvent) event;
+          handleEvent(typedEvent);
+          break;
+        }
       case ("com.fluxtion.example.shared.MyEvent"):
         {
           MyEvent typedEvent = (MyEvent) event;
@@ -52,38 +65,23 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
   }
 
   public void handleEvent(ConfigEvent typedEvent) {
-    switch (typedEvent.filterString()) {
-      case ("cfg.acl"):
-        myEventProcessor_1.handleMyVariableConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-      case ("java.util.Date"):
-        myEventProcessor_1.dateConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-      case ("maxConnection"):
-        myEventProcessor_1.handleMaxConnectionsConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-      case ("timeout"):
-        myEventProcessor_1.handleTimeoutConfig(typedEvent);
-        myEventProcessor_1.handleConfigEvent(typedEvent);
-        afterEvent();
-        return;
-    }
     //Default, no filter methods
-    myEventProcessor_1.handleConfigEvent(typedEvent);
-    myEventProcessor_1.unHandledConfig(typedEvent);
+    propagateControlledhandler_3.silentEvent(typedEvent);
+    //event stack unwind callbacks
+    afterEvent();
+  }
+
+  public void handleEvent(DataEvent typedEvent) {
+    //Default, no filter methods
+    dataEventHandler_1.handleEvent(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
 
   public void handleEvent(MyEvent typedEvent) {
     //Default, no filter methods
-    myEventProcessor_1.handleEvent(typedEvent);
+    propagateControlledhandler_3.broadcastEvent(typedEvent);
+    propagateControlledNode_5.update();
     //event stack unwind callbacks
     afterEvent();
   }
