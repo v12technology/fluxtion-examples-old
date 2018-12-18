@@ -23,7 +23,7 @@
                 <artifactId>fluxtion-maven-plugin</artifactId>
                 <version>${fluxtion.ver}</version>
                 <executions>
-                    <execution>
+<!--                    <execution>
                         <id>filtering</id>
                         <goals>
                             <goal>generate</goal>
@@ -80,6 +80,18 @@
                         <configuration>
                             <configClass>com.fluxtion.example.core.events.dirty.Builder</configClass>
                             <packageName>com.fluxtion.example.core.events.dirty.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>-->
+                    <execution>
+                        <id>clean</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.events.clean.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.events.clean.generated</packageName>
                             <className>SampleProcessor</className>
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
