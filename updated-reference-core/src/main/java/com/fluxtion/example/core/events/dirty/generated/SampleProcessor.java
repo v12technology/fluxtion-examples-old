@@ -37,8 +37,8 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
   private final DirtyAggregator dirtyAggregator_11 =
       new DirtyAggregator(dirtyNode_5, dirtyNode_7, dirtyNode_9);
   //Dirty flags
-  private boolean isDirty_dirtyNode_5 = false;
   private boolean isDirty_dirtyNode_9 = false;
+  private boolean isDirty_dirtyNode_5 = false;
   private boolean isDirty_dirtyNode_7 = false;
   //Filter constants
 
@@ -67,7 +67,7 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
     dataEventHandler_1.handleEvent(typedEvent);
     isDirty_dirtyNode_5 = dirtyNode_5.isDirty();
     isDirty_dirtyNode_7 = dirtyNode_7.isDirty();
-    if (isDirty_dirtyNode_7 | isDirty_dirtyNode_9 | isDirty_dirtyNode_5) {
+    if (isDirty_dirtyNode_9 | isDirty_dirtyNode_5 | isDirty_dirtyNode_7) {
       dirtyAggregator_11.publishDirty();
     }
     //event stack unwind callbacks
@@ -78,7 +78,7 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
     //Default, no filter methods
     myEventHandler_3.handleEvent(typedEvent);
     isDirty_dirtyNode_9 = dirtyNode_9.isDirty();
-    if (isDirty_dirtyNode_7 | isDirty_dirtyNode_9 | isDirty_dirtyNode_5) {
+    if (isDirty_dirtyNode_9 | isDirty_dirtyNode_5 | isDirty_dirtyNode_7) {
       dirtyAggregator_11.publishDirty();
     }
     //event stack unwind callbacks
@@ -88,8 +88,8 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
   @Override
   public void afterEvent() {
 
-    isDirty_dirtyNode_5 = false;
     isDirty_dirtyNode_9 = false;
+    isDirty_dirtyNode_5 = false;
     isDirty_dirtyNode_7 = false;
   }
 
