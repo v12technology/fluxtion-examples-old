@@ -32,7 +32,7 @@ public class SampleProcessor implements EventHandler, BatchHandler, Lifecycle {
   private final DataEventHandler dataEventHandler_3 = new DataEventHandler();
   private final MyEventHandler myEventHandler_5 = new MyEventHandler();
   private final ParentIdentifier parentIdentifier_7 =
-      new ParentIdentifier(dataEventHandler_1, dataEventHandler_3, myEventHandler_5);
+      new ParentIdentifier(dataEventHandler_3, dataEventHandler_1, myEventHandler_5);
   //Dirty flags
 
   //Filter constants
