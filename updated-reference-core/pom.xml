@@ -142,6 +142,30 @@
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>postevent</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.events.postevent.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.events.postevent.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>batch</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.events.batch.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.events.batch.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
