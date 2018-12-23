@@ -190,6 +190,18 @@
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>build-auditor</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.audit.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.audit.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
