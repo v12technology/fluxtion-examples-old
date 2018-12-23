@@ -22,7 +22,7 @@ import com.fluxtion.runtime.audit.Auditor;
  *
  * @author V12 Technology Ltd.
  */
-public class NodeAuditor implements Auditor{
+public class NodeAuditor implements Auditor {
 
     @Override
     public void nodeRegistered(Object node, String nodeName) {
@@ -48,5 +48,5 @@ public class NodeAuditor implements Auditor{
     public boolean auditInvocations() {
         return true;
     }
-    
+
 }

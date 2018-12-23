@@ -30,12 +30,11 @@ public class Builder extends SEPConfig {
 
     @Override
     public void buildConfig() {
-        addNode(new Combiner( 
+        addNode(new Combiner(
                 addNode(new ChildNode(addNode(new MyEventHandler()))),
                 addNode(new PipelineNode(addNode(new DataEventHandler())))
         ));
-        
+
         addAuditor(new NodeAuditor(), "nodeAuditor");
     }
-
 }
