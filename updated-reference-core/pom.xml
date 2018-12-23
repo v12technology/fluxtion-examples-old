@@ -202,6 +202,34 @@
                             <outputDirectory>src/main/java</outputDirectory>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>build-naming-strategies</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.outstyle.naming.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.outstyle.naming.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                            <nodeNamingClass>com.fluxtion.example.core.outstyle.naming.NamingStrategy</nodeNamingClass>
+                            <filterNamingClass>com.fluxtion.example.core.outstyle.naming.NamingStrategy</filterNamingClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>build-mappeddispatch</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <configClass>com.fluxtion.example.core.outstyle.mappeddispatch.Builder</configClass>
+                            <packageName>com.fluxtion.example.core.outstyle.mappeddispatch.generated</packageName>
+                            <className>SampleProcessor</className>
+                            <outputDirectory>src/main/java</outputDirectory>
+                            <nodeNamingClass>com.fluxtion.example.core.outstyle.naming.NamingStrategy</nodeNamingClass>
+                            <filterNamingClass>com.fluxtion.example.core.outstyle.naming.NamingStrategy</filterNamingClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
         </plugins>
