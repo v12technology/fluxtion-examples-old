@@ -24,6 +24,7 @@ obtained from V12 Technology Limited.
         <module>flight-delay</module>
         <module>credit-monitor</module>
         <module>sensor-monitoring</module>
+        <module>trading-monitor</module>
     </modules>
     
     <properties>
