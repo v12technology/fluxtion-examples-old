@@ -21,7 +21,6 @@ import com.fluxtion.api.partition.Partitioner;
 import com.fluxtion.examples.tradingmonitor.allasset.AllSymbolTradeMonitor;
 import com.fluxtion.examples.tradingmonitor.fluxCsvAssetPrice.Csv2AssetPrice;
 import com.fluxtion.examples.tradingmonitor.fluxCsvDeal.Csv2Deal;
-import com.fluxtion.examples.tradingmonitor.processor.TradeMonitor;
 import com.fluxtion.ext.text.api.util.CharStreamer;
 import com.fluxtion.ext.text.api.util.marshaller.DispatchingCsvMarshaller;
 import java.io.File;
@@ -34,15 +33,16 @@ import org.junit.Test;
  */
 public class MonitorTest {
 
-    @Test
-    public void testMonitor() throws IOException {
-
-        CharStreamer.stream(new File("src/test/resources/test-1.csv"), new DispatchingCsvMarshaller()
-                .addMarshaller(AssetPrice.class, new Csv2AssetPrice())
-                .addMarshaller(Deal.class, new Csv2Deal())
-                .addSink(new TradeMonitor())
-        ).noInit().sync().stream();
-    }
+//    @Test
+//    public void testMonitor() throws IOException {
+//
+//        CharStreamer.stream(new File("src/test/resources/test-1.csv"), new DispatchingCsvMarshaller()
+//                .addMarshaller(AssetPrice.class, new Csv2AssetPrice())
+//                .addMarshaller(Deal.class, new Csv2Deal())
+//                .addSink(new TradeMonitor())
+//        ).noInit().sync().stream();
+//    }
+    
     @Test
     public void testAllAssetMonitor() throws IOException {
 
