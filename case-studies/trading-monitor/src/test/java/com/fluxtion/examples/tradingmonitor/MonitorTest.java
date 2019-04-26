@@ -16,11 +16,11 @@
  */
 package com.fluxtion.examples.tradingmonitor;
 
-import com.fluxtion.api.event.Event;
 import com.fluxtion.api.partition.Partitioner;
-import com.fluxtion.examples.tradingmonitor.allasset.AllSymbolTradeMonitor;
 import com.fluxtion.examples.tradingmonitor.fluxCsvAssetPrice.Csv2AssetPrice;
 import com.fluxtion.examples.tradingmonitor.fluxCsvDeal.Csv2Deal;
+import com.fluxtion.examples.tradingmonitor.symbol.SymbolTradeMonitor;
+import com.fluxtion.ext.text.api.event.EofEvent;
 import com.fluxtion.ext.text.api.util.CharStreamer;
 import com.fluxtion.ext.text.api.util.marshaller.DispatchingCsvMarshaller;
 import java.io.File;
@@ -32,38 +32,23 @@ import org.junit.Test;
  * @author V12 Technology Ltd.
  */
 public class MonitorTest {
-
-//    @Test
-//    public void testMonitor() throws IOException {
-//
-//        CharStreamer.stream(new File("src/test/resources/test-1.csv"), new DispatchingCsvMarshaller()
-//                .addMarshaller(AssetPrice.class, new Csv2AssetPrice())
-//                .addMarshaller(Deal.class, new Csv2Deal())
-//                .addSink(new TradeMonitor())
-//        ).noInit().sync().stream();
-//    }
     
     @Test
     public void testAllAssetMonitor() throws IOException {
 
-        Partitioner<AllSymbolTradeMonitor> partitioner = new Partitioner(AllSymbolTradeMonitor::new);
-        partitioner.keyPartitioner(MonitorTest::keyGen);
+        AssetPartitioner strat = new AssetPartitioner();
+        Partitioner<SymbolTradeMonitor> partitioner = new Partitioner<>(SymbolTradeMonitor::new, strat::initMonitor);
+        partitioner.keyPartitioner(strat::keyGen);
         
         CharStreamer.stream(new File("src/test/resources/test-1.csv"), new DispatchingCsvMarshaller()
                 .addMarshaller(AssetPrice.class, new Csv2AssetPrice())
                 .addMarshaller(Deal.class, new Csv2Deal())
                 .addSink(partitioner)
         ).noInit().sync().stream();
+        
+        strat.getPortfolio().onEvent(EofEvent.EOF);
+        strat.getPortfolio().tearDown();
     }
-    
-    public static CharSequence keyGen(Event event) {
-        if (event instanceof AssetPrice) {
-            return ((AssetPrice)event).getSymbol();
-        }
-        if (event instanceof Deal) {
-            return ((Deal)event).getSymbol();
-        }
-        return null;
-    }
+
 
 }
