@@ -19,6 +19,7 @@ package com.fluxtion.examples.tradingmonitor;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.TearDown;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,12 +29,22 @@ import java.util.HashMap;
 public class PortfolioTradePos {
    
     private HashMap<String, AssetTradePos> symbol2Pos;
+    private ArrayList<AssetTradePos> assets;
     private double pnl;
     
     @EventHandler
     public void positionUpdate(AssetTradePos pos){
         symbol2Pos.putIfAbsent(pos.getSymbol(), pos);
-        pnl = symbol2Pos.values().stream().mapToDouble(AssetTradePos::getPnl).sum();
+        if(assets.size()!=symbol2Pos.size()){
+            assets.clear();
+            assets.addAll(symbol2Pos.values());
+        }
+        pnl = 0;
+        for (int i = 0; i < assets.size(); i++) {
+            pnl += assets.get(i).getPnl();
+        }
+        //uses streams slows the processing down by 25% and introduces gc's
+//        pnl = symbol2Pos.values().stream().mapToDouble(AssetTradePos::getPnl).sum();
     }
 
     public double getPnl() {
@@ -52,6 +63,7 @@ public class PortfolioTradePos {
     @Initialise
     public void init(){
         symbol2Pos = new HashMap<>();
+        assets = new ArrayList<>();
     }
     
 }
