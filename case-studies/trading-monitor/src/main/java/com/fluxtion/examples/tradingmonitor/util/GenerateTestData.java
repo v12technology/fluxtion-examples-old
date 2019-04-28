@@ -18,7 +18,7 @@ public class GenerateTestData {
     public static void main(String[] args) {
         logger.info("info message");
         logHeaders();
-        for(int i = 0; i<1_000_000; i++){
+        for(int i = 0; i<2_000_000; i++){
             logPrice("MSFT", 10);
             logTrade("MSFT",10,2);
         }

@@ -21,6 +21,7 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
+        System.out.println("starting");
         long now = System.nanoTime();
         //partiioning strategy - by asset symbol
         AssetPartitioner strat = new AssetPartitioner();

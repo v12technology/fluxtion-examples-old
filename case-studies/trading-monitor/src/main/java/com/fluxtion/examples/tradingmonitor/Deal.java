@@ -25,7 +25,7 @@ import com.fluxtion.ext.text.api.annotation.CsvMarshaller;
  * @author V12 Technology Ltd.
  */
 @CsvMarshaller
-@Disabled
+//@Disabled
 public class Deal extends Event{
     
     private CharSequence symbol;

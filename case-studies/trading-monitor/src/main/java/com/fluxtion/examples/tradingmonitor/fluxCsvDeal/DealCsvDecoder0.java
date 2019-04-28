@@ -59,6 +59,9 @@ public class DealCsvDecoder0 implements RowProcessor<Deal> {
   public boolean charEvent(CharEvent event) {
     final char character = event.getCharacter();
     passedValidation = true;
+    if (character == '\r') {
+      return false;
+    }
     if (character == '\n') {
       return processRow();
     }

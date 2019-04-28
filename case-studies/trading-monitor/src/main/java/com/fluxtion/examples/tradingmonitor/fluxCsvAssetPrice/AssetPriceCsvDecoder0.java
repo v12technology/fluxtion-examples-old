@@ -56,6 +56,9 @@ public class AssetPriceCsvDecoder0 implements RowProcessor<AssetPrice> {
   public boolean charEvent(CharEvent event) {
     final char character = event.getCharacter();
     passedValidation = true;
+    if (character == '\r') {
+      return false;
+    }
     if (character == '\n') {
       return processRow();
     }
