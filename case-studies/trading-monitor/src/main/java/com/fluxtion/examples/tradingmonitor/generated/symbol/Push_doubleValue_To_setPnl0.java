@@ -1,5 +1,6 @@
 package com.fluxtion.examples.tradingmonitor.generated.symbol;
 
+import com.fluxtion.examples.tradingmonitor.generated.symbol.*;
 import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.NoEventReference;
@@ -7,7 +8,7 @@ import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.api.annotations.PushReference;
 import com.fluxtion.examples.tradingmonitor.AssetTradePos;
-import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_doubleValue_By_subtract0;
+import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_doubleValue_By_add0;
 import com.fluxtion.ext.streaming.api.FilterWrapper;
 import com.fluxtion.ext.streaming.api.Test;
 import com.fluxtion.ext.streaming.api.Wrapper;
@@ -25,7 +26,7 @@ import com.fluxtion.ext.streaming.api.stream.AbstractFilterWrapper;
  */
 public class Push_doubleValue_To_setPnl0 implements Wrapper<Push_doubleValue_To_setPnl0> {
 
-  public Map_doubleValue_By_subtract0 filterSubject;
+  public Map_doubleValue_By_add0 filterSubject;
   @PushReference public AssetTradePos f;
 
   @OnEvent

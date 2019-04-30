@@ -16,6 +16,7 @@
  */
 package com.fluxtion.examples.tradingmonitor.generated.portfolio;
 
+import com.fluxtion.examples.tradingmonitor.generated.portfolio.*;
 import com.fluxtion.api.lifecycle.BatchHandler;
 import com.fluxtion.api.lifecycle.EventHandler;
 import com.fluxtion.api.lifecycle.Lifecycle;
@@ -68,7 +69,7 @@ public class PortfolioTradeMonitor implements EventHandler, BatchHandler, Lifecy
     map_PortfolioTradePos_By_increment0_6.setResetImmediate(true);
     map_PortfolioTradePos_By_increment0_6.filterSubject = filter_getPnl_By_lessThan0_4;
     map_PortfolioTradePos_By_increment0_6.f = count_5;
-    numericPredicates_3.doubleLimit_0 = (double) -10000.0;
+    numericPredicates_3.doubleLimit_0 = (double) -1000.0;
     numericPredicates_3.doubleLimit_1 = (double) Double.NaN;
     consoleMsg_1.setMethodSupplier("doubleValue");
   }

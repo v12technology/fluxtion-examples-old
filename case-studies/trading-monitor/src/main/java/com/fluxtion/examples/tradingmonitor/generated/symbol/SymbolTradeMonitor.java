@@ -16,6 +16,7 @@
  */
 package com.fluxtion.examples.tradingmonitor.generated.symbol;
 
+import com.fluxtion.examples.tradingmonitor.generated.symbol.*;
 import com.fluxtion.api.lifecycle.BatchHandler;
 import com.fluxtion.api.lifecycle.EventHandler;
 import com.fluxtion.api.lifecycle.Lifecycle;
@@ -26,6 +27,7 @@ import com.fluxtion.examples.tradingmonitor.AssetPrice;
 import com.fluxtion.examples.tradingmonitor.AssetTradePos;
 import com.fluxtion.examples.tradingmonitor.Deal;
 import com.fluxtion.ext.streaming.api.ReusableEventHandler;
+import com.fluxtion.ext.streaming.api.numeric.ConstantNumber;
 import com.fluxtion.ext.streaming.api.stream.NumericPredicates;
 import com.fluxtion.ext.streaming.api.stream.StreamFunctions.Count;
 import com.fluxtion.ext.streaming.api.stream.StreamFunctions.Sum;
@@ -33,62 +35,67 @@ import com.fluxtion.ext.streaming.api.stream.StreamFunctions.Sum;
 public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle {
 
   //Node declarations
-  private final Count count_11 = new Count();
-  private final Count count_17 = new Count();
+  private final ConstantNumber constantNumber_3 = new ConstantNumber(-1.0);
+  private final Count count_13 = new Count();
+  private final Count count_19 = new Count();
   public final ReusableEventHandler deals = new ReusableEventHandler(2147483647, Deal.class);
   private final Map_getSize_By_multiply0 map_getSize_By_multiply0_2 =
       new Map_getSize_By_multiply0();
-  private final NumericPredicates numericPredicates_9 = new NumericPredicates();
-  private final NumericPredicates numericPredicates_15 = new NumericPredicates();
+  private final Map_doubleValue_By_multiply0 map_doubleValue_By_multiply0_4 =
+      new Map_doubleValue_By_multiply0();
+  private final NumericPredicates numericPredicates_11 = new NumericPredicates();
+  private final NumericPredicates numericPredicates_17 = new NumericPredicates();
   public final ReusableEventHandler prices = new ReusableEventHandler(2147483647, AssetPrice.class);
-  private final Sum sum_3 = new Sum();
-  public final Map_Number_By_addValue0 cost = new Map_Number_By_addValue0();
-  private final Push_doubleValue_To_setCashPos0 push_doubleValue_To_setCashPos0_20 =
-      new Push_doubleValue_To_setCashPos0();
   private final Sum sum_5 = new Sum();
-  public final Map_getSize_By_addValue0 pos = new Map_getSize_By_addValue0();
-  private final Filter_Number_By_outsideRange0 filter_Number_By_outsideRange0_16 =
+  public final Map_Number_By_addValue0 cashPos = new Map_Number_By_addValue0();
+  private final Push_doubleValue_To_setCashPos0 push_doubleValue_To_setCashPos0_22 =
+      new Push_doubleValue_To_setCashPos0();
+  private final Sum sum_7 = new Sum();
+  public final Map_getSize_By_addValue0 assetPos = new Map_getSize_By_addValue0();
+  private final Filter_Number_By_outsideRange0 filter_Number_By_outsideRange0_18 =
       new Filter_Number_By_outsideRange0();
-  private final Map_Number_By_increment1 map_Number_By_increment1_18 =
+  private final Map_Number_By_increment1 map_Number_By_increment1_20 =
       new Map_Number_By_increment1();
-  public final Map_doubleValue_By_multiply0 mtm = new Map_doubleValue_By_multiply0();
-  public final Map_doubleValue_By_subtract0 pnl = new Map_doubleValue_By_subtract0();
-  private final Filter_Number_By_lessThan0 filter_Number_By_lessThan0_10 =
+  public final Map_doubleValue_By_multiply1 mtm = new Map_doubleValue_By_multiply1();
+  public final Map_doubleValue_By_add0 pnl = new Map_doubleValue_By_add0();
+  private final Filter_Number_By_lessThan0 filter_Number_By_lessThan0_12 =
       new Filter_Number_By_lessThan0();
-  private final Map_Number_By_increment0 map_Number_By_increment0_12 =
+  private final Map_Number_By_increment0 map_Number_By_increment0_14 =
       new Map_Number_By_increment0();
-  private final Push_doubleValue_To_setAssetPos0 push_doubleValue_To_setAssetPos0_21 =
+  private final Push_doubleValue_To_setAssetPos0 push_doubleValue_To_setAssetPos0_23 =
       new Push_doubleValue_To_setAssetPos0();
-  private final Push_doubleValue_To_setMtm0 push_doubleValue_To_setMtm0_22 =
+  private final Push_doubleValue_To_setMtm0 push_doubleValue_To_setMtm0_24 =
       new Push_doubleValue_To_setMtm0();
-  private final Push_doubleValue_To_setPnl0 push_doubleValue_To_setPnl0_23 =
+  private final Push_doubleValue_To_setPnl0 push_doubleValue_To_setPnl0_25 =
       new Push_doubleValue_To_setPnl0();
-  private final Push_intValue_To_setPnlBreaches0 push_intValue_To_setPnlBreaches0_14 =
+  private final Push_intValue_To_setPnlBreaches0 push_intValue_To_setPnlBreaches0_16 =
       new Push_intValue_To_setPnlBreaches0();
-  private final Push_intValue_To_setPositionBreaches0 push_intValue_To_setPositionBreaches0_19 =
+  private final Push_intValue_To_setPositionBreaches0 push_intValue_To_setPositionBreaches0_21 =
       new Push_intValue_To_setPositionBreaches0();
   public final AssetTradePos assetTradePos = new AssetTradePos();
   private final EventPublsher eventPublsher_1 = new EventPublsher();
   //Dirty flags
+  private boolean isDirty_assetPos = false;
   private boolean isDirty_assetTradePos = false;
-  private boolean isDirty_cost = false;
+  private boolean isDirty_cashPos = false;
+  private boolean isDirty_constantNumber_3 = false;
   private boolean isDirty_deals = false;
   private boolean isDirty_eventPublsher_1 = false;
-  private boolean isDirty_filter_Number_By_lessThan0_10 = false;
-  private boolean isDirty_filter_Number_By_outsideRange0_16 = false;
-  private boolean isDirty_map_Number_By_increment1_18 = false;
-  private boolean isDirty_map_Number_By_increment0_12 = false;
+  private boolean isDirty_filter_Number_By_lessThan0_12 = false;
+  private boolean isDirty_filter_Number_By_outsideRange0_18 = false;
+  private boolean isDirty_map_Number_By_increment1_20 = false;
+  private boolean isDirty_map_Number_By_increment0_14 = false;
+  private boolean isDirty_map_doubleValue_By_multiply0_4 = false;
   private boolean isDirty_map_getSize_By_multiply0_2 = false;
   private boolean isDirty_mtm = false;
   private boolean isDirty_pnl = false;
-  private boolean isDirty_pos = false;
   private boolean isDirty_prices = false;
-  private boolean isDirty_push_doubleValue_To_setAssetPos0_21 = false;
-  private boolean isDirty_push_doubleValue_To_setCashPos0_20 = false;
-  private boolean isDirty_push_doubleValue_To_setMtm0_22 = false;
-  private boolean isDirty_push_doubleValue_To_setPnl0_23 = false;
-  private boolean isDirty_push_intValue_To_setPnlBreaches0_14 = false;
-  private boolean isDirty_push_intValue_To_setPositionBreaches0_19 = false;
+  private boolean isDirty_push_doubleValue_To_setAssetPos0_23 = false;
+  private boolean isDirty_push_doubleValue_To_setCashPos0_22 = false;
+  private boolean isDirty_push_doubleValue_To_setMtm0_24 = false;
+  private boolean isDirty_push_doubleValue_To_setPnl0_25 = false;
+  private boolean isDirty_push_intValue_To_setPnlBreaches0_16 = false;
+  private boolean isDirty_push_intValue_To_setPositionBreaches0_21 = false;
   //Filter constants
 
   public SymbolTradeMonitor() {
@@ -100,69 +107,74 @@ public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle
     assetTradePos.setPnl(0.0);
     assetTradePos.setPnlBreaches(0);
     assetTradePos.setPositionBreaches(0);
-    filter_Number_By_lessThan0_10.setAlwaysReset(false);
-    filter_Number_By_lessThan0_10.setNotifyOnChangeOnly(true);
-    filter_Number_By_lessThan0_10.setResetImmediate(true);
-    filter_Number_By_lessThan0_10.filterSubject = pnl;
-    filter_Number_By_lessThan0_10.source_0 = pnl;
-    filter_Number_By_lessThan0_10.f = numericPredicates_9;
-    filter_Number_By_outsideRange0_16.setAlwaysReset(false);
-    filter_Number_By_outsideRange0_16.setNotifyOnChangeOnly(true);
-    filter_Number_By_outsideRange0_16.setResetImmediate(true);
-    filter_Number_By_outsideRange0_16.filterSubject = pos;
-    filter_Number_By_outsideRange0_16.source_0 = pos;
-    filter_Number_By_outsideRange0_16.f = numericPredicates_15;
-    cost.setAlwaysReset(false);
-    cost.setNotifyOnChangeOnly(false);
-    cost.setResetImmediate(true);
-    cost.filterSubject = map_getSize_By_multiply0_2;
-    cost.f = sum_3;
-    map_Number_By_increment1_18.setAlwaysReset(false);
-    map_Number_By_increment1_18.setNotifyOnChangeOnly(false);
-    map_Number_By_increment1_18.setResetImmediate(true);
-    map_Number_By_increment1_18.filterSubject = filter_Number_By_outsideRange0_16;
-    map_Number_By_increment1_18.f = count_17;
-    map_Number_By_increment0_12.setAlwaysReset(false);
-    map_Number_By_increment0_12.setNotifyOnChangeOnly(false);
-    map_Number_By_increment0_12.setResetImmediate(true);
-    map_Number_By_increment0_12.filterSubject = filter_Number_By_lessThan0_10;
-    map_Number_By_increment0_12.f = count_11;
-    mtm.setAlwaysReset(false);
-    mtm.setNotifyOnChangeOnly(false);
-    mtm.setResetImmediate(true);
-    mtm.filterSubject = pos;
-    mtm.source_0 = prices;
+    filter_Number_By_lessThan0_12.setAlwaysReset(false);
+    filter_Number_By_lessThan0_12.setNotifyOnChangeOnly(true);
+    filter_Number_By_lessThan0_12.setResetImmediate(true);
+    filter_Number_By_lessThan0_12.filterSubject = pnl;
+    filter_Number_By_lessThan0_12.source_0 = pnl;
+    filter_Number_By_lessThan0_12.f = numericPredicates_11;
+    filter_Number_By_outsideRange0_18.setAlwaysReset(false);
+    filter_Number_By_outsideRange0_18.setNotifyOnChangeOnly(true);
+    filter_Number_By_outsideRange0_18.setResetImmediate(true);
+    filter_Number_By_outsideRange0_18.filterSubject = assetPos;
+    filter_Number_By_outsideRange0_18.source_0 = assetPos;
+    filter_Number_By_outsideRange0_18.f = numericPredicates_17;
+    cashPos.setAlwaysReset(false);
+    cashPos.setNotifyOnChangeOnly(false);
+    cashPos.setResetImmediate(true);
+    cashPos.filterSubject = map_doubleValue_By_multiply0_4;
+    cashPos.f = sum_5;
+    map_Number_By_increment1_20.setAlwaysReset(false);
+    map_Number_By_increment1_20.setNotifyOnChangeOnly(false);
+    map_Number_By_increment1_20.setResetImmediate(true);
+    map_Number_By_increment1_20.filterSubject = filter_Number_By_outsideRange0_18;
+    map_Number_By_increment1_20.f = count_19;
+    map_Number_By_increment0_14.setAlwaysReset(false);
+    map_Number_By_increment0_14.setNotifyOnChangeOnly(false);
+    map_Number_By_increment0_14.setResetImmediate(true);
+    map_Number_By_increment0_14.filterSubject = filter_Number_By_lessThan0_12;
+    map_Number_By_increment0_14.f = count_13;
     pnl.setAlwaysReset(false);
     pnl.setNotifyOnChangeOnly(false);
     pnl.setResetImmediate(true);
     pnl.filterSubject = mtm;
-    pnl.source_0 = cost;
-    pos.setAlwaysReset(false);
-    pos.setNotifyOnChangeOnly(false);
-    pos.setResetImmediate(true);
-    pos.filterSubject = deals;
-    pos.f = sum_5;
+    pnl.source_0 = cashPos;
+    mtm.setAlwaysReset(false);
+    mtm.setNotifyOnChangeOnly(false);
+    mtm.setResetImmediate(true);
+    mtm.filterSubject = assetPos;
+    mtm.source_0 = prices;
+    map_doubleValue_By_multiply0_4.setAlwaysReset(false);
+    map_doubleValue_By_multiply0_4.setNotifyOnChangeOnly(false);
+    map_doubleValue_By_multiply0_4.setResetImmediate(true);
+    map_doubleValue_By_multiply0_4.filterSubject = map_getSize_By_multiply0_2;
+    map_doubleValue_By_multiply0_4.source_0 = constantNumber_3;
+    assetPos.setAlwaysReset(false);
+    assetPos.setNotifyOnChangeOnly(false);
+    assetPos.setResetImmediate(true);
+    assetPos.filterSubject = deals;
+    assetPos.f = sum_7;
     map_getSize_By_multiply0_2.setAlwaysReset(false);
     map_getSize_By_multiply0_2.setNotifyOnChangeOnly(false);
     map_getSize_By_multiply0_2.setResetImmediate(true);
     map_getSize_By_multiply0_2.filterSubject = deals;
     map_getSize_By_multiply0_2.source_0 = deals;
-    push_doubleValue_To_setAssetPos0_21.filterSubject = pos;
-    push_doubleValue_To_setAssetPos0_21.f = assetTradePos;
-    push_doubleValue_To_setCashPos0_20.filterSubject = cost;
-    push_doubleValue_To_setCashPos0_20.f = assetTradePos;
-    push_doubleValue_To_setMtm0_22.filterSubject = mtm;
-    push_doubleValue_To_setMtm0_22.f = assetTradePos;
-    push_doubleValue_To_setPnl0_23.filterSubject = pnl;
-    push_doubleValue_To_setPnl0_23.f = assetTradePos;
-    push_intValue_To_setPnlBreaches0_14.filterSubject = map_Number_By_increment0_12;
-    push_intValue_To_setPnlBreaches0_14.f = assetTradePos;
-    push_intValue_To_setPositionBreaches0_19.filterSubject = map_Number_By_increment1_18;
-    push_intValue_To_setPositionBreaches0_19.f = assetTradePos;
-    numericPredicates_9.doubleLimit_0 = (double) -2000.0;
-    numericPredicates_9.doubleLimit_1 = (double) Double.NaN;
-    numericPredicates_15.doubleLimit_0 = (double) -200.0;
-    numericPredicates_15.doubleLimit_1 = (double) 200.0;
+    push_doubleValue_To_setAssetPos0_23.filterSubject = assetPos;
+    push_doubleValue_To_setAssetPos0_23.f = assetTradePos;
+    push_doubleValue_To_setCashPos0_22.filterSubject = cashPos;
+    push_doubleValue_To_setCashPos0_22.f = assetTradePos;
+    push_doubleValue_To_setMtm0_24.filterSubject = mtm;
+    push_doubleValue_To_setMtm0_24.f = assetTradePos;
+    push_doubleValue_To_setPnl0_25.filterSubject = pnl;
+    push_doubleValue_To_setPnl0_25.f = assetTradePos;
+    push_intValue_To_setPnlBreaches0_16.filterSubject = map_Number_By_increment0_14;
+    push_intValue_To_setPnlBreaches0_16.f = assetTradePos;
+    push_intValue_To_setPositionBreaches0_21.filterSubject = map_Number_By_increment1_20;
+    push_intValue_To_setPositionBreaches0_21.f = assetTradePos;
+    numericPredicates_11.doubleLimit_0 = (double) -200.0;
+    numericPredicates_11.doubleLimit_1 = (double) Double.NaN;
+    numericPredicates_17.doubleLimit_0 = (double) -200.0;
+    numericPredicates_17.doubleLimit_1 = (double) 200.0;
   }
 
   @Override
@@ -204,39 +216,39 @@ public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle
     if (isDirty_prices) {
       mtm.updated_source_0(prices);
     }
-    if (isDirty_pos | isDirty_prices) {
+    if (isDirty_assetPos | isDirty_prices) {
       isDirty_mtm = mtm.onEvent();
       if (isDirty_mtm) {
         pnl.updated_filterSubject(mtm);
       }
     }
-    if (isDirty_cost | isDirty_mtm) {
+    if (isDirty_cashPos | isDirty_mtm) {
       isDirty_pnl = pnl.onEvent();
     }
     if (isDirty_pnl) {
-      isDirty_filter_Number_By_lessThan0_10 = filter_Number_By_lessThan0_10.onEvent();
-      if (isDirty_filter_Number_By_lessThan0_10) {
-        map_Number_By_increment0_12.updated_filterSubject(filter_Number_By_lessThan0_10);
+      isDirty_filter_Number_By_lessThan0_12 = filter_Number_By_lessThan0_12.onEvent();
+      if (isDirty_filter_Number_By_lessThan0_12) {
+        map_Number_By_increment0_14.updated_filterSubject(filter_Number_By_lessThan0_12);
       }
     }
-    if (isDirty_filter_Number_By_lessThan0_10) {
-      isDirty_map_Number_By_increment0_12 = map_Number_By_increment0_12.onEvent();
+    if (isDirty_filter_Number_By_lessThan0_12) {
+      isDirty_map_Number_By_increment0_14 = map_Number_By_increment0_14.onEvent();
     }
     if (isDirty_mtm) {
-      isDirty_push_doubleValue_To_setMtm0_22 = push_doubleValue_To_setMtm0_22.onEvent();
+      isDirty_push_doubleValue_To_setMtm0_24 = push_doubleValue_To_setMtm0_24.onEvent();
     }
     if (isDirty_pnl) {
-      isDirty_push_doubleValue_To_setPnl0_23 = push_doubleValue_To_setPnl0_23.onEvent();
+      isDirty_push_doubleValue_To_setPnl0_25 = push_doubleValue_To_setPnl0_25.onEvent();
     }
-    if (isDirty_map_Number_By_increment0_12) {
-      isDirty_push_intValue_To_setPnlBreaches0_14 = push_intValue_To_setPnlBreaches0_14.onEvent();
+    if (isDirty_map_Number_By_increment0_14) {
+      isDirty_push_intValue_To_setPnlBreaches0_16 = push_intValue_To_setPnlBreaches0_16.onEvent();
     }
-    if (isDirty_push_doubleValue_To_setAssetPos0_21
-        | isDirty_push_doubleValue_To_setCashPos0_20
-        | isDirty_push_doubleValue_To_setMtm0_22
-        | isDirty_push_doubleValue_To_setPnl0_23
-        | isDirty_push_intValue_To_setPnlBreaches0_14
-        | isDirty_push_intValue_To_setPositionBreaches0_19) {
+    if (isDirty_push_doubleValue_To_setAssetPos0_23
+        | isDirty_push_doubleValue_To_setCashPos0_22
+        | isDirty_push_doubleValue_To_setMtm0_24
+        | isDirty_push_doubleValue_To_setPnl0_25
+        | isDirty_push_intValue_To_setPnlBreaches0_16
+        | isDirty_push_intValue_To_setPositionBreaches0_21) {
       isDirty_assetTradePos = assetTradePos.updated();
       if (isDirty_assetTradePos) {
         eventPublsher_1.nodeUpdate(assetTradePos);
@@ -253,78 +265,84 @@ public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle
     if (isDirty_deals) {
       map_getSize_By_multiply0_2.updated_filterSubject(deals);
       map_getSize_By_multiply0_2.updated_source_0(deals);
-      pos.updated_filterSubject(deals);
+      assetPos.updated_filterSubject(deals);
     }
     if (isDirty_deals) {
       isDirty_map_getSize_By_multiply0_2 = map_getSize_By_multiply0_2.onEvent();
       if (isDirty_map_getSize_By_multiply0_2) {
-        cost.updated_filterSubject(map_getSize_By_multiply0_2);
+        map_doubleValue_By_multiply0_4.updated_filterSubject(map_getSize_By_multiply0_2);
       }
     }
-    if (isDirty_map_getSize_By_multiply0_2) {
-      isDirty_cost = cost.onEvent();
-      if (isDirty_cost) {
-        pnl.updated_source_0(cost);
+    if (isDirty_constantNumber_3 | isDirty_map_getSize_By_multiply0_2) {
+      isDirty_map_doubleValue_By_multiply0_4 = map_doubleValue_By_multiply0_4.onEvent();
+      if (isDirty_map_doubleValue_By_multiply0_4) {
+        cashPos.updated_filterSubject(map_doubleValue_By_multiply0_4);
       }
     }
-    if (isDirty_cost) {
-      isDirty_push_doubleValue_To_setCashPos0_20 = push_doubleValue_To_setCashPos0_20.onEvent();
+    if (isDirty_map_doubleValue_By_multiply0_4) {
+      isDirty_cashPos = cashPos.onEvent();
+      if (isDirty_cashPos) {
+        pnl.updated_source_0(cashPos);
+      }
+    }
+    if (isDirty_cashPos) {
+      isDirty_push_doubleValue_To_setCashPos0_22 = push_doubleValue_To_setCashPos0_22.onEvent();
     }
     if (isDirty_deals) {
-      isDirty_pos = pos.onEvent();
-      if (isDirty_pos) {
-        mtm.updated_filterSubject(pos);
+      isDirty_assetPos = assetPos.onEvent();
+      if (isDirty_assetPos) {
+        mtm.updated_filterSubject(assetPos);
       }
     }
-    if (isDirty_pos) {
-      isDirty_filter_Number_By_outsideRange0_16 = filter_Number_By_outsideRange0_16.onEvent();
-      if (isDirty_filter_Number_By_outsideRange0_16) {
-        map_Number_By_increment1_18.updated_filterSubject(filter_Number_By_outsideRange0_16);
+    if (isDirty_assetPos) {
+      isDirty_filter_Number_By_outsideRange0_18 = filter_Number_By_outsideRange0_18.onEvent();
+      if (isDirty_filter_Number_By_outsideRange0_18) {
+        map_Number_By_increment1_20.updated_filterSubject(filter_Number_By_outsideRange0_18);
       }
     }
-    if (isDirty_filter_Number_By_outsideRange0_16) {
-      isDirty_map_Number_By_increment1_18 = map_Number_By_increment1_18.onEvent();
+    if (isDirty_filter_Number_By_outsideRange0_18) {
+      isDirty_map_Number_By_increment1_20 = map_Number_By_increment1_20.onEvent();
     }
-    if (isDirty_pos | isDirty_prices) {
+    if (isDirty_assetPos | isDirty_prices) {
       isDirty_mtm = mtm.onEvent();
       if (isDirty_mtm) {
         pnl.updated_filterSubject(mtm);
       }
     }
-    if (isDirty_cost | isDirty_mtm) {
+    if (isDirty_cashPos | isDirty_mtm) {
       isDirty_pnl = pnl.onEvent();
     }
     if (isDirty_pnl) {
-      isDirty_filter_Number_By_lessThan0_10 = filter_Number_By_lessThan0_10.onEvent();
-      if (isDirty_filter_Number_By_lessThan0_10) {
-        map_Number_By_increment0_12.updated_filterSubject(filter_Number_By_lessThan0_10);
+      isDirty_filter_Number_By_lessThan0_12 = filter_Number_By_lessThan0_12.onEvent();
+      if (isDirty_filter_Number_By_lessThan0_12) {
+        map_Number_By_increment0_14.updated_filterSubject(filter_Number_By_lessThan0_12);
       }
     }
-    if (isDirty_filter_Number_By_lessThan0_10) {
-      isDirty_map_Number_By_increment0_12 = map_Number_By_increment0_12.onEvent();
+    if (isDirty_filter_Number_By_lessThan0_12) {
+      isDirty_map_Number_By_increment0_14 = map_Number_By_increment0_14.onEvent();
     }
-    if (isDirty_pos) {
-      isDirty_push_doubleValue_To_setAssetPos0_21 = push_doubleValue_To_setAssetPos0_21.onEvent();
+    if (isDirty_assetPos) {
+      isDirty_push_doubleValue_To_setAssetPos0_23 = push_doubleValue_To_setAssetPos0_23.onEvent();
     }
     if (isDirty_mtm) {
-      isDirty_push_doubleValue_To_setMtm0_22 = push_doubleValue_To_setMtm0_22.onEvent();
+      isDirty_push_doubleValue_To_setMtm0_24 = push_doubleValue_To_setMtm0_24.onEvent();
     }
     if (isDirty_pnl) {
-      isDirty_push_doubleValue_To_setPnl0_23 = push_doubleValue_To_setPnl0_23.onEvent();
+      isDirty_push_doubleValue_To_setPnl0_25 = push_doubleValue_To_setPnl0_25.onEvent();
     }
-    if (isDirty_map_Number_By_increment0_12) {
-      isDirty_push_intValue_To_setPnlBreaches0_14 = push_intValue_To_setPnlBreaches0_14.onEvent();
+    if (isDirty_map_Number_By_increment0_14) {
+      isDirty_push_intValue_To_setPnlBreaches0_16 = push_intValue_To_setPnlBreaches0_16.onEvent();
     }
-    if (isDirty_map_Number_By_increment1_18) {
-      isDirty_push_intValue_To_setPositionBreaches0_19 =
-          push_intValue_To_setPositionBreaches0_19.onEvent();
+    if (isDirty_map_Number_By_increment1_20) {
+      isDirty_push_intValue_To_setPositionBreaches0_21 =
+          push_intValue_To_setPositionBreaches0_21.onEvent();
     }
-    if (isDirty_push_doubleValue_To_setAssetPos0_21
-        | isDirty_push_doubleValue_To_setCashPos0_20
-        | isDirty_push_doubleValue_To_setMtm0_22
-        | isDirty_push_doubleValue_To_setPnl0_23
-        | isDirty_push_intValue_To_setPnlBreaches0_14
-        | isDirty_push_intValue_To_setPositionBreaches0_19) {
+    if (isDirty_push_doubleValue_To_setAssetPos0_23
+        | isDirty_push_doubleValue_To_setCashPos0_22
+        | isDirty_push_doubleValue_To_setMtm0_24
+        | isDirty_push_doubleValue_To_setPnl0_25
+        | isDirty_push_intValue_To_setPnlBreaches0_16
+        | isDirty_push_intValue_To_setPositionBreaches0_21) {
       isDirty_assetTradePos = assetTradePos.updated();
       if (isDirty_assetTradePos) {
         eventPublsher_1.nodeUpdate(assetTradePos);
@@ -336,44 +354,47 @@ public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle
 
   @Override
   public void afterEvent() {
-    map_Number_By_increment0_12.resetAfterEvent();
-    filter_Number_By_lessThan0_10.resetAfterEvent();
-    map_Number_By_increment1_18.resetAfterEvent();
-    filter_Number_By_outsideRange0_16.resetAfterEvent();
-    pos.resetAfterEvent();
-    cost.resetAfterEvent();
+    map_Number_By_increment0_14.resetAfterEvent();
+    filter_Number_By_lessThan0_12.resetAfterEvent();
+    map_Number_By_increment1_20.resetAfterEvent();
+    filter_Number_By_outsideRange0_18.resetAfterEvent();
+    assetPos.resetAfterEvent();
+    cashPos.resetAfterEvent();
+    isDirty_assetPos = false;
     isDirty_assetTradePos = false;
-    isDirty_cost = false;
+    isDirty_cashPos = false;
+    isDirty_constantNumber_3 = false;
     isDirty_deals = false;
     isDirty_eventPublsher_1 = false;
-    isDirty_filter_Number_By_lessThan0_10 = false;
-    isDirty_filter_Number_By_outsideRange0_16 = false;
-    isDirty_map_Number_By_increment1_18 = false;
-    isDirty_map_Number_By_increment0_12 = false;
+    isDirty_filter_Number_By_lessThan0_12 = false;
+    isDirty_filter_Number_By_outsideRange0_18 = false;
+    isDirty_map_Number_By_increment1_20 = false;
+    isDirty_map_Number_By_increment0_14 = false;
+    isDirty_map_doubleValue_By_multiply0_4 = false;
     isDirty_map_getSize_By_multiply0_2 = false;
     isDirty_mtm = false;
     isDirty_pnl = false;
-    isDirty_pos = false;
     isDirty_prices = false;
-    isDirty_push_doubleValue_To_setAssetPos0_21 = false;
-    isDirty_push_doubleValue_To_setCashPos0_20 = false;
-    isDirty_push_doubleValue_To_setMtm0_22 = false;
-    isDirty_push_doubleValue_To_setPnl0_23 = false;
-    isDirty_push_intValue_To_setPnlBreaches0_14 = false;
-    isDirty_push_intValue_To_setPositionBreaches0_19 = false;
+    isDirty_push_doubleValue_To_setAssetPos0_23 = false;
+    isDirty_push_doubleValue_To_setCashPos0_22 = false;
+    isDirty_push_doubleValue_To_setMtm0_24 = false;
+    isDirty_push_doubleValue_To_setPnl0_25 = false;
+    isDirty_push_intValue_To_setPnlBreaches0_16 = false;
+    isDirty_push_intValue_To_setPositionBreaches0_21 = false;
   }
 
   @Override
   public void init() {
     map_getSize_By_multiply0_2.init();
-    cost.init();
-    pos.init();
-    filter_Number_By_outsideRange0_16.init();
-    map_Number_By_increment1_18.init();
+    map_doubleValue_By_multiply0_4.init();
+    cashPos.init();
+    assetPos.init();
+    filter_Number_By_outsideRange0_18.init();
+    map_Number_By_increment1_20.init();
     mtm.init();
     pnl.init();
-    filter_Number_By_lessThan0_10.init();
-    map_Number_By_increment0_12.init();
+    filter_Number_By_lessThan0_12.init();
+    map_Number_By_increment0_14.init();
     eventPublsher_1.init();
   }
 

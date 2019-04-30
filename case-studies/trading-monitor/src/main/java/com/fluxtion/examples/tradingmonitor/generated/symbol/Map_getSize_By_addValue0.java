@@ -1,5 +1,6 @@
 package com.fluxtion.examples.tradingmonitor.generated.symbol;
 
+import com.fluxtion.examples.tradingmonitor.generated.symbol.*;
 import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.NoEventReference;

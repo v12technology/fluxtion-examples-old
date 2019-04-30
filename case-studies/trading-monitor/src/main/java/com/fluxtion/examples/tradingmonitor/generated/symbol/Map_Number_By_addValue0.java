@@ -1,11 +1,12 @@
 package com.fluxtion.examples.tradingmonitor.generated.symbol;
 
+import com.fluxtion.examples.tradingmonitor.generated.symbol.*;
 import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.NoEventReference;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_getSize_By_multiply0;
+import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_doubleValue_By_multiply0;
 import com.fluxtion.ext.streaming.api.FilterWrapper;
 import com.fluxtion.ext.streaming.api.Stateful;
 import com.fluxtion.ext.streaming.api.Test;
@@ -27,7 +28,7 @@ import com.fluxtion.ext.streaming.api.stream.StreamFunctions.Sum;
  */
 public class Map_Number_By_addValue0 extends AbstractFilterWrapper<Number> {
 
-  public Map_getSize_By_multiply0 filterSubject;
+  public Map_doubleValue_By_multiply0 filterSubject;
   private boolean filterSubjectUpdated;
   @NoEventReference public Sum f;
   private double result;
@@ -52,7 +53,7 @@ public class Map_Number_By_addValue0 extends AbstractFilterWrapper<Number> {
   }
 
   @OnParentUpdate("filterSubject")
-  public void updated_filterSubject(Map_getSize_By_multiply0 updated) {
+  public void updated_filterSubject(Map_doubleValue_By_multiply0 updated) {
     filterSubjectUpdated = true;
   }
 
