@@ -24,10 +24,10 @@ import static com.fluxtion.ext.streaming.api.stream.NumericPredicates.lt;
 import static com.fluxtion.ext.streaming.api.stream.NumericPredicates.outsideBand;
 import static com.fluxtion.ext.streaming.builder.event.EventSelect.select;
 import static com.fluxtion.ext.streaming.builder.stream.StreamBuilder.stream;
+import static com.fluxtion.ext.streaming.builder.stream.StreamFunctionsBuilder.add;
 import static com.fluxtion.ext.streaming.builder.stream.StreamFunctionsBuilder.count;
 import static com.fluxtion.ext.streaming.builder.stream.StreamFunctionsBuilder.cumSum;
 import static com.fluxtion.ext.streaming.builder.stream.StreamFunctionsBuilder.multiply;
-import static com.fluxtion.ext.streaming.builder.stream.StreamFunctionsBuilder.subtract;
 import static com.fluxtion.ext.streaming.builder.util.FunctionArg.arg;
 import com.fluxtion.ext.text.api.event.EofEvent;
 
@@ -38,22 +38,24 @@ import com.fluxtion.ext.text.api.event.EofEvent;
 public class FluxtionBuilder {
 
     @SepBuilder(name = "SymbolTradeMonitor", 
-            packageName = "com.fluxtion.examples.tradingmonitor.generated.symbol")
+            packageName = "com.fluxtion.examples.tradingmonitor.generated.symbol"
+    )
     public void buildAssetAnalyser(SEPConfig cfg) {
         //entry points
         Wrapper<Deal> deals = select(Deal.class);
         Wrapper<AssetPrice> prices = select(AssetPrice.class);
         AssetTradePos results = cfg.addPublicNode(new AssetTradePos(), "assetTradePos");
         //calculate derived values
-        Wrapper<Number> cost = deals
+        Wrapper<Number> cashPosition = deals
                 .map(multiply(), Deal::getSize, Deal::getPrice)
+                .map(multiply(),Number::doubleValue, -1)
                 .map(cumSum());
         Wrapper<Number> pos = deals.map(cumSum(), Deal::getSize);
         Wrapper<Number> mtm = pos.map(multiply(), Number::doubleValue,
                 arg(prices, AssetPrice::getPrice));
-        Wrapper<Number> pnl = subtract(mtm, cost);
+        Wrapper<Number> pnl = add(mtm, cashPosition);
         //add some rules - only fires on first breach
-        pnl.filter(lt(-2000))
+        pnl.filter(lt(-200))
                 .notifyOnChange(true)
                 .map(count())
                 .push(Number::intValue, results::setPnlBreaches);
@@ -62,7 +64,7 @@ public class FluxtionBuilder {
                 .map(count())
                 .push(Number::intValue, results::setPositionBreaches);
         //collect into results
-        cost.push(Number::doubleValue, results::setCashPos);
+        cashPosition.push(Number::doubleValue, results::setCashPos);
         pos.push(Number::doubleValue, results::setAssetPos);
         mtm.push(Number::doubleValue, results::setMtm);
         pnl.push(Number::doubleValue, results::setPnl);
@@ -72,8 +74,8 @@ public class FluxtionBuilder {
         //give some human readable names to nodes - not required 
         deals.id("deals");
         prices.id("prices");
-        cost.id("cost");
-        pos.id("pos");
+        cashPosition.id("cashPos");
+        pos.id("assetPos");
         mtm.id("mtm");
         pnl.id("pnl");
     }
@@ -82,7 +84,7 @@ public class FluxtionBuilder {
             packageName = "com.fluxtion.examples.tradingmonitor.generated.portfolio")
     public void buildPortfolioAnalyser(SEPConfig cfg) {
         PortfolioTradePos portfolio = cfg.addNode(new PortfolioTradePos());
-        stream(portfolio).filter( PortfolioTradePos::getPnl, lt(-10_000))
+        stream(portfolio).filter( PortfolioTradePos::getPnl, lt(-1_000))
                 .map(count())
                 .notifierOverride(select(EofEvent.class))
                 .console("portfolio loss gt 10k count -> ");

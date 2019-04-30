@@ -15,7 +15,7 @@ Configutation:
       fileName: ${log-path}/generated-data.csv
       append: false
       PatternLayout:
-        pattern: "%msg\n"
+        pattern: "%msg%n"
   Loggers:
       Root:
         level: debug

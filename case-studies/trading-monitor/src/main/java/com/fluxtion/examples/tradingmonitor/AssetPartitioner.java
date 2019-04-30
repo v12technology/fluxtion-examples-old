@@ -18,8 +18,6 @@ package com.fluxtion.examples.tradingmonitor;
 
 import com.fluxtion.api.event.Event;
 import com.fluxtion.api.event.RegisterEventHandler;
-import com.fluxtion.examples.tradingmonitor.AssetPrice;
-import com.fluxtion.examples.tradingmonitor.Deal;
 import com.fluxtion.examples.tradingmonitor.generated.portfolio.PortfolioTradeMonitor;
 import com.fluxtion.examples.tradingmonitor.generated.symbol.SymbolTradeMonitor;
 
