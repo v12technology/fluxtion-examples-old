@@ -21,6 +21,15 @@ import java.io.IOException;
  */
 public class Main {
     public static void main(String[] args) throws IOException {
+        runAnalysis();
+        runAnalysis();
+        runAnalysis();
+        runAnalysis();
+        runAnalysis();
+        runAnalysis();
+    }
+
+    private static void runAnalysis() throws IOException {
         System.out.println("starting");
         long now = System.nanoTime();
         //partiioning strategy - by asset symbol
