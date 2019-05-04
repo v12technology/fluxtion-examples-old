@@ -73,6 +73,7 @@
                       <mainClass>com.fluxtion.examples.tradingmonitor.Main</mainClass>
                     </transformer>
                   </transformers>
+                  <minimizeJar>true</minimizeJar>
                 </configuration>
               </execution>
             </executions>
@@ -85,7 +86,7 @@
     <dependency>
       <groupId>com.fluxtion.extension</groupId>
       <artifactId>fluxtion-text-builder</artifactId>
-      <version>1.7.10-SNAPSHOT</version>
+      <version>1.7.11-SNAPSHOT</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -118,11 +119,31 @@
       <version>1.3</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.chrisnewland</groupId>
+      <artifactId>jitwatch</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-api</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>logback-classic</artifactId>
+          <groupId>ch.qos.logback</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>logback-core</artifactId>
+          <groupId>ch.qos.logback</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
   </dependencies>
   <properties>
-    <fluxtion.ver>1.7.10-SNAPSHOT</fluxtion.ver>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <fluxtion.ver>1.7.11-SNAPSHOT</fluxtion.ver>
   </properties>
 </project>

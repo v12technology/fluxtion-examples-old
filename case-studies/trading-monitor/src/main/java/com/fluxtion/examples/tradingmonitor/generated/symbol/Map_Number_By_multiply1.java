@@ -5,9 +5,10 @@ import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.NoEventReference;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
-import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_Number_By_addValue0;
-import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_Number_By_multiply1;
+import com.fluxtion.examples.tradingmonitor.AssetPrice;
+import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_getSize_By_addValue0;
 import com.fluxtion.ext.streaming.api.FilterWrapper;
+import com.fluxtion.ext.streaming.api.ReusableEventHandler;
 import com.fluxtion.ext.streaming.api.Test;
 import com.fluxtion.ext.streaming.api.Wrapper;
 import com.fluxtion.ext.streaming.api.numeric.MutableNumber;
@@ -20,16 +21,16 @@ import com.fluxtion.ext.streaming.api.stream.StreamFunctions;
  * <ul>
  *   <li>output class : {@link Number}
  *   <li>input class : {@link Number}
- *   <li>map function : {@link StreamFunctions#add}
+ *   <li>map function : {@link StreamFunctions#multiply}
  * </ul>
  *
  * @author Greg Higgins
  */
-public class Map_doubleValue_By_add0 extends AbstractFilterWrapper<Number> {
+public class Map_Number_By_multiply1 extends AbstractFilterWrapper<Number> {
 
-  public Map_Number_By_multiply1 filterSubject;
+  public Map_getSize_By_addValue0 filterSubject;
   private boolean filterSubjectUpdated;
-  public Map_Number_By_addValue0 source_0;
+  public ReusableEventHandler source_0;
   private boolean source_0Updated;
   private double result;
   private MutableNumber value;
@@ -40,9 +41,9 @@ public class Map_doubleValue_By_add0 extends AbstractFilterWrapper<Number> {
     oldValue.set(result);
     if (allSourcesUpdated()) {
       result =
-          StreamFunctions.add(
+          StreamFunctions.multiply(
               (double) ((Number) filterSubject.event()).doubleValue(),
-              (double) ((Number) source_0.event()).doubleValue());
+              (double) ((AssetPrice) source_0.event()).getPrice());
     }
     value.set(result);
     return allSourcesUpdated() & !notifyOnChangeOnly | (!oldValue.equals(value));
@@ -55,12 +56,12 @@ public class Map_doubleValue_By_add0 extends AbstractFilterWrapper<Number> {
   }
 
   @OnParentUpdate("filterSubject")
-  public void updated_filterSubject(Map_Number_By_multiply1 updated) {
+  public void updated_filterSubject(Map_getSize_By_addValue0 updated) {
     filterSubjectUpdated = true;
   }
 
   @OnParentUpdate("source_0")
-  public void updated_source_0(Map_Number_By_addValue0 updated) {
+  public void updated_source_0(ReusableEventHandler updated) {
     source_0Updated = true;
   }
 

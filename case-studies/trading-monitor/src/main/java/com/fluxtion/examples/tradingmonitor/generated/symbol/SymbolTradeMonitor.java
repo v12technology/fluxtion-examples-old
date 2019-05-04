@@ -54,7 +54,7 @@ public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle
       new Filter_Number_By_outsideRange0();
   private final Map_Number_By_increment1 map_Number_By_increment1_24 =
       new Map_Number_By_increment1();
-  public final Map_doubleValue_By_multiply0 mtm = new Map_doubleValue_By_multiply0();
+  public final Map_Number_By_multiply1 mtm = new Map_Number_By_multiply1();
   public final Map_doubleValue_By_add0 pnl = new Map_doubleValue_By_add0();
   private final Filter_Number_By_lessThan0 filter_Number_By_lessThan0_17 =
       new Filter_Number_By_lessThan0();
@@ -130,6 +130,11 @@ public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle
     map_Number_By_increment0_19.setResetImmediate(true);
     map_Number_By_increment0_19.filterSubject = filter_Number_By_lessThan0_17;
     map_Number_By_increment0_19.f = count_18;
+    mtm.setAlwaysReset(false);
+    mtm.setNotifyOnChangeOnly(false);
+    mtm.setResetImmediate(true);
+    mtm.filterSubject = assetPos;
+    mtm.source_0 = prices;
     map_Number_By_multiply0_4.setAlwaysReset(false);
     map_Number_By_multiply0_4.setNotifyOnChangeOnly(false);
     map_Number_By_multiply0_4.setResetImmediate(true);
@@ -140,11 +145,6 @@ public class SymbolTradeMonitor implements EventHandler, BatchHandler, Lifecycle
     pnl.setResetImmediate(true);
     pnl.filterSubject = mtm;
     pnl.source_0 = cashPos;
-    mtm.setAlwaysReset(false);
-    mtm.setNotifyOnChangeOnly(false);
-    mtm.setResetImmediate(true);
-    mtm.filterSubject = assetPos;
-    mtm.source_0 = prices;
     assetPos.setAlwaysReset(false);
     assetPos.setNotifyOnChangeOnly(false);
     assetPos.setResetImmediate(true);
