@@ -41,7 +41,7 @@ public class Map_Number_By_multiply0 extends AbstractFilterWrapper<Number> {
       result =
           StreamFunctions.multiply(
               (double) ((Number) filterSubject.event()).doubleValue(),
-              (double) source_0.intValue());
+              (double) source_0.doubleValue());
     }
     value.set(result);
     return allSourcesUpdated() & !notifyOnChangeOnly | (!oldValue.equals(value));
