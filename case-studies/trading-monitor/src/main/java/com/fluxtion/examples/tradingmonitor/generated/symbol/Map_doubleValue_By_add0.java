@@ -1,13 +1,12 @@
 package com.fluxtion.examples.tradingmonitor.generated.symbol;
 
-import com.fluxtion.examples.tradingmonitor.generated.symbol.*;
 import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.NoEventReference;
 import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_Number_By_addValue0;
-import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_doubleValue_By_multiply1;
+import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_doubleValue_By_multiply0;
 import com.fluxtion.ext.streaming.api.FilterWrapper;
 import com.fluxtion.ext.streaming.api.Test;
 import com.fluxtion.ext.streaming.api.Wrapper;
@@ -28,7 +27,7 @@ import com.fluxtion.ext.streaming.api.stream.StreamFunctions;
  */
 public class Map_doubleValue_By_add0 extends AbstractFilterWrapper<Number> {
 
-  public Map_doubleValue_By_multiply1 filterSubject;
+  public Map_doubleValue_By_multiply0 filterSubject;
   private boolean filterSubjectUpdated;
   public Map_Number_By_addValue0 source_0;
   private boolean source_0Updated;
@@ -56,7 +55,7 @@ public class Map_doubleValue_By_add0 extends AbstractFilterWrapper<Number> {
   }
 
   @OnParentUpdate("filterSubject")
-  public void updated_filterSubject(Map_doubleValue_By_multiply1 updated) {
+  public void updated_filterSubject(Map_doubleValue_By_multiply0 updated) {
     filterSubjectUpdated = true;
   }
 
