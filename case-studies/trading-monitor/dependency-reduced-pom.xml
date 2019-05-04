@@ -68,6 +68,7 @@
                   <goal>shade</goal>
                 </goals>
                 <configuration>
+                  <minimizeJar>true</minimizeJar>
                   <transformers>
                     <transformer>
                       <mainClass>com.fluxtion.examples.tradingmonitor.Main</mainClass>
@@ -86,7 +87,7 @@
     <dependency>
       <groupId>com.fluxtion.extension</groupId>
       <artifactId>fluxtion-text-builder</artifactId>
-      <version>1.7.11-SNAPSHOT</version>
+      <version>1.7.11</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
@@ -144,6 +145,6 @@
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <fluxtion.ver>1.7.11-SNAPSHOT</fluxtion.ver>
+    <fluxtion.ver>1.7.11</fluxtion.ver>
   </properties>
 </project>
