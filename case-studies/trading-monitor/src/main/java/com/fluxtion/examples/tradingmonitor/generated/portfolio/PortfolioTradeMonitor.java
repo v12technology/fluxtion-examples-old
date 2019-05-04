@@ -16,7 +16,6 @@
  */
 package com.fluxtion.examples.tradingmonitor.generated.portfolio;
 
-import com.fluxtion.examples.tradingmonitor.generated.portfolio.*;
 import com.fluxtion.api.lifecycle.BatchHandler;
 import com.fluxtion.api.lifecycle.EventHandler;
 import com.fluxtion.api.lifecycle.Lifecycle;

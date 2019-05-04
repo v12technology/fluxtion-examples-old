@@ -18,6 +18,7 @@ package com.fluxtion.examples.tradingmonitor;
 
 import com.fluxtion.api.event.EventPublsher;
 import com.fluxtion.builder.annotation.SepBuilder;
+import static com.fluxtion.builder.event.EventPublisherBuilder.eventSource;
 import com.fluxtion.builder.node.SEPConfig;
 import com.fluxtion.ext.streaming.api.Wrapper;
 import static com.fluxtion.ext.streaming.api.stream.NumericPredicates.lt;
@@ -44,8 +45,9 @@ public class FluxtionBuilder {
         //entry points subsrcibe to events
         Wrapper<Deal> deals = select(Deal.class);
         Wrapper<AssetPrice> prices = select(AssetPrice.class);
-        //result collector
+        //result collector, and republish as an event source
         AssetTradePos results = cfg.addPublicNode(new AssetTradePos(), "assetTradePos");
+        eventSource(results);
         //calculate derived values
         Wrapper<Number> cashPosition = deals
                 .map(multiply(), Deal::getSize, Deal::getPrice)
@@ -68,9 +70,6 @@ public class FluxtionBuilder {
                 .notifyOnChange(true)
                 .map(count())
                 .push(results::setPositionBreaches);
-        //chain eventhandler to portfolio monitor
-        EventPublsher publisher = cfg.addNode(new EventPublsher());
-        publisher.addEventSource(results);
         //human readable names to nodes in generated code - not required 
         deals.id("deals");
         prices.id("prices");
