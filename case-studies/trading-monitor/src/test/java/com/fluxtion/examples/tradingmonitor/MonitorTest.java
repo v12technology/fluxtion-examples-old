@@ -17,8 +17,8 @@
 package com.fluxtion.examples.tradingmonitor;
 
 import com.fluxtion.api.partition.Partitioner;
-import com.fluxtion.examples.tradingmonitor.fluxCsvAssetPrice.Csv2AssetPrice;
-import com.fluxtion.examples.tradingmonitor.fluxCsvDeal.Csv2Deal;
+import com.fluxtion.examples.tradingmonitor.generated.fluxCsvAssetPrice.Csv2AssetPrice;
+import com.fluxtion.examples.tradingmonitor.generated.fluxCsvDeal.Csv2Deal;
 import com.fluxtion.examples.tradingmonitor.generated.symbol.SymbolTradeMonitor;
 import com.fluxtion.ext.text.api.event.EofEvent;
 import com.fluxtion.ext.text.api.util.CharStreamer;

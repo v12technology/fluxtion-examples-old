@@ -1,11 +1,11 @@
-package com.fluxtion.examples.tradingmonitor.fluxCsvDeal;
+package com.fluxtion.examples.tradingmonitor.generated.fluxCsvAssetPrice;
 
 import com.fluxtion.api.annotations.Config;
 import com.fluxtion.api.annotations.EventHandler;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.Inject;
 import com.fluxtion.api.annotations.PushReference;
-import com.fluxtion.examples.tradingmonitor.Deal;
+import com.fluxtion.examples.tradingmonitor.AssetPrice;
 import com.fluxtion.ext.streaming.api.util.CharArrayCharSequence;
 import com.fluxtion.ext.streaming.api.util.CharArrayCharSequence.CharSequenceView;
 import com.fluxtion.ext.text.api.csv.RowProcessor;
@@ -21,11 +21,11 @@ import static com.fluxtion.ext.text.api.ascii.Conversion.*;
 /**
  * Fluxtion generated CSV decoder.
  *
- * <p>target class : Deal
+ * <p>target class : AssetPrice
  *
  * @author Greg Higgins
  */
-public class DealCsvDecoder0 implements RowProcessor<Deal> {
+public class AssetPriceCsvDecoder0 implements RowProcessor<AssetPrice> {
 
   @Inject
   @Config(key = "id", value = "validationLog")
@@ -38,13 +38,10 @@ public class DealCsvDecoder0 implements RowProcessor<Deal> {
   private int fieldIndex = 0;
   private int writeIndex = 0;
   //target
-  private Deal target;
+  private AssetPrice target;
   //source field index: 0
   private final CharSequenceView setPrice = seq.view();
   private int fieldName_price = 0;
-  //source field index: 0
-  private final CharSequenceView setSize = seq.view();
-  private int fieldName_size = 0;
   //source field index: 0
   private final CharSequenceView setSymbol = seq.view();
   private int fieldName_symbol = 0;
@@ -105,12 +102,6 @@ public class DealCsvDecoder0 implements RowProcessor<Deal> {
       logHeaderProblem(
           "problem mapping field:'price' missing column header, index row:", true, null);
     }
-    fieldName_size = headers.indexOf("size");
-    fieldMap.put(fieldName_size, "setSize");
-    if (fieldName_size < 0) {
-      logHeaderProblem(
-          "problem mapping field:'size' missing column header, index row:", true, null);
-    }
     fieldName_symbol = headers.indexOf("symbol");
     fieldMap.put(fieldName_symbol, "setSymbol");
     if (fieldName_symbol < 0) {
@@ -125,10 +116,6 @@ public class DealCsvDecoder0 implements RowProcessor<Deal> {
       fieldIndex = fieldName_price;
       setPrice.subSequence(delimIndex[fieldName_price], delimIndex[fieldName_price + 1] - 1);
       target.setPrice(atod(setPrice));
-
-      fieldIndex = fieldName_size;
-      setSize.subSequence(delimIndex[fieldName_size], delimIndex[fieldName_size + 1] - 1);
-      target.setSize(atoi(setSize));
 
       fieldIndex = fieldName_symbol;
       setSymbol.subSequence(delimIndex[fieldName_symbol], delimIndex[fieldName_symbol + 1] - 1);
@@ -175,20 +162,19 @@ public class DealCsvDecoder0 implements RowProcessor<Deal> {
   }
 
   @Override
-  public Deal event() {
+  public AssetPrice event() {
     return target;
   }
 
   @Override
-  public Class<Deal> eventClass() {
-    return Deal.class;
+  public Class<AssetPrice> eventClass() {
+    return AssetPrice.class;
   }
 
   @Initialise
   public void init() {
-    target = new Deal();
+    target = new AssetPrice();
     fieldMap.put(fieldName_price, "setPrice");
-    fieldMap.put(fieldName_size, "setSize");
     fieldMap.put(fieldName_symbol, "setSymbol");
   }
 
