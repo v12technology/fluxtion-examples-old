@@ -18,6 +18,7 @@ package com.fluxtion.examples.tradingmonitor;
 
 import com.fluxtion.api.event.EventPublsher;
 import com.fluxtion.builder.annotation.SepBuilder;
+import static com.fluxtion.builder.event.EventPublisherBuilder.eventSource;
 import com.fluxtion.builder.node.SEPConfig;
 import com.fluxtion.ext.streaming.api.Wrapper;
 import static com.fluxtion.ext.streaming.api.stream.NumericPredicates.lt;
@@ -41,37 +42,35 @@ public class FluxtionBuilder {
             packageName = "com.fluxtion.examples.tradingmonitor.generated.symbol"
     )
     public void buildAssetAnalyser(SEPConfig cfg) {
-        //entry points
+        //entry points subsrcibe to events
         Wrapper<Deal> deals = select(Deal.class);
         Wrapper<AssetPrice> prices = select(AssetPrice.class);
+        //result collector, and republish as an event source
         AssetTradePos results = cfg.addPublicNode(new AssetTradePos(), "assetTradePos");
+        eventSource(results);
         //calculate derived values
         Wrapper<Number> cashPosition = deals
                 .map(multiply(), Deal::getSize, Deal::getPrice)
-                .map(multiply(),Number::doubleValue, -1)
+                .map(multiply(), -1)
                 .map(cumSum());
         Wrapper<Number> pos = deals.map(cumSum(), Deal::getSize);
-        Wrapper<Number> mtm = pos.map(multiply(), Number::doubleValue,
-                arg(prices, AssetPrice::getPrice));
+        Wrapper<Number> mtm = pos.map(multiply(), arg(prices, AssetPrice::getPrice));
         Wrapper<Number> pnl = add(mtm, cashPosition);
+        //collect into results
+        cashPosition.push(results::setCashPos);
+        pos.push(results::setAssetPos);
+        mtm.push(results::setMtm);
+        pnl.push(results::setPnl);
         //add some rules - only fires on first breach
         pnl.filter(lt(-200))
                 .notifyOnChange(true)
                 .map(count())
-                .push(Number::intValue, results::setPnlBreaches);
+                .push(results::setPnlBreaches);
         pos.filter(outsideBand(-200, 200))
                 .notifyOnChange(true)
                 .map(count())
-                .push(Number::intValue, results::setPositionBreaches);
-        //collect into results
-        cashPosition.push(Number::doubleValue, results::setCashPos);
-        pos.push(Number::doubleValue, results::setAssetPos);
-        mtm.push(Number::doubleValue, results::setMtm);
-        pnl.push(Number::doubleValue, results::setPnl);
-        //chain eventhandler to portfolio monitor
-        EventPublsher publisher = cfg.addNode(new EventPublsher());
-        publisher.addEventSource(results);
-        //give some human readable names to nodes - not required 
+                .push(results::setPositionBreaches);
+        //human readable names to nodes in generated code - not required 
         deals.id("deals");
         prices.id("prices");
         cashPosition.id("cashPos");

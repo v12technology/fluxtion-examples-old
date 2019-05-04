@@ -11,11 +11,11 @@
                 </jGraph:ShapeNode>
             </data>
         </node>
-        <node id="assetPriceCsvDecoder0_0">
+        <node id="dealCsvDecoder0_0">
             <data key="vertex_label">
                 <jGraph:ShapeNode>
                     <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-                    <jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;assetPriceCsvDecoder0_0:&#10;AssetPriceCsvDecoder0"/>
+                    <jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;dealCsvDecoder0_0:&#10;DealCsvDecoder0"/>
                     <jGraph:Style properties="EVENTHANDLER"/>
                 </jGraph:ShapeNode>
             </data>
@@ -47,20 +47,20 @@
                 </jGraph:ShapeNode>
             </data>
         </node>
-        <node id="CharEvent">
-            <data key="vertex_label">
-                <jGraph:ShapeNode>
-                    <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-                    <jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;CharEvent"/>
-                    <jGraph:Style properties="EVENT"/>
-                </jGraph:ShapeNode>
-            </data>
-        </node>
         <node id="EofEvent">
             <data key="vertex_label">
                 <jGraph:ShapeNode>
                     <jGraph:Geometry height="70" width="160" x="20" y="20"/>
                     <jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;EofEvent"/>
+                    <jGraph:Style properties="EVENT"/>
+                </jGraph:ShapeNode>
+            </data>
+        </node>
+        <node id="CharEvent">
+            <data key="vertex_label">
+                <jGraph:ShapeNode>
+                    <jGraph:Geometry height="70" width="160" x="20" y="20"/>
+                    <jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;CharEvent"/>
                     <jGraph:Style properties="EVENT"/>
                 </jGraph:ShapeNode>
             </data>
@@ -74,12 +74,12 @@
                 </jGraph:ShapeNode>
             </data>
         </node>
-        <edge id="1" source="assetPriceCsvDecoder0_0" target="eventPublsher_1">
+        <edge id="1" source="dealCsvDecoder0_0" target="eventPublsher_1">
             <data key="edge_label">
                 <jGraph:ShapeEdge/>
             </data>
         </edge>
-        <edge id="2" source="assetPriceCsvDecoder0_0" target="validationLogger_2">
+        <edge id="2" source="dealCsvDecoder0_0" target="validationLogger_2">
             <data key="edge_label">
                 <jGraph:ShapeEdge/>
             </data>
@@ -94,12 +94,12 @@
                 <jGraph:ShapeEdge/>
             </data>
         </edge>
-        <edge id="5" source="CharEvent" target="assetPriceCsvDecoder0_0">
+        <edge id="5" source="EofEvent" target="dealCsvDecoder0_0">
             <data key="edge_label">
                 <jGraph:ShapeEdge/>
             </data>
         </edge>
-        <edge id="6" source="EofEvent" target="assetPriceCsvDecoder0_0">
+        <edge id="6" source="CharEvent" target="dealCsvDecoder0_0">
             <data key="edge_label">
                 <jGraph:ShapeEdge/>
             </data>

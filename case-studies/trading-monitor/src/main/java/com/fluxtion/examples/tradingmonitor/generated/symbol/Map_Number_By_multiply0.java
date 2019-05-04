@@ -1,6 +1,5 @@
 package com.fluxtion.examples.tradingmonitor.generated.symbol;
 
-import com.fluxtion.examples.tradingmonitor.generated.symbol.*;
 import com.fluxtion.api.annotations.AfterEvent;
 import com.fluxtion.api.annotations.Initialise;
 import com.fluxtion.api.annotations.NoEventReference;
@@ -26,7 +25,7 @@ import com.fluxtion.ext.streaming.api.stream.StreamFunctions;
  *
  * @author Greg Higgins
  */
-public class Map_doubleValue_By_multiply0 extends AbstractFilterWrapper<Number> {
+public class Map_Number_By_multiply0 extends AbstractFilterWrapper<Number> {
 
   public Map_getSize_By_multiply0 filterSubject;
   private boolean filterSubjectUpdated;

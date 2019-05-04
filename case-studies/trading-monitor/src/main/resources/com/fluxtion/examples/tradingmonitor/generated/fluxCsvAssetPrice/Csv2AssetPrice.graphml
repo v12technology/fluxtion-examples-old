@@ -47,20 +47,20 @@
                 </jGraph:ShapeNode>
             </data>
         </node>
-        <node id="CharEvent">
-            <data key="vertex_label">
-                <jGraph:ShapeNode>
-                    <jGraph:Geometry height="70" width="160" x="20" y="20"/>
-                    <jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;CharEvent"/>
-                    <jGraph:Style properties="EVENT"/>
-                </jGraph:ShapeNode>
-            </data>
-        </node>
         <node id="EofEvent">
             <data key="vertex_label">
                 <jGraph:ShapeNode>
                     <jGraph:Geometry height="70" width="160" x="20" y="20"/>
                     <jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;EofEvent"/>
+                    <jGraph:Style properties="EVENT"/>
+                </jGraph:ShapeNode>
+            </data>
+        </node>
+        <node id="CharEvent">
+            <data key="vertex_label">
+                <jGraph:ShapeNode>
+                    <jGraph:Geometry height="70" width="160" x="20" y="20"/>
+                    <jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;CharEvent"/>
                     <jGraph:Style properties="EVENT"/>
                 </jGraph:ShapeNode>
             </data>
@@ -94,12 +94,12 @@
                 <jGraph:ShapeEdge/>
             </data>
         </edge>
-        <edge id="5" source="CharEvent" target="assetPriceCsvDecoder0_0">
+        <edge id="5" source="EofEvent" target="assetPriceCsvDecoder0_0">
             <data key="edge_label">
                 <jGraph:ShapeEdge/>
             </data>
         </edge>
-        <edge id="6" source="EofEvent" target="assetPriceCsvDecoder0_0">
+        <edge id="6" source="CharEvent" target="assetPriceCsvDecoder0_0">
             <data key="edge_label">
                 <jGraph:ShapeEdge/>
             </data>

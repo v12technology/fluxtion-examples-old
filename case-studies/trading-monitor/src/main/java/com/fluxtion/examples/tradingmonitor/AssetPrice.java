@@ -24,7 +24,9 @@ import com.fluxtion.ext.text.api.annotation.CsvMarshaller;
  *
  * @author V12 Technology Ltd.
  */
-@CsvMarshaller
+@CsvMarshaller(
+ packageName = "com.fluxtion.examples.tradingmonitor.generated"
+)
 //@Disabled
 public class AssetPrice extends Event {
 
