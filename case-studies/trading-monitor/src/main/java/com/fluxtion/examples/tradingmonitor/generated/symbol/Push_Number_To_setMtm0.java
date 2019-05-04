@@ -24,7 +24,7 @@ import com.fluxtion.ext.streaming.api.stream.AbstractFilterWrapper;
  *
  * @author Greg Higgins
  */
-public class Push_doubleValue_To_setMtm0 implements Wrapper<Push_doubleValue_To_setMtm0> {
+public class Push_Number_To_setMtm0 implements Wrapper<Push_Number_To_setMtm0> {
 
   public Map_doubleValue_By_multiply1 filterSubject;
   @PushReference public AssetTradePos f;
@@ -36,12 +36,12 @@ public class Push_doubleValue_To_setMtm0 implements Wrapper<Push_doubleValue_To_
   }
 
   @Override
-  public Push_doubleValue_To_setMtm0 event() {
+  public Push_Number_To_setMtm0 event() {
     return this;
   }
 
   @Override
-  public Class<Push_doubleValue_To_setMtm0> eventClass() {
-    return (Class<Push_doubleValue_To_setMtm0>) getClass();
+  public Class<Push_Number_To_setMtm0> eventClass() {
+    return (Class<Push_Number_To_setMtm0>) getClass();
   }
 }

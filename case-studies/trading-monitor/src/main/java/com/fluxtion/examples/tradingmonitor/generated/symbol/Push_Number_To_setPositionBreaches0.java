@@ -8,7 +8,7 @@ import com.fluxtion.api.annotations.OnEvent;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.api.annotations.PushReference;
 import com.fluxtion.examples.tradingmonitor.AssetTradePos;
-import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_Number_By_increment0;
+import com.fluxtion.examples.tradingmonitor.generated.symbol.Map_Number_By_increment1;
 import com.fluxtion.ext.streaming.api.FilterWrapper;
 import com.fluxtion.ext.streaming.api.Test;
 import com.fluxtion.ext.streaming.api.Wrapper;
@@ -19,29 +19,30 @@ import com.fluxtion.ext.streaming.api.stream.AbstractFilterWrapper;
  *
  * <ul>
  *   <li>input class : {@link Number}
- *   <li>push target : {@link AssetTradePos#setPnlBreaches}
+ *   <li>push target : {@link AssetTradePos#setPositionBreaches}
  * </ul>
  *
  * @author Greg Higgins
  */
-public class Push_intValue_To_setPnlBreaches0 implements Wrapper<Push_intValue_To_setPnlBreaches0> {
+public class Push_Number_To_setPositionBreaches0
+    implements Wrapper<Push_Number_To_setPositionBreaches0> {
 
-  public Map_Number_By_increment0 filterSubject;
+  public Map_Number_By_increment1 filterSubject;
   @PushReference public AssetTradePos f;
 
   @OnEvent
   public boolean onEvent() {
-    f.setPnlBreaches((int) ((Number) filterSubject.event()).intValue());
+    f.setPositionBreaches((int) ((Number) filterSubject.event()).intValue());
     return true;
   }
 
   @Override
-  public Push_intValue_To_setPnlBreaches0 event() {
+  public Push_Number_To_setPositionBreaches0 event() {
     return this;
   }
 
   @Override
-  public Class<Push_intValue_To_setPnlBreaches0> eventClass() {
-    return (Class<Push_intValue_To_setPnlBreaches0>) getClass();
+  public Class<Push_Number_To_setPositionBreaches0> eventClass() {
+    return (Class<Push_Number_To_setPositionBreaches0>) getClass();
   }
 }
