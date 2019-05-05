@@ -16,7 +16,6 @@
  */
 package com.fluxtion.examples.tradingmonitor;
 
-import com.fluxtion.api.event.EventPublsher;
 import com.fluxtion.builder.annotation.SepBuilder;
 import static com.fluxtion.builder.event.EventPublisherBuilder.eventSource;
 import com.fluxtion.builder.node.SEPConfig;
@@ -80,7 +79,8 @@ public class FluxtionBuilder {
     }
     
     @SepBuilder(name = "PortfolioTradeMonitor", 
-            packageName = "com.fluxtion.examples.tradingmonitor.generated.portfolio")
+            packageName = "com.fluxtion.examples.tradingmonitor.generated.portfolio"
+    )
     public void buildPortfolioAnalyser(SEPConfig cfg) {
         PortfolioTradePos portfolio = cfg.addNode(new PortfolioTradePos());
         stream(portfolio).filter( PortfolioTradePos::getPnl, lt(-1_000))
