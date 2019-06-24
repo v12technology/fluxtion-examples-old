@@ -1,0 +1,16 @@
+## A sample configuration for trade reconcilers
+---
+rootNodeMappings: 
+    com.fluxtion.casestudy.oilsensor.nodes.AlarmNotifier: alarm
+config:
+    sensors:
+        - {sensor: WellPressure, name: "well 1", max: 1000, min: 100}
+        - {sensor: WellPressure, max: 400, min: 30}
+        - {sensor: DrillRpm,  name: "well 1", max: 4000, min: 300}
+        - {sensor: DrillTemp,  name: "well 1", max: 150, min: -10}
+        - {sensor: DrillTemp,  name: "well 2", max: 150, min: -10}
+        - {sensor: SoilPressure,  name: "well 1", max: 200, min: 10}
+        - {sensor: SoilPressure,  name: "well 2", max: 560, min: 95}
+
+
+        

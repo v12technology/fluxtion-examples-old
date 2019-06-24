@@ -14,16 +14,16 @@ obtained from V12 Technology Limited.
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fluxtion</groupId>
     <artifactId>fluxtion-examples</artifactId>
-    <version>1.0.10</version>
+    <version>1.0.11-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>fluxtion.example</name>
     
     <modules>
-        <module>reference-declarative</module>
-        <module>reference-core</module>
         <module>reference-declarative-extended</module>
         <module>reference-statemachine</module>
         <module>reference-fx</module>
+        <module>case-studies</module>
+        <module>updated-reference-core</module>
     </modules>
     
     <properties>

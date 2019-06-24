@@ -3,3 +3,18 @@
 /reference-statemachine/target/
 /reference-declarative-extended/target/
 /reference-fx/target/
+/case-studies/fx-reconciler/target/
+/reference-utils/target/
+/tutorial/quickstart/target/
+/tutorial/wordcount/target/
+/tutorial/wordcount/nbproject/
+/case-studies/music-analysis/target/
+/case-studies/fx-reconciler - Copy/target/
+/case-studies/flight-delay/target/
+/case-studies/credit-monitor/target/
+/case-studies/flight-delay/dist/data/2008.csv
+/case-studies/flight-delay/dist/worldcity/worldcitiespop.csv
+/tutorial/wordcount - Copy/target/
+/tutorial/wordfrequency/target/
+/updated-reference-core/target/
+/case-studies/trading-monitor/target/

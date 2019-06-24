@@ -18,11 +18,6 @@ public class FxTradeHandler implements EventWrapper<FxTrade>{
         return true;
     }
 
-//    @EventHandler
-//    public void handleFxTrade(FxTrade event){
-//        this.event = event;
-//    }
-//    
     @Override
     public FxTrade event() {
         return event;

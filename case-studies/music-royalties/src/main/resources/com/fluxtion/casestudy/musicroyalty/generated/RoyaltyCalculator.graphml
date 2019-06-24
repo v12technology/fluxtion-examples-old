@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><graphml xmlns="http://graphml.graphdrawing.org/xmlns" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd" xmlns:jGraph="http://www.jgraph.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<key id="vertex_label" for="node" attr.name="nodeData" attr.type="string"/>
+<key id="edge_label" for="edge" attr.name="edgeData" attr.type="string"/>
+<graph edgedefault="directed">
+<node id="revenueCalculation_5">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;revenueCalculation_5:&#10;RevenueCalculation"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="locationRoyaltyFactor_3">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;locationRoyaltyFactor_3:&#10;LocationRoyaltyFactor"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="royaltyLookup_1">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;royaltyLookup_1:&#10;RoyaltyLookup"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="reporter">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="reporter:&#10;ReportGenerator"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="StreamedTrack">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;StreamedTrack"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="NumericSignal">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;NumericSignal"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="TrackRoyalty">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;TrackRoyalty"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<edge id="1" source="locationRoyaltyFactor_3" target="revenueCalculation_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="2" source="royaltyLookup_1" target="revenueCalculation_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="3" source="revenueCalculation_5" target="reporter">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="4" source="StreamedTrack" target="revenueCalculation_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="5" source="NumericSignal" target="locationRoyaltyFactor_3">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="6" source="TrackRoyalty" target="royaltyLookup_1">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+</graph>
+</graphml>

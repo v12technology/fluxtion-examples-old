@@ -1,7 +1,0 @@
-## Config for example 20 - character matcher
----
-rootNodeMappings: 
-    com.fluxtion.learning.example20.CharacterClassifier: classifier
-config:
-    chars: [a, b, c, 0, 7, 8]
-        

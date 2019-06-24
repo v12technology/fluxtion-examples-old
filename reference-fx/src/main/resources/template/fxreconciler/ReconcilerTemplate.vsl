@@ -1,0 +1,145 @@
+## Velocity Template.
+/* 
+ * Copyright (C) 2017 V12 Technology Limited
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package ${functionPackage};
+
+#foreach( $import in $imports)
+import $import;
+#end
+import static com.fluxtion.learning.fx.example6.reconciler.helpers.ReconcileStatus.Status.*;
+
+/**
+ * Fluxtion generated TradeReconciler id:${reconcilerBuilder.reconcilerId}
+ * Acknowledgements must be received from all mandatory venues and from any of the one of venues
+ * for a trade to have RECONCILED status.
+ *<ul>
+ * <li>Mandatory acknowledging venues: ${venues}</li>
+#if( ${oneOfSources} ) * <li>One of acknowledging venues: ${oneOfSources} </li>
+#end
+ * </ul>
+ * @author greg higgins (greg.higgins@v12technology.com)
+ */
+public class  ${functionClass} extends TradeReconciler<${functionClass}.ReconcileRecord>{
+
+#foreach( $source in $reconcilerBuilder.sources)
+    @EventHandler(filterString = "$source")
+    public void tradeAckFrom_$source (TradeAcknowledgement acknowledgement){
+        currentRecord = getRecord(acknowledgement);
+        currentRecord.time_$source = acknowledgement.time;
+        if (currentRecord.matched()) {
+            id2Reconcile.remove(currentRecord.id());
+            currentRecord.status = RECONCILED;
+            reconciled++;
+            reconciling--;
+        }
+    }
+
+#end
+
+    private ReconcileRecord getRecord(TradeAcknowledgement acknowledgement) {
+        ReconcileRecord record = id2Reconcile.get(acknowledgement.tradeId);
+        if (record == null) {
+            record = new ReconcileRecord();
+            record.firstReceivedTime = acknowledgement.time;
+            record.tradeId = acknowledgement.tradeId;
+            id2Reconcile.put(acknowledgement.tradeId, record);
+            reconciling++;
+        }
+        return record;
+    }
+
+    public static class ReconcileRecord implements ReconcileStatus<Integer>{
+
+        private static final String[] VENUES = new String[]{${venues}};
+#if( ${oneOfSources} )
+        private static final String[] VENUES_ONE_OF = new String[]{${oneOfSources}};
+#else
+        private static final String[] VENUES_ONE_OF = new String[0];
+#end
+        Status status = RECONCILING;;
+        int tradeId;
+        long firstReceivedTime = -1;
+#foreach( $source in $reconcilerBuilder.sources)
+        long time_$source = -1;
+#end
+
+        @Override
+        public boolean matched(){
+            return ${matching};
+        }
+
+        @Override
+        public boolean expired(long currentTime, int expiryTimeout){
+            return !matched()  & ((currentTime - firstReceivedTime) > expiryTimeout);
+        }
+
+        @Override
+        public void setStatus(Status status){
+            this.status = status;
+        }
+
+        @Override
+        public Integer id() {
+            return tradeId;
+        }
+
+        @Override
+        public String[] venues(){
+            return VENUES;
+        }
+
+        @Override
+        public String[] oneOfVenues(){
+            return VENUES_ONE_OF;
+        }
+
+        void reset(){
+            status = RECONCILING;
+#foreach( $source in $reconcilerBuilder.sources)
+            time_$source = -1;
+#end
+        }
+
+        @Override
+        public Status status() {
+            return status;
+        }
+
+        public void appendAsJson(StringBuilder builder){
+            builder.append('{')
+                    .append("\"tradeId\": ").append(tradeId)
+                    .append(", \"status\": \"").append(status.name()).append("\"")
+                    .append(", \"acks\": [")
+#foreach( $source in $reconcilerBuilder.sources)
+                    .append("{")
+                    .append("\"venue\": \"$source\"")
+                    .append(", \"ackTime\": ").append(time_$source)
+                    .append("}#if( $foreach.hasNext ), #end")
+#end
+                    .append("]}");
+        }
+
+        @Override
+        public String toString() {
+            return "ReconcileRecord{" 
+                    + "tradeId=" + tradeId 
+                    + ", firstReceivedTime=" + firstReceivedTime 
+                    + ", status=" + status 
+                    + '}';
+        }
+    }
+}

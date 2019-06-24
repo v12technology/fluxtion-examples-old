@@ -1,0 +1,15 @@
+Deal,symbol,size,price
+AssetPrice,symbol,price
+Deal,MSFT,100,15
+Deal,GOOG,60,40
+Deal,MSFT,85,16
+AssetPrice,GOOG,22
+Deal,MSFT,-55,19
+AssetPrice,MSFT,32
+Deal,MSFT,200,50
+AssetPrice,MSFT,4
+Deal,GOOG,-40,45
+Deal,GOOG,-400,20
+AssetPrice,GOOG,8
+AssetPrice,MSFT,48
+

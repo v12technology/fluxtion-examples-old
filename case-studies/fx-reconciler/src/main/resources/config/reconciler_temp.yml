@@ -1,0 +1,29 @@
+## A sample configuration for trade reconcilers
+---
+rootNodeMappings: 
+    com.fluxtion.fx.reconciler.nodes.TradeReconciler: classifier
+config:
+    defaults:
+        reconcileTimeout: 10
+        publishFrequency: 6
+        checkExpiredFrequency: 2
+    reconcilers:
+        REUTERS_LON:
+            venues: [reuter_lon, MiddleOffice_reuters_lon]
+        EBS_LON:
+            venues: [ebs_lon, MiddleOffice_ebs_lon, traiana]
+        HOTSPOT_LD4:
+            venues: [hotspot_ld4, MiddleOffice_HS_LD4, triana_hspot_LD4]
+            reconcileTimeout: 5
+            publishFrequency: 2
+            checkExpiredFrequency: 1
+#        EBS_NY2:
+#            venues: [NY_2, MiddleOffice_NY2]
+#            publishFrequency: 3
+#        FXALL_NY3:
+#            venues: [NY_3_FXALL, MiddleOffice_NY3_FXALL]
+#            checkExpiredFrequency: 17
+#        MIDDLE_OFFICE:
+#            venues: [MiddleOffice_efx]
+#            anyVenue: [LD_4_EBS, dcln_1_reuters, NY_3_FXALL]
+        

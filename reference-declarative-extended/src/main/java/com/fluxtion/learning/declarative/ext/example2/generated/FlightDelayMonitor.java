@@ -1,12 +1,8 @@
 package com.fluxtion.learning.declarative.ext.example2.generated;
 
-import java.util.HashMap;
-
 import com.fluxtion.runtime.lifecycle.BatchHandler;
 import com.fluxtion.runtime.lifecycle.EventHandler;
-import com.fluxtion.runtime.lifecycle.FilteredHandlerInvoker;
 import com.fluxtion.runtime.lifecycle.Lifecycle;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import com.fluxtion.learning.declarative.ext.example2.generated.FlightDetailsHandler;
 import com.fluxtion.learning.declarative.ext.example2.generated.GreaterThanDecorator_1;
 import com.fluxtion.learning.declarative.ext.example2.generated.GroupBy_6;
@@ -25,11 +21,8 @@ public class FlightDelayMonitor implements EventHandler, BatchHandler, Lifecycle
   //Filter constants
 
   public FlightDelayMonitor() {
-    //flightDetailsHandler_2
-    //greaterThanDecorator_1_5
     greaterThanDecorator_1_5.filterSubject = flightDetailsHandler_2;
     greaterThanDecorator_1_5.source_FlightDetailsHandler_0 = flightDetailsHandler_2;
-    //carrierDelayMap
     carrierDelayMap.greaterThanDecorator_10 = greaterThanDecorator_1_5;
   }
 

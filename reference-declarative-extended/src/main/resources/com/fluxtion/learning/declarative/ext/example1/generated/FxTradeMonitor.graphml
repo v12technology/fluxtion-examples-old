@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?><graphml xmlns="http://graphml.graphdrawing.org/xmlns" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd" xmlns:jGraph="http://www.jgraph.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<key id="vertex_label" for="node" attr.name="nodeData" attr.type="string"/>
+<key id="edge_label" for="edge" attr.name="edgeData" attr.type="string"/>
+<graph edgedefault="directed">
+<node id="cumSumInvoker_1_5">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="cumSumInvoker_1_5:&#10;CumSumInvoker_1"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_1">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_1:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_2">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_2:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_3">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_3:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_4">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_4:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="cumSumInvoker_3_10">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="cumSumInvoker_3_10:&#10;CumSumInvoker_3"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_6">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_6:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_7">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_7:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_8">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_8:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandlerStringFilter_9">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandlerStringFilter_9:&#10;FxTradeHandlerStringFilter"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="eurNetPos">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="eurNetPos:&#10;SubtractInvoker_6"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder8_12">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder8_12:&#10;MsgBuilder8"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="fxTradeHandler_0">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;fxTradeHandler_0:&#10;FxTradeHandler"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="asciiConsoleLogger_13">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;asciiConsoleLogger_13:&#10;AsciiConsoleLogger"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder12_14">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder12_14:&#10;MsgBuilder12"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder18_17">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder18_17:&#10;MsgBuilder18"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="greaterThanDecorator_16_16">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="greaterThanDecorator_16_16:&#10;GreaterThanDecorator_16"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="absInvoker_14_15">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="absInvoker_14_15:&#10;AbsInvoker_14"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder22_19">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder22_19:&#10;MsgBuilder22"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="lessThanDecorator_20_18">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="lessThanDecorator_20_18:&#10;LessThanDecorator_20"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder26_21">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder26_21:&#10;MsgBuilder26"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="greaterThanDecorator_24_20">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="greaterThanDecorator_24_20:&#10;GreaterThanDecorator_24"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="msgBuilder30_23">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;EventHandle&gt;&gt;&#10;msgBuilder30_23:&#10;MsgBuilder30"/>
+<jGraph:Style properties="EVENTHANDLER"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="lessThanDecorator_28_22">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="lessThanDecorator_28_22:&#10;LessThanDecorator_28"/>
+<jGraph:Style properties="NODE"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="FxTrade">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;FxTrade"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<node id="LogControlEvent">
+<data key="vertex_label">
+<jGraph:ShapeNode>
+<jGraph:Geometry height="70" width="160" x="20" y="20"/>
+<jGraph:label text="&lt;&lt;Event&gt;&gt;&#10;LogControlEvent"/>
+<jGraph:Style properties="EVENT"/>
+</jGraph:ShapeNode>
+</data>
+</node>
+<edge id="1" source="fxTradeHandlerStringFilter_1" target="cumSumInvoker_1_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="2" source="fxTradeHandlerStringFilter_2" target="cumSumInvoker_1_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="3" source="fxTradeHandlerStringFilter_3" target="cumSumInvoker_1_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="4" source="fxTradeHandlerStringFilter_4" target="cumSumInvoker_1_5">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="5" source="fxTradeHandlerStringFilter_6" target="cumSumInvoker_3_10">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="6" source="fxTradeHandlerStringFilter_7" target="cumSumInvoker_3_10">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="7" source="fxTradeHandlerStringFilter_8" target="cumSumInvoker_3_10">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="8" source="fxTradeHandlerStringFilter_9" target="cumSumInvoker_3_10">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="9" source="cumSumInvoker_1_5" target="eurNetPos">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="10" source="cumSumInvoker_3_10" target="eurNetPos">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="11" source="fxTradeHandler_0" target="msgBuilder8_12">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="12" source="msgBuilder8_12" target="asciiConsoleLogger_13">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="13" source="msgBuilder12_14" target="asciiConsoleLogger_13">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="14" source="fxTradeHandler_0" target="msgBuilder12_14">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="15" source="eurNetPos" target="msgBuilder12_14">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="16" source="cumSumInvoker_3_10" target="msgBuilder12_14">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="17" source="cumSumInvoker_1_5" target="msgBuilder12_14">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="18" source="msgBuilder18_17" target="asciiConsoleLogger_13">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="19" source="eurNetPos" target="msgBuilder18_17">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="20" source="greaterThanDecorator_16_16" target="msgBuilder18_17">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="21" source="absInvoker_14_15" target="greaterThanDecorator_16_16">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="22" source="eurNetPos" target="absInvoker_14_15">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="23" source="msgBuilder22_19" target="asciiConsoleLogger_13">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="24" source="eurNetPos" target="msgBuilder22_19">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="25" source="lessThanDecorator_20_18" target="msgBuilder22_19">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="26" source="absInvoker_14_15" target="lessThanDecorator_20_18">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="27" source="msgBuilder26_21" target="asciiConsoleLogger_13">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="28" source="eurNetPos" target="msgBuilder26_21">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="29" source="greaterThanDecorator_24_20" target="msgBuilder26_21">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="30" source="absInvoker_14_15" target="greaterThanDecorator_24_20">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="31" source="msgBuilder30_23" target="asciiConsoleLogger_13">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="32" source="eurNetPos" target="msgBuilder30_23">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="33" source="lessThanDecorator_28_22" target="msgBuilder30_23">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="34" source="absInvoker_14_15" target="lessThanDecorator_28_22">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="35" source="FxTrade" target="fxTradeHandlerStringFilter_1">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="36" source="FxTrade" target="fxTradeHandlerStringFilter_2">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="37" source="FxTrade" target="fxTradeHandlerStringFilter_3">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="38" source="FxTrade" target="fxTradeHandlerStringFilter_4">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="39" source="FxTrade" target="fxTradeHandlerStringFilter_6">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="40" source="FxTrade" target="fxTradeHandlerStringFilter_7">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="41" source="FxTrade" target="fxTradeHandlerStringFilter_8">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="42" source="FxTrade" target="fxTradeHandlerStringFilter_9">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="43" source="LogControlEvent" target="msgBuilder8_12">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="44" source="FxTrade" target="fxTradeHandler_0">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="45" source="LogControlEvent" target="asciiConsoleLogger_13">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="46" source="LogControlEvent" target="msgBuilder12_14">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="47" source="LogControlEvent" target="msgBuilder18_17">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="48" source="LogControlEvent" target="msgBuilder22_19">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="49" source="LogControlEvent" target="msgBuilder26_21">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+<edge id="50" source="LogControlEvent" target="msgBuilder30_23">
+<data key="edge_label">
+<jGraph:ShapeEdge/>
+</data>
+</edge>
+</graph>
+</graphml>

@@ -18,11 +18,6 @@ public class FlightDetailsHandler implements EventWrapper<FlightDetails>{
         return true;
     }
 
-//    @EventHandler
-//    public void handleFlightDetails(FlightDetails event){
-//        this.event = event;
-//    }
-//    
     @Override
     public FlightDetails event() {
         return event;

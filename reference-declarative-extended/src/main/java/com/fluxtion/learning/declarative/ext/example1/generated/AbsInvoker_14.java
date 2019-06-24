@@ -6,11 +6,11 @@ import com.fluxtion.api.annotations.OnEventComplete;
 import com.fluxtion.api.annotations.OnParentUpdate;
 import com.fluxtion.extension.declarative.api.numeric.NumericValuePush;
 import com.fluxtion.extension.declarative.api.numeric.NumericValue;
-
+import com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Abs;
 /**
  * generated NumericFunction wrapper.
  * Wraps a numeric function for invocation.
- * target class  : com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Abs
+ * target class  : Abs
  * target method : abs
  * 
  * @author Greg Higgins
@@ -18,15 +18,15 @@ import com.fluxtion.extension.declarative.api.numeric.NumericValue;
 public class AbsInvoker_14 extends Number implements NumericValue{
 
     //source operand inputs
-    public com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 source_SubtractInvoker_6_13;
-    private com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Abs f = new  com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.Abs();
+    public SubtractInvoker_6 source_SubtractInvoker_6_13;
+    private Abs f = new  Abs();
     private double result;
     private boolean updated;
 
 
 
     @OnParentUpdate("source_SubtractInvoker_6_13")
-    public void sourceChange_source_SubtractInvoker_6_13(com.fluxtion.learning.declarative.ext.example1.generated.SubtractInvoker_6 updated){
+    public void sourceChange_source_SubtractInvoker_6_13(SubtractInvoker_6 updated){
         calculate();
     }
 
@@ -51,8 +51,8 @@ public class AbsInvoker_14 extends Number implements NumericValue{
 
     @Initialise
     public void init(){
-        updated = false;
         result = 0;
+        updated = false;
     }
 
     @Override

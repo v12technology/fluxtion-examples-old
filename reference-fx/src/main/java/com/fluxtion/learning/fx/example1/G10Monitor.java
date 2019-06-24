@@ -1,3 +1,19 @@
+/* 
+ * Copyright (C) 2017 V12 Technology Limited
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.fluxtion.learning.fx.example1;
 
 
@@ -24,11 +40,11 @@ import com.fluxtion.fx.event.TimingPulseEvent;
 public class G10Monitor implements BiasProcessor {
 
   //Node declarations
-  private final TimeHandlerSeconds timeHandlerSeconds_2 = new TimeHandlerSeconds();
+  private final TimeHandlerSeconds timeHandlerSeconds_1 = new TimeHandlerSeconds();
   public final BiasNotifier breachNotifier = new BiasNotifier();
   public final BiasSummaryBroadcaster summaryBroadcaster = new BiasSummaryBroadcaster();
   public final CustomerOrderCacheGlobal orderCache = new CustomerOrderCacheGlobal();
-  private final EventAuditDelegator eventAuditDelegator_5 = new EventAuditDelegator();
+  private final EventAuditDelegator eventAuditDelegator_3 = new EventAuditDelegator();
   private final PricingBiasCheck biasChecker_AUDUSD60s = new PricingBiasCheck();
   private final PricingBiasCheck biasChecker_AUDUSD600s = new PricingBiasCheck();
   private final PricingBiasCheck biasChecker_EURCHF60s = new PricingBiasCheck();
@@ -49,21 +65,21 @@ public class G10Monitor implements BiasProcessor {
   private final TimedNotifier alarm_60s = new TimedNotifier();
   private final TimedNotifier alarm_600s = new TimedNotifier();
   //Dirty flags
-  private boolean isDirty_biasChecker_AUDUSD600s = false;
+  private boolean isDirty_biasChecker_EURUSD600s = false;
   private boolean isDirty_biasChecker_AUDUSD60s = false;
+  private boolean isDirty_biasChecker_AUDUSD600s = false;
   private boolean isDirty_biasChecker_EURGBP60s = false;
   private boolean isDirty_biasChecker_EURGBP600s = false;
   private boolean isDirty_biasChecker_EURUSD60s = false;
-  private boolean isDirty_biasChecker_EURUSD600s = false;
   private boolean isDirty_biasChecker_USDCHF60s = false;
   private boolean isDirty_biasChecker_USDCHF600s = false;
   private boolean isDirty_alarm_60s = false;
-  private boolean isDirty_biasChecker_EURJPY600s = false;
+  private boolean isDirty_biasChecker_GBPUSD600s = false;
   private boolean isDirty_biasChecker_EURCHF60s = false;
   private boolean isDirty_biasChecker_EURCHF600s = false;
   private boolean isDirty_biasChecker_EURJPY60s = false;
+  private boolean isDirty_biasChecker_EURJPY600s = false;
   private boolean isDirty_biasChecker_GBPUSD60s = false;
-  private boolean isDirty_biasChecker_GBPUSD600s = false;
   private boolean isDirty_biasChecker_USDJPY60s = false;
   private boolean isDirty_biasChecker_USDJPY600s = false;
   private boolean isDirty_alarm_1s = false;
@@ -77,10 +93,10 @@ public class G10Monitor implements BiasProcessor {
   public static final int GBPUSD = 101;
   public static final int USDCHF = 275;
   public static final int USDJPY = 281;
-  private TimingPulseEvent tick = new TimingPulseEvent(1);
+  private final TimingPulseEvent tick = new TimingPulseEvent(1);
 
   public G10Monitor() {
-    //timeHandlerSeconds_2
+    //timeHandlerSeconds_1
     //breachNotifier
     breachNotifier.biasChecks = new PricingBiasCheck[16];
     breachNotifier.biasChecks[0] = biasChecker_AUDUSD60s;
@@ -119,7 +135,7 @@ public class G10Monitor implements BiasProcessor {
     summaryBroadcaster.biasChecks[15] = biasChecker_USDJPY600s;
     summaryBroadcaster.broadcastNotifer = alarm_1s;
     //orderCache
-    //eventAuditDelegator_5
+    //eventAuditDelegator_3
     //biasChecker_AUDUSD60s
     biasChecker_AUDUSD60s.orderCache = orderCache;
     biasChecker_AUDUSD60s.resetNotifer = alarm_60s;
@@ -202,13 +218,13 @@ public class G10Monitor implements BiasProcessor {
     biasChecker_USDJPY600s.avgBiasNotificationLimit = (double) 0.001;
     //alarm_1s
     alarm_1s.periodInSeconds = (int) 1;
-    alarm_1s.timeHandler = timeHandlerSeconds_2;
+    alarm_1s.timeHandler = timeHandlerSeconds_1;
     //alarm_60s
     alarm_60s.periodInSeconds = (int) 60;
-    alarm_60s.timeHandler = timeHandlerSeconds_2;
+    alarm_60s.timeHandler = timeHandlerSeconds_1;
     //alarm_600s
     alarm_600s.periodInSeconds = (int) 600;
-    alarm_600s.timeHandler = timeHandlerSeconds_2;
+    alarm_600s.timeHandler = timeHandlerSeconds_1;
     init();
   }
 
@@ -363,7 +379,7 @@ public class G10Monitor implements BiasProcessor {
   public void handleEvent(ControlSignal typedEvent) {
     switch (typedEvent.filterString()) {
       case ("fxpricebias.audit"):
-        eventAuditDelegator_5.controlNotification(typedEvent);
+        eventAuditDelegator_3.controlNotification(typedEvent);
         afterEvent();
         return;
       case ("fxpricebias.notification"):
@@ -381,7 +397,7 @@ public class G10Monitor implements BiasProcessor {
   public void handleEvent(CustomerOrder typedEvent) {
     //Default, no filter methods
     orderCache.onCustomerOrderPlaced(typedEvent);
-    eventAuditDelegator_5.handleEvent(typedEvent);
+    eventAuditDelegator_3.handleEvent(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
@@ -398,7 +414,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_AUDUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_AUDUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURCHF):
@@ -411,7 +427,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURCHF600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURCHF600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURGBP):
@@ -424,7 +440,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURGBP600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURGBP600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURJPY):
@@ -437,7 +453,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURJPY600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURJPY600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURUSD):
@@ -450,7 +466,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (GBPUSD):
@@ -463,7 +479,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_GBPUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_GBPUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (USDCHF):
@@ -476,7 +492,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_USDCHF600s) {
           breachNotifier.notifyBiasCheck(biasChecker_USDCHF600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (USDJPY):
@@ -489,13 +505,13 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_USDJPY600s) {
           breachNotifier.notifyBiasCheck(biasChecker_USDJPY600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
     }
     //Default, no filter methods
     orderCache.acceptedOrder(typedEvent);
-    eventAuditDelegator_5.handleEvent(typedEvent);
+    eventAuditDelegator_3.handleEvent(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
@@ -512,7 +528,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_AUDUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_AUDUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURCHF):
@@ -525,7 +541,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURCHF600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURCHF600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURGBP):
@@ -538,7 +554,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURGBP600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURGBP600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURJPY):
@@ -551,7 +567,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURJPY600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURJPY600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURUSD):
@@ -564,7 +580,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (GBPUSD):
@@ -577,7 +593,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_GBPUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_GBPUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (USDCHF):
@@ -590,7 +606,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_USDCHF600s) {
           breachNotifier.notifyBiasCheck(biasChecker_USDCHF600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (USDJPY):
@@ -603,13 +619,13 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_USDJPY600s) {
           breachNotifier.notifyBiasCheck(biasChecker_USDJPY600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
     }
     //Default, no filter methods
     orderCache.rejectedOrder(typedEvent);
-    eventAuditDelegator_5.handleEvent(typedEvent);
+    eventAuditDelegator_3.handleEvent(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
@@ -625,7 +641,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_AUDUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_AUDUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURCHF):
@@ -637,7 +653,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURCHF600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURCHF600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURGBP):
@@ -649,7 +665,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURGBP600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURGBP600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURJPY):
@@ -661,7 +677,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURJPY600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURJPY600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (EURUSD):
@@ -673,7 +689,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_EURUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_EURUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (GBPUSD):
@@ -685,7 +701,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_GBPUSD600s) {
           breachNotifier.notifyBiasCheck(biasChecker_GBPUSD600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (USDCHF):
@@ -697,7 +713,7 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_USDCHF600s) {
           breachNotifier.notifyBiasCheck(biasChecker_USDCHF600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
       case (USDJPY):
@@ -709,12 +725,12 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_USDJPY600s) {
           breachNotifier.notifyBiasCheck(biasChecker_USDJPY600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
     }
     //Default, no filter methods
-    eventAuditDelegator_5.handleEvent(typedEvent);
+    eventAuditDelegator_3.handleEvent(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
@@ -722,7 +738,7 @@ public class G10Monitor implements BiasProcessor {
   public void handleEvent(ListenerRegisration typedEvent) {
     switch (typedEvent.filterString()) {
       case ("com.fluxtion.fx.EventAuditor"):
-        eventAuditDelegator_5.registerAuditor(typedEvent);
+        eventAuditDelegator_3.registerAuditor(typedEvent);
         afterEvent();
         return;
       case ("com.fluxtion.fx.node.biascheck.NotificationHandler"):
@@ -740,7 +756,7 @@ public class G10Monitor implements BiasProcessor {
   public void handleEvent(TimingPulseEvent typedEvent) {
     switch (typedEvent.filterId()) {
       case (1):
-        timeHandlerSeconds_2.onTimingPulse(typedEvent);
+        timeHandlerSeconds_1.onTimingPulse(typedEvent);
         isDirty_alarm_1s = alarm_1s.processTimePulse();
         if (isDirty_alarm_1s) {
           summaryBroadcaster.publishSummary(alarm_1s);
@@ -811,16 +827,17 @@ public class G10Monitor implements BiasProcessor {
         if (isDirty_biasChecker_USDJPY600s) {
           breachNotifier.notifyBiasCheck(biasChecker_USDJPY600s);
         }
-        eventAuditDelegator_5.handleEvent(typedEvent);
+        eventAuditDelegator_3.handleEvent(typedEvent);
         afterEvent();
         return;
     }
     //Default, no filter methods
-    eventAuditDelegator_5.handleEvent(typedEvent);
+    eventAuditDelegator_3.handleEvent(typedEvent);
     //event stack unwind callbacks
     afterEvent();
   }
 
+  @Override
   public void afterEvent() {
     biasChecker_USDJPY600s.afterEvent();
     biasChecker_USDCHF600s.afterEvent();
@@ -842,21 +859,21 @@ public class G10Monitor implements BiasProcessor {
     alarm_60s.resetFiredFlag();
     alarm_1s.resetFiredFlag();
     orderCache.removeProcessedOrders();
-    isDirty_biasChecker_AUDUSD600s = false;
+    isDirty_biasChecker_EURUSD600s = false;
     isDirty_biasChecker_AUDUSD60s = false;
+    isDirty_biasChecker_AUDUSD600s = false;
     isDirty_biasChecker_EURGBP60s = false;
     isDirty_biasChecker_EURGBP600s = false;
     isDirty_biasChecker_EURUSD60s = false;
-    isDirty_biasChecker_EURUSD600s = false;
     isDirty_biasChecker_USDCHF60s = false;
     isDirty_biasChecker_USDCHF600s = false;
     isDirty_alarm_60s = false;
-    isDirty_biasChecker_EURJPY600s = false;
+    isDirty_biasChecker_GBPUSD600s = false;
     isDirty_biasChecker_EURCHF60s = false;
     isDirty_biasChecker_EURCHF600s = false;
     isDirty_biasChecker_EURJPY60s = false;
+    isDirty_biasChecker_EURJPY600s = false;
     isDirty_biasChecker_GBPUSD60s = false;
-    isDirty_biasChecker_GBPUSD600s = false;
     isDirty_biasChecker_USDJPY60s = false;
     isDirty_biasChecker_USDJPY600s = false;
     isDirty_alarm_1s = false;
@@ -884,7 +901,7 @@ public class G10Monitor implements BiasProcessor {
     biasChecker_GBPUSD600s.init();
     biasChecker_USDCHF600s.init();
     biasChecker_USDJPY600s.init();
-    summaryBroadcaster.init();
     breachNotifier.init();
+    summaryBroadcaster.init();
   }
 }
