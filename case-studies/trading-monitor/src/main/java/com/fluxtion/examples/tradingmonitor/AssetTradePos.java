@@ -32,6 +32,8 @@ public class AssetTradePos extends Event {
     private double cashPos;
     private int positionBreaches;
     private int pnlBreaches;
+    private int dealsProcessed;
+    private int pricesProcessed;
 
     public String getSymbol() {
         return symbol;
@@ -89,13 +91,39 @@ public class AssetTradePos extends Event {
         this.pnlBreaches = pnlBreaches;
     }
 
+    public int getDealsProcessed() {
+        return dealsProcessed;
+    }
+
+    public void setDealsProcessed(int dealsProcessed) {
+        this.dealsProcessed = dealsProcessed;
+    }
+
+    public int getPricesProcessed() {
+        return pricesProcessed;
+    }
+
+    public void setPricesProcessed(int pricesProcessed) {
+        this.pricesProcessed = pricesProcessed;
+    }
+
     @Override
     public String toString() {
-        return "AssetTradePos{" + "symbol=" + symbol + ", pnl=" + pnl + ", assetPos=" + assetPos + ", mtm=" + mtm + ", cashPos=" + cashPos + ", positionBreaches=" + positionBreaches + ", pnlBreaches=" + pnlBreaches + '}';
+        return "AssetTradePos{" 
+                + "symbol=" + symbol 
+                + ", pnl=" + pnl 
+                + ", assetPos=" + assetPos 
+                + ", mtm=" + mtm 
+                + ", cashPos=" + cashPos 
+                + ", positionBreaches=" + positionBreaches 
+                + ", pnlBreaches=" + pnlBreaches 
+                + ", dealsProcessed=" + dealsProcessed 
+                + ", pricesProcessed=" + pricesProcessed 
+                + '}';
     }
 
     @OnEvent
-    public boolean updated(){
+    public boolean updated() {
         return true;
     }
 }

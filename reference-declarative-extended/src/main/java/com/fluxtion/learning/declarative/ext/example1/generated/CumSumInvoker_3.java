@@ -12,6 +12,7 @@ import com.fluxtion.extension.declarative.funclib.api.math.UnaryFunctions.CumSum
 /**
  * generated NumericFunction wrapper.
  * Wraps a numeric function for invocation.
+ * source class  : ${sourceInfo.type}
  * target class  : CumSum
  * target method : incSum
  * 
@@ -50,9 +51,9 @@ public class CumSumInvoker_3 implements NumericValue{
 
     @Initialise
     public void init(){
-        f.reset();
+        //f.reset();
         updated = false;
-        result = 0;
+        result = f.reset();
     }
 
     @Override
